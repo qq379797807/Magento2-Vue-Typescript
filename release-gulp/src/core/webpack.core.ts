@@ -5,8 +5,6 @@ import { Base } from './base'
 import { InputConfig } from '../decorators'
 import { WebpackConfig } from '../config/webpack.base.conf'
 
-export class ConfigurationArgs implements Configuration { }
-
 export class WebpackCore extends Base {
     public static register: () => WebpackCore
     private configs: { [key: string]: any }

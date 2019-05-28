@@ -1,10 +1,10 @@
-import * as webpack from 'webpack';
-import { Configuration, MultiCompiler, Compiler } from 'webpack';
-import * as WebpackDevServer from 'webpack-dev-server';
-import * as _ from 'lodash';
+import * as _ from 'lodash'
+import * as webpack from 'webpack'
+import * as WebpackDevServer from 'webpack-dev-server'
+import { Configuration, MultiCompiler, Compiler } from 'webpack'
 
 export interface ConfigurationExtention extends Configuration {
-    [key: string]: any;
+    [key: string]: any,
     devServer?: {
         historyApiFallback: boolean,
         hot: boolean,
@@ -13,47 +13,48 @@ export interface ConfigurationExtention extends Configuration {
         port: number,
         host: string,
         disableHostCheck: boolean
-    };
+    }
 }
 
 export class WebpackServer {
-    private webpack: any;
-    private webpackConfig?: ConfigurationExtention;
-    private compiler?: Compiler | MultiCompiler;
-    private evn: "development" | "production" | "none" = 'development';
+    private webpack: any
+    private webpackConfig?: ConfigurationExtention
+    private compiler?: Compiler | MultiCompiler
+    private env: 'development' | 'production' | 'none' = 'development'
 
-    constructor() {
-        this.webpack = webpack;
-        this.webpackConfig = {};
+    constructor () {
+        this.webpack = webpack
+        this.webpackConfig = {}
     }
 
-    injectWebpack(inject: any) {
-        this.webpack = inject;
-        return this;
+    injectWebpack (inject: any) {
+        this.webpack = inject
+        return this
     }
 
-    setConfig(config: string | ConfigurationExtention, evn?: "development" | "production" | "none") {
+    setConfig (config: string | ConfigurationExtention, env?: 'development' | 'production' | 'none') {
         if (_.isString(config)) {
-            this.webpackConfig = require(config);
+            this.webpackConfig = require(config)
         } else {
-            this.webpackConfig = config;
+            this.webpackConfig = config
         }
-        if (evn) this.evn = evn;
-        return this;
+        if (env) this.env = env
+        return this
     }
 
-    runBuild(callback?: (err: Error, stats: any) => void) {
-        if (!this.webpackConfig) return this;
-        this.webpackConfig.mode = this.evn;
-        if (!callback) callback = () => { };
-        this.compiler = webpack(this.webpackConfig);
-        this.compiler.apply(new webpack.ProgressPlugin());
-        this.compiler.run(callback);
-        return this;
+    runBuild (callback?: (err: Error, stats: any) => void) {
+        if (!this.webpackConfig) return this
+        this.webpackConfig.mode = this.env
+        if (!callback) callback = () => {}
+
+        this.compiler = webpack(this.webpackConfig)
+        this.compiler.apply(new webpack.ProgressPlugin())
+        this.compiler.run(callback)
+        return this
     }
 
-    runServer() {
-        if (!this.webpackConfig) return this;
+    runServer () {
+        if (!this.webpackConfig) return this
         if (!this.webpackConfig.devServer) {
             this.webpackConfig.devServer = {
                 historyApiFallback: true,
@@ -66,34 +67,35 @@ export class WebpackServer {
             }
         }
         if (!this.webpackConfig.devServer.port) {
-            this.webpackConfig.devServer.port = 3000;
+            this.webpackConfig.devServer.port = 3000
         }
         if (!this.webpackConfig.devServer.host) {
-            this.webpackConfig.devServer.host = '127.0.0.1';
+            this.webpackConfig.devServer.host = '127.0.0.1'
         }
-        let { port, host } = this.webpackConfig.devServer;
-        this.webpackConfig.mode = this.evn;
+        let { port, host } = this.webpackConfig.devServer
+        this.webpackConfig.mode = this.env
         if (_.isString(this.webpackConfig.entry)) {
             this.webpackConfig.entry = [
                 `webpack-dev-server/client?http://${host}:${port}`,
                 this.webpackConfig.entry
             ]
         } else if (_.isArray(this.webpackConfig.entry)) {
-            this.webpackConfig.entry.unshift(`webpack-dev-server/client?http://${host}:${port}`);
+            this.webpackConfig.entry.unshift(`webpack-dev-server/client?http://${host}:${port}`)
         }
-        this.compiler = this.webpack(this.webpackConfig);
+        this.compiler = this.webpack(this.webpackConfig)
         let server = new WebpackDevServer(
             (<any>this.compiler),
             this.webpackConfig.devServer
         )
         server.listen(port, (err: any) => {
-            (<any>this.webpackConfig).devServer.port += 1;
+            (<any>this.webpackConfig).devServer.port += 1
             let { port, host } = (<any>this.webpackConfig).devServer;
-            (<any>this.webpackConfig).entry.shift();
-            (<any>this.webpackConfig).entry.unshift(`webpack-dev-server/client?http://${host}:${port}`);
-            this.runServer();
+
+            (<any>this.webpackConfig).entry.shift()
+            (<any>this.webpackConfig).entry.unshift(`webpack-dev-server/client?http://${host}:${port}`)
+            this.runServer()
             console.log(`HMR Listening at http://localhost:${port}`)
-        });
-        return this;
+        })
+        return this
     }
 }

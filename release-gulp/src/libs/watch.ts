@@ -1,19 +1,20 @@
-import * as watch from 'gulp-watch';
-import { Gulp } from 'gulp';
-import * as _ from 'lodash';
+import * as _ from 'lodash'
+import * as watch from 'gulp-watch'
+import { Gulp } from 'gulp'
 
 export class Watch {
-    private gulp: Gulp;
+    private gulp: Gulp
 
-    constructor(gulp: Gulp) {
-        this.gulp = gulp;
+    constructor (gulp: Gulp) {
+        this.gulp = gulp
     }
 
-    run(path: string | string[], callback: Function) {
-        callback(this.gulp);
+    run (path: string | string[], callback: Function): Gulp {
+        callback(this.gulp)
         watch(path, () => {
-            callback(this.gulp);
-        });
-        return this.gulp;
+            callback(this.gulp)
+        })
+
+        return this.gulp
     }
 }

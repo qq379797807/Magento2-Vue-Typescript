@@ -37,7 +37,7 @@ export class Core extends Base {
         })
     }
 
-    public GulpFile(target: Function, gulp?: Gulp) {
+    public GulpFile (target: Function, gulp?: Gulp) {
         if (gulp) this.gulp = gulp
         this.target = target
         let instanc = new (<any>this.target)()
@@ -48,9 +48,7 @@ export class Core extends Base {
                 config: ITask,
                 types: object
             }, key: string) => {
-                if (!item.config) {
-                    item.config = {}
-                }
+                if (!item.config) item.config = {}
 
                 let befores = this.toArray(item.config.befores)
                 let afters = this.toArray(item.config.afters)
@@ -58,7 +56,7 @@ export class Core extends Base {
                 if (befores.length > 0) {
                     befores.push(function (done: Function) {
                         instanc[key].bind(instanc, ..._self.injectLibs(item.types, _self.gulp))(done);
-                        done();
+                        done()
                     }.bind(instanc))
                     if (afters.length > 0) {
                         befores.concat(afters)
