@@ -1,0 +1,54 @@
+{
+    "name": "release-gulp",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "gulp",
+        "typescript",
+        "webpack"
+    ],
+    "license": "ISC",
+    "dependencies": {
+        "@types/gulp": "^4.0.5",
+        "@types/webpack-dev-server": "^3.1.1",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "fs": "0.0.1-security",
+        "gulp": "^4.0.0",
+        "gulp-nodemon": "^2.2.1",
+        "gulp-sourcemaps": "^2.6.4",
+        "gulp-typescript": "^5.0.0-alpha.3",
+        "gulp-watch": "^5.0.0",
+        "koa": "^2.6.2",
+        "koa-convert": "^1.2.0",
+        "koa-webpack-middleware": "^1.0.7",
+        "lodash": "^4.17.10",
+        "merge2": "^1.2.2",
+        "reflect-metadata": "^0.1.12",
+        "ts-node": "^7.0.0",
+        "typescript": "^2.9.2",
+        "webpack": "^4.25.1",
+        "webpack-dev-server": "^3.1.10",
+        "webpack-stream": "^4.0.3"
+    },
+    "devDependencies": {
+        "@types/gulp-nodemon": "0.0.32",
+        "@types/gulp-sourcemaps": "0.0.32",
+        "@types/gulp-typescript": "^2.13.0",
+        "@types/gulp-watch": "^4.1.34",
+        "@types/lodash": "^4.14.110",
+        "@types/merge2": "^1.1.4",
+        "@types/webpack": "^4.4.5",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.4",
+        "babel-preset-es2015": "^6.24.1",
+        "gulp-babel": "^7.0.1",
+        "gulp-clean": "^0.4.0",
+        "gulp-rename": "^1.3.0",
+        "gulp-typescript": "^5.0.0-alpha.3",
+        "html-webpack-plugin": "^3.2.0",
+        "pump": "^3.0.0"
+    }
+}
