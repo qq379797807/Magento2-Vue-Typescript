@@ -7,9 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 export class webpack {
     @Config({
         root: __dirname,
-        entry: path.resolve(__dirname, 'demo/src/index.js'),
+        entry: path.resolve(__dirname, 'app/src/index.js'),
         output: {
-            path: path.resolve(__dirname, 'demo/dist'),
+            path: path.resolve(__dirname, 'app/dist'),
             filename: '[name].js',
             publicPath: '/'
         },

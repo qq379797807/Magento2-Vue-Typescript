@@ -1,16 +1,17 @@
-import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './src'
-import { Gulp } from 'gulp'
 import * as path from 'path'
 import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import * as merge from 'merge2'
+import { Gulp } from 'gulp'
+import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './src'
 const clean = require('gulp-clean')
 const pump = require('pump')
+const cssExtention = ['scss', 'less', 'stylus']
 
 @GulpFile()
 export class gulpflie {
     @Task()
-    public del(gulp: Gulp) {
+    public del (gulp: Gulp) {
         pump([
             gulp.src('./dist'),
             clean()
@@ -20,7 +21,7 @@ export class gulpflie {
     @Task({
         befores: ['del']
     })
-    public copy(gulp: Gulp, watch: Watch) {
+    public copy (gulp: Gulp, watch: Watch) {
         watch.run(
             path.join(__dirname, 'src/**/*.js'),
             (gulp: Gulp) => {
@@ -33,18 +34,37 @@ export class gulpflie {
     @Task({
         befores: ['copy']
     })
-    public build(gulp: Gulp, watch: Watch) {
+    public build (gulp: Gulp, watch: Watch) {
         watch.run(
             path.join(__dirname, 'src/**/*.ts'),
             (gulp: Gulp) => {
-                console.log('watch ...')
+                console.log('watch init ...')
                 let tsResult = gulp
                     .src([path.join(__dirname, 'src/**/*.ts')])
                     .pipe(sourcemaps.init())
                     .pipe(ts.createProject('tsconfig.json')());
                 return merge([
                     tsResult.dts.pipe(gulp.dest('./dist')),
-                    tsResult.js.pipe(sourcemaps.write("./sourcemaps"))
+                    tsResult.js.pipe(sourcemaps.write('./sourcemaps'))
+                        .pipe(gulp.dest('./dist'))
+                ])
+            }
+        )
+    }
+
+    @Task()
+    public css (gulp: Gulp, watch: Watch) {
+        watch.run(
+            path.join(__dirname, `src/**/*.${cssExtention}`),
+            (gulp: Gulp) => {
+                console.log('watch init ...')
+                let tsResult = gulp
+                    .src([path.join(__dirname, 'src/**/*.ts')])
+                    .pipe(sourcemaps.init())
+                    .pipe(ts.createProject('tsconfig.json')());
+                return merge([
+                    tsResult.dts.pipe(gulp.dest('./dist')),
+                    tsResult.js.pipe(sourcemaps.write('./sourcemaps'))
                         .pipe(gulp.dest('./dist'))
                 ])
             }
@@ -54,15 +74,30 @@ export class gulpflie {
     @Task({
         // befores: ['build']
     })
-    public demo(gulp: Gulp, webpackServer: WebpackServer) {
+    public boot(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'demo/webpack.config.js'),
+            path.resolve(__dirname, 'app/webpack.config.js'),
             'development'
         ).runServer()
     }
 
     @Task()
-    public test(vkoa: Vkoa) {
+    public rollup(gulp: Gulp, watch: Watch) {
+        watch.run(
+            path.join(__dirname, 'src/**/*.ts'),
+            (gulp: Gulp) => {
+                console.log('rollup init ...')
+
+                gulp.src([path.join(__dirname, 'src/**/*.ts')])
+                    .pipe(sourcemaps.init())
+                    .pipe(sourcemaps.write('./sourcemaps'))
+                    .pipe(gulp.dest('./dist'))
+            }
+        )
+    }
+
+    @Task()
+    public test (vkoa: Vkoa) {
         vkoa
             .setWebpack('webpack')
             .setKoa('koa')
