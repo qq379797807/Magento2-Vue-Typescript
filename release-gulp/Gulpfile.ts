@@ -70,21 +70,21 @@ export class Gulpflie {
             }
         )
     }
+   
+    @Task()
+    public dev(gulp: Gulp, webpackServer: WebpackServer) {
+        return webpackServer.setConfig(
+            path.resolve(__dirname, 'build/webpack.dev.conf'),
+            'development'
+        ).runServer()
+    }
 
     @Task()
     public build(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'build/webpack.config.prod'),
+            path.resolve(__dirname, 'build/webpack.prod.conf'),
             'production'
         ).runBuild()
-    }
-
-    @Task()
-    public dev(gulp: Gulp, webpackServer: WebpackServer) {
-        return webpackServer.setConfig(
-            path.resolve(__dirname, 'build/webpack.config.dev'),
-            'development'
-        ).runServer()
     }
 
     @Task()

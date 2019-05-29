@@ -1,12 +1,12 @@
 <template>
-    <div id="app">
+    <div class="in-page">
         {{ title }}
     </div>
 </template>
 
 <script>
 export default {
-    name: 'app',
+    name: 'page',
     data: () => ({
         title: 'Magento2 PWA'
     }),

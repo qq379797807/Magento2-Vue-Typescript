@@ -88,11 +88,11 @@ export class WebpackConfig {
         delete config.output
         delete config.entry
         delete config.plugins
+        delete config.root
 
         return {
             entry: entry,
             output,
-            devtool: 'source-map',
             resolve: {
                 extensions: [
                     '.ts',
@@ -109,24 +109,24 @@ export class WebpackConfig {
                     '@': path.resolve(__dirname, '../../app')
                 }
             },
-            mode: 'development',
             devServer: {
                 open: true,
                 inline: true,
                 hot: true,
                 port: 3000,
-                colors: true,
+                progress: true,
                 overlay: {
                     warnings: true,
                     errors: true
-                }
+                },
+                historyApiFallback: true,
+                disableHostCheck: true
             },
             module: {
                 rules: [
                     {
                         test: /\.vue$/,
                         loader: 'vue-loader',
-                        enforce: 'pre',
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -141,8 +141,7 @@ export class WebpackConfig {
                         ]
                     },
                     {
-                        test: /\.tsx$/,
-                        loader: 'ts-loader',
+                        test: /\.tsx?$/,
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -151,8 +150,8 @@ export class WebpackConfig {
                             'babel-loader',
                             {
                                 loader: 'ts-loader',
-                                options: {
-                                    appendTsxSuffixTo: [/\.vue$/]
+                                options: { 
+                                    appendTsxSuffixTo: [/\.vue$/] 
                                 }
                             }
                         ]
