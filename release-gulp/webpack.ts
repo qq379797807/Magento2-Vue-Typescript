@@ -1,13 +1,13 @@
 import * as path from 'path'
 import { Configuration } from 'webpack'
-import { Webpack, Config } from "./src"
+import { Webpack, Config } from './src'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 @Webpack()
 export class webpack {
     @Config({
         root: __dirname,
-        entry: path.resolve(__dirname, 'app/src/index.js'),
+        entry: path.resolve(__dirname, 'app/src/main.ts'),
         output: {
             path: path.resolve(__dirname, 'app/dist'),
             filename: '[name].js',

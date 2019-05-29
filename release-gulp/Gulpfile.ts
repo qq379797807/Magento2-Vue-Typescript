@@ -34,7 +34,7 @@ export class gulpflie {
     @Task({
         befores: ['copy']
     })
-    public build (gulp: Gulp, watch: Watch) {
+    public script (gulp: Gulp, watch: Watch) {
         watch.run(
             path.join(__dirname, 'src/**/*.ts'),
             (gulp: Gulp) => {
@@ -53,7 +53,7 @@ export class gulpflie {
     }
 
     @Task()
-    public css (gulp: Gulp, watch: Watch) {
+    public style (gulp: Gulp, watch: Watch) {
         watch.run(
             path.join(__dirname, `src/**/*.${cssExtention}`),
             (gulp: Gulp) => {
@@ -71,18 +71,24 @@ export class gulpflie {
         )
     }
 
-    @Task({
-        // befores: ['build']
-    })
-    public boot(gulp: Gulp, webpackServer: WebpackServer) {
+    @Task()
+    public build(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'app/webpack.config.js'),
+            path.resolve(__dirname, 'app/webpack.config'),
+            'production'
+        ).runBuild()
+    }
+
+    @Task()
+    public dev(gulp: Gulp, webpackServer: WebpackServer) {
+        return webpackServer.setConfig(
+            path.resolve(__dirname, 'app/webpack.config'),
             'development'
         ).runServer()
     }
 
     @Task()
-    public rollup(gulp: Gulp, watch: Watch) {
+    public rollup (gulp: Gulp, watch: Watch) {
         watch.run(
             path.join(__dirname, 'src/**/*.ts'),
             (gulp: Gulp) => {
