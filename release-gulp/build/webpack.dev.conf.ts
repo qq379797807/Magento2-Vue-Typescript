@@ -4,6 +4,9 @@ import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig } from '../src/config'
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -24,7 +27,7 @@ const baseConfig = new WebpackConfig({
             }
         }),
         new VueLoaderPlugin(),
-        // new ExtractTextPlugin(`[name].[contenthash].css`),
+        new ExtractTextPlugin(`[name].[contenthash].css`),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '../app/index.html'),
             filename: 'index.html',
