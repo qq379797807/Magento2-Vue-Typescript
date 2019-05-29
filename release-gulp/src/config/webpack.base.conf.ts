@@ -1,4 +1,5 @@
 import * as path from 'path'
+import * as webpack from 'webpack'
 import { InputConfig } from '../decorators'
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -91,8 +92,22 @@ export class WebpackConfig {
         return {
             entry: entry,
             output,
+            devtool: 'source-map',
             resolve: {
-                extensions: ['.js', '.vue', '.scss', '.less', '.stylus', '.css', '.json']
+                extensions: [
+                    '.ts',
+                    '.tsx',
+                    '.vue',
+                    '.js', 
+                    '.scss', 
+                    '.less', 
+                    '.stylus', 
+                    '.css', 
+                    '.json'
+                ],
+                alias: {
+                    '@': path.resolve(__dirname, '../../app')
+                }
             },
             mode: 'development',
             devServer: {
@@ -109,8 +124,9 @@ export class WebpackConfig {
             module: {
                 rules: [
                     {
-                        test: /\.ts$/,
-                        loader: 'ts-loader',
+                        test: /\.vue$/,
+                        loader: 'vue-loader',
+                        enforce: 'pre',
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -125,6 +141,39 @@ export class WebpackConfig {
                         ]
                     },
                     {
+                        test: /\.tsx$/,
+                        loader: 'ts-loader',
+                        include: [this.path],
+                        exclude: [
+                            /node_modules/
+                        ],
+                        use: [
+                            'babel-loader',
+                            {
+                                loader: 'ts-loader',
+                                options: {
+                                    appendTsxSuffixTo: [/\.vue$/]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        test: /\.ts$/,
+                        loader: 'ts-loader',
+                        include: [this.path],
+                        exclude: [
+                            /node_modules/
+                        ]
+                    },
+                    {
+                        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                            name: this.utils.assetsPath(`${this.path}/[name].[hash:7].[ext]`)
+                        }
+                    },
+                    {
                         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                         loader: 'url-loader',
                         options: {
@@ -133,7 +182,7 @@ export class WebpackConfig {
                         }
                     },
                     {
-                        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                        test: /\.(woff2?|eot|ttf|otf|rtf)(\?.*)?$/,
                         loader: 'url-loader',
                         options: {
                             limit: 10000,

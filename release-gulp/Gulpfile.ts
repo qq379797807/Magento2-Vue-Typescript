@@ -9,7 +9,7 @@ const pump = require('pump')
 const cssExtention = ['scss', 'less', 'stylus']
 
 @GulpFile()
-export class gulpflie {
+export class Gulpflie {
     @Task()
     public del (gulp: Gulp) {
         pump([
@@ -74,7 +74,7 @@ export class gulpflie {
     @Task()
     public build(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'app/webpack.config'),
+            path.resolve(__dirname, 'build/webpack.config.prod'),
             'production'
         ).runBuild()
     }
@@ -82,7 +82,7 @@ export class gulpflie {
     @Task()
     public dev(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'app/webpack.config'),
+            path.resolve(__dirname, 'build/webpack.config.dev'),
             'development'
         ).runServer()
     }
