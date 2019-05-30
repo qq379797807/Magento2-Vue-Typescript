@@ -33,7 +33,7 @@ export function Webpack () {
 
 export interface InputConfig {
     root: string,
-    entry: string | string[],
+    entry: any,
     plugins?: Plugin[],
     output: Output,
     [key: string]: any

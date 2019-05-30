@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { InputConfig } from '../decorators'
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 export class WebpackConfig {
     private path: string
@@ -42,10 +42,15 @@ export class WebpackConfig {
                     }
 
                     if (options.extract) {
-                        return ExtractTextPlugin.extract({
-                            use: loaders,
-                            fallback: 'vue-style-loader'
-                        })
+                        return [
+                            MiniCssExtractPlugin,
+                            {
+                                loader: 'vue-style-loader',
+                                options: {
+                                    minimize: process.env.NODE_ENV === 'production'
+                                }
+                            }
+                        ]
                     } else {
                         return ['vue-style-loader'].concat(<any[]>loaders)
                     }
@@ -114,6 +119,7 @@ export class WebpackConfig {
                 inline: true,
                 hot: true,
                 port: 3000,
+                https: false,
                 progress: true,
                 overlay: {
                     warnings: true,

@@ -2,14 +2,13 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig } from '../packages/config'
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
-    entry: [
+    entry: () => new Promise((resolve) => resolve([
         path.resolve(__dirname, '../app/main.tsx')
-    ],
+    ])),
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name].js',
@@ -29,25 +28,15 @@ const baseConfig = new WebpackConfig({
             }
         }),
         new VueLoaderPlugin(),
-        new ExtractTextPlugin(`[name].[contenthash:8].css`),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, '../app/index.html'),
-            filename: 'index.html',
-            inject: 'body',
-            hash: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeAttributeQuotes: true
-            }
+        new MiniCssExtractPlugin({
+            filename: `[name].[contenthash:8].css`
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            vm: 'vue'
-        })   
+        new webpack.HotModuleReplacementPlugin()  
     ],
     optimization: {
         minimize: true,
+        namedModules: true,
+        namedChunks: true,
         providedExports: true,
         usedExports: true,
         sideEffects: true,

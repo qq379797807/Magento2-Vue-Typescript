@@ -2,15 +2,14 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig } from '../packages/config'
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
-    entry: [
+    entry: () => new Promise((resolve) => resolve([
         path.resolve(__dirname, '../app/main.tsx')
-    ],
+    ])),
     cache: true,
     output: {
         path: path.join(__dirname, '../dist'),
@@ -26,26 +25,49 @@ const baseConfig = new WebpackConfig({
             }
         }),
         new VueLoaderPlugin(),
-        new ExtractTextPlugin(`[name].[contenthash:8].css`),
+        new MiniCssExtractPlugin({
+            filename: `../dist/css/[name].[contenthash:8].css`
+        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '../app/index.html'),
             filename: 'index.html',
-            inject: 'body',
+            inject: true,
             hash: true,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
                 removeAttributeQuotes: true
-            }
+            },
+            chunksSortMode: 'none'
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            vm: 'vue'
-        })   
+        new webpack.HotModuleReplacementPlugin()
     ],
     optimization: {
+        minimize: false,
         namedModules: true,
-        namedChunks: true
+        namedChunks: true,
+        splitChunks: {
+            chunks: "async",
+            minSize: 30000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            name: true,
+            cacheGroups: {
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true,
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                }
+            }
+        },
+        runtimeChunk: {
+            name: 'runtime'
+        }
     }
 })
 const webpackDevConfig = baseConfig.getConfig()
