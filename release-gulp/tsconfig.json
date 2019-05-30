@@ -55,7 +55,7 @@
         "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
     },
     "include": [
-        "src/declare/**/*.d.ts",
+        "packages/declare/**/*.d.ts",
         "./**/*.ts",
         "./**/*.tsx"
     ]

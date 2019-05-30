@@ -1,6 +1,6 @@
 // import * as path from 'path'
 // import { Configuration } from 'webpack'
-// import { Webpack, Config } from './src'
+// import { Webpack, Config } from './packages'
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // @Webpack()

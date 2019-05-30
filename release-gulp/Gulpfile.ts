@@ -3,7 +3,7 @@ import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import * as merge from 'merge2'
 import { Gulp } from 'gulp'
-import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './src'
+import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 const cssExtention = ['scss', 'less', 'stylus']
