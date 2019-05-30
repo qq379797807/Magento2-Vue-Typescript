@@ -27,7 +27,7 @@ const baseConfig = new WebpackConfig({
             }
         }),
         new VueLoaderPlugin(),
-        new ExtractTextPlugin(`[name].[contenthash].css`),
+        new ExtractTextPlugin(`[name].[contenthash:8].css`),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '../app/index.html'),
             filename: 'index.html',
