@@ -113,8 +113,7 @@ export class WebpackConfig {
                 open: true,
                 inline: true,
                 hot: true,
-                host: 'dev.car.cn',
-                port: 80,
+                port: 3000,
                 progress: true,
                 overlay: {
                     warnings: true,

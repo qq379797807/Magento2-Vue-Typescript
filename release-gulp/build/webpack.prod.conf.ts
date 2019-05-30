@@ -17,10 +17,15 @@ const baseConfig = new WebpackConfig({
     },
     mode: 'production',
     devtool: 'cheap-module-source-map',
+    performance: {
+        hints: 'warning',
+        maxAssetSize: 250000,
+        maxEntrypointSize: 250000
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                NODE_ENV: JSON.stringify('production')
             }
         }),
         new VueLoaderPlugin(),
@@ -40,7 +45,16 @@ const baseConfig = new WebpackConfig({
         new webpack.ProvidePlugin({
             vm: 'vue'
         })   
-    ]
+    ],
+    optimization: {
+        minimize: true,
+        providedExports: true,
+        usedExports: true,
+        sideEffects: true,
+        concatenateModules: true,
+        noEmitOnErrors: true
+    }
+
 })
 const webpackProdConfig = baseConfig.getConfig()
 

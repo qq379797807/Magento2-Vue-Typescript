@@ -5,14 +5,13 @@ import { WebpackConfig } from '../src/config'
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: [
         path.resolve(__dirname, '../app/main.tsx')
     ],
+    cache: true,
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name].js',
@@ -23,7 +22,7 @@ const baseConfig = new WebpackConfig({
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"development"'
+                NODE_ENV: JSON.stringify('development')
             }
         }),
         new VueLoaderPlugin(),
@@ -43,7 +42,11 @@ const baseConfig = new WebpackConfig({
         new webpack.ProvidePlugin({
             vm: 'vue'
         })   
-    ]
+    ],
+    optimization: {
+        namedModules: true,
+        namedChunks: true
+    }
 })
 const webpackDevConfig = baseConfig.getConfig()
 

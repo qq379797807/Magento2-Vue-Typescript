@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 import View from './src/View.vue'
 
 @Component({
-    extends: View
+    name: 'page'
 })
 export class App extends Vue {
     render (h: CreateElement): JSX.Element {

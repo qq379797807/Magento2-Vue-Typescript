@@ -6,7 +6,6 @@
 
 <script>
 export default {
-    name: 'page',
     data: () => ({
         title: 'Magento2 PWA'
     }),
