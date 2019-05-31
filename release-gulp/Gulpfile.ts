@@ -66,7 +66,7 @@ export class Gulpflie {
             path.join(__dirname, `./app/src/${styles}/**/*.${styles}`),
             (gulp: Gulp) => {
                 console.log('sass compile ...')
-                gulp.src([path.join(__dirname, `./app/src/${styles}/app.${styles}`)])
+                gulp.src([path.join(__dirname, `./app/src/${styles}/main.${styles}`)])
                     .pipe(GT.sourcemaps.init())
                     .pipe(GT.sass({
                         outputStyle: 'compressed'

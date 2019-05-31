@@ -4,8 +4,5 @@
         <referenceBlock name="require.js" remove="true" />
         <referenceBlock  name="theme.active.editor" remove="true" />
         <referenceContainer name="page.wrapper" htmlId="app" htmlClass="" />
-        <referenceContainer name="root">
-            <block class="Magento\Framework\View\Element\Template" name="webpack" after="-" template="Magento_Theme::webpack.phtml" />
-        </referenceContainer>
     </body>
 </page>

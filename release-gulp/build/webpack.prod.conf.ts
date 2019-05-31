@@ -2,7 +2,10 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig, InputConfig } from '../packages'
+import { themeConfig } from '../build'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+let { area, src } = themeConfig.default
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -10,7 +13,7 @@ const baseConfig = new WebpackConfig({
         path.resolve(__dirname, '../app/main.tsx')
     ])),
     output: {
-        path: path.join(__dirname, '../dist'),
+        path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
         filename: '[name].js',
         publicPath: './'
     },
