@@ -3,13 +3,21 @@ import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import * as merge from 'merge2'
 import { Gulp } from 'gulp'
+import themeConfig from './build/theme.conf'
 import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
-const cssExtention = ['scss', 'less', 'stylus']
+const cssExtention = ['.scss', '.less', '.stylus']
 
 @GulpFile()
 export class Gulpflie {
+    @Task()
+    public default (gulp: Gulp) {
+        console.log(themeConfig)
+        let { src } = themeConfig.default
+        console.log(src)
+    }
+
     @Task()
     public del (gulp: Gulp) {
         pump([
