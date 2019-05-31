@@ -6,20 +6,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 @Webpack()
 export class webpack {
     @Config({
-        root: __dirname,
-        entry: path.resolve(__dirname, 'app/src/main.ts'),
+        root:  path.join(__dirname, '../app'),
+        entry: () => new Promise((resolve) => resolve([
+            path.resolve(__dirname, '../app/main.tsx')
+        ])),
         output: {
-            path: path.resolve(__dirname, 'app/dist'),
+            path: path.resolve(__dirname, './dist'),
             filename: '[name].js',
             publicPath: '/'
         },
         plugins: [
             new HtmlWebpackPlugin({
-                template: path.join(__dirname, 'index.html'),
+                template: path.join(__dirname, './app/index.html'),
                 filename: 'index.html',
-                inject: 'body',
-                hash: true
-            })
+                inject: true,
+                hash: true,
+                minify: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true
+                },
+                chunksSortMode: 'none'
+            }),
         ]
     })
 

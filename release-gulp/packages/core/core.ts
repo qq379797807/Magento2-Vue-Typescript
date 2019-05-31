@@ -25,7 +25,7 @@ export class Core extends Base {
         this.tasks = {}
     }
 
-    private toArray (data?: string | string[]): string[] {
+    private toArray (data?: string | any[]): any[] {
         if (!data) return []
         if (_.isString(data)) return [data]
         return data

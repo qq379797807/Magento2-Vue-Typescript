@@ -1,4 +1,4 @@
 export interface ITask {
-    befores?: string | string[]
-    afters?: string | string[]
+    befores?: string | any[]
+    afters?: string | any[]
 }
