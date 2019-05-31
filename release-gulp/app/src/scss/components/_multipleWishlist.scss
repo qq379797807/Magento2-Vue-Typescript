@@ -110,6 +110,12 @@ $desktop-popup-position-top  : 20% !default;
     }
 }
 
+.block-wishlist-search {
+    .form-wishlist-search {
+        margin: $form-field__vertical-indent 0 0;
+    }
+}
+
 .block-wishlist-management {
     position: relative;
 
