@@ -25,9 +25,9 @@ $product-name-text-decoration-hover                 : $link__hover__text-decorat
 $toolbar-mode-icon-font-size                        : 26px !default;
 $product-h1-margin-bottom-desktop                   : $indent__base !default;
 
-@import 'module/listings';
-@import 'module/toolbar';
-@import 'module/gallery';
+@import './listings';
+@import './toolbar';
+@import './gallery';
 
 //
 //  Category view
