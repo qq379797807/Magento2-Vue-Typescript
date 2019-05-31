@@ -7,15 +7,10 @@ const themeConfig: ThemeConfig = {
         src: 'Restful/car',
         locale: 'en_US',
         parent: '',
-        styles: [
-            '.scss'
-        ],
-        scripts: [
-            '.tsx',
-            '.vue'
-        ],
+        styles: 'scss',
+        scripts: 'tsx',
         files: [
-            'css/main.css'
+            'css/app.css'
         ]
     }
 }

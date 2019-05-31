@@ -1,24 +1,12 @@
 import * as _ from 'lodash'
 import * as webpack from 'webpack'
 import * as WebpackDevServer from 'webpack-dev-server'
-import { Configuration, MultiCompiler, Compiler } from 'webpack'
-
-export interface ConfigurationExtention extends Configuration {
-    [key: string]: any,
-    devServer?: {
-        historyApiFallback: boolean,
-        hot: boolean,
-        inline: boolean,
-        progress: boolean,
-        port: number,
-        host: string,
-        disableHostCheck: boolean
-    }
-}
+import { MultiCompiler, Compiler } from 'webpack'
+import { InputConfig } from '../decorators'
 
 export class WebpackServer {
     private webpack: any
-    private webpackConfig?: ConfigurationExtention
+    private webpackConfig?: InputConfig
     private compiler?: Compiler | MultiCompiler
     private env: 'development' | 'production' | 'none' = 'development'
 
@@ -32,7 +20,7 @@ export class WebpackServer {
         return this
     }
 
-    setConfig (config: string | ConfigurationExtention, env?: 'development' | 'production' | 'none') {
+    setConfig (config: string | InputConfig, env?: 'development' | 'production' | 'none') {
         if (_.isString(config)) {
             this.webpackConfig = require(config)
         } else {

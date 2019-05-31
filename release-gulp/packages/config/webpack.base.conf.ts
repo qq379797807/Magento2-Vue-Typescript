@@ -8,7 +8,7 @@ export class WebpackConfig {
     private useConfig: InputConfig
 
     constructor (config: InputConfig) {
-        this.path = config.root
+        this.path = config.root || ''
         this.useConfig = config
     }
 

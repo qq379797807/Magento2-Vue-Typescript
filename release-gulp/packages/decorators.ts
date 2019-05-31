@@ -1,9 +1,26 @@
 import 'reflect-metadata'
 import { Gulp } from 'gulp'
-import { Output, Plugin } from 'webpack'
+import { Output, Plugin, Configuration } from 'webpack'
 import { Core } from './core/core'
 import { ITask } from './core/models'
 import { WebpackCore } from './core/webpack.core'
+
+export interface InputConfig extends Configuration {
+    root?: string,
+    entry?: any,
+    plugins?: Plugin[],
+    output?: Output,
+    devServer?: {
+        historyApiFallback: boolean,
+        hot: boolean,
+        inline: boolean,
+        progress: boolean,
+        port: number,
+        host: string,
+        disableHostCheck: boolean
+    },
+    [key: string]: any
+}
 
 export function GulpFile (gulp?: Gulp) {
     return function (target: Function, key?: string) {
@@ -29,14 +46,6 @@ export function Webpack () {
             .register()
             .pluginWebpack(target)
     }
-}
-
-export interface InputConfig {
-    root: string,
-    entry: any,
-    plugins?: Plugin[],
-    output: Output,
-    [key: string]: any
 }
 
 export function Config (config: InputConfig) {

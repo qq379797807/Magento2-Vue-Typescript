@@ -1,0 +1,595 @@
+/*
+ * Color palette
+ */
+$color-boilerplate-primary: #333 !default;
+$color-boilerplate-secondary: orange !default;
+$color-boilerplate-black: $color-boilerplate-primary !default;
+$color-boilerplate-blue: #1979c3 !default;
+$color-boilerplate-orange: #ff5501 !default;
+$color-boilerplate-light-gray: #f2f2f2 !default;
+$color-boilerplate-lighter-gray: rgb(218, 218, 218) !default;
+$color-boilerplate-gray: rgb(148, 148, 148) !default;
+
+$color-primary-gradient-color: linear-gradient(red, orange) !default;
+$color-secondary-gradient-color: linear-gradient(magenta, blue) !default;
+
+
+/*
+ * Responsive breakpoints
+ */
+$breakpoint-mobile-small: $screen__xxs !default;
+$breakpoint-mobile-portrait: $screen__xs !default;
+$breakpoint-mobile-landscape: $screen__s !default;
+$breakpoint-tablet-portrait: $screen__m !default;
+$breakpoint-tablet-landscape: $screen__l !default;
+$breakpoint-desktop: $screen__xl !default;
+
+/*
+ * Fonts
+ */
+$font-default-font-family-primary: 'Open Sans' !default;
+$font-default-font-family-secondary: 'Open Sans' !default;
+$font-default-font-size: 1.4rem !default;
+$font-default-font-weight: 400 !default;
+$font-default-font-line-height: 18px !default;
+$font-default-color: $color-boilerplate-black !default;
+$font-default-heading-color: $color-boilerplate-black !default;
+
+/* Body */
+$font-family: $font-default-font-family-primary !default;
+
+/* Heading */
+$font-family-heading: $font-default-font-family-secondary !default;
+$font-family-heading-color: $color-boilerplate-black !default;
+$font-family-heading-font-weight: 300 !default;
+$font-family-heading-line-height: 1.1 !default;
+$font-family-heading-text-transform: none !default;
+
+/* H1 */
+$font-family-heading-h1-font-size: 40px !default;
+$font-family-heading-h1-font-weight: $font-family-heading-font-weight !default;
+$font-family-heading-h1-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h1-margin: 0rem 0 40px 0 !default;
+$font-family-heading-h1-color: $font-default-heading-color !default;
+
+/* H2 */
+$font-family-heading-h2-font-size: 2.6rem !default;
+$font-family-heading-h2-font-weight: $font-family-heading-font-weight !default;
+$font-family-heading-h2-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h2-margin: 2.5rem 0 2rem 0 !default;
+$font-family-heading-h2-color: $font-default-heading-color !default;
+
+/* H3 */
+$font-family-heading-h3-font-size: 1.8rem !default;
+$font-family-heading-h3-font-weight: $font-family-heading-font-weight !default;
+$font-family-heading-h3-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h3-margin: 1.5rem 0 1rem 0 !default;
+$font-family-heading-h3-color: $font-default-heading-color !default;
+
+
+/* H4 */
+$font-family-heading-h4-font-size: 1.4rem !default;
+$font-family-heading-h4-font-weight: 700 !default;
+$font-family-heading-h4-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h4-margin: 2rem 0 2rem 0 !default;
+$font-family-heading-h4-color: $font-default-heading-color !default;
+
+
+/* H5 */
+$font-family-heading-h5-font-size: 1.2rem !default;
+$font-family-heading-h5-font-weight: 700 !default;
+$font-family-heading-h5-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h5-margin: 2rem 0 2rem 0 !default;
+$font-family-heading-h5-color: $font-default-heading-color !default;
+
+
+/* H6 */
+$font-family-heading-h6-font-size: 1rem !default;
+$font-family-heading-h6-font-weight: 700 !default;
+$font-family-heading-h6-line-height: $font-family-heading-line-height !default;
+$font-family-heading-h6-margin: 2rem 0 2rem 0 !default;
+$font-family-heading-h6-color: $font-default-heading-color !default;
+
+/* Link */
+$font-default-link-color: $color-boilerplate-blue !default;
+$font-default-link-text-decoration: none !default;
+$font-default-link-font-weight: $font-default-font-weight !default;
+$font-default-link-hover-color: $font-default-link-color !default;
+$font-default-link-hover-font-weight: $font-default-link-font-weight !default;
+$font-default-link-hover-text-decoration: underline !default;
+
+/* Header Links */
+$font-header-link-color: $font-default-link-color !default;
+$font-header-link-text-decoration: $font-default-link-text-decoration !default;
+$font-header-link-font-weight: $font-default-link-font-weight !default;
+$font-header-link-hover-color: $font-default-link-hover-color !default;
+$font-header-link-hover-font-weight: $font-default-link-hover-font-weight !default;
+$font-header-link-hover-text-decoration: $font-default-link-hover-text-decoration !default;
+
+/* Footer links */
+$font-footer-link-color: $font-default-link-color !default;
+$font-footer-link-text-decoration: $font-default-link-text-decoration !default;
+$font-footer-link-font-weight: $font-default-link-font-weight !default;
+$font-footer-link-hover-color: $font-default-link-hover-color !default;
+$font-footer-link-hover-font-weight: $font-default-link-hover-font-weight !default;
+$font-footer-link-hover-text-decoration: $font-default-link-hover-text-decoration !default;
+
+/* Standard title classes */
+$font-filter-title-font-size: 18px !default;
+$font-filter-title-font-weight: 700 !default;
+$font-filter-title-line-height: 1.421617 !default;
+$font-filter-title-margin: 0 0 20px 0 !default;
+$font-filter-title-color: $font-default-color !default;
+$font-filter-title-text-transform: none !default;
+
+$font-filter-subtitle-font-size: $font-default-font-size !default;
+$font-filter-subtitle-font-weight: 700 !default;
+$font-filter-subtitle-line-height: 1.421617 !default;
+$font-filter-subtitle-margin: 0 0 10px 0 !default;
+$font-filter-subtitle-color: $font-default-color !default;
+$font-filter-subtitle-text-transform: none !default;
+
+$font-filter-options-title-font-size: $font-default-font-size !default;
+$font-filter-options-title-font-weight: 700 !default;
+$font-filter-options-title-line-height: 1.421617 !default;
+$font-filter-options-title-margin: 0 0 10px 0 !default;
+$font-filter-options-title-color: $font-default-color !default;
+$font-filter-options-title-text-transform: none !default;
+
+$font-product-item-name-font-size: $font-default-font-size !default;
+$font-product-item-name-font-weight: $font-default-font-weight !default;
+$font-product-item-name-line-height: $font-default-font-line-height !default;
+$font-product-item-name-margin: 5px 0px !default;
+$font-product-item-name-color: $font-default-color !default;
+$font-product-item-name-text-transform: none !default;
+
+/*
+ * Buttons
+ */
+$button-default-background-color: $color-boilerplate-blue !default;
+$button-default-border: 1px solid $color-boilerplate-blue !default;
+$button-default-border-radius: 3px !default;
+$button-default-color: $color-boilerplate-light-gray !default;
+$button-default-font-family: $font-default-font-family-primary !default;
+$button-default-line-height: $font-default-font-line-height;
+$button-default-font-size: 1.4rem !default;
+$button-default-font-weight: 400 !default;
+$button-default-transition: all .34s ease-in-out !default;
+$button-default-padding: 7px 15px !default;
+$button-default-text-transform: none !default;
+
+/* Button default states */
+$button-default-hover-background-color: $color-boilerplate-orange !default;
+$button-default-hover-border: 1px solid $color-boilerplate-blue !default;
+$button-default-hover-color: white !default;
+
+/* Button primary */
+$button-primary-background-color: $button-default-background-color !default;
+$button-primary-border: $button-default-border !default;
+$button-primary-border-radius: $button-default-border-radius;
+$button-primary-color: $button-default-color !default;
+$button-primary-font-family: $font-default-font-family-primary !default;
+$button-primary-line-height: $font-default-font-line-height;
+$button-primary-font-weight: 600 !default;
+$button-primary-font-size: $button-default-font-size !default;
+$button-primary-transition: $button-default-transition !default;
+$button-primary-padding: $button-default-padding !default;
+$button-primary-text-transform: $button-default-text-transform !default;
+
+/* Button primary hover states */
+$button-primary-hover-background-color: $button-default-hover-background-color !default;
+$button-primary-hover-border: $button-default-hover-border !default;
+$button-primary-hover-color: $button-default-hover-color !default;
+
+/* Button secondary */
+$button-secondary-background-color: white !default;
+$button-secondary-border: 1px solid blue !default;
+$button-secondary-font-family: $button-default-font-family !default;
+$button-secondary-font-size: $button-default-font-size !default;
+$button-secondary-padding: 20px !default;
+$button-secondary-transition: $button-default-transition !default;
+$button-secondary-color: $color-boilerplate-blue !default;
+$button-secondary-text-transform: $button-default-text-transform !default;
+
+/* Button secondary hover states */
+$button-secondary-hover-background-color: #dadada !default;
+$button-secondary-hover-border: 1px solid #2a2a2a !default;
+$button-secondary-hover-color: #000 !default;
+
+/*
+ * Swatches
+ */
+$swatch-default-background: $color-boilerplate-light-gray !default;
+$swatch-default-border: 1px solid $color-boilerplate-lighter-gray !default;
+$swatch-default-border-radius: 0px !default;
+$swatch-default-color: $color-boilerplate-gray !default;
+$swatch-default-font-size: $font-default-font-size !default;
+$swatch-default-font-weight: 700 !default;
+$swatch-default-line-height: 20px !default;
+$swatch-default-text-align: center !default;
+$swatch-default-margin: 0 10px 5px 0 !default;
+$swatch-default-padding: 1px 2px !default;
+$swatch-default-height: 20px !default;
+$swatch-default-width: 30px !default;
+$swatch-default-min-width: 30px !default;
+$swatch-default-max-width: 90px !default;
+$swatch-default-overflow: hidden !default;
+
+$swatch-default-hover-border: 1px solid white !default;
+$swatch-default-hover-outline: 1px solid #999 !default;
+$swatch-default-hover-color: #999 !default;
+
+$swatch-option-text-background: $swatch-default-background !default;
+$swatch-option-text-border: $swatch-default-border !default;
+$swatch-option-text-color: $swatch-default-color !default;
+$swatch-option-text-font-size: 12px !default;
+$swatch-option-text-padding: 4px 8px !default;
+$swatch-option-text-min-width: 22px !default;
+$swatch-option-text-margin: 0px 7px 5px 0 !default;
+$swatch-option-text-outline: $swatch-default-hover-outline !default;
+
+$swatch-option-text-hover-border: $swatch-default-hover-border !default;
+$swatch-option-text-hover-outline: $swatch-default-hover-outline !default;
+$swatch-option-text-hover-color: $swatch-default-hover-color !default;
+
+$swatch-option-color-border: $swatch-default-border !default;
+$swatch-option-color-padding: $swatch-default-padding !default;
+$swatch-option-color-margin: $swatch-default-margin !default;
+$swatch-option-color-height: $swatch-default-height !default;
+$swatch-option-color-width: $swatch-default-width !default;
+$swatch-option-color-hover-outline: $swatch-default-hover-outline !default;
+$swatch-option-color-min-width: $swatch-default-min-width !default;
+
+/*
+ * Inputs & Forms
+ */
+
+/* [input-text|select|textarea|input-radio|input-checkbox] */
+$input-default-background-color: white !default;
+$input-default-border-color: $color-boilerplate-gray !default;
+$input-default-border: 1px solid $input-default-border-color !default;
+$input-default-border-radius: 3px !default;
+$input-default-height: 36px !default;
+$input-default-width: 100% !default;
+$input-default-margin: 0 !default;
+$input-default-padding: 5px 10px 4px !default;
+$input-default-vertical-align: middle !default;
+$input-default-font-size: $font-default-font-size !default;
+$input-default-color: black !default;
+$input-default-font-family: $font-default-font-family-secondary !default;
+$input-default-font-weight: $font-default-font-weight !default;
+$input-default-font-style: normal !default;
+$input-default-line-height: 36px !default;
+
+/* Placeholder */
+$input-default-placeholder-color: #84929F !default;
+$input-default-placeholder-font-style: $input-default-font-style !default;
+
+/* Disabled state */
+$input-default-disabled-background-color: $input-default-background-color !default;
+$input-default-disabled-border: $input-default-border !default;
+$input-default-disabled-opacity: .2 !default;
+$input-default-disabled-color: $input-default-color !default;
+$input-default-disabled-font-style: $input-default-font-style !default;
+
+/* Focus state */
+$input-default-focus-background-color: $input-default-background-color !default;
+$input-default-focus-border: $input-default-border !default;
+$input-default-focus-color: $input-default-color !default;
+$input-default-focus-font-style: $input-default-font-style !default;
+
+/* Input[type="text"] */
+$input-type-text-background-color: $input-default-background-color !default;
+$input-type-text-border-color: $input-default-border-color !default;
+$input-type-text-border: $input-default-border !default;
+$input-type-text-border-radius: $input-default-border-radius !default;
+$input-type-text-height: $input-default-height !default;
+$input-type-text-width: $input-default-width !default;
+$input-type-text-margin: $input-default-margin !default;
+$input-type-text-padding: $input-default-padding !default;
+$input-type-text-vertical-align: $input-default-vertical-align !default;
+$input-type-text-font-size: $input-default-font-style !default;
+$input-type-text-color: $input-default-color !default;
+$input-type-text-font-family: $input-default-font-family !default;
+$input-type-text-font-weight: $input-default-font-weight !default;
+$input-type-text-font-style: $input-default-font-style !default;
+$input-type-text-line-height: $input-default-line-height !default;
+
+/* Input[type="text"] Placeholder */
+$input-type-text-placeholder-color: $input-default-placeholder-color !default;
+$input-type-text-placeholder-font-style: $input-default-placeholder-font-style !default;
+
+/* Input[type="text"] Disabled state */
+$input-type-text-disabled-background-color: $input-default-disabled-background-color !default;
+$input-type-text-disabled-border: $input-default-disabled-border !default;
+$input-type-text-disabled-opacity: $input-default-disabled-opacity !default;
+$input-type-text-disabled-color: $input-default-disabled-color !default;
+$input-type-text-disabled-font-style: $input-default-disabled-font-style !default;
+
+/* Input[type="text"] Focus state */
+$input-type-text-focus-background-color: $input-default-focus-background-color !default;
+$input-type-text-focus-border: $input-default-focus-border !default;
+$input-type-text-focus-color: $input-default-focus-color !default;
+$input-type-text-focus-font-style: $input-default-focus-font-style !default;
+
+/* Select */
+$input-select-background-color: $input-default-background-color !default;
+$input-select-border-color: $input-default-border-color !default;
+$input-select-border: $input-default-border !default;
+$input-select-border-radius: $input-default-border-radius !default;
+$input-select-height: $input-default-height !default;
+$input-select-width: $input-default-width !default;
+$input-select-margin: $input-default-margin !default;
+$input-select-padding: $input-default-padding !default;
+$input-select-vertical-align: $input-default-vertical-align !default;
+$input-select-font-size: $input-default-font-size !default;
+$input-select-color: $input-default-color !default;
+$input-select-font-family: $input-default-font-family !default;
+$input-select-font-weight: $input-default-font-weight !default;
+$input-select-font-style: $input-default-font-style !default;
+$input-select-line-height: $input-default-line-height !default;
+
+/* Select Placeholder */
+$input-select-placeholder-color: $input-default-placeholder-color !default;
+$input-select-placeholder-font-style: $input-default-placeholder-font-style !default;
+
+/* Select Disabled state */
+$input-select-disabled-background-color: $input-default-disabled-background-color !default;
+$input-select-disabled-border: $input-default-disabled-border !default;
+$input-select-disabled-opacity: $input-default-disabled-opacity !default;
+$input-select-disabled-color: $input-default-disabled-color !default;
+$input-select-disabled-font-style: $input-default-disabled-font-style !default;
+
+/* Select Focus state */
+$input-select-focus-background-color: $input-default-focus-background-color !default;
+$input-select-focus-border: $input-default-focus-border !default;
+$input-select-focus-color: $input-default-focus-color !default;
+$input-select-focus-font-style: $input-default-focus-font-style !default;
+
+
+/* Textarea */
+$input-textarea-resize: vertical !default;
+$input-textarea-background-color: $input-default-background-color !default;
+$input-textarea-border-color: $input-default-border-color !default;
+$input-textarea-border: $input-default-border !default;
+$input-textarea-border-radius: $input-default-border-radius !default;
+$input-textarea-height: auto !default;
+$input-textarea-min-height: $input-default-height !default;
+$input-textarea-width: $input-default-width !default;
+$input-textarea-margin: $input-default-margin !default;
+$input-textarea-padding: $input-default-padding !default;
+$input-textarea-vertical-align: $input-default-vertical-align !default;
+$input-textarea-font-size: $input-default-font-size !default;
+$input-textarea-color: $input-default-color !default;
+$input-textarea-font-family: $input-default-font-family !default;
+$input-textarea-font-weight: $input-default-font-weight !default;
+$input-textarea-font-style: $input-default-font-style !default;
+$input-textarea-line-height: $input-default-line-height !default;
+
+/* Textarea Placeholder */
+$input-textarea-placeholder-color: $input-default-placeholder-color !default;
+$input-textarea-placeholder-font-style: $input-default-placeholder-font-style !default;
+
+/* Textarea Disabled state */
+$input-textarea-disabled-background-color: $input-default-disabled-background-color !default;
+$input-textarea-disabled-border: $input-default-disabled-border !default;
+$input-textarea-disabled-opacity: $input-default-disabled-opacity !default;
+$input-textarea-disabled-color: $input-default-disabled-color !default;
+$input-textarea-disabled-font-style: $input-default-disabled-font-style !default;
+
+/* Textarea Focused state */
+$input-textarea-focus-background-color: $input-default-focus-background-color !default;
+$input-textarea-focus-border: $input-default-focus-border !default;
+$input-textarea-focus-color: $input-default-focus-color !default;
+$input-textarea-focus-font-style: $input-default-focus-font-style !default;
+
+/* Checkbox / Radio */
+$input-choice-width: auto !default;
+
+/* Limiter */
+$input-limiter-background-color: white !default;
+$input-limiter-border-color: $color-boilerplate-gray !default;
+$input-limiter-border: 1px solid $color-boilerplate-gray !default;
+$input-limiter-border-radius: $input-default-border-radius !default;
+$input-limiter-height: 32px !default;
+$input-limiter-width: auto !default;
+$input-limiter-margin: 0 5px 0 7px !default;
+$input-limiter-padding: $input-default-padding !default;
+$input-limiter-vertical-align: $input-default-vertical-align !default;
+$input-limiter-font-size: $font-default-font-size !default;
+$input-limiter-color: $color-boilerplate-black !default;
+$input-limiter-font-family: $input-default-font-family !default;
+$input-limiter-font-weight: $input-default-font-weight !default;
+$input-limiter-font-style: $input-default-font-style !default;
+$input-limiter-line-height: 1.42 !default;
+
+/* Textarea Disabled state */
+$input-limiter-disabled-background-color: $input-default-disabled-background-color !default;
+$input-limiter-disabled-border: $input-default-disabled-border !default;
+$input-limiter-disabled-opacity: $input-default-disabled-opacity !default;
+$input-limiter-disabled-color: $input-default-disabled-color !default;
+$input-limiter-disabled-font-style: $input-default-disabled-font-style !default;
+
+/* Textarea Focused state */
+$input-limiter-focus-background-color: $input-default-focus-background-color !default;
+$input-limiter-focus-border: $input-default-focus-border !default;
+$input-limiter-focus-color: $input-default-focus-color !default;
+$input-limiter-focus-font-style: $input-default-focus-font-style !default;
+
+/* Sorter */
+$input-sorter-background-color: white !default;
+$input-sorter-border-color: $color-boilerplate-gray !default;
+$input-sorter-border: 1px solid $color-boilerplate-gray !default;
+$input-sorter-border-radius: $input-default-border-radius !default;
+$input-sorter-height: 32px !default;
+$input-sorter-width: auto !default;
+$input-sorter-margin: 0 0 0 7px !default;
+$input-sorter-padding: $input-default-padding !default;
+$input-sorter-vertical-align: $input-default-vertical-align !default;
+$input-sorter-font-size: $font-default-font-size !default;
+$input-sorter-color: $color-boilerplate-black !default;
+$input-sorter-font-family: $input-default-font-family !default;
+$input-sorter-font-weight: $input-default-font-weight !default;
+$input-sorter-font-style: $input-default-font-style !default;
+$input-sorter-line-height: 1.42 !default;
+
+/* Sorter Disabled state */
+$input-sorter-disabled-background-color: $input-default-disabled-background-color !default;
+$input-sorter-disabled-border: $input-default-disabled-border !default;
+$input-sorter-disabled-opacity: $input-default-disabled-opacity !default;
+$input-sorter-disabled-color: $input-default-disabled-color !default;
+$input-sorter-disabled-font-style: $input-default-disabled-font-style !default;
+
+/*
+ * Header
+ */
+$header-background-color: #fff !default;
+$header-text-color: $font-default-color !default;
+$header-padding: 30px 20px 0 !default;
+$header-panel-background-color: $header-background-color !default;
+$header-panel-text-color: $header-text-color !default;
+$header-panel-padding: 10px 20px !default;
+$header-panel-bottom-border-color: #e8e8e8 !default;
+
+
+/*
+ * Menu bar
+ */
+
+$menu-bar-background: $color-boilerplate-light-gray !default;
+$menu-bar-margin: 0 0 25px !default;
+$menu-bar-menu-item-font-family: $font-default-font-family-primary !default;
+$menu-bar-menu-item-font-weight: 700 !default;
+$menu-bar-menu-item-font-size: $font-default-font-size !default;
+$menu-bar-menu-item-color: $color-boilerplate-gray !default;
+
+$menu-bar-menu-item-hover-color: $color-boilerplate-black !default;
+$menu-bar-menu-item-hover-background: $menu-bar-background !default;
+
+$menu-bar-menu-item-active-color: $menu-bar-menu-item-hover-color !default;
+$menu-bar-menu-item-active-default-border: 3px solid $color-boilerplate-orange !default
+$menu-bar-menu-item-active-border-top: none !default;
+$menu-bar-menu-item-active-border-bottom: $menu-bar-menu-item-active-default-border !default;
+$menu-bar-menu-item-active-border-left: none !default;
+$menu-bar-menu-item-active-border-right: none !default;
+$menu-bar-menu-item-active-background: $menu-bar-menu-item-hover-background !default;
+
+$menu-bar-menu-item-submenu-background: #ffffff !default;
+$menu-bar-menu-item-submenu-item-color: $color-boilerplate-black !default;
+$menu-bar-menu-item-submenu-item-border-color: $color-boilerplate-orange !default;
+$menu-bar-menu-item-submenu-item-font-weight: 400 !default;
+$menu-bar-menu-item-submenu-item-hover-background: #eaeaea !default;
+$menu-bar-menu-item-submenu-item-hover-color: $color-boilerplate-black !default;
+$menu-bar-menu-item-submenu-item-hover-font-weight: 400 !default;
+
+/*
+ * Fieldset / Fields
+ */
+
+/* Fieldset */
+$form-fieldset-border: 0 !default;
+$form-fieldset-margin: 0 !default;
+$form-fieldset-padding: 0 !default;
+$form-fieldset-legend-color: $font-default-color !default;
+$form-fieldset-legend-font-size: 24px !default;
+$form-fieldset-legend-font-family: $font-default-font-family-secondary !default;
+$form-fieldset-legend-font-weight: 600 !default;
+$form-fieldset-legend-font-style: normal !default;
+$form-fieldset-legend-line-height: 1.2 !default;
+$form-fieldset-legend-margin: 20px 0 !default;
+$form-fieldset-legend-padding: 0 !default;
+$form-fieldset-legend-width: inherit !default;
+
+/* Field */
+$form-fieldset-field-type: block !default;
+$form-fieldset-field-margin: 0 0 20px !default;
+$form-fieldset-field-box-sizing: border-box !default;
+
+$form-fieldset-field-choice-before-width: auto !default;
+$form-fieldset-field-choice-before-padding: 0 !default;
+$form-fieldset-field-choice-before-height: inherit !default;
+$form-fieldset-field-choice-before-float: none !default;
+
+
+/* Label */
+$form-fieldset-field-label-padding: 6px 15px 0 0 !default;
+$form-fieldset-field-label-text-align: left !default;
+$form-fieldset-field-label-width: auto !default;
+$form-fieldset-field-label-float: none !default;
+$form-fieldset-field-label-font-weight: 600 !default;
+
+$form-fieldset-field-choice-label-margin: 0 0 0 5px !default;
+
+/* Control */
+$form-fieldset-field-control-width: auto !default;
+$form-fieldset-field-control-float: none !default;
+
+/* Action toolbar */
+$form-action-toolbar-margin: 20px 0 !default;
+$form-action-toolbar-padding: 0 !default;
+
+/* Breadcrumbs */
+$breadcrumb-item-font-size: $font-default-font-size !default;
+$breadcrumb-item-line-height: $font-default-font-line-height !default;
+$breadcrumb-item-padding: 5px 5px 0 0 !default;
+$breadcrumb-item-color: $font-default-color !default;
+$breadcrumb-item-font-weight: $font-default-font-weight !default;
+$breadcrumb-item-current-font-weight: $font-default-font-weight !default;
+$breadcrumb-item-current-color: $color-boilerplate-gray !default;
+$breadcrumb-item-chevron-color: $color-boilerplate-gray !default;
+$breadcrumb-item-chevron-line-height: $font-default-font-line-height !default;
+
+/* Toolbar */
+$toolbar-modes-mode-background: $color-boilerplate-light-gray !default;
+$toolbar-modes-mode-border: 1px solid $color-boilerplate-gray !default;
+$toolbar-modes-mode-color: $color-boilerplate-gray !default;
+$toolbar-modes-mode-padding: 7px 10px !default;
+$toolbar-modes-mode-hover-background: $color-boilerplate-lighter-gray !default;
+$toolbar-modes-mode-hover-border: $toolbar-modes-mode-border !default;
+$toolbar-modes-mode-hover-color: $toolbar-modes-mode-color !default;
+$toolbar-modes-mode-hover-padding: $toolbar-modes-mode-padding !default;
+$toolbar-modes-mode-active-background: $toolbar-modes-mode-background !default;
+$toolbar-modes-mode-active-border: $toolbar-modes-mode-border !default;
+$toolbar-modes-mode-active-color: $toolbar-modes-mode-color !default;
+$toolbar-modes-mode-active-padding: $toolbar-modes-mode-padding !default;
+
+/*
+ * Tabs
+ */
+
+/* Detail tabs */
+
+$detail-tab-title-background: black !default;
+$detail-tab-title-border-color: gray !default;
+$detail-tab-title-color: white !default;
+$detail-tab-title-font-weight: 300 !default;
+$detail-tab-title-text-decoration: none !default;
+$detail-tab-title-padding: 5px 25px !default;
+$detail-tab-title-height: 25px !default;
+$detail-tab-title-font-size: 1.5rem !default;
+
+$detail-tab-title-hover-background: orange !default;
+$detail-tab-title-hover-color: white !default;
+$detail-tab-title-hover-border: red !default;
+
+$detail-tab-title-active-background: orange !default;
+$detail-tab-title-active-color: white !default;
+$detail-tab-title-active-border: red !default;
+
+$detail-tab-content-background: gray !default;
+$detail-tab-content-border: 1px solid black !default;
+$detail-tab-content-margin: 31px !default;
+$detail-tab-content-font-size: $font-default-font-size !default;
+
+$footer-background: #ffffff !default;
+$footer-content-margin: 25px auto !default;
+$footer-content-padding: 25px 20px 0 !default;
+$footer-content-color: $color-boilerplate-black !default;
+$footer-line-color: $color-boilerplate-black !default;
+
+
+
+
+
+
+

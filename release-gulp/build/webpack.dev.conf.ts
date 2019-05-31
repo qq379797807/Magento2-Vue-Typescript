@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
-import { WebpackConfig, ConfigurationExtention } from '../packages'
+import { WebpackConfig, InputConfig } from '../packages'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -71,6 +71,6 @@ const baseConfig = new WebpackConfig({
     }
 })
 
-const webpackDevConfig: ConfigurationExtention = baseConfig.getConfig()
+const webpackDevConfig: InputConfig = baseConfig.getConfig()
 
 export default webpackDevConfig

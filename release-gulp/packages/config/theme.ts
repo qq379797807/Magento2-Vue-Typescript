@@ -5,8 +5,8 @@ export interface ThemeConfig {
         src: string,
         locale: string,
         parent?: string,
-        styles: Array<string>,
-        scripts: Array<string>,
+        styles: string,
+        scripts: string,
         files: Array<string>
     }
 }

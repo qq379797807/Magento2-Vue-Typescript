@@ -1,5 +1,4 @@
 import * as _ from 'lodash'
-import * as webpack from 'webpack'
 import { Configuration } from 'webpack'
 import { Base } from './base'
 import { InputConfig } from '../decorators'
@@ -21,8 +20,8 @@ export class WebpackCore extends Base {
         _.map(this.configs, (item: { config: InputConfig, types: any[] }, index: string) => {
             if (_.isFunction(mode[index])) {
                 let args: any = _.map(item.types, type => {
-                    if (type.name === 'Object') return this.configs = item.config
-                })
+                    if (type.name === 'Object') return item.config
+                });
                 this.buildConfig = {
                     ...this.buildConfig,
                     [index]: mode[index](...args)
