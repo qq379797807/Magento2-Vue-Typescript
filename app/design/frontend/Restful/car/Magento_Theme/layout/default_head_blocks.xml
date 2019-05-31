@@ -4,5 +4,6 @@
         <remove src="mage/calendar.css" />
         <remove src="requirejs/require.js" />
         <remove src="mage/polyfill.js" />
+        <css src="css/app.css" />
     </head>
 </page>
