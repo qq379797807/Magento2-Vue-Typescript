@@ -119,6 +119,7 @@ export class WebpackConfig {
                 inline: true,
                 hot: true,
                 port: 3000,
+                host: '127.0.0.1',
                 https: false,
                 progress: true,
                 overlay: {

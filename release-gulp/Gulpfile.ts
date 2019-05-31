@@ -3,7 +3,7 @@ import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import * as merge from 'merge2'
 import { Gulp } from 'gulp'
-import themeConfig from './build/theme.conf'
+import { themeConfig, webpackDevConfig, webpackProdConfig } from './build'
 import { GulpFile, Task, Watch, WebpackServer, Vkoa } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
@@ -82,7 +82,7 @@ export class Gulpflie {
     @Task()
     public dev(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'build/webpack.dev.conf'),
+            webpackDevConfig,
             'development'
         ).runServer()
     }
@@ -90,7 +90,7 @@ export class Gulpflie {
     @Task()
     public build(gulp: Gulp, webpackServer: WebpackServer) {
         return webpackServer.setConfig(
-            path.resolve(__dirname, 'build/webpack.prod.conf'),
+            webpackProdConfig,
             'production'
         ).runBuild()
     }
@@ -116,6 +116,5 @@ export class Gulpflie {
             .setWebpack('webpack')
             .setKoa('koa')
             .run()
-        // return webpackServer.setConfig(require('./webpack')).runServer()
     }
 }
