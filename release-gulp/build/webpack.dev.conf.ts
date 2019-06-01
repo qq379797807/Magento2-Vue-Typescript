@@ -1,9 +1,12 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
+import { themeConfig } from '../build'
 import { WebpackConfig, InputConfig } from '../packages'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+let { area, src } = themeConfig.default
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -12,7 +15,7 @@ const baseConfig = new WebpackConfig({
     ])),
     cache: true,
     output: {
-        path: path.join(__dirname, '../dist'),
+        path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
         filename: '[name].js',
         publicPath: './'
     },

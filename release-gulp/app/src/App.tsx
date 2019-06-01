@@ -18,7 +18,9 @@ import Component from 'vue-class-component'
 export class App extends Vue {
     render (h: CreateElement): JSX.Element {
         return (
-            <div class="app" />
+            <div class="app">
+                <a href={this.logoUrl}>B M</a>
+            </div>
         )
     }
 }
