@@ -1,5 +1,5 @@
 import Vue, { CreateElement } from 'vue'
-import { App } from './src/App'
+import { App } from './App'
 
 Vue.config.productionTip = false;
 

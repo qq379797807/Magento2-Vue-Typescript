@@ -8,25 +8,33 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
+const { area, src, styles, locale } = themeConfig.default
+const appDir = `app/design/${area}/${src}`
+const pubDir = `pub/static/${area}/${src}/${locale}`
+
 @GulpFile()
 export class Gulpflie {
     @Task()
     public default (gulp: Gulp) {
-        console.log(themeConfig)
-        let { src } = themeConfig.default
         console.log(src)
     }
 
     @Task()
     public del (gulp: Gulp) {
         pump([
-            gulp.src('./dist'),
-            clean()
-        ]);
+            gulp.src([
+                `../var/view_preprocessed/${pubDir}`,
+                `../${pubDir}`
+            ]),
+            clean({
+                read: false,
+                force: true
+            })
+        ])
     }
 
     @Task({
-        befores: ['del']
+        // befores: ['del']
     })
     public copy (gulp: Gulp, watch: Watch) {
         watch.run(
@@ -61,7 +69,6 @@ export class Gulpflie {
 
     @Task()
     public styles (gulp: Gulp, watch: Watch) {
-        let { area, src, styles, locale } = themeConfig.default
         watch.run(
             path.join(__dirname, `./app/src/${styles}/**/*.${styles}`),
             (gulp: Gulp) => {

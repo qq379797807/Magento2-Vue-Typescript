@@ -9,13 +9,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 let { area, src } = themeConfig.default
 
 const baseConfig = new WebpackConfig({
-    root:  path.join(__dirname, '../app'),
+    root:  path.resolve(__dirname, '../app'),
     entry: () => new Promise((resolve) => resolve([
         path.resolve(__dirname, '../app/main.tsx')
     ])),
     cache: true,
     output: {
-        path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
+        path: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
         filename: '[name].js',
         publicPath: './'
     },
@@ -32,7 +32,7 @@ const baseConfig = new WebpackConfig({
             filename: `../dist/css/[name].[contenthash:8].css`
         }),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, '../app/index.html'),
+            template: path.resolve(__dirname, '../app/index.html'),
             filename: 'index.html',
             inject: true,
             hash: true,
