@@ -89,11 +89,14 @@ export class Gulpflie {
             path.resolve(__dirname, util.getSrcDir()),
             (gulp: Gulp, e?: any) => {
                 util.logMsg(`Copy task start ...`, `green`)
-                if (e) console.log(e.path)
-                gulp.src(path.resolve(__dirname, util.getSrcDir()))
+                if (e) {
+                    util.copyFile(e)
+                } else {
+                    gulp.src(path.resolve(__dirname, util.getSrcDir()))
                     .pipe(GT.multi([
                         path.resolve(__dirname, util.getAppDir())
                     ]))
+                }
             }
         )
     }
