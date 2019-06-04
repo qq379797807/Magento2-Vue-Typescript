@@ -2,7 +2,7 @@ const gulpLoader = require('gulp-load-plugins')
 
 const GT = gulpLoader({
     DEBUG: false,
-    pattern: ['gulp-*', 'gulp.*', '@*/gulp{-,.}*'],
+    pattern: ['gulp-*', 'gulp.*', '@*/gulp{-,.}*', 'autoprefixer'],
     overridePattern: true,
     scope: ['dependencies', 'devDependencies', 'peerDependencies'],
     replaceString: /^gulp(-|\.)/,

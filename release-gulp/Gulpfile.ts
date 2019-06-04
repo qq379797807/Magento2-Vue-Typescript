@@ -9,23 +9,90 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
-const { area, src, styles, locale } = themeConfig.default
-const appDir = `app/design/${area}/${src}`
-const pubDir = `pub/static/${area}/${src}/${locale}`
+const { styles, scripts, mode, name } = themeConfig.default
 
 @GulpFile()
 export class Gulpflie {
     @Task()
     public default (gulp: Gulp) {
-        console.log(src)
+        console.log(gulp)
     }
 
     @Task()
-    public phtml (gulp: Gulp, watch: Watch) {
+    public del (gulp: Gulp, util: Util) {
+        pump([
+            gulp.src([
+                path.resolve(__dirname, `${util.getVarDir()}`),
+                path.resolve(__dirname, `${util.getPubDir()}`)
+            ]),
+            clean({
+                read: false,
+                force: true
+            })
+        ])
+    }
+
+    @Task()
+    public copy (gulp: Gulp, watch: Watch, util: Util) {
+        watch.run(
+            path.resolve(__dirname, util.getSrcDir()),
+            (gulp: Gulp, e?: any) => {
+                util.logMsg(`Copy task start ...`, `green`)
+                if (e) {
+                    util.copyFile(e)
+                } else {
+                    gulp.src(path.resolve(__dirname, util.getSrcDir()))
+                    .pipe(GT.multi([
+                        path.resolve(__dirname, util.getAppDir())
+                    ]))
+                }
+            }
+        )
+    }
+
+    @Task()
+    public styles (gulp: Gulp, watch: Watch, util: Util) {
+        console.log(`${util.getSrcDir()}${util.os()}.${styles}`)
+        watch.run(
+            path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
+            (gulp: Gulp) => {
+                util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
+                gulp.src([
+                        path.resolve(__dirname, `${util.getSassDir()}main.${styles}`)
+                    ])
+                    .pipe(GT.sourcemaps.init())
+                    .pipe(GT.sass({
+                        outputStyle: 'compressed'
+                    }))
+                    .pipe(GT.postcss([
+                        GT.autoprefixer({
+                            browsers: ['> 0.5%', 'last 2 versions', 'Firefox ESR', 'not dead'],
+                            cascade: true,
+                            remove: true
+                        })
+                    ]))
+                    .pipe(GT.sourcemaps.write('.', {
+                        includeContent: true
+                    }))
+                    .pipe(GT.multi([
+                        `${util.getAppDir()}${util.os()}web${util.os()}css`
+                    ]))
+                    .pipe(GT.logger({
+                        display: 'name',
+                        beforeEach: `Theme: ${name} `,
+                        afterEach: ' Compiled!',
+                        showChange: true
+                    }))
+            }
+        )
+    }
+
+    @Task()
+    public phtml (gulp: Gulp, watch: Watch, util: Util) {
         watch.run(
             path.join(__dirname, 'src/**/*.js'),
             (gulp: Gulp) => {
-                gulp.src(`${appDir}**/*.phtml`)
+                gulp.src(`${util.getAppDir()}**/*.phtml`)
                     // .pipe($.plumber())
                     // .pipe($.if(Util.mode(), $.htmlmin({
                     //     collapseWhitespace: true,
@@ -69,38 +136,6 @@ export class Gulpflie {
 
     }
 
-    @Task()
-    public del (gulp: Gulp) {
-        pump([
-            gulp.src([
-                `../var/view_preprocessed/${pubDir}`,
-                `../${pubDir}`
-            ]),
-            clean({
-                read: false,
-                force: true
-            })
-        ])
-    }
-
-    @Task()
-    public copy (gulp: Gulp, watch: Watch, util: Util) {
-        watch.run(
-            path.resolve(__dirname, util.getSrcDir()),
-            (gulp: Gulp, e?: any) => {
-                util.logMsg(`Copy task start ...`, `green`)
-                if (e) {
-                    util.copyFile(e)
-                } else {
-                    gulp.src(path.resolve(__dirname, util.getSrcDir()))
-                    .pipe(GT.multi([
-                        path.resolve(__dirname, util.getAppDir())
-                    ]))
-                }
-            }
-        )
-    }
-
     @Task({
         befores: ['copy']
     })
@@ -118,25 +153,6 @@ export class Gulpflie {
                     tsResult.js.pipe(sourcemaps.write('./sourcemaps'))
                         .pipe(gulp.dest('./dist'))
                 ])
-            }
-        )
-    }
-
-    @Task()
-    public styles (gulp: Gulp, watch: Watch) {
-        watch.run(
-            path.join(__dirname, `./app/src/${styles}/**/*.${styles}`),
-            (gulp: Gulp) => {
-                console.log('sass compile ...')
-                gulp.src([path.join(__dirname, `./app/src/${styles}/main.${styles}`)])
-                    .pipe(GT.sourcemaps.init())
-                    .pipe(GT.sass({
-                        outputStyle: 'compressed'
-                    }))
-                    .pipe(GT.sourcemaps.write())
-                    .pipe(GT.multi([
-                        `../app/design/${area}/${src}/web/css`
-                    ]))
             }
         )
     }

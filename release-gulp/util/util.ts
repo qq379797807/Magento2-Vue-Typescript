@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as _ from 'lodash'
-import * as gulp from 'gulp'
 import * as os from 'os'
 import * as makeDir from 'make-dir'
 import { themeConfig } from '../build'
@@ -29,7 +28,6 @@ export class Util {
 
     public copyFile (e: any) {
         const os: string = this.os()
-        let type: string = e.type
         let origin: string = e.path
         let target: string = origin.replace(
             `${os}release-gulp${os}app${os}src${os}`, 
@@ -86,7 +84,6 @@ export class Util {
         const src_path: string = `.${os}app${os}src${os}**${os}**`
         
         return src_path
-    
     }
 
     public getAppDir (): string {
@@ -105,8 +102,15 @@ export class Util {
 
     public getVarDir (): string {
         const os: string = this.os()
-        const var_path: string = `..${os}var${os}view_preprocessed${os}pub${os}static${os}${area}${os}${src}${this.url}${locale}`
+        const var_path: string = `..${os}var${os}view_preprocessed${os}pub${os}static${os}${area}${os}${this.url}${os}${locale}`
         
         return var_path
+    }
+
+    public getSassDir (): string {
+        const os: string = this.os()
+        const scss_path: string = `.${os}app${os}src${os}styles${os}`
+        
+        return scss_path
     }
 }
