@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import * as os from 'os'
 import * as makeDir from 'make-dir'
 import { themeConfig } from '../build'
+import { async } from '_@types_q@1.5.2@@types/q';
 const tool = require('gulp-util')
 
 const { area, src, locale } = themeConfig.default
@@ -47,14 +48,29 @@ export class Util {
     public generateFile (old: string, dest: string) {
         this.logMsg(`Copy File: ${old}`, 'magenta')
 
-        let readStream = fs.createReadStream(old)
-        let writeStream = fs.createWriteStream(dest)
+        const generate = async (sc: string, ds: string) => {
+            try {
+                await this.readStream(sc, ds)
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
 
-        readStream.pipe(writeStream)
-        readStream.on('end', () => {
-            this.logMsg(`Copy file success ...`, 'green')
-        }).on('error', () => {
-            this.logMsg(`Copy file error ...`, 'red')
+        generate(old, dest)
+    }
+
+    public readStream (origin: string, target: string): Promise<any> {
+        return new Promise((resolve?: any, reject?: any) => {
+            let readStream: fs.ReadStream = fs.createReadStream(origin)
+            let writeStream: fs.WriteStream = fs.createWriteStream(target)
+
+            readStream.pipe(writeStream)
+            readStream.on('end', () => {
+                readStream.close()
+                resolve(this.logMsg(`Copy file success ...`, 'green'))
+            }).on('error', (err) => {
+                reject(this.logMsg(`Copy file error ...`, 'red'))
+            })
         })
     }
 
