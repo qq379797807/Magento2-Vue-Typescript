@@ -9,7 +9,7 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
-const { styles, scripts, mode, name } = themeConfig.default
+const { styles, scripts, name } = themeConfig.default
 
 @GulpFile()
 export class Gulpflie {
@@ -52,7 +52,6 @@ export class Gulpflie {
 
     @Task()
     public styles (gulp: Gulp, watch: Watch, util: Util) {
-        console.log(`${util.getSrcDir()}${util.os()}.${styles}`)
         watch.run(
             path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
             (gulp: Gulp) => {
@@ -66,7 +65,6 @@ export class Gulpflie {
                     }))
                     .pipe(GT.postcss([
                         GT.autoprefixer({
-                            browsers: ['> 0.5%', 'last 2 versions', 'Firefox ESR', 'not dead'],
                             cascade: true,
                             remove: true
                         })

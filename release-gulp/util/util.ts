@@ -7,7 +7,7 @@ import { themeConfig } from '../build'
 import { async } from '_@types_q@1.5.2@@types/q';
 const tool = require('gulp-util')
 
-const { area, src, locale } = themeConfig.default
+const { area, src, locale, mode } = themeConfig.default
 
 export class Util {
     public url: string
@@ -52,7 +52,7 @@ export class Util {
             try {
                 await this.readStream(sc, ds)
             } catch (e) {
-                console.log(e.message)
+                this.logMsg(`${e.message}`, 'red')
             }
         }
 
@@ -72,6 +72,10 @@ export class Util {
                 reject(this.logMsg(`Copy file error ...`, 'red'))
             })
         })
+    }
+
+    public mode (): boolean {
+        return mode === 'development' ? true : false
     }
 
     public logMsg (msg: string, color: string): any {
