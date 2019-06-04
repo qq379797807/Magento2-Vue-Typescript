@@ -3,6 +3,7 @@ import * as merge from 'merge2'
 import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import { Gulp } from 'gulp'
+import { Util } from './util/util'
 import { themeConfig, webpackDevConfig, webpackProdConfig } from './build'
 import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
@@ -20,6 +21,55 @@ export class Gulpflie {
     }
 
     @Task()
+    public phtml (gulp: Gulp, watch: Watch) {
+        watch.run(
+            path.join(__dirname, 'src/**/*.js'),
+            (gulp: Gulp) => {
+                gulp.src(`${appDir}**/*.phtml`)
+                    // .pipe($.plumber())
+                    // .pipe($.if(Util.mode(), $.htmlmin({
+                    //     collapseWhitespace: true,
+                    //     minifyCSS: true,
+                    //     minifyJS: { 
+                    //         compress: {
+                    //             drop_console: true
+                    //         }
+                    //     },
+                    //     processConditionalComments: true,
+                    //     removeComments: true,
+                    //     removeEmptyAttributes: true,
+                    //     removeScriptTypeAttributes: true,
+                    //     removeStyleLinkTypeAttributes: true
+                    // })))
+                    // .pipe(gulp.dest(outputDir))
+            }
+        )
+    }
+
+    @Task()
+    public images (gulp: Gulp, watch: Watch) {
+        watch.run(
+            path.join(__dirname, `./app/src/web/images/**`),
+            (gulp: Gulp) => {
+                console.log('Minify Images Task Start ...')
+                // gulp.src([path.join(__dirname, `./app/src/web/images/**`)])
+                //     .pipe(gulpif(env==='build', cache(imagemin({
+                //         optimizationLevel: 5,
+                //         progressive: true,
+                //         interlaced: true,
+                //         multipass: true
+                //     }))))
+                //     .pipe(gulp.dest('./dist'))
+            }
+        )
+    }
+
+    @Task()
+    public fonts (gulp: Gulp) {
+
+    }
+
+    @Task()
     public del (gulp: Gulp) {
         pump([
             gulp.src([
@@ -33,15 +83,17 @@ export class Gulpflie {
         ])
     }
 
-    @Task({
-        // befores: ['del']
-    })
-    public copy (gulp: Gulp, watch: Watch) {
+    @Task()
+    public copy (gulp: Gulp, watch: Watch, util: Util) {
         watch.run(
-            path.join(__dirname, 'src/**/*.js'),
-            (gulp: Gulp) => {
-                gulp.src([path.join(__dirname, 'src/**/*.js')])
-                    .pipe(gulp.dest('./dist'))
+            path.resolve(__dirname, util.getSrcDir()),
+            (gulp: Gulp, e?: any) => {
+                util.logMsg(`Copy task start ...`, `green`)
+                if (e) console.log(e.path)
+                gulp.src(path.resolve(__dirname, util.getSrcDir()))
+                    .pipe(GT.multi([
+                        path.resolve(__dirname, util.getAppDir())
+                    ]))
             }
         )
     }
@@ -79,7 +131,9 @@ export class Gulpflie {
                         outputStyle: 'compressed'
                     }))
                     .pipe(GT.sourcemaps.write())
-                    .pipe(GT.multi([`../app/design/${area}/${src}/web/css`]))
+                    .pipe(GT.multi([
+                        `../app/design/${area}/${src}/web/css`
+                    ]))
             }
         )
     }

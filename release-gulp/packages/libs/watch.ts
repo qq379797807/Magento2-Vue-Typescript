@@ -11,8 +11,8 @@ export class Watch {
 
     run (path: string | string[], callback: Function): Gulp {
         callback(this.gulp)
-        watch(path, () => {
-            callback(this.gulp)
+        watch(path, (e: any) => {
+            callback(this.gulp, e)
         })
 
         return this.gulp

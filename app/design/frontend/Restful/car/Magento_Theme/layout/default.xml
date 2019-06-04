@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="require.js" remove="true" />
+        <referenceBlock  name="theme.active.editor" remove="true" />
+        <referenceContainer name="page.wrapper" htmlId="app" htmlClass="" />
+        <referenceContainer name="root">
+            <block class="Magento\Framework\View\Element\Template" name="webpack" after="-" template="Magento_Theme::webpack.phtml" />
+        </referenceContainer>
+    </body>
+</page>

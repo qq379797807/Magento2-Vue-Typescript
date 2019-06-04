@@ -4,29 +4,40 @@ import * as gulp from 'gulp'
 import * as os from 'os'
 import * as makeDir from 'make-dir'
 import { themeConfig } from '../build'
+const tool = require('gulp-util')
 
 const { area, src, locale } = themeConfig.default
 
-export default class Util {
+export class Util {
     public isDir (dir: string): boolean {
         return fs.existsSync(dir)
     }
 
     public createDir (dir: string) {
-        // makeDir(dir).then(path => {
-        //     gutil.log(gutil.colors.green(`目录创建成功：${dir}`))
-        // })
+        makeDir(dir).then((path: string) => {
+            this.logMsg(`Directory init success：${dir}`, `magenta`)
+        })
     }
 
-    public initDir (modules: []) {
-        Promise.all([
-            '/layout',
-            '/templates',
-            '/styles',
-            '/web'
-        ]).then(() => {
+    public copyFile (src: string, dest: string) {
+        if (this.isDir(src)) {
+            this.logMsg(`This is a directory ...`, `green`)
+        } else {
+            let readStream = fs.createReadStream(src)
+            let writeSteam = fs.createWriteStream(dest)
+            readStream
+                .pipe(writeSteam)
+                .on('end', () => {
+                    this.logMsg(`Copy file success ...`, `green`)
+                })
+                .on('error', () => {
+                    this.logMsg(`Copy file error ...`, `red`)
+                })
+        }
+    }
 
-        })
+    public logMsg (msg: string, color: string): any {
+        return tool.log(tool.colors[color](`${msg}`))
     }
 
     public getOs (): NodeJS.Platform {
@@ -44,6 +55,14 @@ export default class Util {
             obj[name] = path.resolve(__dirname, './src', `./js/${item}.js`)
             return Object.assign(obj, option)
         })
+    }
+
+    public getSrcDir (): string {
+        const os: string = this.os()
+        const src_path: string = `.${os}app${os}src${os}**${os}**`
+        
+        return src_path
+    
     }
 
     public getAppDir (): string {
