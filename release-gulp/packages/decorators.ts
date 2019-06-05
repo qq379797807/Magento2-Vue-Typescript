@@ -24,6 +24,7 @@ export interface InputConfig extends Configuration {
             errors?: boolean
         },
         publicPath?: string,
+        contentBase?: string,
         disableHostCheck?: boolean,
         historyApiFallback?: boolean
     },

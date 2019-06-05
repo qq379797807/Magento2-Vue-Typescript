@@ -31,17 +31,26 @@ const baseConfig = new WebpackConfig({
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: `[name].[contenthash:8].css`
-        })
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
     ],
     optimization: {
-        minimize: true,
-        namedModules: true,
-        namedChunks: true,
-        providedExports: true,
-        usedExports: true,
+        namedModules: false,
+        namedChunks: false,
+        nodeEnv: 'production',
+        flagIncludedChunks: true,
+        occurrenceOrder: true,
         sideEffects: true,
+        usedExports: true,
         concatenateModules: true,
-        noEmitOnErrors: true
+        splitChunks: {
+            minSize: 30000,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+        },
+        noEmitOnErrors: true,
+        minimize: true
     }
 })
 const webpackProdConfig: InputConfig = baseConfig.getConfig()

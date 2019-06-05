@@ -85,12 +85,38 @@ export class Gulpflie {
         )
     }
 
+    @Task({
+        befores: ['styles']
+    })
+    public base64 (gulp: Gulp, util: Util) {
+        gulp.src([
+                path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
+            ])
+            .pipe(GT.base64({
+                baseDir: `${util.getAppDir()}${util.os()}web${util.os()}images`,
+                extensions: ['svg', 'png', /\.jpg#datauri$/i],
+                exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+                maxImageSize: 8 * 1024,
+                debug: false
+            }))
+            .pipe(GT.multi([
+                `${util.getAppDir()}${util.os()}web${util.os()}css`
+            ]))
+            .pipe(GT.logger({
+                display: 'name',
+                beforeEach: `Theme: ${name} `,
+                afterEach: ' Base64!',
+                showChange: true
+            }))
+    }
+
     @Task()
     public phtml (gulp: Gulp, watch: Watch, util: Util) {
         watch.run(
             path.join(__dirname, 'src/**/*.js'),
             (gulp: Gulp) => {
-                gulp.src(`${util.getAppDir()}**/*.phtml`)
+                console.log('phtml task ...')
+                // gulp.src(`${util.getAppDir()}**/*.phtml`)
                     // .pipe($.plumber())
                     // .pipe($.if(Util.mode(), $.htmlmin({
                     //     collapseWhitespace: true,
@@ -113,9 +139,9 @@ export class Gulpflie {
 
     @Task()
     public images (gulp: Gulp, watch: Watch) {
-        watch.run(
-            path.join(__dirname, `./app/src/web/images/**`),
-            (gulp: Gulp) => {
+        // watch.run(
+        //     path.join(__dirname, `./app/src/web/images/**`),
+        //     (gulp: Gulp) => {
                 console.log('Minify Images Task Start ...')
                 // gulp.src([path.join(__dirname, `./app/src/web/images/**`)])
                 //     .pipe(gulpif(env==='build', cache(imagemin({
@@ -125,13 +151,13 @@ export class Gulpflie {
                 //         multipass: true
                 //     }))))
                 //     .pipe(gulp.dest('./dist'))
-            }
-        )
+        //     }
+        // )
     }
 
     @Task()
     public fonts (gulp: Gulp) {
-
+        console.log('fonts task ...');
     }
 
     @Task({
