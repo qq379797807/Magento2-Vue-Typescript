@@ -49,6 +49,7 @@ export class WebpackServer {
                 hot: false,
                 inline: true,
                 progress: true,
+                compress: true,
                 port: 3000,
                 host: '127.0.0.1',
                 disableHostCheck: true

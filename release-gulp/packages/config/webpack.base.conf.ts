@@ -121,13 +121,15 @@ export class WebpackConfig {
                 port: 80,
                 host: 'dev.car.cn',
                 https: false,
+                compress: true,
                 progress: true,
                 overlay: {
                     warnings: true,
                     errors: true
                 },
                 historyApiFallback: true,
-                disableHostCheck: true
+                disableHostCheck: true,
+                publicPath: path.join(__dirname, '../assets/')
             },
             module: {
                 rules: [

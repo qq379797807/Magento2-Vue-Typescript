@@ -15,6 +15,7 @@ export interface InputConfig extends Configuration {
         hot: boolean,
         inline: boolean,
         progress: boolean,
+        compress: boolean,
         port: number,
         host: string,
         disableHostCheck: boolean
