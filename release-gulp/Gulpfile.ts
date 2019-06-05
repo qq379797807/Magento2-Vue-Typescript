@@ -9,7 +9,7 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
-const { styles, scripts, name } = themeConfig.default
+const { styles, scripts } = themeConfig.default
 
 @GulpFile()
 export class Gulpflie {
@@ -41,7 +41,7 @@ export class Gulpflie {
                 if (e) {
                     util.copyFile(e)
                 } else {
-                    gulp.src(path.resolve(__dirname, util.getSrcDir()))
+                    return gulp.src(path.resolve(__dirname, util.getSrcDir()))
                     .pipe(GT.multi([
                         path.resolve(__dirname, util.getAppDir())
                     ]))
@@ -56,7 +56,7 @@ export class Gulpflie {
             path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
             (gulp: Gulp) => {
                 util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
-                gulp.src([
+                return gulp.src([
                         path.resolve(__dirname, `${util.getSassDir()}main.${styles}`)
                     ])
                     .pipe(GT.sourcemaps.init())
@@ -85,11 +85,10 @@ export class Gulpflie {
         )
     }
 
-    @Task({
-        befores: ['styles']
-    })
+    @Task()
     public base64 (gulp: Gulp, util: Util) {
-        gulp.src([
+        util.logMsg(`Css base64 task start ...`, `green`)
+        return gulp.src([
                 path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
             ])
             .pipe(GT.base64({
@@ -108,6 +107,37 @@ export class Gulpflie {
                 afterEach: ' Base64!',
                 showChange: true
             }))
+    }
+
+    @Task()
+    public images (gulp: Gulp, watch: Watch, util: Util) {
+        watch.run([
+                path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
+                path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
+            ],
+            (gulp: Gulp) => {
+                util.logMsg(`Optimize images task start ...`, `green`)
+                gulp.src([
+                        path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
+                        path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
+                    ])
+                    .pipe(GT.if(util.mode(), GT.cache(GT.imagemin({
+                        optimizationLevel: 5,
+                        progressive: true,
+                        interlaced: true,
+                        multipass: true
+                    }))))
+                    .pipe(GT.multi([
+                        `${util.getAppDir()}${util.os()}`
+                    ]))
+                    .pipe(GT.logger({
+                        display: 'name',
+                        beforeEach: `Theme: ${name} `,
+                        afterEach: ' Optimize Image!',
+                        showChange: true
+                    }))
+            }
+        )
     }
 
     @Task()
@@ -135,29 +165,6 @@ export class Gulpflie {
                     // .pipe(gulp.dest(outputDir))
             }
         )
-    }
-
-    @Task()
-    public images (gulp: Gulp, watch: Watch) {
-        // watch.run(
-        //     path.join(__dirname, `./app/src/web/images/**`),
-        //     (gulp: Gulp) => {
-                console.log('Minify Images Task Start ...')
-                // gulp.src([path.join(__dirname, `./app/src/web/images/**`)])
-                //     .pipe(gulpif(env==='build', cache(imagemin({
-                //         optimizationLevel: 5,
-                //         progressive: true,
-                //         interlaced: true,
-                //         multipass: true
-                //     }))))
-                //     .pipe(gulp.dest('./dist'))
-        //     }
-        // )
-    }
-
-    @Task()
-    public fonts (gulp: Gulp) {
-        console.log('fonts task ...');
     }
 
     @Task({
