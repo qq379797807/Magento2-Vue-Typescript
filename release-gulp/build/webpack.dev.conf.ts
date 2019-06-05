@@ -16,16 +16,31 @@ const baseConfig = new WebpackConfig({
     cache: true,
     output: {
         path: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
-        filename: '[name].js',
-        publicPath: './'
+        publicPath: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
+        filename: '[name].js'
     },
     mode: 'development',
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'inline-source-map',
+    devServer: {
+        open: true,
+        inline: true,
+        hot: true,
+        port: 80,
+        host: 'dev.car.cn',
+        https: false,
+        compress: true,
+        progress: true,
+        overlay: {
+            warnings: true,
+            errors: true
+        },
+        historyApiFallback: true,
+        disableHostCheck: true,
+        publicPath: path.join(__dirname, '../assets/')
+    },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('development')
-            }
+            'process.env.NODE_ENV': JSON.stringify('development')
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({

@@ -18,7 +18,7 @@ const baseConfig = new WebpackConfig({
         publicPath: './'
     },
     mode: 'production',
-    devtool: 'cheap-module-source-map',
+    devtool: 'inline-source-map',
     performance: {
         hints: 'warning',
         maxAssetSize: 250000,
@@ -26,15 +26,12 @@ const baseConfig = new WebpackConfig({
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
+            'process.env.NODE_ENV':  JSON.stringify('production')
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: `[name].[contenthash:8].css`
-        }),
-        new webpack.HotModuleReplacementPlugin()  
+        })
     ],
     optimization: {
         minimize: true,
@@ -46,7 +43,6 @@ const baseConfig = new WebpackConfig({
         concatenateModules: true,
         noEmitOnErrors: true
     }
-
 })
 const webpackProdConfig: InputConfig = baseConfig.getConfig()
 

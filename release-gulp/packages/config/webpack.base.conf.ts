@@ -111,25 +111,8 @@ export class WebpackConfig {
                     '.json'
                 ],
                 alias: {
-                    '@': path.resolve(__dirname, '../../app')
+                    'vue$': 'vue/dist/vue.esm.js'
                 }
-            },
-            devServer: {
-                open: true,
-                inline: true,
-                hot: true,
-                port: 80,
-                host: 'dev.car.cn',
-                https: false,
-                compress: true,
-                progress: true,
-                overlay: {
-                    warnings: true,
-                    errors: true
-                },
-                historyApiFallback: true,
-                disableHostCheck: true,
-                publicPath: path.join(__dirname, '../assets/')
             },
             module: {
                 rules: [

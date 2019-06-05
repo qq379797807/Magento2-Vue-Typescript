@@ -11,14 +11,21 @@ export interface InputConfig extends Configuration {
     plugins?: Plugin[],
     output?: Output,
     devServer?: {
-        historyApiFallback: boolean,
-        hot: boolean,
-        inline: boolean,
-        progress: boolean,
-        compress: boolean,
-        port: number,
-        host: string,
-        disableHostCheck: boolean
+        open?: boolean,
+        hot?: boolean,
+        inline?: boolean,
+        progress?: boolean,
+        compress?: boolean,
+        port?: number,
+        host?: string,
+        https?: boolean,
+        overlay?: {
+            warnings?: boolean,
+            errors?: boolean
+        },
+        publicPath?: string,
+        disableHostCheck?: boolean,
+        historyApiFallback?: boolean
     },
     [key: string]: any
 }
