@@ -9,134 +9,146 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
-const { styles, scripts } = themeConfig.default
+const { styles, scripts, name } = themeConfig.default
 
 @GulpFile()
 export class Gulpflie {
     @Task()
-    public default (gulp: Gulp) {
-        console.log(gulp)
-    }
-
-    @Task()
-    public del (gulp: Gulp, util: Util) {
-        pump([
-            gulp.src([
-                path.resolve(__dirname, `${util.getVarDir()}`),
-                path.resolve(__dirname, `${util.getPubDir()}`)
-            ]),
-            clean({
-                read: false,
-                force: true
-            })
-        ])
-    }
-
-    @Task()
-    public copy (gulp: Gulp, watch: Watch, util: Util) {
-        watch.run(
-            path.resolve(__dirname, util.getSrcDir()),
-            (gulp: Gulp, e?: any) => {
-                util.logMsg(`Copy task start ...`, `green`)
-                if (e) {
-                    util.copyFile(e)
-                } else {
-                    return gulp.src(path.resolve(__dirname, util.getSrcDir()))
-                    .pipe(GT.multi([
-                        path.resolve(__dirname, util.getAppDir())
-                    ]))
-                }
-            }
+    public async default (gulp: Gulp) {
+        await Promise.resolve(
+            console.log(gulp)
         )
     }
 
     @Task()
-    public styles (gulp: Gulp, watch: Watch, util: Util) {
-        watch.run(
-            path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
-            (gulp: Gulp) => {
-                util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
-                return gulp.src([
-                        path.resolve(__dirname, `${util.getSassDir()}main.${styles}`)
-                    ])
-                    .pipe(GT.sourcemaps.init())
-                    .pipe(GT.sass({
-                        outputStyle: 'compressed'
-                    }))
-                    .pipe(GT.postcss([
-                        GT.autoprefixer({
-                            cascade: true,
-                            remove: true
-                        })
-                    ]))
-                    .pipe(GT.sourcemaps.write('.', {
-                        includeContent: true
-                    }))
-                    .pipe(GT.multi([
-                        `${util.getAppDir()}${util.os()}web${util.os()}css`
-                    ]))
-                    .pipe(GT.logger({
-                        display: 'name',
-                        beforeEach: `Theme: ${name} `,
-                        afterEach: ' Compiled!',
-                        showChange: true
-                    }))
-            }
-        )
-    }
-
-    @Task()
-    public base64 (gulp: Gulp, util: Util) {
-        util.logMsg(`Css base64 task start ...`, `green`)
-        return gulp.src([
-                path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
-            ])
-            .pipe(GT.base64({
-                baseDir: `${util.getAppDir()}${util.os()}web${util.os()}images`,
-                extensions: ['svg', 'png', /\.jpg#datauri$/i],
-                exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
-                maxImageSize: 8 * 1024,
-                debug: false
-            }))
-            .pipe(GT.multi([
-                `${util.getAppDir()}${util.os()}web${util.os()}css`
-            ]))
-            .pipe(GT.logger({
-                display: 'name',
-                beforeEach: `Theme: ${name} `,
-                afterEach: ' Base64!',
-                showChange: true
-            }))
-    }
-
-    @Task()
-    public images (gulp: Gulp, watch: Watch, util: Util) {
-        watch.run([
-                path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
-                path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
-            ],
-            (gulp: Gulp) => {
-                util.logMsg(`Optimize images task start ...`, `green`)
+    public async del (gulp: Gulp, util: Util) {
+        await Promise.resolve(
+            pump([
                 gulp.src([
-                        path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
-                        path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
-                    ])
-                    .pipe(GT.if(util.mode(), GT.cache(GT.imagemin({
-                        optimizationLevel: 5,
-                        progressive: true,
-                        interlaced: true,
-                        multipass: true
-                    }))))
-                    .pipe(GT.multi([
-                        `${util.getAppDir()}${util.os()}`
-                    ]))
-                    .pipe(GT.logger({
-                        display: 'name',
-                        beforeEach: `Theme: ${name} `,
-                        afterEach: ' Optimize Image!',
-                        showChange: true
-                    }))
-            }
+                    path.resolve(__dirname, `${util.getVarDir()}`),
+                    path.resolve(__dirname, `${util.getPubDir()}`)
+                ]),
+                clean({
+                    read: false,
+                    force: true
+                })
+            ])
+        )
+    }
+
+    @Task()
+    public async copy (gulp: Gulp, watch: Watch, util: Util) {
+        await Promise.resolve(
+            watch.run(
+                path.resolve(__dirname, util.getSrcDir()),
+                (gulp: Gulp, e?: any) => {
+                    util.logMsg(`Copy task start ...`, `green`)
+                    if (e) {
+                        util.copyFile(e)
+                    } else {
+                        return gulp.src(path.resolve(__dirname, util.getSrcDir()))
+                        .pipe(GT.multi([
+                            path.resolve(__dirname, util.getAppDir())
+                        ]))
+                    }
+                }
+            )
+        )
+    }
+
+    @Task()
+    public async styles (gulp: Gulp, watch: Watch, util: Util) {
+        await Promise.resolve(
+            watch.run(
+                path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
+                (gulp: Gulp) => {
+                    util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
+                    return gulp.src([
+                            path.resolve(__dirname, `${util.getSassDir()}main.${styles}`)
+                        ])
+                        .pipe(GT.sourcemaps.init())
+                        .pipe(GT.sass({
+                            outputStyle: 'compressed'
+                        }))
+                        .pipe(GT.postcss([
+                            GT.autoprefixer({
+                                cascade: true,
+                                remove: true
+                            })
+                        ]))
+                        .pipe(GT.sourcemaps.write('.', {
+                            includeContent: true
+                        }))
+                        .pipe(GT.multi([
+                            `${util.getAppDir()}${util.os()}web${util.os()}css`
+                        ]))
+                        .pipe(GT.logger({
+                            display: 'name',
+                            beforeEach: `Theme: ${name} `,
+                            afterEach: ' Compiled!',
+                            showChange: true
+                        }))
+                }
+            )
+        )
+    }
+
+    @Task()
+    public async base64 (gulp: Gulp, util: Util) {
+        util.logMsg(`Base64 task start ...`, `green`)
+        await Promise.resolve(
+            gulp.src([
+                    path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
+                ])
+                .pipe(GT.base64({
+                    baseDir: `${util.getAppDir()}${util.os()}web${util.os()}images`,
+                    extensions: ['svg', 'png', /\.jpg#datauri$/i],
+                    exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+                    maxImageSize: 8 * 1024,
+                    debug: false
+                }))
+                .pipe(GT.multi([
+                    `${util.getAppDir()}${util.os()}web${util.os()}css`
+                ]))
+                .pipe(GT.logger({
+                    display: 'name',
+                    beforeEach: `Theme: ${name} `,
+                    afterEach: ' Base64!',
+                    showChange: true
+                }))
+        )
+    }
+
+    @Task()
+    public async images (gulp: Gulp, watch: Watch, util: Util) {
+        await Promise.resolve(
+            watch.run([
+                    path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
+                    path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
+                ],
+                (gulp: Gulp) => {
+                    util.logMsg(`Optimize images task start ...`, `green`)
+                    gulp.src([
+                            path.join(__dirname, `${util.getSrcDir()}${util.os()}media${util.os()}*`),
+                            path.join(__dirname, `${util.getSrcDir()}${util.os()}web${util.os()}images${util.os()}*`)
+                        ])
+                        .pipe(GT.if(util.mode(), GT.cache(GT.imagemin({
+                            optimizationLevel: 5,
+                            progressive: true,
+                            interlaced: true,
+                            multipass: true
+                        }))))
+                        .pipe(GT.multi([
+                            `${util.getAppDir()}${util.os()}`
+                        ]))
+                        .pipe(GT.logger({
+                            display: 'name',
+                            beforeEach: `Theme: ${name} `,
+                            afterEach: ' Optimize Image!',
+                            showChange: true
+                        }))
+                }
+            )
         )
     }
 
@@ -189,41 +201,49 @@ export class Gulpflie {
     }
    
     @Task()
-    public dev(gulp: Gulp, webpackServer: WebpackServer) {
-        return webpackServer.setConfig(
-            webpackDevConfig,
-            'development'
-        ).runServer()
-    }
-
-    @Task()
-    public build(gulp: Gulp, webpackServer: WebpackServer) {
-        return webpackServer.setConfig(
-            webpackProdConfig,
-            'production'
-        ).runBuild()
-    }
-
-    @Task()
-    public rollup (gulp: Gulp, watch: Watch) {
-        watch.run(
-            path.join(__dirname, 'src/**/*.ts'),
-            (gulp: Gulp) => {
-                console.log('rollup init ...')
-
-                gulp.src([path.join(__dirname, 'src/**/*.ts')])
-                    .pipe(sourcemaps.init())
-                    .pipe(sourcemaps.write('./sourcemaps'))
-                    .pipe(gulp.dest('./dist'))
-            }
+    public async dev(gulp: Gulp, webpackServer: WebpackServer) {
+        await Promise.resolve(
+            webpackServer.setConfig(
+                webpackDevConfig,
+                'development'
+            ).runServer()
         )
     }
 
     @Task()
-    public test (vkoa: Vkoa) {
-        vkoa
-            .setWebpack('webpack')
-            .setKoa('koa')
-            .run()
+    public async build(gulp: Gulp, webpackServer: WebpackServer) {
+        await Promise.resolve(
+            webpackServer.setConfig(
+                webpackProdConfig,
+                'production'
+            ).runBuild()
+        )
+    }
+
+    @Task()
+    public async rollup (gulp: Gulp, watch: Watch) {
+        await Promise.resolve(
+            watch.run(
+                path.join(__dirname, 'src/**/*.ts'),
+                (gulp: Gulp) => {
+                    console.log('rollup init ...')
+
+                    gulp.src([path.join(__dirname, 'src/**/*.ts')])
+                        .pipe(sourcemaps.init())
+                        .pipe(sourcemaps.write('./sourcemaps'))
+                        .pipe(gulp.dest('./dist'))
+                }
+            )
+        )
+    }
+
+    @Task()
+    public async test (vkoa: Vkoa) {
+        await Promise.resolve(
+            vkoa
+                .setWebpack('webpack')
+                .setKoa('koa')
+                .run()
+        )
     }
 }
