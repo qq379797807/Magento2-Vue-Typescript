@@ -5,19 +5,14 @@
 ?>
 <?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();?>
 <span data-action="toggle-nav" class="action nav-toggle"><span><?= /* @escapeNotVerified */ __('Toggle Nav') ?></span></span>
-<?php if ($block->isHomePage()):?>
-    <strong class="logo">
-<?php else: ?>
-    <a class="logo" v-bind:href="logoUrl" title="<?= /* @escapeNotVerified */ $storeName ?>">
-<?php endif ?>
+
+<v-logo inline-template>
+    <a class="logo" title="<?= /* @escapeNotVerified */ $storeName ?>">
         <img src="<?= /* @escapeNotVerified */ $block->getLogoSrc() ?>"
-             title="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
-             alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
-             <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
-             <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+            title="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
+            alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
+            <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+            <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
         />
-<?php if ($block->isHomePage()):?>
-    </strong>
-<?php else:?>
     </a>
-<?php endif?>
+</v-logo>

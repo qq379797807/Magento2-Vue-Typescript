@@ -25,6 +25,7 @@ export class Gulpflie {
         await Promise.resolve(
             pump([
                 gulp.src([
+                    path.resolve(__dirname, `${util.getAppDir()}`),
                     path.resolve(__dirname, `${util.getVarDir()}`),
                     path.resolve(__dirname, `${util.getPubDir()}`)
                 ]),
@@ -39,20 +40,22 @@ export class Gulpflie {
     @Task()
     public async copy (gulp: Gulp, watch: Watch, util: Util) {
         await Promise.resolve(
-            watch.run(
-                path.resolve(__dirname, util.getSrcDir()),
-                (gulp: Gulp, e?: any) => {
-                    util.logMsg(`Copy task start ...`, `green`)
-                    if (e) {
-                        util.copyFile(e)
-                    } else {
-                        return gulp.src(path.resolve(__dirname, util.getSrcDir()))
+            // watch.run(
+            //     path.resolve(__dirname, util.getSrcDir()),
+            //     (gulp: Gulp, e?: any) => {
+            //         util.logMsg(`Copy task start ...`, `green`)
+            //         if (e) {
+            //             util.copyFile(e)
+            //         } else {
+                        gulp.src([
+                            path.resolve(__dirname, util.getSrcDir())
+                        ])
                         .pipe(GT.multi([
                             path.resolve(__dirname, util.getAppDir())
                         ]))
-                    }
-                }
-            )
+            //         }
+            //     }
+            // )
         )
     }
 

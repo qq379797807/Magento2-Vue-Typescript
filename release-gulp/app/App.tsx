@@ -1,13 +1,21 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { VHeader } from './src/components/header/header'
+import { VContent } from './src/components/content/content'
+import { VFooter } from './src/components/footer/footer'
 
 @Component({
-    name: 'app',
+    name: 'v-app',
     data: () => ({
-        logoUrl: 'https://www.baidu.com'
-    })
+        theme: 'Magento2 Vue Theme'
+    }),
+    components: {
+        VHeader,
+        VContent,
+        VFooter
+    }
 })
-export class App extends Vue {
+export class VApp extends Vue {
     mounted () {
         this.init()
     }
