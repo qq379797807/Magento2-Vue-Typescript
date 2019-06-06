@@ -17,7 +17,7 @@ const baseConfig = new WebpackConfig({
         filename: '[name].js',
         publicPath: './'
     },
-    mode: 'production',
+    mode: 'development',
     devtool: 'inline-source-map',
     performance: {
         hints: 'warning',
@@ -26,7 +26,7 @@ const baseConfig = new WebpackConfig({
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':  JSON.stringify('production')
+            'process.env.NODE_ENV':  JSON.stringify('development')
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
@@ -38,7 +38,7 @@ const baseConfig = new WebpackConfig({
     optimization: {
         namedModules: false,
         namedChunks: false,
-        nodeEnv: 'production',
+        nodeEnv: 'development',
         flagIncludedChunks: true,
         occurrenceOrder: true,
         sideEffects: true,

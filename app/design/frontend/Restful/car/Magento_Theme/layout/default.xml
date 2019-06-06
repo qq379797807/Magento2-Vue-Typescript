@@ -5,7 +5,9 @@
         <referenceBlock  name="theme.active.editor" remove="true" />
         <referenceContainer name="page.wrapper" htmlId="app" htmlClass="" />
         <referenceContainer name="root">
+            <block class="Magento\Framework\View\Element\Template" name="app" before="-" template="Magento_Theme::app.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="webpack" after="-" template="Magento_Theme::webpack.phtml" />
         </referenceContainer>
+        <move element="page.wrapper" destination="app" />
     </body>
 </page>

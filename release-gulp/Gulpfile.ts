@@ -94,32 +94,6 @@ export class Gulpflie {
     }
 
     @Task()
-    public async base64 (gulp: Gulp, util: Util) {
-        util.logMsg(`Base64 task start ...`, `green`)
-        await Promise.resolve(
-            gulp.src([
-                    path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
-                ])
-                .pipe(GT.base64({
-                    baseDir: `${util.getAppDir()}${util.os()}web${util.os()}images`,
-                    extensions: ['svg', 'png', /\.jpg#datauri$/i],
-                    exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
-                    maxImageSize: 8 * 1024,
-                    debug: false
-                }))
-                .pipe(GT.multi([
-                    `${util.getAppDir()}${util.os()}web${util.os()}css`
-                ]))
-                .pipe(GT.logger({
-                    display: 'name',
-                    beforeEach: `Theme: ${name} `,
-                    afterEach: ' Base64!',
-                    showChange: true
-                }))
-        )
-    }
-
-    @Task()
     public async images (gulp: Gulp, watch: Watch, util: Util) {
         await Promise.resolve(
             watch.run([
@@ -153,29 +127,79 @@ export class Gulpflie {
     }
 
     @Task()
-    public phtml (gulp: Gulp, watch: Watch, util: Util) {
-        watch.run(
-            path.join(__dirname, 'src/**/*.js'),
-            (gulp: Gulp) => {
-                console.log('phtml task ...')
-                // gulp.src(`${util.getAppDir()}**/*.phtml`)
-                    // .pipe($.plumber())
-                    // .pipe($.if(Util.mode(), $.htmlmin({
-                    //     collapseWhitespace: true,
-                    //     minifyCSS: true,
-                    //     minifyJS: { 
-                    //         compress: {
-                    //             drop_console: true
-                    //         }
-                    //     },
-                    //     processConditionalComments: true,
-                    //     removeComments: true,
-                    //     removeEmptyAttributes: true,
-                    //     removeScriptTypeAttributes: true,
-                    //     removeStyleLinkTypeAttributes: true
-                    // })))
-                    // .pipe(gulp.dest(outputDir))
-            }
+    public async base64 (gulp: Gulp, util: Util) {
+        util.logMsg(`Base64 task start ...`, `green`)
+        await Promise.resolve(
+            gulp.src([
+                    path.resolve(__dirname, `${util.getAppDir()}${util.os()}web${util.os()}css${util.os()}main.css`)
+                ])
+                .pipe(GT.base64({
+                    baseDir: `${util.getAppDir()}${util.os()}web${util.os()}images`,
+                    extensions: ['svg', 'png', /\.jpg#datauri$/i],
+                    exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+                    maxImageSize: 8 * 1024,
+                    debug: false
+                }))
+                .pipe(GT.multi([
+                    `${util.getAppDir()}${util.os()}web${util.os()}css`
+                ]))
+                .pipe(GT.logger({
+                    display: 'name',
+                    beforeEach: `Theme: ${name} `,
+                    afterEach: ' Base64!',
+                    showChange: true
+                }))
+        )
+    }
+
+    @Task()
+    public async shell (gulp: Gulp, util: Util) {
+        util.logMsg(`Shell task start ...`, `green`)
+        await Promise.resolve(
+            GT.shell.task([
+                `php ${util.getMgCommand()} cache:clean`
+            ])
+        )
+    }
+
+    @Task()
+    public async phtml (gulp: Gulp, watch: Watch, util: Util) {
+        await Promise.resolve(
+            watch.run(
+                [
+                    path.resolve(__dirname, `${util.getAppDir()}${util.os()}**${util.os()}**${util.os()}**.html`)
+                ],
+                (gulp: Gulp) => {
+                    util.logMsg(`Html task start ...`, `green`)
+                    gulp.src([
+                            path.resolve(__dirname, `${util.getAppDir()}${util.os()}**${util.os()}**${util.os()}**.html`)
+                        ])
+                        .pipe(GT.plumber())
+                        .pipe(GT.if(util.mode(), GT.htmlmin({
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: { 
+                                compress: {
+                                    drop_console: true
+                                }
+                            },
+                            processConditionalComments: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true
+                        })))
+                        .pipe(GT.multi([
+                            `${util.getAppDir()}${util.os()}`
+                        ]))
+                        .pipe(GT.logger({
+                            display: 'name',
+                            beforeEach: `Theme: ${name} `,
+                            afterEach: ' Optimize Html!',
+                            showChange: true
+                        }))
+                }
+            )
         )
     }
 

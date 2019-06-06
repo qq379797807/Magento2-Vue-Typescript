@@ -90,6 +90,16 @@ export class Util {
         return this.getOs() === 'win32' ? '\\' : '/'
     }
 
+    public getMgCommand (): any {
+        const os: string = this.os()
+        const bin: string = path.resolve(__dirname, `..${os}bin${os}magento`)
+
+        if (this.isDir(bin)) {
+            return bin
+        }
+        return false
+    }
+
     public createEntry (list: Array<string>, option: any) {
         const obj: any = {}
         list.forEach((item: any) => {

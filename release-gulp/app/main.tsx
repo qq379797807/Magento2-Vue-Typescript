@@ -1,19 +1,11 @@
-import Vue from 'vue'
+import Vue, { CreateElement } from 'vue'
+import { App } from './App'
 
 Vue.config.productionTip = false
 
 new Vue({
-    name: 'app',
     el: '#app',
-    data: () => ({
-        logoUrl: 'https://www.baidu.com'
-    }),
-    mounted () {
-        this.init()
-    },
-    methods: {
-        init () {
-            console.log(`Magento2 App is bootstrap ...`)
-        }   
+    components: {
+        App
     }
 })
