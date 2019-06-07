@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VLogo } from './logo/logo'
+import { VHeaderLinks } from './modules/links'
+import { VLogo } from './modules/logo'
+import { VMinicart } from './modules/minicart'
+import { VSearch } from './modules/search'
 
 @Component({
     name: 'v-header',
@@ -8,7 +11,10 @@ import { VLogo } from './logo/logo'
         title: 'header'
     }),
     components: {
-        VLogo
+        VHeaderLinks,
+        VLogo,
+        VMinicart,
+        VSearch
     }
 })
 export class VHeader extends Vue {
@@ -17,6 +23,6 @@ export class VHeader extends Vue {
     }
 
     init () {
-        console.log(`Header is init ...`)
+        
     } 
 }

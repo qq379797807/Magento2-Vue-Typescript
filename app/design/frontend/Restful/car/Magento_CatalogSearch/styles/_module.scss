@@ -11,12 +11,6 @@ $autocomplete-item-amount__color : $color-gray60 !default;
 .block-search {
     margin-bottom: 0;
 
-    .block {
-        &-title {
-            display: none;
-        }
-    }
-
     .block-content {
         margin-bottom: 0;
     }
@@ -31,7 +25,6 @@ $autocomplete-item-amount__color : $color-gray60 !default;
             $_icon-font-color-active : $minicart-icons-color-hover,
             $_icon-font-text-hide    : true
         );
-        display: inline-block;
         float: right;
 
         &.active {
@@ -58,10 +51,6 @@ $autocomplete-item-amount__color : $color-gray60 !default;
         left: -300%;
         margin: 15px 0;
         position: absolute;
-    }
-
-    .nested {
-        display: none;
     }
 }
 
@@ -205,12 +194,6 @@ $autocomplete-item-amount__color : $color-gray60 !default;
             border-top: 0;
             margin: 0;
             padding: 0 0 25px;
-        }
-
-        .nested {
-            display: block;
-            padding-top: 5px;
-            position: absolute;
         }
 
         input {

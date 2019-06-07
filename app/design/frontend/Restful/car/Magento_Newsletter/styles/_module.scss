@@ -36,14 +36,6 @@
         padding-left: 35px;
     }
 
-    .title {
-        display: none;
-    }
-
-    .label {
-        @extend .abs-visually-hidden;
-    }
-
     .actions {
         display: table-cell;
         vertical-align: top;

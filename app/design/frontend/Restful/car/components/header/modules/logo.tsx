@@ -13,6 +13,6 @@ export class VLogo extends Vue {
     }
 
     init () {
-        console.log(`Logo is init ...`)
+        
     } 
 }

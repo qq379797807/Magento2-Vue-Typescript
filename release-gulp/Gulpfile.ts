@@ -161,7 +161,11 @@ export class Gulpflie {
         await Promise.resolve(
             GT.shell.task([
                 `php ${util.getMgCommand()} cache:clean`
-            ])
+            ], {
+                env: {
+                    nodeEnv: util.mode()
+                }
+            })
         )
     }
 

@@ -1,0 +1,7 @@
+<?php
+ /** @var \Magento\CatalogSearch\Helper\Data $helper */
+$helper = $this->helper('Magento\CatalogSearch\Helper\Data');
+?>
+<v-advance-search inline-template>
+    <a class="action advanced" href="<?= /* @escapeNotVerified */ $helper->getAdvancedSearchUrl() ?>" data-action="advanced-search"><?= /* @escapeNotVerified */ __('Advanced Search') ?></a>
+</v-advance-search>
