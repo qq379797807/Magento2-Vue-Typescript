@@ -7,12 +7,7 @@
 <span data-action="toggle-nav" class="action nav-toggle"><span><?= /* @escapeNotVerified */ __('Toggle Nav') ?></span></span>
 
 <v-logo inline-template>
-    <a class="logo" title="<?= /* @escapeNotVerified */ $storeName ?>">
-        <img src="<?= /* @escapeNotVerified */ $block->getLogoSrc() ?>"
-            title="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
-            alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
-            <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
-            <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
-        />
+    <a :href="logo.link" class="logo" :title="logo.alt">
+        <img :src="logo.url" :width="logo.width" :height="logo.height" :alt="logo.alt" />
     </a>
 </v-logo>
