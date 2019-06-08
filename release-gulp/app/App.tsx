@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VHeader } from './src/components/header/header'
+import { VNavagition } from './src/components/navagition/navagition'
 import { VContent } from './src/components/content/content'
 import { VFooter } from './src/components/footer/footer'
 
@@ -11,6 +12,7 @@ import { VFooter } from './src/components/footer/footer'
     }),
     components: {
         VHeader,
+        VNavagition,
         VContent,
         VFooter
     }

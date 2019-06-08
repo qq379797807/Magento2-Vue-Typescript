@@ -4,13 +4,6 @@
 
 $active-nav-indent: 54px !default;
 
-.panel.header {
-    .links,
-    .switcher {
-        display: none;
-    }
-}
-
 .nav-sections {
     @include lib-css(background, $navigation__background);
 }
@@ -290,11 +283,4 @@ $active-nav-indent: 54px !default;
     }
 
     @include lib-main-navigation-desktop();
-
-    .panel.header {
-        .links,
-        .switcher {
-            display: inline-block;
-        }
-    }
 }

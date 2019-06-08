@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component({
-    name: 'v-advance-search',
+    name: 'v-currency',
     data: () => ({
-        title: 'advance search'
+        title: 'currency'
     })
 })
-export class VAdvanceSearch extends Vue {
+export class VCurrency extends Vue {
     mounted () {
         this.init()
     }

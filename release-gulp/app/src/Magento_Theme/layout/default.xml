@@ -2,8 +2,10 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="require.js" remove="true" />
-        <referenceBlock  name="theme.active.editor" remove="true" />
+        <referenceBlock name="theme.active.editor" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
+        <referenceContainer name="after.body.start" remove="true" />
+        <referenceContainer name="before.body.end" remove="true" />
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.app" before="-" template="Magento_Theme::app.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.webpack" after="-" template="Magento_Theme::webpack.phtml" />
@@ -16,12 +18,16 @@
         <referenceContainer name="header.panel">
             <block class="Magento\Framework\View\Element\Template" name="vue.header.links" after="store_language" template="Magento_Theme::header/links.phtml" />
         </referenceContainer>
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template" name="vue.navagition" before="-" template="Magento_Theme::navagition.phtml" />
+        </referenceContainer>
         <referenceContainer name="footer">
             <block class="Magento\Framework\View\Element\Template" name="vue.footer.links" after="store_switcher" template="Magento_Theme::footer/links.phtml" />
         </referenceContainer>
         <move element="page.wrapper" destination="vue.app" />
         <move element="header.container" destination="vue.header" />
         <move element="top.links" destination="vue.header.links" />
+        <move element="navigation.sections" destination="vue.navagition" />
         <move element="main.content" destination="vue.content" />
         <move element="footer" destination="footer-container" />
         <move element="footer-container" destination="vue.footer" />

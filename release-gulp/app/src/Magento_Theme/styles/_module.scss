@@ -213,10 +213,6 @@ body {
             margin: 0;
         }
 
-        .label {
-            @extend .abs-visually-hidden;
-        }
-
         strong {
             font-weight: $font-weight__regular;
         }
