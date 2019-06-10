@@ -10,11 +10,11 @@ let { area, src } = themeConfig.default
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: () => new Promise((resolve) => resolve([
-        path.resolve(__dirname, '../app/main.tsx')
+        path.resolve(__dirname, '../app/src/pager/cms_index.tsx')
     ])),
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
-        filename: '[name].js',
+        filename: '[name].bundle.js',
         publicPath: './'
     },
     mode: 'development',

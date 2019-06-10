@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { VApp } from './App'
+import { VApp } from './container/cms_index'
 
 Vue.config.productionTip = false
 

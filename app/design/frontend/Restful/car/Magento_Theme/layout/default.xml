@@ -8,7 +8,6 @@
         <referenceContainer name="before.body.end" remove="true" />
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.app" before="-" template="Magento_Theme::app.phtml" />
-            <block class="Magento\Framework\View\Element\Template" name="vue.webpack" after="-" template="Magento_Theme::webpack.phtml" />
         </referenceContainer>
         <referenceContainer name="page.wrapper">
             <block class="Magento\Framework\View\Element\Template" name="vue.header" before="-" template="Magento_Theme::header.phtml" />
