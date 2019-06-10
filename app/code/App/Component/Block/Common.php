@@ -148,7 +148,12 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['logo']['height'] = $logoObject->getLogoHeight();
         $data['logo']['alt'] = $logoObject->getLogoAlt();
 
-        // Search terms
+        // Page Title
+        $pageTitle = $objectManger->create('Magento\Theme\Block\Html\Title');
+        $title = $pageTitle->getPageHeading();
+        $data['title'] = $title;
+
+        // Search Terms
         $SearchTerm = $objectManger->create('Magento\Search\Block\Term');
         if (empty($this->_terms)) {
             $this->_terms = [];

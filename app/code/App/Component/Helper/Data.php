@@ -28,7 +28,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
     protected function query($sql, $params = null) {
 
         $stmt = $this->prequery($sql, $params);
-
         return $stmt->fetchAll();
     }
 
@@ -571,13 +570,6 @@ where  ea.attribute_set_id =:setid and ea.attribute_group_id =:groupId order by 
 
     }
 
-//    public function getProductSpec($productId) {
-//
-//        $retArr = [];
-//        return $retArr;
-//
-//    }
-
     public function getProductsFullValue($id, $storeId, $attId, $typename) {
 
         $row_id = $this->getRowId($id);
@@ -649,7 +641,6 @@ where  ea.attribute_set_id =:setid and ea.attribute_group_id =:groupId order by 
         $earn_points = [];
         $available_points = [];
 
-//        $productObject = $this->createObject('Magento\Catalog\Model\Product');
         $scopeConfig = $this->createObject('\Magento\Framework\App\Config\ScopeConfigInterface');
 
         $rewardPointProportion = $scopeConfig->getValue('rewardpoint_customfee/rewardpoint_customfee/rewardpoint_proportion', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
@@ -965,20 +956,6 @@ where  ea.attribute_set_id =:setid and ea.attribute_group_id =:groupId order by 
             return false;
         }
     }
-//    private static function pkcs5_pad ($text, $blocksize) {
-//        $pad = $blocksize - (strlen($text) % $blocksize);
-//        return $text . str_repeat(chr($pad), $pad);
-//    }
-//
-//    public static function decrypt($inData, $key='sync_secret_key1') {
-//        $data = pack("H*" , $inData);
-//
-//        $decrypted= mcrypt_decrypt(MCRYPT_RIJNDAEL_128,$key, $data ,MCRYPT_MODE_ECB);
-//        $dec_s = strlen($decrypted);
-//        $padding = ord($decrypted[$dec_s-1]);
-//        $decrypted = substr($decrypted, 0, -$padding);
-//        return $decrypted;
-//    }
 
     public function getAttachinfo($id,$websiteId,$storeId){
         $relates =$this->getAttributeInfo("relate_sku");
@@ -989,7 +966,6 @@ where  ea.attribute_set_id =:setid and ea.attribute_group_id =:groupId order by 
             $attId =$relates['attid'];
         }
         $sku =$this->getProductSkuById($id);
-        //$sku =$this->getProductsValue($id,$storeId,"sku");
 
         $rowId =$this->getBundleProductRowId($sku,$attId);
         if($rowId==0)
@@ -1154,9 +1130,7 @@ where parent_product_id =? and selection_id =? ";
         return $name;
     }
 
-//    ****************************fanny*************************************
    public function getHomeCarrier($store_id){
-
        $sql ="select option_id,value from eav_attribute_option_value where option_id in (select option_id from  eav_attribute_option where attribute_id = ?) and store_id = ? ";
        $carrier_filter_code_id = $this->getAttributeIdByCode('carrier_filter');
        $params = [$carrier_filter_code_id,$store_id];
@@ -1171,11 +1145,12 @@ where parent_product_id =? and selection_id =? ";
 
        return $carrier_option_value;
    }
-   public function getFormatString($name){
-       $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-       $product = $objectManager->create('Magento\Catalog\Model\Product');
-       return $product->formatUrlKey($name);
-   }
+
+    public function getFormatString($name){
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product = $objectManager->create('Magento\Catalog\Model\Product');
+        return $product->formatUrlKey($name);
+    }
 
     public function checkEmailIsExist($email)
     {
@@ -1211,7 +1186,6 @@ where parent_product_id =? and selection_id =? ";
         } else {
             return false;
         }
-
     }
 
     public function saveRegisterProduct($insertData){
