@@ -172,10 +172,10 @@ body {
         }
     }
 
-    .copyright,
-    .bugs {
-        display: block;
-        margin: 20px 0 0;
+    .copyright {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
     }
 }
 
@@ -382,10 +382,6 @@ body {
                 padding-right: 50px;
                 vertical-align: top;
             }
-        }
-
-        .copyright {
-            @extend .abs-add-clearfix-desktop;
         }
     }
 }

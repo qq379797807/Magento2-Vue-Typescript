@@ -4,8 +4,6 @@
         <referenceBlock name="require.js" remove="true" />
         <referenceBlock name="theme.active.editor" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
-        <referenceContainer name="after.body.start" remove="true" />
-        <referenceContainer name="before.body.end" remove="true" />
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.app" before="-" template="Magento_Theme::app.phtml" />
         </referenceContainer>
@@ -20,6 +18,9 @@
         <referenceContainer name="page.top">
             <block class="Magento\Framework\View\Element\Template" name="vue.navagition" before="-" template="Magento_Theme::navagition.phtml" />
         </referenceContainer>
+        <referenceContainer name="columns.top">
+            <block class="Magento\Framework\View\Element\Template" name="vue.message" after="page.main.title" template="Magento_Theme::message.phtml" />
+        </referenceContainer>
         <referenceContainer name="footer">
             <block class="Magento\Framework\View\Element\Template" name="vue.footer.links" after="store_switcher" template="Magento_Theme::footer/links.phtml" />
         </referenceContainer>
@@ -28,6 +29,7 @@
         <move element="top.links" destination="vue.header.links" />
         <move element="navigation.sections" destination="vue.navagition" />
         <move element="main.content" destination="vue.content" />
+        <move element="page.messages" destination="vue.message" />
         <move element="footer" destination="footer-container" />
         <move element="footer-container" destination="vue.footer" />
         <move element="footer_links" destination="vue.footer.links" />

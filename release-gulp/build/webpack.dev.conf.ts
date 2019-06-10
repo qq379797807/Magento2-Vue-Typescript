@@ -11,14 +11,14 @@ let { area, src } = themeConfig.default
 
 const baseConfig = new WebpackConfig({
     root:  path.resolve(__dirname, '../app'),
-    entry: () => new Promise((resolve) => resolve([
-        path.resolve(__dirname, '../app/src/pager/cms_index.tsx')
-    ])),
+    entry: () => new Promise((resolve) => resolve({
+        cms_index: path.resolve(__dirname, '../app/src/pager/cms_index.tsx')
+    })),
     cache: true,
     output: {
         path: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
-        publicPath: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
-        filename: '[name].js'
+        filename: '[name].bundle.js',
+        publicPath: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`)
     },
     mode: 'development',
     devtool: 'inline-source-map',
