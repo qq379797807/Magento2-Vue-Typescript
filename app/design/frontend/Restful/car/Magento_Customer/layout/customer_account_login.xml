@@ -5,5 +5,9 @@
             <block class="App\Component\Block\Common" name="vue.login.html" before="-" template="Magento_Customer::login.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.login.js" after="-" template="Magento_Customer::component.phtml" />
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="vue.login.container" after="-" template="Magento_Customer::login/container.phtml" />
+        </referenceContainer>
+        <move element="customer.login.container" destination="vue.login.container" />
     </body>
 </page>

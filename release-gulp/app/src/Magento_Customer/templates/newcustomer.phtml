@@ -1,0 +1,20 @@
+<?php
+/** @var \Magento\Customer\Block\Form\Login\Info $block */
+?>
+<?php if ($block->getRegistration()->isAllowed()): ?>
+    <v-login-customer inline-template>
+        <div class="block block-new-customer">
+            <div class="block-title">
+                <strong v-text="i18n.title"></strong>
+            </div>
+            <div class="block-content">
+                <p v-text="i18n.msg"></p>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <a href="<?= $block->escapeUrl($block->getCreateAccountUrl()) ?>" class="action create primary" v-text="i18n.button"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </v-login-customer>
+<?php endif; ?>
