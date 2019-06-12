@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="root">
+            <block class="App\Component\Block\Common" name="vue.create.html" before="-" template="Magento_Customer::create.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.create.js" after="-" template="Magento_Customer::create/component.phtml" />
+        </referenceContainer>
+        <!-- <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="vue.create.container" after="-" template="Magento_Customer::login/container.phtml" />
+        </referenceContainer> -->
+    </body>
+</page>
