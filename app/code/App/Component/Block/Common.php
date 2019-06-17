@@ -153,6 +153,11 @@ class Common extends \Magento\Framework\View\Element\Template
         $title = $pageTitle->getPageHeading();
         $data['title'] = $title;
 
+        // Minicart 
+        $minicartHelper = $objectManger->create('Magento\Checkout\Block\Cart\Sidebar');
+        $minicart = $minicartHelper->getConfig();
+        $data['minicart'] = $minicart;
+
         // Search Terms
         $SearchTerm = $objectManger->create('Magento\Search\Block\Term');
         if (empty($this->_terms)) {

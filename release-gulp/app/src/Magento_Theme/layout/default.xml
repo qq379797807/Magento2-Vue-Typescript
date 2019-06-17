@@ -3,6 +3,7 @@
     <body>
         <referenceBlock name="require.js" remove="true" />
         <referenceBlock name="theme.active.editor" remove="true" />
+        <referenceBlock name="global_notices" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.app" before="-" template="Magento_Theme::app.phtml" />
