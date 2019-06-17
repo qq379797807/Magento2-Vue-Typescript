@@ -1,10 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import * as _ from 'lodash'
 import * as os from 'os'
 import * as makeDir from 'make-dir'
 import { themeConfig } from '../build'
-import { async } from '_@types_q@1.5.2@@types/q';
 const tool = require('gulp-util')
 
 const { area, src, locale, mode } = themeConfig.default
@@ -12,7 +10,7 @@ const { area, src, locale, mode } = themeConfig.default
 export class Util {
     public url: string
 
-    public constructor () {
+    constructor () {
         this.url = src.replace(`/`, `${this.os()}`)
     }
 
@@ -98,15 +96,6 @@ export class Util {
             return bin
         }
         return false
-    }
-
-    public createEntry (list: Array<string>, option: any) {
-        const obj: any = {}
-        list.forEach((item: any) => {
-            const name = item.filename ? `./js/${item.filename}` : `./js/${item}`
-            obj[name] = path.resolve(__dirname, './src', `./js/${item}.js`)
-            return Object.assign(obj, option)
-        })
     }
 
     public getSrcDir (): string {

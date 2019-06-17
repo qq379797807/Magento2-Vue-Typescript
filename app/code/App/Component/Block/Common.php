@@ -216,7 +216,7 @@ class Common extends \Magento\Framework\View\Element\Template
             if ($item == $current_currency) {
                 $currency['is_active'] = 1;
             }
-            $data['available_currency'][] = $currency;
+            $data['currency'][] = $currency;
         }
 
         return $this->_jsonHelper->jsonEncode($data);

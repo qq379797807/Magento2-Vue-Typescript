@@ -5,15 +5,24 @@ import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-let { area, src } = themeConfig.default
+const { area, src } = themeConfig.default
+const createEntry: any = ((list: string[]) => {
+    const params: any = {}
+    list.map((url: string) => {    
+        params[url] = path.resolve(__dirname, `../app/src/pager/${url}.tsx`)
+    })
+
+    return new Promise((resolve) => resolve(params))
+})
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
-    entry: () => new Promise((resolve) => resolve({
-        cms_index: path.resolve(__dirname, '../app/src/pager/cms_index.tsx'),
-        customer_login: path.resolve(__dirname, '../app/src/pager/customer_login.tsx'),
-        customer_create: path.resolve(__dirname, '../app/src/pager/customer_create.tsx')
-    })),
+    entry: () => createEntry([
+        'cms_index',
+        'catalog_category',
+        'customer_login',
+        'customer_create'
+    ]),
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
         filename: '[name].bundle.js',

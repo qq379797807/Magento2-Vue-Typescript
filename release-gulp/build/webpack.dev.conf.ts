@@ -3,19 +3,27 @@ import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import { themeConfig } from '../build'
 import { WebpackConfig, InputConfig } from '../packages'
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 
-let { area, src } = themeConfig.default
+const { area, src } = themeConfig.default
+const createEntry: any = ((list: string[]) => {
+    const params: any = {}
+    list.map((url: string) => {    
+        params[url] = path.resolve(__dirname, `../app/src/pager/${url}.tsx`)
+    })
+
+    return new Promise((resolve) => resolve(params))
+})
 
 const baseConfig = new WebpackConfig({
     root:  path.resolve(__dirname, '../app'),
-    entry: () => new Promise((resolve) => resolve({
-        cms_index: path.resolve(__dirname, '../app/src/pager/cms_index.tsx'),
-        customer_login: path.resolve(__dirname, '../app/src/pager/customer_login.tsx'),
-        customer_create: path.resolve(__dirname, '../app/src/pager/customer_create.tsx')
-    })),
+    entry: () => createEntry([
+        'cms_index',
+        'catalog_category',
+        'customer_login',
+        'customer_create'
+    ]),
     cache: true,
     output: {
         path: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`),
