@@ -2,7 +2,8 @@
 namespace App\Component\Block;
 
 class Common extends \Magento\Framework\View\Element\Template
-{
+{   
+    private $stores;
     private $checkoutsesion;
     private $helper;
     private $current_store;
@@ -47,6 +48,7 @@ class Common extends \Magento\Framework\View\Element\Template
         if ($this->current_store) {
             return $this->current_store;
         }
+
         $this->current_store = $this->_storeManager->getStore();
         return $this->current_store;
     }
@@ -60,8 +62,6 @@ class Common extends \Magento\Framework\View\Element\Template
     {
         return $this->checkoutsesion;
     }
-
-    private $stores;
 
     public function getStores()
     {
@@ -81,17 +81,32 @@ class Common extends \Magento\Framework\View\Element\Template
         foreach ($categories as $category) {
             $loadCategory = $objectManger->create('Magento\Catalog\Model\Category')->load($category->getId());
             $subCategories = $loadCategory->getChildrenCategories();
+            $subArr = array();
+
             foreach ($subCategories as $subCategory) {
-                if(!$subCategory->getIsActive()){continue;}
-                $sub = array();
+                if (!$subCategory->getIsActive()) { 
+                    continue;
+                }
+                
+                $sub_category_code = [
+                    'id' => $subCategory->getId(),
+                    'name' => $subCategory->getName(),
+                    'url' => $categoryHelper->getCategoryUrl($subCategory)
+                ];
 
-                $sub['id'] = $subCategory->getId();
-                $sub['name'] = $subCategory->getName();
-                $sub['link'] = $categoryHelper->getCategoryUrl($subCategory);
-
-                $arr[] = $sub;
+                $subArr[] = $sub_category_code;
             }
+            
+            $category_code = [
+                'id' => $category->getId(),
+                'name' => $category->getName(),
+                'url' => $categoryHelper->getCategoryUrl($category),
+                'sub_category' => $subArr
+            ];
+            
+            $arr[] = $category_code;
         }
+
         return $arr;
     }
 
@@ -157,6 +172,10 @@ class Common extends \Magento\Framework\View\Element\Template
         $minicartHelper = $objectManger->create('Magento\Checkout\Block\Cart\Sidebar');
         $minicart = $minicartHelper->getConfig();
         $data['minicart'] = $minicart;
+
+        // Category
+        $categories = $this->getStoresSubCategories();
+        $data['categories'] = $categories;
 
         // Search Terms
         $SearchTerm = $objectManger->create('Magento\Search\Block\Term');
