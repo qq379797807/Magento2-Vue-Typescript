@@ -33,20 +33,6 @@ $layout-column__additional-sidebar-offset : $layout-column-main__sidebar-offset 
 //  _____________________________________________
 
 @include max-screen($screen__m) {
-    .navigation,
-    .breadcrumbs,
-    .page-header .header.panel,
-    .header.content,
-    .footer.content,
-    .page-main,
-    .page-wrapper > .widget,
-    .page-wrapper > .page-bottom,
-    .block.category.event,
-    .top-container {
-        padding-left: $layout__width-xs-indent;
-        padding-right: $layout__width-xs-indent;
-    }
-
     .page-main {
         .account &,
         .cms-privacy-policy & {
@@ -61,7 +47,7 @@ $layout-column__additional-sidebar-offset : $layout-column-main__sidebar-offset 
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .navigation,
+    nav,
     .breadcrumbs,
     .page-header .header.panel,
     .header.content,
@@ -71,30 +57,17 @@ $layout-column__additional-sidebar-offset : $layout-column-main__sidebar-offset 
     .block.category.event,
     .top-container,
     .page-main {
-        box-sizing: border-box;
         margin-left: auto;
         margin-right: auto;
         max-width: $layout__max-width;
-        padding-left: $layout-indent__width;
-        padding-right: $layout-indent__width;
         width: auto;
     }
 
     .page-main {
         width: 100%;
-
-        // These flex properties should be combined to `flex: 1 0 auto`
-        // sass-lint:disable no-css-comments
-        /* stylelint-disable declaration-block-no-redundant-longhand-properties */
         @include lib-vendor-prefix-flex-grow(1);
         @include lib-vendor-prefix-flex-shrink(0);
         @include lib-vendor-prefix-flex-basis(auto);
-        /* stylelint-enable declaration-block-no-redundant-longhand-properties */
-        // sass-lint:enable  no-css-comments
-
-        .ie9 & {
-            width: auto;
-        }
     }
 
     .columns {

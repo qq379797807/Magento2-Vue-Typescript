@@ -1,24 +1,26 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VCurrency } from '../header/modules/currency'
-import { VLanguage } from '../header/modules/language'
+
+declare let window: any;
 
 @Component({
     name: 'v-navagition',
     data: () => ({
-        title: 'navagition'
-    }),
-    components: {
-        VCurrency,
-        VLanguage
-    }
+        categories: [],
+        counter: 0
+    })
 })
 export class VNavagition extends Vue {
+    public categories: string[] = []
+    public counter: number = 0
+
     mounted () {
         this.init()
     }
 
     init () {
-
+        let commonJson: any = window.commonJson
+        this.categories = commonJson.categories
+        this.counter = this.categories.length
     } 
 }

@@ -1,3 +1,20 @@
 <v-navagition inline-template>
-    <?= $block->getChildHtml() ?>
+    <nav class="navigation">
+        <ul class="in-list" v-if="counter > 0">
+            <li v-for="category in categories">
+                <a :href="category.url" :title="category.name">
+                    <span v-text="category.name"></span>
+                </a>
+                <div class="menu" v-if="category.sub_category.length > 0">
+                    <ul>
+                        <li v-for="item in category.sub_category">
+                            <a :href="item.url" :title="item.name">
+                                <span v-text="item.name"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
 </v-navagition>

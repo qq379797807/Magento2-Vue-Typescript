@@ -62,11 +62,11 @@ export class Gulpflie {
     @Task()
     public async styles (gulp: Gulp, watch: Watch, util: Util) {
         await Promise.resolve(
-            watch.run(
-                path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
-                (gulp: Gulp) => {
-                    util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
-                    return gulp.src([
+            // watch.run(
+            //     path.resolve(__dirname, `${util.getSrcDir()}${util.os()}**.${styles}`),
+            //     (gulp: Gulp) => {
+            //         util.logMsg(`${styles.toUpperCase()} task start ...`, `green`)
+                    gulp.src([
                             path.resolve(__dirname, `${util.getSassDir()}main.${styles}`)
                         ])
                         .pipe(GT.sourcemaps.init())
@@ -91,8 +91,8 @@ export class Gulpflie {
                             afterEach: ' Compiled!',
                             showChange: true
                         }))
-                }
-            )
+                // }
+            // )
         )
     }
 

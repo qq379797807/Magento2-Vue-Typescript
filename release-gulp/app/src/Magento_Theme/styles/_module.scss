@@ -260,7 +260,6 @@ body {
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-
     html,
     body {
         height: 100%; // Stretch screen area for sticky footer
@@ -274,7 +273,6 @@ body {
         > .breadcrumbs,
         > .top-container,
         > .widget {
-            box-sizing: border-box;
             width: 100%;
         }
 
@@ -282,10 +280,6 @@ body {
         .ie11 & {
             height: 100%;
         }
-    }
-
-    .navigation ul {
-        padding: 0 8px;
     }
 
     .header {
@@ -342,7 +336,7 @@ body {
     .page-main {
         > .page-title-wrapper {
             .page-title {
-                display: inline-block;
+                padding: 3rem 0;
             }
 
             .page-title + .action {

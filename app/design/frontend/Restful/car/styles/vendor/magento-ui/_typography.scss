@@ -412,35 +412,9 @@
 ) {
     ul,
     ol {
-        @include lib-css(margin-top, lib-font-size-value($_list-margin-top));
-        @include lib-css(margin-bottom, lib-font-size-value($_list-margin-bottom));
-
         & > li {
-            @include lib-css(margin-top, lib-font-size-value($_list-item-margin-top));
-            @include lib-css(margin-bottom, lib-font-size-value($_list-item-margin-bottom));
+            @include lib-css(list-style-type, none);
         }
-
-        ul,
-        ol {
-            margin-bottom: 0;
-        }
-    }
-
-    dl {
-        @include lib-css(margin-bottom, $_dl-margin-bottom);
-        @include lib-css(margin-top, $_dl-margin-top);
-    }
-
-    dt {
-        @include lib-css(font-weight, $_dt-font-weight);
-        @include lib-css(margin-bottom, $_dt-margin-bottom);
-        @include lib-css(margin-top, $_dt-margin-top);
-    }
-
-    dd {
-        @include lib-css(margin-bottom, $_dd-margin-bottom);
-        @include lib-css(margin-top, $_dd-margin-top);
-        margin-left: 0;
     }
 }
 

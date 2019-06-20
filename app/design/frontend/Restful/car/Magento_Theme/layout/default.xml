@@ -5,6 +5,7 @@
         <referenceBlock name="theme.active.editor" remove="true" />
         <referenceBlock name="global_notices" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
+        <referenceBlock name="navigation.sections" remove="true" />
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.app" before="-" template="Magento_Theme::app.phtml" />
         </referenceContainer>
@@ -28,7 +29,6 @@
         <move element="page.wrapper" destination="vue.app" />
         <move element="header.container" destination="vue.header" />
         <move element="top.links" destination="vue.header.links" />
-        <move element="navigation.sections" destination="vue.navagition" />
         <move element="main.content" destination="vue.content" />
         <move element="page.messages" destination="vue.message" />
         <move element="footer" destination="footer-container" />
