@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import { VApp } from './container/cms_index'
-const SocialSharing = require('vue-social-sharing')
+import { VApp } from './container/cms_page'
 
 Vue.config.productionTip = false
-Vue.use(SocialSharing)
 
 new Vue({
     el: '#app',

@@ -2,7 +2,8 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
-            <block class="Magento\Framework\View\Element\Template" name="vue.cms.js" after="-" template="Magento_Cms::home/component.phtml" />
+            <block class="App\Component\Block\Page" name="vue.page.html" template="Magento_Cms::page/page.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.page.js" after="-" template="Magento_Cms::page/component.phtml" />
         </referenceContainer>
     </body>
 </page>

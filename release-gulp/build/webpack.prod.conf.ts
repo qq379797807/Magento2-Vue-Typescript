@@ -19,6 +19,7 @@ const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: () => createEntry([
         'cms_index',
+        'cms_page',
         'catalog_category',
         'customer_login',
         'customer_create'

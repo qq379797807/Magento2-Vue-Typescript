@@ -19,6 +19,6 @@ export class VContent extends Vue {
     }
 
     init () {
-
+        
     }
 }
