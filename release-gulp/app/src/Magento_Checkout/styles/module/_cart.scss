@@ -4,8 +4,6 @@
 
 //  Summary block
 .cart-summary {
-    @extend .abs-add-box-sizing;
-    @extend .abs-adjustment-incl-excl-tax;
     @include lib-css(background, $sidebar__background-color);
     margin-bottom: $indent__m;
     padding: 1px 15px $indent__m;
@@ -16,7 +14,6 @@
     }
 
     .block {
-        @extend .abs-discount-block;
         margin-bottom: 0;
 
         .item-options {

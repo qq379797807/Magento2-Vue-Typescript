@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+       <referenceContainer name="root">
+            <block class="App\Component\Block\Cart" name="vue.cart.html" after="vue.common" template="Magento_Checkout::cart/data.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.cart.js" after="-" template="Magento_Checkout::cart/component.phtml" />
+        </referenceContainer>
+        <referenceContainer name="checkout.cart.container">
+            <block class="Magento\Framework\View\Element\Template" name="vue.cart.summary" template="Magento_Checkout::cart/summary.phtml" />
+        </referenceContainer>
+        <move element="cart.summary" destination="vue.cart.summary" />
+    </body>
+</page>

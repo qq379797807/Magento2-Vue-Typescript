@@ -22,6 +22,7 @@ const baseConfig = new WebpackConfig({
         'cms_index',
         'cms_page',
         'catalog_category',
+        'checkout_cart',
         'customer_login',
         'customer_create'
     ]),

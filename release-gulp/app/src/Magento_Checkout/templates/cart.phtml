@@ -1,0 +1,9 @@
+<?php
+/**
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+?>
+
+<v-cart inline-template>
+    <?= $block->getItemsCount() > 0 ? $block->getChildHtml('with-items') : $block->getChildHtml('no-items') ?>
+</v-cart>
