@@ -1,0 +1,12 @@
+<?php
+/**  @var $block \Magento\Checkout\Block\Cart */
+?>
+
+<v-cart-empty inline-template>
+    <div class="cart-empty">
+        <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
+        <p v-text="i18n.noItem"></p>
+        <a :href="continueLink" v-text="i18n.continue"></a>
+        <?= $block->getChildHtml('shopping.cart.table.after') ?>
+    </div>
+</v-cart-empty>

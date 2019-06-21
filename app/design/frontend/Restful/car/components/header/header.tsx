@@ -22,11 +22,5 @@ import { VSearch } from './modules/search'
     }
 })
 export class VHeader extends Vue {
-    mounted () {
-        this.init()
-    }
 
-    init () {
-        
-    } 
 }

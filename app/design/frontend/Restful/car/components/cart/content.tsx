@@ -7,7 +7,7 @@ import { VCart } from './modules/cart'
 @Component({
     name: 'v-content',
     data: () => ({
-        title: 'content'
+        title: 'cart'
     }),
     components: {
         VTitle,

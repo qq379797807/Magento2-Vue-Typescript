@@ -178,7 +178,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['categories'] = $categories;
 
         // Search Terms
-        $SearchTerm = $objectManger->create('Magento\Search\Block\Term');
+        $searchTerm = $objectManger->create('Magento\Search\Block\Term');
         if (empty($this->_terms)) {
             $this->_terms = [];
             $terms = $this->_queryCollectionFactory->create()->setPopularQueryFilter(
@@ -198,7 +198,7 @@ class Common extends \Magento\Framework\View\Element\Template
                 }
                 $term->setRatio(($term->getPopularity() - $this->_minPopularity) / $range);
                 $this->_terms['query_text'] = $term->getData('query_text');
-                $this->_terms['url'] = $SearchTerm -> getSearchUrl($term);
+                $this->_terms['url'] = $searchTerm -> getSearchUrl($term);
                 $data['search_terms'][]= $this->_terms;
                 }
             }
@@ -214,7 +214,7 @@ class Common extends \Magento\Framework\View\Element\Template
         if (count($recent_searches) > 0) {
             foreach ($recent_searches as $recent_search) {
                 $recentSearch['query_text'] = $recent_search->getData('query_text');
-                $recentSearch['url'] = $SearchTerm -> getSearchUrl($recent_search);
+                $recentSearch['url'] = $searchTerm -> getSearchUrl($recent_search);
                 $data['recent_searches'][]= $recentSearch;
             }
         }
@@ -226,6 +226,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['cart_qty'] = $this->getCheckoutSession()->getQuote()->getItemsSummaryQty();
 
         // Currency
+        $currencyHelper = $objectManger->create('Magento\Directory\Model\PriceCurrency');
         $currentStore = $this->getCurrentStore();
         $current_currency = $currentStore->getCurrentCurrencyCode();
         $available_currency = $currentStore->getAvailableCurrencyCodes();
@@ -233,12 +234,13 @@ class Common extends \Magento\Framework\View\Element\Template
         foreach ($available_currency as $item) {
             $currency = [
                 'code' => $item,
-                'is_active' => 0,
-                'url' => $this->urlBuilder->getUrl("currency", array('currency' => $item, 'uenc' => $refer))
+                'symbol' => $currencyHelper->getCurrencySymbol(null, $item),
+                'active' => 0,
+                'url' => $this->urlBuilder->getUrl('currency', array('currency' => $item, 'uenc' => $refer))
             ];
 
             if ($item == $current_currency) {
-                $currency['is_active'] = 1;
+                $currency['active'] = 1;
             }
             $data['currency'][] = $currency;
         }
