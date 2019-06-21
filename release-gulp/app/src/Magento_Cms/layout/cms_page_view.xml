@@ -5,5 +5,9 @@
             <block class="App\Component\Block\Page" name="vue.page.html" after="vue.common" template="Magento_Cms::page/page.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.page.js" after="-" template="Magento_Cms::page/component.phtml" />
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="vue.page.wrapper" template="Magento_Cms::page/wrapper.phtml" />
+        </referenceContainer>
+        <referenceBlock name="cms_page" remove="true" />
     </body>
 </page>

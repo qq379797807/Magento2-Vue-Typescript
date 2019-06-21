@@ -4,5 +4,6 @@
         <referenceContainer name="root">
             <block class="Magento\Framework\View\Element\Template" name="vue.cms.js" after="-" template="Magento_Cms::home/component.phtml" />
         </referenceContainer>
+        <referenceBlock name="vue.page.js" remove="true" />
     </body>
 </page>

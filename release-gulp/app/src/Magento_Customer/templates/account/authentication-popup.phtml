@@ -1,0 +1,8 @@
+<?php
+/** @var \Magento\Customer\Block\Account\AuthenticationPopup $block */
+?>
+<div class="in-authentication">
+    <script>
+        window.authenticationPopup = <?= /* @noEscape */ $block->getSerializedConfig() ?>;
+    </script>
+</div>

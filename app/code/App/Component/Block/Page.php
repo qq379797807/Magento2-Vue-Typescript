@@ -5,10 +5,12 @@ class Page extends \Magento\Framework\View\Element\Template
 {
     private $helper;
     private $_jsonHelper;
+    private $_filterProvider;
 
     public function __construct(
         \App\Component\Helper\Data $helper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magento\Framework\View\Element\Template\Context $context
     )
     {
@@ -16,6 +18,7 @@ class Page extends \Magento\Framework\View\Element\Template
         $this->_isScopePrivate = true;
         $this->helper = $helper;
         $this->_jsonHelper = $JsonHelper;
+        $this->_filterProvider = $filterProvider;
     }
 
     public function getPageJson($version = 'pc')
@@ -23,10 +26,17 @@ class Page extends \Magento\Framework\View\Element\Template
         $data = array();
         $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
 
-        // Page Title
-        $pageTitle = $objectManger->create('Magento\Theme\Block\Html\Title');
-        $title = $pageTitle->getPageHeading();
-        $data['title'] = $title;
+        // Page Content
+        $pagerHelper = $objectManger->create('Magento\Cms\Block\Page');
+        $identities = $pagerHelper->getIdentities();
+        $page = $pagerHelper->getPage();
+        $content = $page->getContent();
+        $wrapper = $this->_filterProvider->getPageFilter()->filter($content);
+        $cmsTitle = $page->getContentHeading();
+        
+        $data['identities'] = $identities;
+        $data['title'] = $cmsTitle;
+        $data['pager'] = $wrapper;
 
         return $this->_jsonHelper->jsonEncode($data);
     }
