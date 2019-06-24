@@ -104,6 +104,7 @@ ORDER BY r.rate_id DESC";
         }
         return $ret;
     }
+
     public function getThemeSetting($theme_id) {
         $sql = "SELECT theme_id,theme_path,area,code FROM theme WHERE theme_id=?";
         $parms = [$theme_id];
@@ -654,16 +655,13 @@ where  ea.attribute_set_id =:setid and ea.attribute_group_id =:groupId order by 
                 $simpleId = $item->getProduct()->getId();
             }
 
-            //$product = $productObject->load($item['product_id']);
-            // 可赚积分
-
             $earn_point = $this->getProductsValue($simpleId, $storeId, 'earn_point');
             if ($earn_point) {
                 $earn_point = $earn_point * $item['qty'];
             } else {
                 $earn_point = $item->getPrice() * $rewardPointProportion * $item['qty'];
             }
-            // 可用积分
+
             $available_point = $this->getProductsValue($simpleId, $storeId, 'available_point');
             if ($available_point != "") {
                 $available_point = $available_point * $item['qty'];

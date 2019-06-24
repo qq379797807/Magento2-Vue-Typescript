@@ -2,6 +2,7 @@
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
+            <block class="App\Component\Block\Category" name="vue.category.html" after="vue.common" template="Magento_Catalog::category/page.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.category.js" after="-" template="Magento_Catalog::category/component.phtml" />
         </referenceContainer>
     </body>

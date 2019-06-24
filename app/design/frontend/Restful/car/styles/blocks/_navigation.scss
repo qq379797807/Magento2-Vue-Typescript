@@ -12,11 +12,26 @@ nav {
 
         li {
             @include lib-css(padding, 1.5rem);
+            @include lib-css(position, relative);
+
+            &:hover {
+                .menu {
+                    @include lib-css(display, block);
+                }
+            }
         }
     }
 
     .menu {
-        display: none;
+        @include lib-css(position, absolute);
+        @include lib-css(top, 100%);
+        @include lib-css(left, 0);
+        @include lib-css(width, 150px);
+        @include lib-css(display, none);
+        @include lib-css(padding, 10px);
+        @include lib-css(z-index, 20);
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 -1px 0.5rem rgba(0, 0, 0, 0.2);
     }
 }
 
