@@ -5,5 +5,9 @@
             <block class="App\Component\Block\Category" name="vue.category.html" after="vue.common" template="Magento_Catalog::category/page.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.category.js" after="-" template="Magento_Catalog::category/component.phtml" />
         </referenceContainer>
+        <referenceContainer name="columns.top">
+            <block class="Magento\Framework\View\Element\Template" name="vue.category.view" after="-"  template="Magento_Catalog::category/view.phtml" />
+        </referenceContainer>
+        <move element="category.view.container" destination="vue.category.view" />
     </body>
 </page>

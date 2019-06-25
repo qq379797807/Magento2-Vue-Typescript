@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VTitle } from '../title/title'
 import { VMessage } from '../message/message'
+import { VCategoryView } from './modules/view'
 
 @Component({
     name: 'v-content',
@@ -10,15 +11,10 @@ import { VMessage } from '../message/message'
     }),
     components: {
         VTitle,
-        VMessage
+        VMessage,
+        VCategoryView
     }
 })
 export class VContent extends Vue {
-    mounted () {
-        this.init()
-    }
 
-    init () {
-        
-    }
 }
