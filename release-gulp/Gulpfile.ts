@@ -25,8 +25,8 @@ export class Gulpflie {
         await Promise.resolve(
             pump([
                 gulp.src([
-                    path.resolve(__dirname, `${util.getAppDir()}`),
-                    path.resolve(__dirname, `${util.getVarDir()}`),
+                    // path.resolve(__dirname, `${util.getAppDir()}`),
+                    // path.resolve(__dirname, `${util.getVarDir()}`),
                     path.resolve(__dirname, `${util.getPubDir()}`)
                 ]),
                 clean({
@@ -37,7 +37,9 @@ export class Gulpflie {
         )
     }
 
-    @Task()
+    @Task({
+        befores: ['del']
+    })
     public async copy (gulp: Gulp, watch: Watch, util: Util) {
         await Promise.resolve(
             // watch.run(

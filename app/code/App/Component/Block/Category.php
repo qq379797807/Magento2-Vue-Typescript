@@ -42,6 +42,17 @@ class Category extends \Magento\Framework\View\Element\Template
         $postData = $this->_request->getParams();
         $sort = [];
 
+        $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
+        $viewHelper= $objectManger->create('Magento\Catalog\Block\Category\View');
+        $_category = $viewHelper->getCurrentCategory();
+
+        $data['category_image'] = $_category->getImageUrl();
+        $data['category_name'] = $_category->getName();
+        $data['category_description'] = $_category->getDescription();
+        $data['category_contentMode'] = $viewHelper->isContentMode();
+        $data['category_mixedMode'] = $viewHelper->isMixedMode();
+        $data['category_cms'] = $viewHelper->getCmsBlockHtml();
+
         if($this->_request->getParam('product_list_order')){
             $sort['product_list_order'] = $this->_request->getParam('product_list_order');
             $sort['product_list_dir'] = $this->_request->getParam('product_list_dir')? $this->_request->getParam('product_list_dir') : 'desc';

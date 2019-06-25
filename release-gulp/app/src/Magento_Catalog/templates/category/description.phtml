@@ -3,12 +3,7 @@
  * @var $block \Magento\Catalog\Block\Category\View
  */
 ?>
-<?php 
-    $_description = $block->getCurrentCategory()->getDescription();
-?>
 
 <v-category-description inline-template>
-    <div class="category-description">
-        <?= /* @escapeNotVerified */ $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?>
-    </div>
+    <div class="category-description" v-if="description" v-html="description"></div>
 </v-category-description>

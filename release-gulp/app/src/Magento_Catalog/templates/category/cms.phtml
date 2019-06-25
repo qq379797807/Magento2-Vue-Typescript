@@ -1,21 +1,9 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-// @codingStandardsIgnoreFile
-
-?>
-<?php
-/**
- * Category view template
- *
  * @var $block \Magento\Catalog\Block\Category\View
  */
 ?>
-<?php if ($block->isContentMode() || $block->isMixedMode()): ?>
-    <div class="category-cms">
-        <?= $block->getCmsBlockHtml() ?>
-    </div>
-<?php endif; ?>
+
+<v-category-cms inline-template>
+    <div class="category-cms" v-if="mixed_mode || content_mode" v-html="cms_block"></div>
+</v-category-cms>

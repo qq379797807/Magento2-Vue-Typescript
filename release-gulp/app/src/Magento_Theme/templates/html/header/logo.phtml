@@ -7,6 +7,6 @@
 
 <v-logo inline-template>
     <a :href="logo.link" class="logo" :title="logo.alt">
-        <img :src="logo.url" :width="logo.width" :height="logo.height" :alt="logo.alt" />
+        <img v-lazy="logo.url" :width="logo.width" :height="logo.height" :alt="logo.alt" />
     </a>
 </v-logo>
