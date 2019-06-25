@@ -3,4 +3,10 @@
     <head>
         <remove src="mage/gallery/gallery.css"/>
     </head>
+    <body>
+        <referenceContainer name="root">
+            <!-- <block class="App\Component\Block\Category" name="vue.product.html" after="vue.common" template="Magento_Catalog::product/page.phtml" /> -->
+            <block class="Magento\Framework\View\Element\Template" name="vue.product.js" after="-" template="Magento_Catalog::product/component.phtml" />
+        </referenceContainer>
+    </body>
 </page>
