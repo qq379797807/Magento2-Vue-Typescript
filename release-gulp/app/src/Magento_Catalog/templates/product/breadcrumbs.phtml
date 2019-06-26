@@ -1,0 +1,16 @@
+<?php
+/*
+* @var \Magento\Theme\Block\Html\Breadcrumbs $block 
+*/
+?>
+
+<v-breadcrumbs inline-template>
+    <section class="breadcrumbs">
+        <ul class="items" v-if="breadcrumbs">
+            <li class="item" v-for="crumb in breadcrumbs">
+                <a :href="crumb.link" :title="crumb.label" v-if="crumb.link" v-text="crumb.label"></a>
+                <span v-if="!crumb.link" v-text="crumb.label"></span>
+            </li>
+        </ul>
+    </section>
+</v-breadcrumbs>

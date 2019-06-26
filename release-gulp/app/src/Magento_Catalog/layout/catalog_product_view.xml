@@ -4,9 +4,19 @@
         <remove src="mage/gallery/gallery.css"/>
     </head>
     <body>
+        <attribute name="itemtype" value="" />
+        <attribute name="itemscope" value="" />
         <referenceContainer name="root">
-            <!-- <block class="App\Component\Block\Category" name="vue.product.html" after="vue.common" template="Magento_Catalog::product/page.phtml" /> -->
+            <block class="App\Component\Block\Product" name="vue.product.html" after="vue.common" template="Magento_Catalog::product/page.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.product.js" after="-" template="Magento_Catalog::product/component.phtml" />
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="vue.product.view" before="-" template="Magento_Catalog::product/view.phtml">
+                <block class="Magento\Framework\View\Element\Template" name="vue.product.main" template="Magento_Catalog::product/main.phtml" />
+                <block class="Magento\Framework\View\Element\Template" name="vue.product.media" template="Magento_Catalog::product/media.phtml" />
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.media" remove="true" />
+        <move element="product.info.main" destination="vue.product.main" />
     </body>
 </page>
