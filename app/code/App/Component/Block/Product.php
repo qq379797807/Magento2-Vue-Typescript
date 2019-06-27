@@ -24,9 +24,9 @@ class Product extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Url\EncoderInterface $urlEncoder
     )
     {
+        parent::__construct($context);
         $this->scopeConfig = $scopeConfig;
         $this->categoryHelper = $categoryHelper;
-        parent::__construct($context);
         $this->storeManger = $storeManger;
         $this->request = $request;
         $this->_jsonHelper = $JsonHelper;
@@ -39,11 +39,6 @@ class Product extends \Magento\Framework\View\Element\Template
         return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
     }
 
-    public function customerSession()
-    {
-        return $this->getObject('Magento\Customer\Model\Session');
-    }
-
     public function getCurrentStore()
     {
         if($this->current_store)
@@ -54,7 +49,7 @@ class Product extends \Magento\Framework\View\Element\Template
         return $this->current_store;
     }
 
-    public function getProductInfo ($version)
+    public function getProductInfo($version)
     {
         $data = array();
         $params = $this ->request->getParams();
@@ -62,21 +57,22 @@ class Product extends \Magento\Framework\View\Element\Template
         $size = $version == 'mobile' ? '400x400' : '800x800';
         $baseMediaUrl = $this ->_storeManager-> getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA );
         $helper = $this->getObject('App\Component\Helper\Data');
-        $email_to_friend_helper = $this->getObject('Magento\Catalog\Helper\Product');
+        $emailHelper = $this->getObject('Magento\Catalog\Helper\Product');
         $currentStore = $this->getCurrentStore();
         $baseUrl = $currentStore->getBaseUrl('media') . 'catalog/product/';
         $website_id = $currentStore->getWebsite()->getId();
         $store_id = $currentStore->getId();
         $product = $this->getObject('Magento\Catalog\Model\Product')->load($id);
         $data['product_id'] = $id;
-        // $data['review_average'] = $helper->getProductReviewAverage($id);
+        $data['review_average'] = $helper->getProductReviewAverage($id);
         $data['product_type'] = $helper->getProductType($id);
-        // $stockinfo = $helper->getProductQty($id,$product->getTypeId());
-        // $data['status'] = $stockinfo['status'] == true ? 'In Stock': 'Out Of Stock';
-        // $data['name'] = $helper->getProductsValue($id,$store_id,'name');
-        // $data['sku'] = $helper->getProductSkuById($id);
-        // $data['short_description'] = $helper->getProductsValue($id,$store_id,'listing_description');
-        // $data['description'] = $helper->getProductsValue($id,$store_id,'description');
+        $stockinfo = $helper->getProductQty($id, $product->getTypeId());
+        $data['product_status'] = $stockinfo['status'] == true ? 'In Stock': 'Out Of Stock';
+        $data['type'] = $this->_request->getParam('type', '');
+        // $data['product_name'] = $helper->getProductsValue($id, $store_id, 'name');
+        $data['product_sku'] = $helper->getProductSkuById($id);
+        // $data['product_short_description'] = $helper->getProductsValue($id, $store_id, 'listing_description');
+        // $data['product_description'] = $helper->getProductsValue($id,$store_id,'description');
         // $vedio = $helper->getProductsValue($id,$store_id,'short_description');
         // if(preg_match('/iframe/',$vedio)){
         //     $data['vedio'] = $vedio;
@@ -113,7 +109,7 @@ class Product extends \Magento\Framework\View\Element\Template
         //     $data['origin_price'] =$data['price'];
         // }
 
-        // $data['images'] = $this->getImage($id,$store_id,$helper,$size);
+        // $data['images'] = $this->getImage($id, $store_id, $helper, $size);
         // $simpleIds = $helper->getConfigLimiteds($id);
         // $relateProduct = array();
         // if($simpleIds) {
@@ -153,22 +149,13 @@ class Product extends \Magento\Framework\View\Element\Template
         //     }
         // }
 
-        // $data['configproduct'] =$relateProduct;
-        // $data['configattr'] =$helper->_getConfigAttribute($id);
-        // $data['email_to_friends'] = $email_to_friend_helper->getEmailToFriendUrl($product);
-        // $data['type'] = $this->_request->getParam('type', '');
-        // $data['is_in_wishlist'] = $helper->inWishList($id);
-        // $manualData = $helper->getProductsValue($id,$store_id,'manual_data');
-        // $manualData = $this->convertMediaPath($manualData,$baseMediaUrl);
-        // $data['user_guide'] = $manualData;
-
-        // $software_updates = $helper->getProductsValue($id,$store_id,'support_data');
-        // $software_updates = $this->convertMediaPath($software_updates,$baseMediaUrl);
-        // $data['software_updates'] = $software_updates;
-
-        // $data['related'] =$this->getRelateProduct($product,$store_id,$website_id,$helper);
-        // $data['upsell'] =$this->getUpsellProduct($product,$store_id,$website_id,$helper);
-        // $data['crossSell'] =$this->getCrossSellProduct($product,$store_id,$website_id,$helper);
+        // $data['configproduct'] = $relateProduct;
+        // $data['configattr'] = $helper->_getConfigAttribute($id);
+        $data['email_to'] = $emailHelper->getEmailToFriendUrl($product);
+        $data['in_wishlist'] = $helper->inWishList($id);
+        // $data['related_product'] =$this->getRelateProduct($product, $store_id, $website_id, $helper);
+        // $data['upsell_product'] =$this->getUpsellProduct($product,$store_id,$website_id,$helper);
+        // $data['cross_product'] =$this->getCrossSellProduct($product,$store_id,$website_id,$helper);
         return $data;
     }
 
@@ -188,7 +175,7 @@ class Product extends \Magento\Framework\View\Element\Template
         return $data;
     }
 
-    private function getRelateProduct($product,$store_id,$website_id,$helper)
+    private function getRelateProduct($product, $store_id, $website_id, $helper)
     {
         $relatedProducts = $product->getRelatedProductCollection();
         $relatedProducts->addAttributeToFilter("status", 1);
@@ -369,11 +356,11 @@ class Product extends \Magento\Framework\View\Element\Template
         return $data;
     }
 
-    public function getImage($id,$store_id,$helper,$size)
+    public function getImage($id, $store_id, $helper, $size)
     {
-        $gallerys = $helper->getGallery($id,$store_id);
+        $gallerys = $helper->getGallery($id, $store_id);
         $retArr = array();
-        $baseImage = $helper->getProductsValue($id,$store_id,'image');
+        $baseImage = $helper->getProductsValue($id, $store_id, 'image');
         $retArr[] = $helper->resizeProductImage($baseImage,$size);
         foreach ($gallerys as $subitem)
         {
@@ -381,7 +368,7 @@ class Product extends \Magento\Framework\View\Element\Template
             {
                 continue;
             }
-            $retArr[] = $helper->resizeProductImage($subitem,'800x800');
+            $retArr[] = $helper->resizeProductImage($subitem, '800x800');
         }
 
         return $retArr;

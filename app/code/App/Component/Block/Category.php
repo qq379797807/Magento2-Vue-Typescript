@@ -10,7 +10,7 @@ class Category extends \Magento\Framework\View\Element\Template
     protected $request;
     protected $formKey;
     protected $repository;
-    // protected $_catalogData;
+    protected $_catalogData;
 
     public function __construct(
         Template\Context $context,
@@ -18,7 +18,7 @@ class Category extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Data\Form\FormKey $formKey,
         // \App\Component\Helper\Category $categoryHelper,
         \Magento\Catalog\Api\CategoryRepositoryInterface $repository,
-        // \Magento\Catalog\Helper\Data $catalogData,
+        \Magento\Catalog\Helper\Data $catalogData,
         array $data = []
     )
     {
@@ -26,7 +26,7 @@ class Category extends \Magento\Framework\View\Element\Template
         $this->jsonHelper = $jsonHelper;
         $this->formKey = $formKey;
         $this->repository = $repository;
-        // $this->_catalogData = $catalogData;
+        $this->_catalogData = $catalogData;
         parent::__construct($context, $data);
     }
 
@@ -72,13 +72,12 @@ class Category extends \Magento\Framework\View\Element\Template
         $home = array(
             'home'=> [
                 'label' => 'Home',
-                'title' => 'Go to Home Page',
                 'link' => $this->_storeManager->getStore()->getBaseUrl()
             ]
         );
-        // $path = $this->_catalogData->getBreadcrumbPath();
-        // $path = array_merge($home, $path);
-        // $data['breadcrumbs'] = $path;
+        $path = $this->_catalogData->getBreadcrumbPath();
+        $path = array_merge($home, $path);
+        $data['breadcrumbs'] = $path;
 
         return $this->jsonHelper->jsonEncode($data);
     }

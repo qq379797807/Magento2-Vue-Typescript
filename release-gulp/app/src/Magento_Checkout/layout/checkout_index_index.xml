@@ -2,8 +2,20 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
-            <block class="App\Component\Block\Cart" name="vue.cart.html" after="vue.common" template="Magento_Checkout::cart/data.phtml" />
+            <block class="App\Component\Block\Checkout" name="vue.checkout.html" after="vue.common" template="Magento_Checkout::checkout/data.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.checkout.js" after="-" template="Magento_Checkout::checkout/component.phtml" />
         </referenceContainer>
+        <referenceBlock name="vue.message">
+            <container name="checkout.page.messages" htmlTag="div" htmlClass="page messages">
+                <block class="Magento\Framework\View\Element\Template" name="checkout.ajax.message" template="Magento_Theme::html/messages.phtml" />
+                <block class="Magento\Framework\View\Element\Messages" name="checkout.messages" template="Magento_Theme::messages.phtml" />
+            </container>
+        </referenceBlock>
+        <referenceBlock name="vue.footer">
+            <container name="checkout.footer" htmlTag="footer" htmlClass="page-footer">
+            </container>
+        </referenceBlock>
+        <move element="checkout.header.container" destination="vue.header" />
+        <move element="footer" destination="checkout.footer" />
     </body>
 </page>

@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VHeader } from '../../components/checkout/header'
-import { VNavagition } from '../../components/navagition/navagition'
-import { VBreadcrumbs } from '../../components/breadcrumbs/breadcrumbs'
 import { VContent } from '../../components/checkout/content'
 import { VFooter } from '../../components/footer/footer'
 
@@ -13,8 +11,6 @@ import { VFooter } from '../../components/footer/footer'
     }),
     components: {
         VHeader,
-        VNavagition,
-        VBreadcrumbs,
         VContent,
         VFooter
     }

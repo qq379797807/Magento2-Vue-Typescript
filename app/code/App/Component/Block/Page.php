@@ -12,8 +12,7 @@ class Page extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magento\Framework\View\Element\Template\Context $context
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->_isScopePrivate = true;
         $this->helper = $helper;
@@ -21,13 +20,15 @@ class Page extends \Magento\Framework\View\Element\Template
         $this->_filterProvider = $filterProvider;
     }
 
+    public function getObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
+    }
+
     public function getPageJson($version = 'pc')
     {
         $data = array();
-        $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-
-        // Page Content
-        $pagerHelper = $objectManger->create('Magento\Cms\Block\Page');
+        $pagerHelper = $this->getObject('Magento\Cms\Block\Page');
         $identities = $pagerHelper->getIdentities();
         $page = $pagerHelper->getPage();
         $content = $page->getContent();

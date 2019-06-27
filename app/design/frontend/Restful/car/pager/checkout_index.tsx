@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import * as VueLazyload from 'vue-lazyload'
 import { VApp } from './container/checkout_index'
+import store from './checkout/store'
 
+declare let window: any
 const Lazyload: any = VueLazyload
 Vue.config.productionTip = false
 Vue.use(Lazyload.install, {
@@ -16,6 +18,7 @@ Vue.use(Lazyload.install, {
 
 new Vue({
     el: '#app',
+    store,
     components: {
         VApp
     }

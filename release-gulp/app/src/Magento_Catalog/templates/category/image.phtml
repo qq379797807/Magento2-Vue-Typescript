@@ -14,7 +14,7 @@
 ?>
 
 <v-category-image inline-template>
-    <div class="category-image">
+    <div class="category-image" v-if="url">
         <img v-lazy="url" :alt="name" :title="name" class="image" />
     </div>
 </v-category-image>

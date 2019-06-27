@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VTitle } from '../title/title'
 import { VMessage } from '../message/message'
+import { VCheckoutView } from './modules/checkout'
 
 @Component({
     name: 'v-content',
@@ -11,6 +12,7 @@ import { VMessage } from '../message/message'
     components: {
         VTitle,
         VMessage,
+        VCheckoutView
     }
 })
 export class VContent extends Vue {

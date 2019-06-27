@@ -17,7 +17,7 @@
     $_breadcrumbs-icon-font-content                 : $breadcrumbs-icon__font-content,
     $_icon-font                                     : $breadcrumbs-icon__font,
     $_icon-font-size                                : $breadcrumbs-icon__font-size,
-    $_icon-font-line-height                         : $breadcrumbs-icon__font-line-height,
+    $_icon-font-line-height                         : 2rem,
     $_icon-font-color                               : $breadcrumbs-icon__font-color,
     $_icon-font-margin                              : $breadcrumbs-icon__font-margin,
     $_icon-font-vertical-align                      : $breadcrumbs-icon__font-vertical-align,
@@ -68,15 +68,10 @@
     $_breadcrumbs-link-gradient-color-start-active  : $breadcrumbs-link__active__gradient-color-start,
     $_breadcrumbs-link-gradient-color-end-active    : $breadcrumbs-link__active__gradient-color-end
 ) {
-    @include lib-css(margin, $_breadcrumbs-container-margin);
     .items {
-        @include lib-font-size($_breadcrumbs-font-size);
         @include lib-css(color, $_breadcrumbs-current-color);
-        @include lib-list-inline();
-    }
-
-    .item {
-        margin: 0;
+        @include lib-css(display, flex);
+        @include lib-css(padding, 2rem 0);
     }
 
     a {
@@ -147,7 +142,6 @@
         @include lib-css(padding, $_breadcrumbs-padding);
     }
 
-    // Insert separating symbol to "content"
     @if $_breadcrumbs-separator-symbol != '' and $_breadcrumbs-separator-symbol != false {
         .item:not(:last-child) {
             &:after {
@@ -157,7 +151,6 @@
         }
     }
 
-    // Use font icon as a separating symbol
     @if $_breadcrumbs-icon-use {
         .item:not(:last-child) {
             @include lib-icon-font(

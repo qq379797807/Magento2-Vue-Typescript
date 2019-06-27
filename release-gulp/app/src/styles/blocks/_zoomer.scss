@@ -1,0 +1,43 @@
+.preview-box {
+	margin-bottom: 1vh;
+}
+
+.responsive-image {
+	height: auto;
+	width: 100%;
+}
+
+.zoomer-control {
+	display: grid;
+	align-items: center;
+	font-size: x-large;
+	cursor: pointer;
+	justify-content: center;
+}
+
+.zoomer-control-box {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+    grid-column-gap: 5px;
+    
+	.thumb-list {
+        display: grid;
+        grid-column-gap: 4px;
+        
+        img {
+            width: 10rem;
+            cursor: pointer;
+        }
+    }
+}
+
+.choosed-thumb {
+	border-radius: 0px;
+}
+
+.pane-container {
+	display: none;
+	position: absolute;
+	z-index: 10000;
+	pointer-events: none;
+}
