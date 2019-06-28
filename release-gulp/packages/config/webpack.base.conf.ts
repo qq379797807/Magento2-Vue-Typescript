@@ -99,9 +99,9 @@ export class WebpackConfig {
             output,
             resolve: {
                 extensions: [
-                    '.ts',
                     '.tsx',
                     '.vue',
+                    '.ts',
                     '.js', 
                     '.scss', 
                     '.less', 

@@ -140,6 +140,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $uenc = $this->getRequest()->getParam('uenc', '');
         $data['uenc'] = $uenc;
         $data['stores'] = $storeArr;
+        $data['base_url'] = $this->urlBuilder->getUrl('/');
         $data['media_path'] = $current_store->getBaseUrl('media');
         $data['img_path'] = $this->getViewFileUrl('images');
         $welcomeMsg = __("welcome to our online website")->render();

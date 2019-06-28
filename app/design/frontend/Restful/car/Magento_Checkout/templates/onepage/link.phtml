@@ -1,0 +1,7 @@
+<?php if ($block->isPossibleOnepageCheckout()):?>
+    <a href="<?= $block->getCheckoutUrl() ?>"
+        title="<?= __('Proceed to Checkout') ?>"
+        class="action primary checkout">
+        <span><?= __('Proceed to Checkout') ?></span>
+    </a>
+<?php endif?>

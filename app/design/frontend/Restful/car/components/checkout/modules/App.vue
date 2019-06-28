@@ -12,13 +12,12 @@ export default {
     }),
     computed: {
         isCustomerLoggedIn () {
-            // return this.$store.getters.isCustomerLoggedIn
-            return true
+            return this.$store.getters.isCustomerLoggedIn
         }
     },
     mounted () {
         if (this.isCustomerLoggedIn) {
-            // this.$store.dispatch('getCustomerData')
+            this.$store.dispatch('getCustomerData')
         }
     }
 }
