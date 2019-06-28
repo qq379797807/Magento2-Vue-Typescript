@@ -1,6 +1,7 @@
 <template>
     <div class="in-checkout">
         <h2 v-text="title"></h2>
+        <v-input :label="label" v-model="address"></v-input>
     </div>
 </template>
 
@@ -8,7 +9,9 @@
 export default {
     name: 'v-checkout',
     data: () => ({
-        title: 'Checkout Component'
+        title: 'One Step Checkout',
+        label: 'First Name',
+        address: null
     }),
     computed: {
         isCustomerLoggedIn () {

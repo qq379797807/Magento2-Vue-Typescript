@@ -5,6 +5,7 @@ import { themeConfig } from '../build'
 import { WebpackConfig, InputConfig } from '../packages'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 const { area, src } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
@@ -60,6 +61,7 @@ const baseConfig = new WebpackConfig({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
+        new ProgressBarPlugin(),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: `../../app/design/${area}/${src}/web/css/[name].[contenthash:8].css`

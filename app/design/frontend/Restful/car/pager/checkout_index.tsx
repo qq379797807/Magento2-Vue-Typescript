@@ -6,6 +6,7 @@ import state from './checkout/store/state'
 import getters from './checkout/store/getters'
 import actions from './checkout/store/actions'
 import mutations from './checkout/store/mutations'
+import UI from '../components/ui'
 
 const Lazyload: any = VueLazyload
 
@@ -20,6 +21,7 @@ Vue.use(Lazyload.install, {
         'scroll'
     ]
 })
+UI.install(Vue)
 
 const store: Store<any> = new Vuex.Store({
     state: state,

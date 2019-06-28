@@ -1,9 +1,14 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
+import * as os from 'os'
 import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
+const HappyPack = require('happypack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 const { area, src } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
@@ -42,6 +47,25 @@ const baseConfig = new WebpackConfig({
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify('development')
+        }),
+        // new BundleAnalyzerPlugin({
+        //     analyzerMode: 'server',
+        //     analyzerHost: '127.0.0.1',
+        //     analyzerPort: 8889,
+        //     reportFilename: 'report.html',
+        //     defaultSizes: 'parsed',
+        //     openAnalyzer: true,
+        //     generateStatsFile: false,
+        //     statsFilename: 'stats.json',
+        //     statsOptions: null,
+        //     logLevel: 'info',
+        // }),
+        new ProgressBarPlugin(),
+        new HappyPack({
+            id: 'babel',
+            loaders: ['babel-loader?cacheDirectory=true'],
+            threadPool: happyThreadPool,
+            verboseWhenProfiling: true,
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
