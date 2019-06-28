@@ -7,6 +7,7 @@
 </template>
 
 <script>
+// import VShippingAddress from '../shipping/address.vue'
 export default {
     name: 'v-checkout',
     data: () => ({
@@ -15,6 +16,8 @@ export default {
         address: null,
         checkbox: false
     }),
+    components: {
+    },
     computed: {
         isCustomerLoggedIn () {
             return this.$store.getters.isCustomerLoggedIn

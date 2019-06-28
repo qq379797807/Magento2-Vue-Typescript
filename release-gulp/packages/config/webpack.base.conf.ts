@@ -142,6 +142,7 @@ export class WebpackConfig {
                             {
                                 loader: 'ts-loader',
                                 options: { 
+                                    happyPackMode: true,
                                     appendTsxSuffixTo: [/\.vue$/] 
                                 }
                             }
@@ -153,7 +154,10 @@ export class WebpackConfig {
                         include: [this.path],
                         exclude: [
                             /node_modules/
-                        ]
+                        ],
+                        options: {
+                            happyPackMode: true
+                        }
                     },
                     {
                         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
