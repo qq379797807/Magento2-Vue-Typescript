@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import * as VueLazyload from 'vue-lazyload'
+import VueLazyload from 'vue-lazyload'
 import { VApp } from './container/cms_page'
 
 const Lazyload: any = VueLazyload

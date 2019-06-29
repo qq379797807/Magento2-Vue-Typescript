@@ -1,8 +1,10 @@
 import { VueConstructor } from 'vue'
 import Input from './element/input.vue'
+import Checkbox from './element/checkbox.vue'
 
 const component: any[] = [
-    Input
+    Input,
+    Checkbox
 ]
 
 const UI: any = {

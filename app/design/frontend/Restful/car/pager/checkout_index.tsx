@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
-import * as VueLazyload from 'vue-lazyload'
+import VueLazyload from 'vue-lazyload'
 import { VApp } from './container/checkout_index'
 import state from './checkout/store/state'
 import getters from './checkout/store/getters'

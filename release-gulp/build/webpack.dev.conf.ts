@@ -27,7 +27,9 @@ const baseConfig = new WebpackConfig({
         'checkout_cart',
         'checkout_index',
         'customer_login',
-        'customer_create'
+        'customer_create',
+        'customer_account',
+        'sales_order'
     ]),
     cache: true,
     output: {
