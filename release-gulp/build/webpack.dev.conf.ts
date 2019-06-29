@@ -29,7 +29,11 @@ const baseConfig = new WebpackConfig({
         'customer_login',
         'customer_create',
         'customer_account',
-        'sales_order'
+        'sales_order',
+        'downloadable_product',
+        'wishlist_index',
+        'customer_address',
+        'customer_edit'
     ]),
     cache: true,
     output: {

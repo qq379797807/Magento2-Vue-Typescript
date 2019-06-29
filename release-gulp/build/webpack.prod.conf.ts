@@ -8,7 +8,8 @@ const HappyPack = require('happypack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+// const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 })
 
 const { area, src } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
@@ -32,7 +33,11 @@ const baseConfig = new WebpackConfig({
         'customer_login',
         'customer_create',
         'customer_account',
-        'sales_order'
+        'sales_order',
+        'downloadable_product',
+        'wishlist_index',
+        'customer_address',
+        'customer_edit'
     ]),
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
