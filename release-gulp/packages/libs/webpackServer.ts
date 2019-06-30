@@ -3,6 +3,8 @@ import * as webpack from 'webpack'
 import * as WebpackDevServer from 'webpack-dev-server'
 import { MultiCompiler, Compiler } from 'webpack'
 import { InputConfig } from '../decorators'
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
 
 export class WebpackServer {
     private webpack: any
@@ -35,7 +37,7 @@ export class WebpackServer {
         this.webpackConfig.mode = this.env
         if (!callback) callback = () => {}
 
-        this.compiler = webpack(this.webpackConfig)
+        this.compiler = webpack(smp.wrap(this.webpackConfig))
         this.compiler.apply(new webpack.ProgressPlugin())
         this.compiler.run(callback)
         return this

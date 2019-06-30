@@ -6,6 +6,7 @@ import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
 import modulesConfig from './modules'
 const HappyPack = require('happypack')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -60,7 +61,7 @@ const baseConfig = new WebpackConfig({
             id: 'babel',
             loaders: ['babel-loader?cacheDirectory=true'],
             threadPool: happyThreadPool,
-            verboseWhenProfiling: true,
+            verboseWhenProfiling: true
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
@@ -84,7 +85,14 @@ const baseConfig = new WebpackConfig({
             maxInitialRequests: 3,
         },
         noEmitOnErrors: true,
-        minimize: true
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                cache:  true,
+                parallel:  os.cpus().length - 1,
+                sourceMap: true
+            })
+        ]
     }
 })
 const webpackProdConfig: InputConfig = baseConfig.getConfig()

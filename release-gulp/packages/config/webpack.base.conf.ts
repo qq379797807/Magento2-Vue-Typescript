@@ -143,6 +143,7 @@ export class WebpackConfig {
                                 loader: 'ts-loader',
                                 options: { 
                                     happyPackMode: true,
+                                    transpileOnly: true,
                                     appendTsxSuffixTo: [/\.vue$/] 
                                 }
                             }
@@ -156,6 +157,7 @@ export class WebpackConfig {
                             /node_modules/
                         ],
                         options: {
+                            transpileOnly: true,
                             happyPackMode: true
                         }
                     },
