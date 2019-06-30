@@ -166,7 +166,6 @@ select {
         }
 
         > .field {
-            @include lib-form-field-type-revert();
             margin: 0 0 $form-field__vertical-indent__desktop;
         }
     }

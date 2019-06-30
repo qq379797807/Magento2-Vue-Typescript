@@ -15,7 +15,9 @@ const modulesConfig: string[] = [
     'customer_edit',
     'vault_cards',
     'paypal_billing',
-    'review_customer'
+    'review_customer',
+    'newsletter_index',
+    'search_term'
 ]
 
 export default modulesConfig
