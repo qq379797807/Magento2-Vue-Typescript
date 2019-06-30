@@ -3,6 +3,7 @@ import * as webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import { themeConfig } from '../build'
 import { WebpackConfig, InputConfig } from '../packages'
+import modulesConfig from './modules'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -20,20 +21,7 @@ const createEntry: any = ((list: string[]) => {
 const baseConfig = new WebpackConfig({
     root:  path.resolve(__dirname, '../app'),
     entry: () => createEntry([
-        'cms_index',
-        'cms_page',
-        'catalog_category',
-        'catalog_product',
-        'checkout_cart',
-        'checkout_index',
-        'customer_login',
-        'customer_create',
-        'customer_account',
-        'sales_order',
-        'downloadable_product',
-        'wishlist_index',
-        'customer_address',
-        'customer_edit'
+        ...modulesConfig
     ]),
     cache: true,
     output: {

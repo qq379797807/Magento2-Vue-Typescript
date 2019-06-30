@@ -20,7 +20,7 @@ export class Util {
 
     public createDir (dir: string, callback?: Function) {
         makeDir(dir).then((path: string) => {
-            this.logMsg(`Directory init success：${dir}`, `magenta`)
+            this.logMsg(`Directory init success：${dir}`, `magento`)
             if (callback) callback()
         })
     }
@@ -33,10 +33,10 @@ export class Util {
             `${os}app${os}design${os}${area}${os}${this.url}${os}`
         )
         if (this.isDir(target)) {
-            this.logMsg(`Directory is exists ...`, `magenta`)
+            this.logMsg(`Directory is exists ...`, `magento`)
             this.generateFile(origin, target)
         } else {
-            this.logMsg(`Directory is not exists ...`, `magenta`)
+            this.logMsg(`Directory is not exists ...`, `magento`)
             this.createDir(target, () => {
                 this.generateFile(origin,  target)
             })
@@ -44,7 +44,7 @@ export class Util {
     }
 
     public generateFile (old: string, dest: string) {
-        this.logMsg(`Copy File: ${old}`, 'magenta')
+        this.logMsg(`Copy File: ${old}`, 'magento')
 
         const generate = async (sc: string, ds: string) => {
             try {
