@@ -404,10 +404,6 @@ $_password-very-strong               : #81b562 !default;
         }
 
         .fieldset {
-            &:after {
-                @extend .abs-margin-for-forms-desktop;
-            }
-
             > .field {
                 > .control {
                     width: 55%;

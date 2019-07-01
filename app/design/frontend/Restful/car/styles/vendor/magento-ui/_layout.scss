@@ -36,14 +36,6 @@
         @include lib-vendor-prefix-flex-wrap(wrap);
         box-sizing: border-box;
     }
-    &:after {
-        clear: both;
-        content: ' ';
-        display: block;
-        height: 0;
-        overflow: hidden;
-        visibility: hidden;
-    }
 }
 
 @mixin lib-layout-columns__main() {

@@ -9,6 +9,8 @@ const HappyPack = require('happypack')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 const happyThreadPool = HappyPack.ThreadPool({ size: 4 })
@@ -44,6 +46,7 @@ const baseConfig = new WebpackConfig({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify('development')
         }),
+        new FirendlyErrorePlugin(),
         // new BundleAnalyzerPlugin({
         //     analyzerMode: 'server',
         //     analyzerHost: '127.0.0.1',
@@ -68,7 +71,8 @@ const baseConfig = new WebpackConfig({
             filename: `[name].[contenthash:8].css`
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new HardSourceWebpackPlugin()
     ],
     optimization: {
         namedModules: false,

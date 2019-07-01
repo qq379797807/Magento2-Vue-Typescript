@@ -161,10 +161,6 @@ select {
 
 @include min-screen($screen__m) {
     .fieldset {
-        .legend {
-            @extend .abs-margin-for-forms-desktop;
-        }
-
         > .field {
             margin: 0 0 $form-field__vertical-indent__desktop;
         }
