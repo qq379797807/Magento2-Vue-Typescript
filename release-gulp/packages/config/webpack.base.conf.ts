@@ -117,7 +117,7 @@ export class WebpackConfig {
                 rules: [
                     {
                         test: /\.vue$/,
-                        loader: 'vue-loader',
+                        loader: ['cache-loader', 'vue-loader'],
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -125,7 +125,7 @@ export class WebpackConfig {
                     },
                     {
                         test: /\.js$/,
-                        loader: 'happypack/loader?id=babel',
+                        loader: 'happypack/loader?id=happyBabel',
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -138,7 +138,8 @@ export class WebpackConfig {
                             /node_modules/
                         ],
                         use: [
-                            'happypack/loader?id=babel',
+                            'cache-loader',
+                            'happypack/loader?id=happyBabel',
                             {
                                 loader: 'ts-loader',
                                 options: { 

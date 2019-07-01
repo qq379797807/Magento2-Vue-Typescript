@@ -1,6 +1,5 @@
 <template>
     <div class="in-checkout">
-        <h1 v-text="i18n.title"></h1>
         <p v-text="i18n.welcome"></p>
         <div class="in-view">
             <div class="in-item">
@@ -27,7 +26,6 @@ export default {
     name: 'v-checkout',
     data: () => ({
         i18n: {
-            title: 'Checkout',
             welcome: 'Welcome to the checkout. Fill in the fields below to complete your purchase!'
         }
     }),

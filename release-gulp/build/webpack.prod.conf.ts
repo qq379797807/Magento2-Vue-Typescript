@@ -6,14 +6,13 @@ import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
 import compileModules from './modules'
 const HappyPack = require('happypack')
-const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-// const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
-const happyThreadPool = HappyPack.ThreadPool({ size: 4 })
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 const { area, src } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
@@ -61,7 +60,7 @@ const baseConfig = new WebpackConfig({
         // }),
         new ProgressBarPlugin(),
         new HappyPack({
-            id: 'babel',
+            id: 'happyBabel',
             loaders: ['babel-loader?cacheDirectory=true'],
             threadPool: happyThreadPool,
             verboseWhenProfiling: true
@@ -91,10 +90,21 @@ const baseConfig = new WebpackConfig({
         noEmitOnErrors: true,
         minimize: true,
         minimizer: [
-            new TerserPlugin({
-                cache:  true,
-                parallel:  os.cpus().length - 1,
-                sourceMap: true
+            new ParallelUglifyPlugin({
+                cacheDir: '.cache/',
+                workerCount: os.cpus().length,
+                sourceMap: true,
+                uglifyJS: {
+                    output: {
+                        comments: false,
+                        beautify: false
+                    },
+                    compress: {
+                        // drop_console: true,
+                        collapse_vars: true,
+                        reduce_vars: true
+                    }
+                }
             })
         ]
     }
