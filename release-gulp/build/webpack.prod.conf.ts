@@ -4,7 +4,7 @@ import * as os from 'os'
 import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
-import modulesConfig from './modules'
+import compileModules from './modules'
 const HappyPack = require('happypack')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -28,7 +28,7 @@ const createEntry: any = ((list: string[]) => {
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: () => createEntry([
-        ...modulesConfig
+        ...compileModules
     ]),
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/js`),
@@ -39,8 +39,8 @@ const baseConfig = new WebpackConfig({
     devtool: 'inline-source-map',
     performance: {
         hints: 'warning',
-        maxAssetSize: 250000,
-        maxEntrypointSize: 250000
+        maxAssetSize: 50000000,
+        maxEntrypointSize: 30000000
     },
     plugins: [
         new webpack.DefinePlugin({

@@ -1,3 +1,5 @@
+import args from '../util/args'
+
 const modulesConfig: string[] = [
     'cms_index',
     'cms_page',
@@ -22,5 +24,15 @@ const modulesConfig: string[] = [
     'contact_index',
     'catalog_search'
 ]
+let compileModules: string[] = []
+const compileM: string = args.module
 
-export default modulesConfig
+if (compileM) {
+    if (modulesConfig.includes(compileM)) {
+        compileModules.push(compileM)
+    }
+} else {
+    compileModules = modulesConfig
+}
+
+export default compileModules

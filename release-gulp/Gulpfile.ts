@@ -9,12 +9,12 @@ import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
 
-const { styles, scripts, name } = themeConfig.default
+const { styles, name } = themeConfig.default
 
 @GulpFile()
 export class Gulpflie {
     @Task()
-    public async default (gulp: Gulp) {
+    public async default (gulp: Gulp, util: Util) {
         await Promise.resolve(
             console.log(gulp)
         )
@@ -215,19 +215,19 @@ export class Gulpflie {
     @Task({
         befores: ['copy']
     })
-    public script (gulp: Gulp, watch: Watch) {
+    public script (gulp: Gulp, watch: Watch, util: Util) {
         watch.run(
-            path.join(__dirname, 'src/**/*.ts'),
+            path.join(__dirname, `src${util.os()}**${util.os()}*.ts`),
             (gulp: Gulp) => {
                 console.log('watch init ...')
                 let tsResult = gulp
-                    .src([path.join(__dirname, 'src/**/*.ts')])
+                    .src([path.join(__dirname, `src${util.os()}**${util.os()}*.ts`)])
                     .pipe(sourcemaps.init())
                     .pipe(ts.createProject('tsconfig.json')());
                 return merge([
-                    tsResult.dts.pipe(gulp.dest('./dist')),
+                    tsResult.dts.pipe(gulp.dest(`.${util.os()}dist`)),
                     tsResult.js.pipe(sourcemaps.write('./sourcemaps'))
-                        .pipe(gulp.dest('./dist'))
+                        .pipe(gulp.dest(`.${util.os()}dist`))
                 ])
             }
         )

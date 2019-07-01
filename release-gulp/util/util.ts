@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import * as makeDir from 'make-dir'
+import args from './args'
 import { themeConfig } from '../build'
 const tool = require('gulp-util')
 
@@ -131,5 +132,9 @@ export class Util {
         const scss_path: string = `.${os}app${os}src${os}styles${os}`
         
         return scss_path
+    }
+
+    public getModule (): string {
+        return args.module
     }
 }
