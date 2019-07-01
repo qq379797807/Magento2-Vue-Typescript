@@ -1,10 +1,18 @@
 import { VueConstructor } from 'vue'
 import Input from './element/input.vue'
 import Checkbox from './element/checkbox.vue'
+import Radio from './element/radio.vue'
+import Textarea from './element/textarea.vue'
+import Form from './element/form.vue'
+import FormItem from './element/formItem.vue'
 
 const component: any[] = [
     Input,
-    Checkbox
+    Checkbox,
+    Radio,
+    Textarea,
+    Form,
+    FormItem
 ]
 
 const UI: any = {

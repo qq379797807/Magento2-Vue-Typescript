@@ -7,6 +7,30 @@
     @include lib-css(align-items, flex-start);
 
     .in-item {
+        padding: 0 1rem;
         flex-basis: calc(100% / 3);
+    }
+}
+
+.v-form-item {
+    margin-bottom: 1rem;
+}
+
+.v-form-label {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.v-checkbox-text {
+    display: inline-block;
+    margin-left: .5rem;
+}
+
+.in-summary {
+    .item,
+    .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
