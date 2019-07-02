@@ -61,14 +61,6 @@
                 }
             }
         }
-
-        > .primary {
-            margin-right: $indent__s;
-        }
-    }
-
-    .action.primary {
-        @extend .abs-button-l;
     }
 
     .item-options {
@@ -248,17 +240,6 @@
 
             .data.table {
                 @extend .abs-checkout-order-review;
-            }
-        }
-
-        .actions-toolbar {
-            .action {
-                margin-bottom: $indent__m;
-            }
-
-            > .primary {
-                margin-bottom: $indent__m;
-                margin-right: 0;
             }
         }
     }

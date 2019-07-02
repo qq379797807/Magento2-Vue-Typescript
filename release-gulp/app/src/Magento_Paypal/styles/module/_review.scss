@@ -2,13 +2,6 @@
 .paypal-review {
     .block {
         @extend .abs-account-blocks;
-        .actions-toolbar {
-            .action {
-                &.primary {
-                    @extend .abs-revert-secondary-color;
-                }
-            }
-        }
     }
 
     .paypa-review-title {

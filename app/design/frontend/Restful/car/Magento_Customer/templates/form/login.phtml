@@ -8,38 +8,23 @@
             <strong v-text="i18n.title"></strong>
         </div>
         <div class="block-content">
-            <form class="form form-login"
-                action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
-                method="post"
-                data-mage-init='{"validation":{}}'>
-                <?= $block->getBlockHtml('formkey') ?>
-                <fieldset class="fieldset login">
-                    <div class="field note" v-text="i18n.note"></div>
-                    <div class="field email required">
-                        <label class="label" for="email" v-text="i18n.email"></label>
-                        <div class="control">
-                            <input name="login[username]" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" :title="i18n.email" />
-                        </div>
-                    </div>
-                    <div class="field password required">
-                        <label for="pass" class="label" v-text="i18n.password"></label>
-                        <div class="control">
-                            <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" :title="i18n.password" />
-                        </div>
-                    </div>
-                    <?= $block->getChildHtml('form_additional_info') ?>
-                    <div class="actions-toolbar">
-                        <div class="primary">
-                            <button type="submit" class="action login primary">
-                                <span v-text="i18n.signIn"></span>
-                            </button>
-                        </div>
-                        <div class="secondary">
-                            <a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>" v-text="i18n.forgot"></a>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+            <v-form action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>" method="post">
+                <v-form-item>    
+                    <p class="note" v-text="i18n.note"></p>
+                    <?= $block->getBlockHtml('formkey') ?>
+                </v-form-item>
+                <v-form-item :label="i18n.email">
+                    <v-input name="login[username]" v-model="email"></v-input>
+                </v-form-item>
+                <v-form-item :label="i18n.password">
+                    <v-input name="login[password]" v-model="password"></v-input>
+                </v-form-item>
+                <?= $block->getChildHtml('form_additional_info') ?>
+                <v-form-item>
+                    <v-button type="primary" native="submit">{{i18n.signIn}}</v-button>
+                    <a href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>" class="remind" v-text="i18n.forgot"></a>
+                </v-form-item>
+            </v-form>
         </div>
     </div>
 </v-login-form>

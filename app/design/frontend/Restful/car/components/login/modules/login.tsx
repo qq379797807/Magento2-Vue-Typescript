@@ -11,7 +11,9 @@ import Component from 'vue-class-component'
             password: 'Password',
             signIn: 'Sign In',
             forgot: 'Forgot Your Password?'
-        }
+        },
+        email: null,
+        password: null
     })
 })
 export class VLoginForm extends Vue {

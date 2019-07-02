@@ -58,30 +58,6 @@ $minicart-qty__height         : 24px !default;
         }
     }
 
-    .block-content {
-        > .actions {
-            margin-top: 15px;
-            text-align: center;
-
-            > .primary {
-                margin: 0 $indent__s 15px;
-
-                .action {
-                    &.primary {
-                        @extend .abs-button-l;
-                        display: block;
-                        margin-bottom: 15px;
-                        width: 100%;
-
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     .block-category-link,
     .block-product-link,
     .block-cms-link,
@@ -134,11 +110,6 @@ $minicart-qty__height         : 24px !default;
             float: right;
             margin: -24px 0 0;
             text-align: right;
-
-            > .primary,
-            > .secondary {
-                display: inline;
-            }
         }
     }
 

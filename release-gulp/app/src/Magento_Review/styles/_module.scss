@@ -235,12 +235,6 @@ $reviews-indent-desktop: 30px !default;
         }
     }
 
-    &-form {
-        .action.submit.primary {
-            @include lib-button-revert-secondary-color();
-        }
-    }
-
     .fieldset &-legend.legend {
         @extend .abs-reset-left-margin;
         margin-bottom: $indent__base;

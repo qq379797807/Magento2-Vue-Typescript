@@ -47,13 +47,6 @@
             }
         }
     }
-    .actions-toolbar {
-        > .primary {
-            button {
-                @extend .abs-revert-secondary-color;
-            }
-        }
-    }
 }
 
 //  Totals block
@@ -194,11 +187,6 @@
         @extend .abs-reset-list;
         margin-top: $indent__base;
         text-align: center;
-
-        .action.primary {
-            @extend .abs-button-l;
-            width: 100%;
-        }
 
         .item {
             & + .item {

@@ -1,5 +1,4 @@
 .actions-toolbar {
-    > .primary,
     > .secondary {
         text-align: center;
         .action {
@@ -21,13 +20,5 @@
 @include min-screen($screen__m) {
     .actions-toolbar {
         @include lib-actions-toolbar();
-        > .secondary,
-        > .primary {
-            margin-bottom: 0;
-            .action {
-                margin-bottom: 0;
-                width: auto;
-            }
-        }
     }
 }

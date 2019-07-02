@@ -144,14 +144,6 @@
     .block-cart-failed {
         @extend .abs-shopping-cart-items-desktop;
 
-        .actions {
-            text-align: left;
-        }
-
-        .actions.primary {
-            float: right;
-        }
-
         .block-content {
             @extend .abs-add-clearfix-desktop;
         }

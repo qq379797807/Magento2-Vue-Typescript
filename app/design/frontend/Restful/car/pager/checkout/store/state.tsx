@@ -4,7 +4,6 @@ const state: any = {
     config: window.checkoutJson,
     baseUrl: window.commonJson.base_url,
     customer: null,
-    step: 'shipping',
     orderId: null,
     shippingMethods: [],
     selectedShippingMethod: null,

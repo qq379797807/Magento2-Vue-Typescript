@@ -1,6 +1,5 @@
 <template>
     <div :class="`${prefix}-form-input`">
-        <label :class="`${prefix}-form-label`" :for="label" v-text="label"></label>
         <input v-bind="$attrs" 
             :value="value"
             :type="inputType"
@@ -19,22 +18,13 @@ const prefix = 'v'
 
 export default {
     name: `${prefix}-input`,
+    inheritAttrs: false,
     data: () => ({
         prefix: prefix,
         eye: false
     }),
-    inheritAttrs: false,
-    watch: {
-        eye (value) {
-            this.inputType = value ? 'text' : 'password'
-        }
-    },
     props: {
         value: null,
-        label: {
-            type: String,
-            required: true
-        },
         disabled: {
             type: Boolean,
             default: false
@@ -42,10 +32,6 @@ export default {
         inputType: {
             type: String,
             default: 'text'
-        },
-        validateEvent: {
-            type: Boolean,
-            default: true
         },
         clear: {
             type: Boolean,
@@ -59,11 +45,13 @@ export default {
         focus: Function,
         blur: Function
     },
+    watch: {
+        eye (value) {
+            this.inputType = value ? 'text' : 'password'
+        }
+    },
     methods: {
         _blur (e) {
-            if (this.validateEvent) {
-                // this.dispatch('formItem', `${prefix}.form.blur`, [e])
-            }
             this._emit('blur', e)
             this.blur && this.blur(e)
         },
@@ -71,9 +59,6 @@ export default {
             const value = e.target.value
             this.$emit('input', value)
             this.change && this.change(e)
-            if (this.validateEvent) {
-                // this.dispatch('formItem', `${prefix}.form.change`, [value, e])
-            }
         },
         _focus (e) {
             this._emit('focus', e)

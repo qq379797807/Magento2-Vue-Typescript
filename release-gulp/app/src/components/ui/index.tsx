@@ -5,6 +5,7 @@ import Radio from './element/radio.vue'
 import Textarea from './element/textarea.vue'
 import Form from './element/form.vue'
 import FormItem from './element/formItem.vue'
+import Button from './element/button.vue'
 
 const component: any[] = [
     Input,
@@ -12,7 +13,8 @@ const component: any[] = [
     Radio,
     Textarea,
     Form,
-    FormItem
+    FormItem,
+    Button
 ]
 
 const UI: any = {

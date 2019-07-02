@@ -2,20 +2,35 @@
 //  Page components
 //  ---------------------------------------------
 
-@import 'checkout/checkout';
-@import 'checkout/estimated-total';
-@import 'checkout/progress-bar';
-@import 'checkout/fields';
-@import 'checkout/modals';
-@import 'checkout/tooltip';
-@import 'checkout/shipping';
-@import 'checkout/shipping-policy';
+.in-view {
+    @include lib-css(display, flex);
+    @include lib-css(align-items, flex-start);
 
-@import 'checkout/sidebar';
-@import 'checkout/sidebar-shipping-information';
-@import 'checkout/order-summary';
-@import 'checkout/authentication';
+    .in-item {
+        padding: 0 1rem;
+        flex-basis: calc(100% / 3);
+    }
+}
 
-@import 'checkout/payments';
-@import 'checkout/payment-options';
-@import 'checkout/checkout-agreements';
+.v-form-item {
+    margin-bottom: 1rem;
+}
+
+.v-form-label {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.v-checkbox-text {
+    display: inline-block;
+    margin-left: .5rem;
+}
+
+.in-summary {
+    .item,
+    .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

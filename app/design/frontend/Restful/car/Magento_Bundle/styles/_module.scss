@@ -1,8 +1,5 @@
 .bundle-actions {
     @extend .abs-box-tocart;
-    .action.primary {
-        @extend .abs-button-l;
-    }
 }
 
 .bundle-options-container {
@@ -67,17 +64,6 @@
 
             > li {
                 margin-bottom: $indent__s;
-            }
-        }
-
-        .box-tocart {
-            .actions {
-                display: inline-block;
-                margin-bottom: $indent__s;
-            }
-
-            .action.primary {
-                @extend .abs-button-l;
             }
         }
 

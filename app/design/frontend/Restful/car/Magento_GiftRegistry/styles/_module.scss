@@ -48,12 +48,6 @@
                 width: auto;
             }
         }
-
-        .action.primary {
-            @extend .abs-revert-secondary-color;
-            @extend .abs-revert-secondary-size;
-            margin-bottom: 0;
-        }
     }
 }
 

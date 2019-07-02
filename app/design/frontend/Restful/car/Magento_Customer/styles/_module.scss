@@ -58,10 +58,6 @@ $_password-very-strong               : #81b562 !default;
     #region_id {
         display: none;
     }
-
-    .actions-toolbar .action.primary {
-        @extend .abs-button-l;
-    }
 }
 
 .form-edit-account {
@@ -386,30 +382,6 @@ $_password-very-strong               : #81b562 !default;
 @include min-screen($screen__m) {
     .login-container {
         @extend .abs-add-clearfix-desktop;
-
-        .block {
-            @extend .abs-blocks-2columns;
-            &.login {
-                .actions-toolbar {
-                    > .primary {
-                        margin-bottom: 0;
-                        margin-right: $indent__l;
-                    }
-
-                    > .secondary {
-                        float: left;
-                    }
-                }
-            }
-        }
-
-        .fieldset {
-            > .field {
-                > .control {
-                    width: 55%;
-                }
-            }
-        }
     }
 
     //  Full name fieldset
