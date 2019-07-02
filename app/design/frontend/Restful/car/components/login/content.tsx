@@ -15,12 +15,4 @@ import { VLoginContainer } from './modules/container'
         VLoginContainer
     }
 })
-export class VContent extends Vue {
-    mounted () {
-        this.init()
-    }
-
-    init () {
-
-    }
-}
+export class VContent extends Vue {}

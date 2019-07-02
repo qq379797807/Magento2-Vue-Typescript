@@ -114,11 +114,6 @@
     @include lib-css(color, $_link-color);
     @include lib-css(text-decoration, $_link-text-decoration);
 
-    &:visited {
-        @include lib-css(color, $_link-color-visited);
-        @include lib-css(text-decoration, $_link-text-decoration-visited);
-    }
-
     &:hover {
         @include lib-css(color, $_link-color-hover);
         @include lib-css(text-decoration, $_link-text-decoration-hover);
@@ -387,8 +382,7 @@
 //  ---------------------------------------------
 
 @mixin lib-typography-links() {
-    a,
-    .alink {
+    a {
         @include lib-link();
     }
 }

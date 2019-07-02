@@ -3,17 +3,13 @@
 ?>
 <?php if ($block->getRegistration()->isAllowed()): ?>
     <v-login-customer inline-template>
-        <div class="block block-new-customer">
+        <div class="block block-customer">
             <div class="block-title">
-                <strong v-text="i18n.title"></strong>
+                <strong v-text="i18n.createTitle"></strong>
             </div>
             <div class="block-content">
-                <p v-text="i18n.msg"></p>
-                <div class="actions-toolbar">
-                    <div class="primary">
-                        <a href="<?= $block->escapeUrl($block->getCreateAccountUrl()) ?>" class="action create primary" v-text="i18n.button"></a>
-                    </div>
-                </div>
+                <p v-text="i18n.createMsg"></p>
+                <v-button type="primary" :href="create_url" v-text="i18n.createButton"></v-button>
             </div>
         </div>
     </v-login-customer>

@@ -3,12 +3,12 @@
 ?>
 
 <v-login-form inline-template>
-    <div class="block block-customer-login">
+    <div class="block block-login">
         <div class="block-title">
             <strong v-text="i18n.title"></strong>
         </div>
         <div class="block-content">
-            <v-form action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>" method="post">
+            <v-form :action="post_action" method="post">
                 <v-form-item>    
                     <p class="note" v-text="i18n.note"></p>
                     <?= $block->getBlockHtml('formkey') ?>
@@ -19,10 +19,9 @@
                 <v-form-item :label="i18n.password">
                     <v-input name="login[password]" v-model="password"></v-input>
                 </v-form-item>
-                <?= $block->getChildHtml('form_additional_info') ?>
-                <v-form-item>
-                    <v-button type="primary" native="submit">{{i18n.signIn}}</v-button>
-                    <a href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>" class="remind" v-text="i18n.forgot"></a>
+                <v-form-item :classes="'in-flex'">
+                    <v-button type="primary" native="submit" v-text="i18n.signIn"></v-button>
+                    <v-button type="link" :href="forgot_url" v-text="i18n.forgot"></v-button>
                 </v-form-item>
             </v-form>
         </div>

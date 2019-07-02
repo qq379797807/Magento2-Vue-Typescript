@@ -13,12 +13,4 @@ import { VLoginCustomer } from './newcustomer'
         VLoginCustomer
     }
 })
-export class VLoginContainer extends Vue {
-    mounted () {
-        this.init()
-    }
-
-    init () {
-
-    }
-}
+export class VLoginContainer extends Vue {}

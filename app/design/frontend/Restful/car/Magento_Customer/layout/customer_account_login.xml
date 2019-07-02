@@ -2,6 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
+            <block class="App\Component\Block\Login" name="vue.login.html" after="vue.common" template="Magento_Customer::login/page.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.login.js" after="-" template="Magento_Customer::login/component.phtml" />
         </referenceContainer>
         <referenceContainer name="content">

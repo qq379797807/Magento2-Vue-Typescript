@@ -21,25 +21,25 @@ $_password-strong                    : #c5eeac !default;
 $_password-very-strong               : #81b562 !default;
 
 .login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
     .block {
-        &-new-customer {
-            .actions-toolbar {
-                margin-top: 25px;
-            }
-        }
+        flex-basis: 50%;
 
         .block-title {
             @extend .abs-login-block-title;
-            @include lib-font-size(18);
         }
     }
+}
 
-    .fieldset {
-        @include lib-form-hasrequired(bottom);
-        &:after {
-            margin-top: 35px;
-        }
-    }
+.block-login {
+    padding-right: 5rem;
+}
+
+.block-customer {
+    padding-left: 5rem;
 }
 
 .block-addresses-list {
@@ -221,13 +221,6 @@ $_password-very-strong               : #81b562 !default;
 //  ---------------------------------------------
 
 .block {
-    @extend .abs-margin-for-blocks-and-widgets;
-    .column.main & {
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
     .title {
         margin-bottom: $indent__s;
 
@@ -343,14 +336,6 @@ $_password-very-strong               : #81b562 !default;
 }
 
 @include max-screen($screen__m) {
-    .login-container {
-        .fieldset {
-            &:after {
-                text-align: center;
-            }
-        }
-    }
-
     .account {
         .page.messages {
             margin-bottom: $indent__xl;
@@ -380,31 +365,6 @@ $_password-very-strong               : #81b562 !default;
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .login-container {
-        @extend .abs-add-clearfix-desktop;
-    }
-
-    //  Full name fieldset
-    .fieldset {
-        .fullname {
-            .field {
-                .label {
-                    @include lib-css(margin, $form-field-type-label-inline__margin);
-                    @include lib-css(padding, $form-field-type-label-inline__padding);
-                    @include lib-css(text-align, $form-field-type-label-inline__align);
-                    @include lib-css(width, $form-field-type-label-inline__width);
-                    box-sizing: border-box;
-                    float: left;
-                }
-
-                .control {
-                    @include lib-css(width, $form-field-type-control-inline__width);
-                    float: left;
-                }
-            }
-        }
-    }
-
     .form.password.reset,
     .form.send.confirmation,
     .form.password.forget,

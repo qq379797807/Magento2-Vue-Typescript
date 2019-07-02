@@ -39,7 +39,6 @@ export default {
         native: {
             default: '',
             validator: value => {
-                console.log(value)
                 return ['', 'button', 'submit', 'reset'].indexOf(value) !== -1
             }
         }
