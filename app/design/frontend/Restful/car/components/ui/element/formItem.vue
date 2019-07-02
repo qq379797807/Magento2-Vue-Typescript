@@ -3,7 +3,7 @@
         <label v-if="label || $slots.label" :class="{[prefix+'-form-label']: true}">
             <slot name="label">{{label}}</slot>
         </label>
-        <div :class="`${prefix}-form-box` classes">
+        <div :class="`${prefix}-form-box ${classes}`">
             <slot></slot>
             <div :class="`${prefix}-form-tips`" v-text="errorTips" v-if="errorTips"></div>
         </div>

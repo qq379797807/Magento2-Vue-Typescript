@@ -5,6 +5,12 @@
 $form-field__vertical-indent__desktop: 29px !default;
 $form-calendar-icon__color: $primary__color !default;
 
+.in-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .fieldset {
     @include lib-form-fieldset();
     &:last-child {

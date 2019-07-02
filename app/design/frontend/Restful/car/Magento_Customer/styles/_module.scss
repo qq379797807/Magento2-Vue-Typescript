@@ -30,7 +30,6 @@ $_password-very-strong               : #81b562 !default;
 
         .block-title {
             @extend .abs-login-block-title;
-            @include lib-font-size(18);
         }
     }
 }
