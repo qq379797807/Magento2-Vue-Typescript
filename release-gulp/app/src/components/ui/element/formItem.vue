@@ -22,7 +22,10 @@ export default {
         error: false
     }),
     props: {
-        classes: String,
+        classes: {
+            type: String,
+            default: ''
+        },
         label: String,
         prop: String,
         required: {

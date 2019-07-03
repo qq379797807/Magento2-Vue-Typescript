@@ -4,3 +4,25 @@
     $font-weight: normal,
     $font-style : normal
 );
+
+
+.v-icon-eye {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-family: $icons__font-name;
+    font-size: 2.6rem;
+    font-style: normal;
+    display: inline-block;
+    z-index: 20;
+
+    &::before {
+        content: '\e6a6';
+    }
+
+    &.show {
+        &::before {
+            content: '\eab6';
+        }
+    }
+}

@@ -11,6 +11,12 @@ $form-calendar-icon__color: $primary__color !default;
     align-items: center;
 }
 
+.v-form-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
 .v-input-control {
     @include lib-css(width, 100%);
 }

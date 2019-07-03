@@ -133,7 +133,7 @@
     @include lib-css(color, $_color);
     @include lib-css(height, 3.6rem);
     @include lib-css(margin, $_margin);
-    @include lib-css(padding, 0 1rem);
+    @include lib-css(padding, 0 1.5rem);
     @include lib-css(vertical-align, $_vertical-align);
     @include lib-css(background, $_background);
     @include lib-css(background-clip, $_background-clip);

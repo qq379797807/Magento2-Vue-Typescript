@@ -9,7 +9,7 @@
             @focus="_focus"
             @blur="_blur" />
         <i :class="`${prefix}-icon-clear`" v-if="clear&&value" @click.stop="_clear"></i>
-        <i :class="[prefix+'-icon-eye',{ 'eye-show': eye }]" v-if="value && showEye && type==='password'" @click.stop="eye=!eye"></i>
+        <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="value && show && type==='password'" @click.stop="eye=!eye"></i>
     </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
     inheritAttrs: false,
     data: () => ({
         prefix: prefix,
-        eye: false
+        eye: false,
+        inputType: 'text'
     }),
     props: {
         value: null,
@@ -29,7 +30,7 @@ export default {
             type: Boolean,
             default: false
         },
-        inputType: {
+        type: {
             type: String,
             default: 'text'
         },
@@ -37,7 +38,7 @@ export default {
             type: Boolean,
             default: false
         },
-        showEye: {
+        show: {
             type: Boolean,
             default: false
         },
@@ -49,6 +50,9 @@ export default {
         eye (value) {
             this.inputType = value ? 'text' : 'password'
         }
+    },
+    mounted () {
+        this.inputType = this.type
     },
     methods: {
         _blur (e) {
