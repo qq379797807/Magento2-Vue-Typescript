@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 import { VApp } from './container/customer_login'
-import UI from '../components/ui'
 import { VContentLoader } from './loader/loader'
+import UI from '../components/ui'
 
 const Lazyload: any = VueLazyload
 Vue.config.productionTip = false

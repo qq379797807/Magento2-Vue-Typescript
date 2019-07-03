@@ -129,23 +129,17 @@
         $_margin           : $input-checkbox__margin !default;
         $_vertical-align   : $input-checkbox__vertical-align !default;
     }
-
+    
+    @include lib-css(color, $_color);
+    @include lib-css(width, $_width);
+    @include lib-css(height, 36px);
+    @include lib-css(margin, $_margin);
+    @include lib-css(padding, 0 1rem);
+    @include lib-css(vertical-align, $_vertical-align);
     @include lib-css(background, $_background);
     @include lib-css(background-clip, $_background-clip);
-    @include lib-css(border, $_border);
-    @include lib-css(border-radius, $_border-radius);
-    @include lib-css(color, $_color);
-    @include lib-css(font-family, $_font-family);
-    @include lib-css(font-size, $_font-size);
-    @include lib-css(font-style, $_font-style);
-    @include lib-css(font-weight, $_font-weight);
-    @include lib-css(height, $_height);
-    @include lib-css(line-height, $_line-height);
-    @include lib-css(margin, $_margin);
-    @include lib-css(padding, $_padding);
-    @include lib-css(vertical-align, $_vertical-align);
-    @include lib-css(width, $_width);
-    box-sizing: border-box;
+    @include lib-css(border, 1px solid $border__color);
+    @include lib-css(border-radius, 3px);
 
     @include _lib-form-element-focus(
         $_background,

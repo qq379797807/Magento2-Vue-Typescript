@@ -6,6 +6,7 @@ import Textarea from './element/textarea.vue'
 import Form from './element/form.vue'
 import FormItem from './element/formItem.vue'
 import Button from './element/button.vue'
+import Select from './element/select.vue'
 
 const component: any[] = [
     Input,
@@ -14,7 +15,8 @@ const component: any[] = [
     Textarea,
     Form,
     FormItem,
-    Button
+    Button,
+    Select
 ]
 
 const UI: any = {

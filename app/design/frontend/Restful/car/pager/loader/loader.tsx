@@ -67,9 +67,7 @@ export class VContentLoader extends Vue {
         this.data = {}
     }
 
-    mounted () {
-        console.log(this)
-    }
+    mounted () {}
 
     render (h: CreateElement): JSX.Element {
         const idClip = this.uniqueKey ? `${this.uniqueKey}-idClip` : uid()

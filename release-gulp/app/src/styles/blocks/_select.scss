@@ -1,0 +1,141 @@
+$namespace: 'v-';
+@mixin ns($cls) {
+    $NS: $namespace + $cls;
+
+    .#{$NS}{
+        @content;
+    }
+}
+
+@include ns(select) {
+    display: inline-block;
+    position: relative;
+
+    @include ns(select-control) {
+        [class*="v-icon-"] {
+            font-family: FontAwesome;
+            font-size: 20px;
+            display: block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            position: absolute;
+            right: 0;top: 50%;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+            transform: translateY(-50%);
+        }
+
+        @include ns(icon-arrow) {
+            &:after{content: '\f107';}
+            &.open{transform: translateY(-50%) rotate(180deg)}
+        }
+  
+        @include ns(icon-clear) {
+            color: $color-gray60;
+            font-size: 16px;
+            display: none;
+            z-index: 2;
+
+            &:before {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                width: 10px;
+                height: 10px;
+                content: '';
+                display: inline-block;
+                background: $color-white;
+            }
+
+            &:after {
+                content: '\f057';
+                z-index: 2;
+                position: relative;
+            }
+        }
+       
+        &.show-clear:hover{
+            @include ns(icon-clear){
+                display: block;
+            }
+        }
+    }
+
+    @include ns(select-down) {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 100%;
+        z-index: 50;
+        background: $color-white;
+        border: 1px solid $border__color ;
+
+        ul {
+            padding: 5px 0;
+        }
+        
+        li {
+            height: 25px;
+            line-height: 25px;
+            display: block;
+            padding: 0 10px;
+            margin: 0;
+            cursor: pointer;
+
+            &:hover { 
+                background: #dcdfe6;
+            }
+
+            &.active { 
+                background: #a0cfff;
+            }
+
+            &.disabled { 
+                color: $color-gray60;
+                background: $border__color ;
+                cursor: not-allowed;
+            }
+        }
+    }
+    
+    .#{$namespace}-input-control.placeholder {
+        color: $color-gray60;
+    }
+}
+
+    
+.slide-toggle-enter-active { 
+    animation: slideDown .3s; 
+    transform-origin: center top;
+}
+
+.slide-toggle-leave-active { 
+    animation: slideUp .3s; 
+    transform-origin: center top; 
+}
+
+@keyframes slideDown{
+    0% { 
+        opacity: 0; 
+        transform: scaleY(0); 
+    }
+
+    100% { 
+        opacity: 1; 
+        transform: scaleY(1); 
+    }
+}
+
+@keyframes slideUp {
+    0% { 
+        opacity: 1; 
+        transform: scaleY(1); 
+    }
+
+    100% { 
+        opacity: 0; 
+        transform: scaleY(0); 
+    }
+}
