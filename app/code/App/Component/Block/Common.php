@@ -133,7 +133,7 @@ class Common extends \Magento\Framework\View\Element\Template
             } else {
                 $ret['choosed'] = false;
             }
-            $ret['url'] = $this->urlBuilder->getUrl("stores/store/switch", array('___store' => $ret['code'], 'form_key' => $form_key, 'uenc' => $refer));
+            $ret['value'] = $this->urlBuilder->getUrl("stores/store/switch", array('___store' => $ret['code'], 'form_key' => $form_key, 'uenc' => $refer));
             $storeArr[] = $ret;
         }
 
@@ -188,23 +188,23 @@ class Common extends \Magento\Framework\View\Element\Template
                 6
             )->load()->getItems();
             if (count($terms) > 0) {
+                $this->_maxPopularity = reset($terms)->getPopularity();
+                $this->_minPopularity = end($terms)->getPopularity();
+                $range = $this->_maxPopularity - $this->_minPopularity;
+                foreach ($terms as $term) {
+                    if (!$term->getPopularity()) {
+                        continue;
+                    }
 
-            $this->_maxPopularity = reset($terms)->getPopularity();
-            $this->_minPopularity = end($terms)->getPopularity();
-            $range = $this->_maxPopularity - $this->_minPopularity;
-            $range = $range == 0 ? 1 : $range;
-            foreach ($terms as $term) {
-                if (!$term->getPopularity()) {
-                    continue;
-                }
-                $term->setRatio(($term->getPopularity() - $this->_minPopularity) / $range);
-                $this->_terms['query_text'] = $term->getData('query_text');
-                $this->_terms['url'] = $searchTerm -> getSearchUrl($term);
-                $data['search_terms'][]= $this->_terms;
+                    $term->setRatio(($term->getPopularity() - $this->_minPopularity) / $range);
+                    $this->_terms['query_text'] = $term->getData('query_text');
+                    $this->_terms['url'] = $searchTerm -> getSearchUrl($term);
+                    $data['search_terms'][]= $this->_terms;
                 }
             }
 
         }
+        
         // Recente Searches
         $recentSearch = [];
         $recent_searches = $this->_queryCollectionFactory->create()->setRecentQueryFilter(
@@ -235,9 +235,9 @@ class Common extends \Magento\Framework\View\Element\Template
         foreach ($available_currency as $item) {
             $currency = [
                 'code' => $item,
-                'symbol' => $currencyHelper->getCurrencySymbol(null, $item),
+                'name' => $currencyHelper->getCurrencySymbol(null, $item) . ' - ' . $item,
                 'active' => 0,
-                'url' => $this->urlBuilder->getUrl('currency', array('currency' => $item, 'uenc' => $refer))
+                'value' => $this->urlBuilder->getUrl('currency', array('currency' => $item, 'uenc' => $refer))
             ];
 
             if ($item == $current_currency) {

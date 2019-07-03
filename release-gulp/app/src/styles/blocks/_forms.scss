@@ -11,6 +11,10 @@ $form-calendar-icon__color: $primary__color !default;
     align-items: center;
 }
 
+.v-input-control {
+    @include lib-css(width, 100%);
+}
+
 .fieldset {
     @include lib-form-fieldset();
     &:last-child {

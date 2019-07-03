@@ -8,19 +8,17 @@ $namespace: 'v-';
 }
 
 @include ns(select) {
-    display: inline-block;
     position: relative;
 
     @include ns(select-control) {
         [class*="v-icon-"] {
-            font-family: FontAwesome;
-            font-size: 20px;
+            font-family: $icons__font-name;
+            font-size: 1.8rem;
+            font-style: normal;
             display: block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
             position: absolute;
-            right: 0;top: 50%;
+            top: 50%;
+            right: 1rem;
             text-align: center;
             cursor: pointer;
             transition: all .3s;
@@ -28,8 +26,13 @@ $namespace: 'v-';
         }
 
         @include ns(icon-arrow) {
-            &:after{content: '\f107';}
-            &.open{transform: translateY(-50%) rotate(180deg)}
+            &:after {
+                content: '\e6ac';
+            }
+
+            &.open {
+                transform: translateY(-50%) rotate(180deg);
+            }
         }
   
         @include ns(icon-clear) {
@@ -50,7 +53,7 @@ $namespace: 'v-';
             }
 
             &:after {
-                content: '\f057';
+                content: '\e600';
                 z-index: 2;
                 position: relative;
             }
@@ -66,22 +69,15 @@ $namespace: 'v-';
     @include ns(select-down) {
         position: absolute;
         left: 0;
-        top: 30px;
+        top: 37px;
         width: 100%;
         z-index: 50;
         background: $color-white;
-        border: 1px solid $border__color ;
-
-        ul {
-            padding: 5px 0;
-        }
+        box-shadow: 0 -1px 0.5rem rgba(0, 0, 0, 0.2);
         
         li {
-            height: 25px;
-            line-height: 25px;
             display: block;
-            padding: 0 10px;
-            margin: 0;
+            padding: .8rem 1rem;
             cursor: pointer;
 
             &:hover { 

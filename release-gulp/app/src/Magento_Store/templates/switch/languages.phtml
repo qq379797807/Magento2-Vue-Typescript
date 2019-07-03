@@ -3,32 +3,8 @@
 ?>
 <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : ''; ?>
 
-<?php if (count($block->getStores())>1): ?>
-    <v-language inline-template>
-        <div class="switcher switcher-language">
-            <div class="actions dropdown switcher-options">
-                <div class="action toggle switcher-trigger"
-                    id="switcher-language-trigger<?= $block->escapeHtmlAttr($id) ?>"
-                    data-mage-init='{"dropdown":{}}'
-                    data-toggle="dropdown"
-                    data-trigger-keypress-button="true">
-                    <strong class="view-<?= $block->escapeHtml($block->getCurrentStoreCode()) ?>">
-                        <span><?= $block->escapeHtml($block->getStoreName()) ?></span>
-                    </strong>
-                </div>
-                <ul class="dropdown switcher-dropdown"
-                    data-target="dropdown">
-                    <?php foreach ($block->getStores() as $_lang): ?>
-                        <?php if ($_lang->getId() != $block->getCurrentStoreId()): ?>
-                            <li class="view-<?= $block->escapeHtml($_lang->getCode()) ?> switcher-option">
-                                <a href="#" data-post='<?= /* @noEscape */ $block->getTargetStorePostData($_lang) ?>'>
-                                    <?= $block->escapeHtml($_lang->getName()) ?>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </v-language>
-<?php endif; ?>
+<v-language inline-template>
+    <div class="switcher switcher-language" v-if="language.length > 0">
+        <v-select placeholder="Choose Language" :options="language" v-model="selectLanguage" :filterable=true></v-select>
+    </div>
+</v-language>

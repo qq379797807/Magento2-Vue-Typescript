@@ -5,7 +5,7 @@
             [prefix+'-select-control']:true}" @click="_selectControlClick">
             <input type="text" v-if="filterable"
                 :class="{
-                [prefix+'-input-control']:true,
+                [prefix+'-input']:true,
                 'focus':show,
                 'placeholder':placeholder&&value.length===0,
                 'disabled':disabled}"
@@ -16,21 +16,21 @@
                 :value="keywords"
                 ref="input">
             <div :class="{
-                [prefix+'-input-control']:true,
+                [prefix+'-input']:true,
                 'focus':show,
                 'placeholder':placeholder&&value.length===0,
                 'disabled':disabled}"
                 v-text="text" v-if="!filterable">
             </div>
             <i :class="{'open':show,[prefix+'-icon-arrow']:true}"></i>
-            <i :class="`${prefix}-icon-clear`" v-if="clear&&value.length>0" @click="_clearClick"></i>
+            <i :class="`${prefix}-icon-clear`" v-if="clear && value.length > 0" @click="_clearClick"></i>
         </div>
         <transition name="slide-toggle">
-            <div :class="`${prefix}-select-down`" v-show="show&&filterOption.length>0" :style="showLiNum" v-if="!$slots.default">
+            <div :class="`${prefix}-select-down`" v-show="show && filterOption.length > 0" :style="showLiNum" v-if="!$slots.default">
                 <ul>
                     <li v-for="(item,index) in filterOption" @click="_itemClick(item,$event)"
                         :class="{'disabled':item.disabled,'active':_getActive(item),[item.class]:item.class}" ref="li"
-                        :key="index">{{item.label || item.value}}</li>
+                        :key="index">{{item.name || item.value}}</li>
                 </ul>
             </div>
             <div :class="`${prefix}-select-down`" v-if="$slots.default" v-show="show">
@@ -111,6 +111,7 @@ export default {
         if (this.filterable) {
             this.keywords = this.value ? this.text : ''
         }
+        this.filterOption = this.options
     },
     methods: {
         _showHide (e) {
@@ -137,7 +138,7 @@ export default {
                     }
 
                     let newValue = this.value
-                    let activeValue = item.label || item.value
+                    let activeValue = item.name || item.value
                     let index = newText.indexOf(activeValue)
 
                     if (index !== -1) {
@@ -151,9 +152,9 @@ export default {
                     this.text = newText.join(',')
                     this._emit(newValue, newText, 1)
                 } else {
-                    this.text = item.label || item.value
+                    this.text = item.name || item.value
                     this.show = false
-                    this._emit(item.value, item.label, 1)
+                    this._emit(item.value, item.name, 1)
                 }
                 
                 this.keywords = this.text
@@ -167,11 +168,11 @@ export default {
                     const option = this.options[i]
                     if (this.multiple) {
                         if (this.value.indexOf(option.value) !== -1) {
-                            text.push(option.label || option.value)
+                            text.push(option.name || option.value)
                         }
                     } else {
                         if (option.value === this.value) {
-                            this.text = option.label || option.value
+                            this.text = option.name || option.value
                             break
                         }
                     }
@@ -184,8 +185,8 @@ export default {
                 if (this.placeholder) {
                     this.text = this.placeholder
                 } else {
-                    this.text = this.options[0].label || this.options[0].value
-                    this._emit(this.text, this.options[0].label, 0)
+                    this.text = this.options[0].name || this.options[0].value
+                    this._emit(this.text, this.options[0].name, 0)
                 }
             }
         },
@@ -193,7 +194,7 @@ export default {
             this.keywords = e.target.value
             let newArray = []
             for (let i in this.options) {
-                const value = this.options[i].label || this.options[i].value
+                const value = this.options[i].name || this.options[i].value
 
                 if (value.indexOf(e.target.value) > -1) {
                     newArray.push(this.options[i])
@@ -204,12 +205,12 @@ export default {
         _blur (e) {
             const value = e.target.value
             const filter = this.options.filter((item) => {
-                return (item.label || item.value) === value && !item.disabled
+                return (item.name || item.value) === value && !item.disabled
             })
             if (filter.length > 0) {
                 const item = filter[0]
-                this._emit(item.value, item.label, 1)
-                this.text = item.label || item.value
+                this._emit(item.value, item.name, 1)
+                this.text = item.name || item.value
             } else {
                 this.keywords = this.value ? this.text : ''
             }
@@ -231,11 +232,11 @@ export default {
             this.text = this.placeholder
             e.stopPropagation()
         },
-        _emit (value, label, type) {
+        _emit (value, name, type) {
             this.$emit('input', value)
             if (type === 1) {
-                this.$emit('change', value, label)
-                this.change && this.change(value, label)
+                this.$emit('change', value, name)
+                this.change && this.change(value, name)
             }
         },
         _selectControlClick (e) {

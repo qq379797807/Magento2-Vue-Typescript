@@ -2,7 +2,9 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="require.js" remove="true" />
+        <referenceBlock name="skip_to_content" remove="true" />
         <referenceBlock name="theme.active.editor" remove="true" />
+        <referenceBlock name="frontend-storage-manager" remove="true" />
         <referenceBlock name="global_notices" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
         <referenceBlock name="navigation.sections" remove="true" />
@@ -16,7 +18,8 @@
             <block class="Magento\Framework\View\Element\Template" name="vue.footer" after="-" template="Magento_Theme::footer.phtml" />
         </referenceContainer>
         <referenceContainer name="header.panel">
-            <block class="Magento\Framework\View\Element\Template" name="vue.header.links" after="store_language" template="Magento_Theme::header/links.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.header.setting" template="Magento_Theme::header/setting.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.header.links" template="Magento_Theme::header/links.phtml" />
         </referenceContainer>
         <referenceContainer name="page.top">
             <block class="Magento\Framework\View\Element\Template" name="vue.navagition" before="-" template="Magento_Theme::navagition.phtml" />
@@ -29,6 +32,8 @@
         </referenceContainer>
         <move element="page.wrapper" destination="vue.app" />
         <move element="header.container" destination="vue.header" />
+        <move element="currency" destination="vue.header.setting" />
+        <move element="store_language" destination="vue.header.setting" />
         <move element="top.links" destination="vue.header.links" />
         <move element="main.content" destination="vue.content" />
         <move element="page.messages" destination="vue.message" />

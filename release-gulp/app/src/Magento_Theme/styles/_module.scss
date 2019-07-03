@@ -45,11 +45,11 @@ body {
 //
 //  Header
 //  ---------------------------------------------
-
-.page-header {
-    @include lib-css(background-color, $header__background-color);
-    border-bottom: 1px solid $border-color__base;
-    margin-bottom: $indent__base;
+.panel.header {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header {
@@ -235,36 +235,16 @@ body {
         > .widget {
             width: 100%;
         }
-
-        .ie10 &,
-        .ie11 & {
-            height: 100%;
-        }
     }
 
     .header {
-        &.panel {
-            > .header.links {
-                float: right;
-                font-size: 0;
-                @include lib-list-inline();
-                margin-left: auto;
+        .links {
+            display: flex;
+            align-items: center;
 
-                > li {
-                    font-size: $font-size__base;
-                    margin: 0 0 0 15px;
-
-                    &.welcome,
-                    a {
-                        line-height: 1.4;
-                    }
-
-                    &.welcome {
-                        a {
-                            @include lib-css(padding-left, $indent__xs);
-                        }
-                    }
-                }
+            > li {
+                font-size: $font-size__base;
+                margin-left: 1.5rem;
             }
         }
 
@@ -275,21 +255,13 @@ body {
     }
 
     .page-header {
-        border: 0;
-        margin-bottom: 0;
-
         .panel.wrapper {
-            border-bottom: 1px solid $secondary__color;
-        }
-
-        .header.panel {
-            @extend .abs-add-clearfix-desktop;
-            padding-bottom: $indent__s;
-            padding-top: $indent__s;
+            border-bottom: 1px dashed $secondary__color;
         }
 
         .switcher {
             display: inline-block;
+            margin-right: 1rem;
         }
     }
 
