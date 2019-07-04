@@ -21,5 +21,6 @@ export class VLanguage extends Vue {
     init () {
         let commonJson: any = window.commonJson
         this.language = commonJson.stores
+        this.selectLanguage = commonJson.store_code
     } 
 }

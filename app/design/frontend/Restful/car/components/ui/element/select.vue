@@ -121,6 +121,7 @@ export default {
             this.keywords = this.value ? this.text : ''
         }
         this.filterOption = this.options
+        this.selectCode = this.value ? this.value : ''
     },
     methods: {
         _showHide (e) {

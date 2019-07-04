@@ -2,23 +2,11 @@
 /** @var $block \Magento\Checkout\Block\Cart\Shipping */ 
 ?>
 
-<div class="block shipping">
-    <div class="title">
-        <strong>
-            <?= /* @escapeNotVerified */ $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?>
-        </strong>
-    </div>
+<div class="in-summary">
+    <h2 class="title">
+        <?= /* @escapeNotVerified */ $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?>
+    </h2>
     <div class="content">
-        <!-- ko template: getTemplate() --><!-- /ko -->
-        <script type="text/x-magento-init">
-            {
-                "#block-summary": {
-                    "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
-                }
-            }
-        </script>
-        <script>
-            window.checkoutConfig = <?= /* @escapeNotVerified */ $block->getSerializedCheckoutConfig() ?>;
-        </script>
+        <v-estimate></v-estimate>
     </div>
 </div>

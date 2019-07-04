@@ -7,6 +7,8 @@ import Form from './element/form.vue'
 import FormItem from './element/formItem.vue'
 import Button from './element/button.vue'
 import Select from './element/select.vue'
+import Collapse from './module/collapse.vue'
+import CollapsePanel from './module/panel.vue'
 
 const component: any[] = [
     Input,
@@ -16,7 +18,9 @@ const component: any[] = [
     Form,
     FormItem,
     Button,
-    Select
+    Select,
+    Collapse,
+    CollapsePanel
 ]
 
 const UI: any = {

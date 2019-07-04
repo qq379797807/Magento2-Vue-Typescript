@@ -12,7 +12,7 @@ declare let window: any
 })
 export class VCurrency extends Vue {
     public currency: any[] = []
-    public selectCurrency: any = ''
+    public selectCurrency: string = ''
 
     mounted () {
         this.init()
@@ -21,5 +21,6 @@ export class VCurrency extends Vue {
     init () {
         let commonJson: any = window.commonJson
         this.currency = commonJson.currency
+        this.selectCurrency = commonJson.current_code
     } 
 }
