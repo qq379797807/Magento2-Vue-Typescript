@@ -40,6 +40,7 @@ $_password-very-strong               : #81b562 !default;
 
 .v-account {
     display: flex;
+    margin: 0 -2rem;
     flex-wrap: wrap;
 
     .v-form-item {

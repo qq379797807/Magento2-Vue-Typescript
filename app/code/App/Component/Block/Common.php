@@ -6,6 +6,7 @@ class Common extends \Magento\Framework\View\Element\Template
     private $stores;
     private $checkoutsesion;
     private $helper;
+    private $directoryHelper;
     private $current_store;
     private $_jsonHelper;
     protected $urlBuilder;
@@ -23,6 +24,7 @@ class Common extends \Magento\Framework\View\Element\Template
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Checkout\Model\Session $checkoutsesion,
         \App\Component\Helper\Data $helper,
+        \Magento\Directory\Helper\Data $directoryHelper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Url\EncoderInterface $urlEncoder,
@@ -34,6 +36,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $this->_isScopePrivate = true;
         $this->urlBuilder = $context->getUrlBuilder();
         $this->helper = $helper;
+        $this->directoryHelper = $directoryHelper;
         $this->urlEncoder = $urlEncoder;
         $this->formKey = $formKey;
         $this->_jsonHelper = $JsonHelper;
@@ -125,15 +128,14 @@ class Common extends \Magento\Framework\View\Element\Template
         $refer = $this->urlEncoder->encode($this->urlBuilder->getCurrentUrl());
         $form_key = $this->formKey->getFormKey();
         $data['form_key'] = $form_key;
+        $storeCode = $current_store->getCode();;
+        $data['store_code'] = $storeCode;
+        $data['country_id'] = $this->directoryHelper->getDefaultCountry($storeCode);
 
         foreach ($stores as $store) {
             $ret = $store->getData();
-            if ($current_store->getId() == $store->getId()) {
-                $ret['choosed'] = true;
-            } else {
-                $ret['choosed'] = false;
-            }
-            $ret['value'] = $this->urlBuilder->getUrl("stores/store/switch", array('___store' => $ret['code'], 'form_key' => $form_key, 'uenc' => $refer));
+            $ret['value'] = $ret['code'];
+            $ret['url'] = $this->urlBuilder->getUrl("stores/store/switch", array('___store' => $ret['code'], 'form_key' => $form_key, 'uenc' => $refer));
             $storeArr[] = $ret;
         }
 
@@ -155,7 +157,6 @@ class Common extends \Magento\Framework\View\Element\Template
         }
         $data['welcome'] = $welcomeMsg;
 
-        // Logo
         $logoObject = $objectManger->create('Magento\Theme\Block\Html\Header\Logo');
         $logo = $logoObject ->getLogoSrc();
         $data['logo']['url'] = $logo;
@@ -164,21 +165,17 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['logo']['height'] = $logoObject->getLogoHeight();
         $data['logo']['alt'] = $logoObject->getLogoAlt();
 
-        // Page Title
         $pageTitle = $objectManger->create('Magento\Theme\Block\Html\Title');
         $title = $pageTitle->getPageHeading();
         $data['title'] = $title;
 
-        // Minicart 
         $minicartHelper = $objectManger->create('Magento\Checkout\Block\Cart\Sidebar');
         $minicart = $minicartHelper->getConfig();
         $data['minicart'] = $minicart;
 
-        // Category
         $categories = $this->getStoresSubCategories();
         $data['categories'] = $categories;
 
-        // Search Terms
         $searchTerm = $objectManger->create('Magento\Search\Block\Term');
         if (empty($this->_terms)) {
             $this->_terms = [];
@@ -205,7 +202,6 @@ class Common extends \Magento\Framework\View\Element\Template
 
         }
         
-        // Recente Searches
         $recentSearch = [];
         $recent_searches = $this->_queryCollectionFactory->create()->setRecentQueryFilter(
             $this->_storeManager->getStore()->getId()
@@ -220,29 +216,23 @@ class Common extends \Magento\Framework\View\Element\Template
             }
         }
 
-        // Copyright
         $footer = $objectManger->create('Magento\Theme\Block\Html\Footer');
         $copyright = $footer ->getCopyright();
         $data['copyright'] = $copyright;
         $data['cart_qty'] = $this->getCheckoutSession()->getQuote()->getItemsSummaryQty();
 
-        // Currency
         $currencyHelper = $objectManger->create('Magento\Directory\Model\PriceCurrency');
         $currentStore = $this->getCurrentStore();
         $current_currency = $currentStore->getCurrentCurrencyCode();
         $available_currency = $currentStore->getAvailableCurrencyCodes();
-
+        $data['current_code'] = $current_currency;
         foreach ($available_currency as $item) {
             $currency = [
-                'code' => $item,
                 'name' => $currencyHelper->getCurrencySymbol(null, $item) . ' - ' . $item,
-                'active' => 0,
-                'value' => $this->urlBuilder->getUrl('currency', array('currency' => $item, 'uenc' => $refer))
+                'value' => $item,
+                'url' => $this->urlBuilder->getUrl('currency', array('currency' => $item, 'uenc' => $refer))
             ];
 
-            if ($item == $current_currency) {
-                $currency['active'] = 1;
-            }
             $data['currency'][] = $currency;
         }
 
