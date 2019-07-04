@@ -219,7 +219,6 @@ export default {
             })
             if (filter.length > 0) {
                 const item = filter[0]
-                this._emit(item.value, item.name, 1)
                 this.text = item.name || item.value
             } else {
                 this.keywords = this.value ? this.text : ''

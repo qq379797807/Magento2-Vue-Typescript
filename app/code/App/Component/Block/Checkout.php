@@ -22,8 +22,6 @@ class Checkout extends \Magento\Framework\View\Element\Template
     {
         $data = array();
         $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-
-        // Checkout Data
         $checkoutHelper = $objectManger->create('Magento\Checkout\Block\Onepage');
         $checkoutConfig = $checkoutHelper->getCheckoutConfig();
         

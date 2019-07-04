@@ -24,9 +24,6 @@ class Login extends \Magento\Framework\View\Element\Template
         return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
     }
 
-    /**
-     * @return string
-     */
     public function getLoginJson ($version='pc')
     {
         $data = [];

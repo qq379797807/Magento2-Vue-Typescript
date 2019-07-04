@@ -29,6 +29,25 @@ $form-calendar-icon__color: $primary__color !default;
     @include lib-css(width, 100%);
 }
 
+.v-country {
+    .v-select-control {
+        display: flex;
+        align-items: center;
+
+        .v-flag {
+            position: absolute;
+            top: 1.3rem;
+            left: 1rem;
+            z-index: 20;
+        }
+    
+        .v-input {
+            width: 100%;
+            padding-left: 3.5rem;
+        }
+    }
+}
+
 .fieldset {
     @include lib-form-fieldset();
     &:last-child {

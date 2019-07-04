@@ -22,11 +22,8 @@ class Cart extends \Magento\Framework\View\Element\Template
     {
         $data = array();
         $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-
-        // Cart Data
         $shippingHelper = $objectManger->create('Magento\Checkout\Block\Cart\Shipping');
         $cartConfig = $shippingHelper->getCheckoutConfig();
-        
         $data = $cartConfig;
 
         return $this->_jsonHelper->jsonEncode($data);
