@@ -65,6 +65,30 @@ class Register extends \Magento\Framework\View\Element\Template
         $data['country'] = $this->getAddressRegion();
         $addressHelper = $this->getObject('Magento\Customer\Helper\Address');
         $data['address_count'] = $addressHelper->getStreetLines();
+        $nameHelper = $this->getObject('Magento\Customer\Block\Widget\Name');
+        $data['prefix'] = [
+            'enabled' => $nameHelper->showPrefix(),
+            'required' => $nameHelper->isPrefixRequired(),
+            'options' => $nameHelper->getPrefixOptions()
+        ];
+        $data['suffix'] = [
+            'enabled' => $nameHelper->showSuffix(),
+            'required' => $nameHelper->isSuffixRequired(),
+            'options' => $nameHelper->getSuffixOptions()
+        ];
+        $genderHelper = $this->getObject('Magento\Customer\Block\Widget\Gender');
+        $genderOptions = [];
+        $options = $genderHelper->getGenderOptions();
+        foreach ($options as $option) {
+            $genderOptions[] = [
+                'name' => $option->getLabel(),
+                'value' => $option->getValue()
+            ];
+        }
+        $data['gender'] = [
+            'required' => $genderHelper->isRequired(),
+            'options' => $genderOptions
+        ];
 
         return $this->_jsonHelper->jsonEncode($data);
     }

@@ -1,0 +1,11 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Taxvat $block 
+*/
+?>
+
+<?php $isRequired = $block->isRequired() ?>
+
+<v-form-item :label="i18n.taxvat">
+    <v-input name="taxvat" v-model="taxVat"></v-input>
+</v-form-item>

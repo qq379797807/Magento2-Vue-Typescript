@@ -1,0 +1,11 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Fax $block 
+*/
+?>
+
+<?php $isRequired = $block->isRequired() ?>
+
+<v-form-item :label="i18n.fax">
+    <v-input name="fax" v-model="fax"></v-input>
+</v-form-item>

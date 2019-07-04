@@ -1,0 +1,35 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Name $block
+*/
+?>
+
+<?php 
+    $isMiddlenameRequired = $block->isMiddlenameRequired(); 
+?>
+
+<v-form-item :label="i18n.prefix" v-if="prefixEnabled">
+    <?php if ($block->getPrefixOptions() === false): ?>
+        <v-input name="<?= $block->getFieldName('prefix') ?>" v-model="selectPrefix"></v-input>
+    <?php else: ?>
+        <v-select name="<?= $block->getFieldName('prefix') ?>" placeholder="Choose Prefix" :options="prefixOption" v-model="selectPrefix" :filterable=true :number=6></v-select>
+    <?php endif; ?>
+</v-form-item>
+<v-form-item :label="i18n.firstname">
+    <v-input name="<?= $block->getFieldName('firstname') ?>" v-model="firstname"></v-input>
+</v-form-item>
+<?php if ($block->showMiddlename()): ?>
+    <v-form-item :label="i18n.middlename">
+        <v-input name="<?= $block->getFieldName('middlename') ?>" v-model="middlename"></v-input>
+    </v-form-item>
+<?php endif; ?>
+<v-form-item :label="i18n.lastname">
+    <v-input name="<?= $block->getFieldName('lastname') ?>" v-model="lastname"></v-input>
+</v-form-item>
+<v-form-item :label="i18n.suffix" v-if="prefixEnabled">
+    <?php if ($block->getPrefixOptions() === false): ?>
+        <v-input name="<?= $block->getFieldName('suffix') ?>" v-model="selectSuffix"></v-input>
+    <?php else: ?>
+        <v-select name="<?= $block->getFieldName('suffix') ?>" placeholder="Choose Suffix" :options="suffixOption" v-model="selectSuffix" :filterable=true :number=6></v-select>
+    <?php endif; ?>
+</v-form-item>

@@ -1,0 +1,9 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Gender $block 
+*/
+?>
+
+<v-form-item :label="i18n.gender">
+    <v-select name="<?= $block->getFieldName('gender') ?>" placeholder="Choose Gender" :options="genderOption" v-model="selectGender" :filterable=true :number=6></v-select>
+</v-form-item>

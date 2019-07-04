@@ -38,6 +38,17 @@ $_password-very-strong               : #81b562 !default;
     margin-top: 1rem;
 }
 
+.v-account {
+    display: flex;
+    margin: 0 -2rem;
+    flex-wrap: wrap;
+
+    .v-form-item {
+        padding: 0 2rem;
+        flex-basis: calc((100% - 8rem) / 2);
+    }
+}
+
 .switcher-language {
     .v-select-control {
         .v-flag {
@@ -386,8 +397,7 @@ $_password-very-strong               : #81b562 !default;
 @include min-screen($screen__m) {
     .form.password.reset,
     .form.send.confirmation,
-    .form.password.forget,
-    .form.create.account {
+    .form.password.forget {
         min-width: 600px;
         width: 50%;
     }

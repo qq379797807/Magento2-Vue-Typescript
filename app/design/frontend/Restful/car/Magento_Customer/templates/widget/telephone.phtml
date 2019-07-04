@@ -1,0 +1,11 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Telephone $block 
+*/
+?>
+
+<?php $isRequired = $block->isRequired() ?>
+
+<v-form-item :label="i18n.telephone">
+    <v-input name="telephone" v-model="telephone"></v-input>
+</v-form-item>

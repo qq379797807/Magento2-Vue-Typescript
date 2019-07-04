@@ -1,0 +1,11 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Widget\Company $block 
+*/
+?>
+
+<?php $isRequired = $block->isRequired() ?>
+
+<v-form-item :label="i18n.company">
+    <v-input name="company" v-model="company"></v-input>
+</v-form-item>

@@ -29,9 +29,16 @@ $form-calendar-icon__color: $primary__color !default;
     @include lib-css(width, 100%);
 }
 
+.v-select-control {
+    display: flex;
+
+    .v-input {
+        width: 100%;
+    }
+}
+
 .v-country {
     .v-select-control {
-        display: flex;
         align-items: center;
 
         .v-flag {
@@ -42,10 +49,14 @@ $form-calendar-icon__color: $primary__color !default;
         }
     
         .v-input {
-            width: 100%;
             padding-left: 3.5rem;
         }
     }
+}
+
+.v-checkbox {
+    display: block;
+    margin: 2rem 0;
 }
 
 .fieldset {
