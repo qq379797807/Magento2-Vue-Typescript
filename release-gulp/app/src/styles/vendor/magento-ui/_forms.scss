@@ -137,8 +137,9 @@
     @include lib-css(vertical-align, $_vertical-align);
     @include lib-css(background, $_background);
     @include lib-css(background-clip, $_background-clip);
-    @include lib-css(border, 1px solid $border__color);
-    @include lib-css(border-radius, 3px);
+    @include lib-css(border, 1px solid rgba(34,36,38,.15));
+    @include lib-css(border-radius, .28571429rem);
+    transition: box-shadow .1s ease, border-color .1s ease, -webkit-box-shadow .1s ease;
 
     @include _lib-form-element-focus(
         $_background,

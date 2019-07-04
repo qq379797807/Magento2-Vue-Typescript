@@ -34,6 +34,21 @@ $_password-very-strong               : #81b562 !default;
     }
 }
 
+.switcher-language {
+    .v-select-control {
+        .v-flag {
+            position: absolute;
+            top: 1.3rem;
+            left: 1rem;
+            z-index: 20;
+        }
+    
+        .v-input {
+            padding-left: 3.5rem;
+        }
+    }
+}
+
 .block-login {
     padding-right: 5rem;
 }

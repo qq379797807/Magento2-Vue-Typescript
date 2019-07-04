@@ -8,18 +8,24 @@ import Component from 'vue-class-component'
             email: 'Email',
             password: 'Password',
             comfirm: 'Confirm Password',
+            city: 'City',
+            zip: 'Zip',
             button: 'Create an Account'
         },
         showEye: true,
         email: '',
         password: '',
-        comfirm: ''
+        comfirm: '',
+        city: '',
+        postcode: ''
     })
 })
 export class VCreate extends Vue {
     public email: string = ''
     public password: string = ''
     public comfirm: string = ''
+    public city: string = ''
+    public postcode: string = ''
 
     mounted () {
         this.init()

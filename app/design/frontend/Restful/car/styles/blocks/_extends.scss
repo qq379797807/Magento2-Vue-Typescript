@@ -39,7 +39,6 @@
     }
 
     dd {
-        display: inline-block;
         float: left;
         margin: 0 0 $indent__xs;
     }
@@ -144,14 +143,15 @@
 //  ---------------------------------------------
 
 .abs-login-block-title {
+    font-family: $font-family-name__anisha;
+    @include lib-font-size(30);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $secondary__color;
+
     strong {
         font-weight: 500;
-    }
-
-    @include lib-font-size(18);
-    border-bottom: 1px solid $secondary__color;
-    margin-bottom: 15px;
-    padding-bottom: 12px;
+    }    
 }
 
 //

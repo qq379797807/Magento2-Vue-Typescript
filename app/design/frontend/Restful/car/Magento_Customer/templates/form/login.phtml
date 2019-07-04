@@ -22,7 +22,7 @@
                     <v-input name="login[username]" v-model="email"></v-input>
                 </v-form-item>
                 <v-form-item :label="i18n.password">
-                    <v-input name="login[password]" v-model="password"></v-input>
+                    <v-input type="password" name="login[password]" :show="showEye" v-model="password"></v-input>
                 </v-form-item>
                 <v-form-item :classes="'in-flex'">
                     <v-button type="primary" native="submit" v-text="i18n.signIn"></v-button>

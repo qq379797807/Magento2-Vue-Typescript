@@ -3,6 +3,7 @@
         <div :class="{
             'show-clear':clear&&value.length>0,
             [prefix+'-select-control']:true}" @click="_selectControlClick">
+            <i :class="'v-flag ' + selectCode" v-if="icon"></i>
             <input type="text" v-if="filterable"
                 :class="{
                 [prefix+'-input']:true,
@@ -30,7 +31,10 @@
                 <ul>
                     <li v-for="(item,index) in filterOption" @click="_itemClick(item,$event)"
                         :class="{'disabled':item.disabled,'active':_getActive(item),[item.class]:item.class}" ref="li"
-                        :key="index">{{item.name || item.value}}</li>
+                        :key="index">
+                        <i :class="'v-flag ' + item.code" v-if="icon"></i>
+                        <span v-text="item.name || item.value"></span>
+                    </li>
                 </ul>
             </div>
             <div :class="`${prefix}-select-down`" v-if="$slots.default" v-show="show">
@@ -51,7 +55,8 @@ export default {
         show: false,
         liHeight: '',
         text: '',
-        keywords: ''
+        keywords: '',
+        selectCode: ''
     }),
     props: {
         value: [Array, String, Number],
@@ -64,7 +69,7 @@ export default {
             default: 0
         },
         placeholder: String,
-        showNum: {
+        number: {
             type: Number,
             default: 0
         },
@@ -79,6 +84,10 @@ export default {
             default: false
         },
         clear: {
+            type: Boolean,
+            default: false
+        },
+        icon: {
             type: Boolean,
             default: false
         },
@@ -158,6 +167,7 @@ export default {
                 }
                 
                 this.keywords = this.text
+                this.selectCode = item.code
             }
             e.stopPropagation()
         },
@@ -253,9 +263,9 @@ export default {
     },
     computed: {
         showLiNum () {
-            if (this.showNum && this.options.length > this.showNum) {
+            if (this.number && this.options.length > this.number) {
                 return {
-                    height: this.liHeight * this.showNum + 'px',
+                    height: this.liHeight * this.number + 'px',
                     overflowY: 'auto'
                 }
             }

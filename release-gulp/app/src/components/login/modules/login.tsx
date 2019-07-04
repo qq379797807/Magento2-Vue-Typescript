@@ -14,6 +14,7 @@ declare let window: any
             signIn: 'Sign In',
             forgot: 'Forgot Your Password?'
         },
+        showEye: true,
         email: null,
         password: null,
         post_action: '',
