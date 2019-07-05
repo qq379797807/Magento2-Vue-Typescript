@@ -30,9 +30,6 @@ class Category extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryJson ($version='pc')
     {
         $data = [];

@@ -1,8 +1,18 @@
 import { ActionTree } from 'vuex'
+import api from '../../api/api'
 
 const actions: ActionTree<any, any> = {
+    async validateEmail({ commit, state, getters }, email: string) {
+        let url = `rest/default/V1/customers/isEmailAvailable`
+        let data: any = {
+            'customerEmail': email
+        }
+        
+        let res = await api.post(url, data)
+        console.log(res)
+    },
     updateShippingMethods({ commit, getters }, countryId: any) {
-        const data = {
+        let data = {
             'address': {
                 'country_id': countryId
             }
@@ -13,7 +23,7 @@ const actions: ActionTree<any, any> = {
             url = 'carts/mine/estimate-shipping-methods'
         }
 
-        const options = {
+        let options = {
             method: 'POST',
             data: JSON.stringify(data),
             url

@@ -34,6 +34,9 @@ export default {
         prop: 'modelValue',
         event: 'change'
     },
+    mounted () {
+        this.checked = this.modelValue
+    },
     methods: {
         _change (e) {
             this.$emit('change', this.checked)

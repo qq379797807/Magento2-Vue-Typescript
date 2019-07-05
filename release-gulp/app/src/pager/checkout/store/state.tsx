@@ -1,7 +1,10 @@
 declare let window: any
 
+const checkoutJson = window.checkoutJson
+
 const state: any = {
-    config: window.checkoutJson,
+    config: checkoutJson,
+    countries: checkoutJson.country,
     baseUrl: window.commonJson.base_url,
     customer: null,
     orderId: null,

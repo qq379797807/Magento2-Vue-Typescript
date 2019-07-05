@@ -23,17 +23,6 @@ class Cart extends \Magento\Framework\View\Element\Template
         return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
     }
 
-    public function getCartJson($version = 'pc')
-    {
-        $data = array();
-        $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
-        $cartConfig = $shippingHelper->getCheckoutConfig();
-        $data = $cartConfig;
-        $data['country'] = $this->getAddressRegion();
-
-        return $this->_jsonHelper->jsonEncode($data);
-    }
-
     public function getAddressRegion() {
         $result = [];
         $countryHelper = $this->getObject("Magento\Directory\Api\CountryInformationAcquirerInterface");
@@ -64,5 +53,16 @@ class Cart extends \Magento\Framework\View\Element\Template
         }
 
         return $result;
+    }
+
+    public function getCartJson($version = 'pc')
+    {
+        $data = array();
+        $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
+        $cartConfig = $shippingHelper->getCheckoutConfig();
+        $data = $cartConfig;
+        $data['country'] = $this->getAddressRegion();
+
+        return $this->_jsonHelper->jsonEncode($data);
     }
 }
