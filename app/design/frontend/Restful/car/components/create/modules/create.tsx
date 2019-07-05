@@ -98,12 +98,14 @@ export class VCreate extends Vue {
     }
 
     init () {
+        let commonJson: any = window.commonJson
         let registerJson: any = window.registerJson
         this.country = registerJson.country
         this.address_count = registerJson.address_count - 1
         this.counter = Array.apply(null, Array(this.address_count)).map((item, i) => {
             return i
         })
+        this.selectCountry = (commonJson.country_id).toLowerCase()
         this.prefixEnabled = registerJson.prefix.enabled
         this.prefixOption = this.changeOption(registerJson.prefix.options)
         this.suffixEnabled = registerJson.suffix.enabled

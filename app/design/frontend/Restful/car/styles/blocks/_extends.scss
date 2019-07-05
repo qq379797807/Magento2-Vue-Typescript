@@ -1036,22 +1036,7 @@
     .abs-shopping-cart-items-desktop {
         float: left;
         position: relative;
-        width: 73%;
-
-        .actions {
-            text-align: right;
-        }
-
-        .action {
-            &.clear,
-            &.update {
-                margin-left: $indent__s;
-            }
-
-            &.continue {
-                float: left;
-            }
-        }
+        width: 65%;
     }
 }
 

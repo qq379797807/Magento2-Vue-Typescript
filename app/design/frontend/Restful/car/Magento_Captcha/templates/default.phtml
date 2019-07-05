@@ -1,0 +1,13 @@
+<?php
+/*
+* @var \Magento\Captcha\Block\Captcha\DefaultCaptcha $block 
+*/
+?>
+
+<v-form-item :label="i18n.captcha">
+    <v-input name="captcha[user_forgotpassword]" v-model="captcha"></v-input>
+</v-form-item>
+<v-form-item :classes="'in-flex'">
+    <img v-lazy="captcha_img" class="captcha-img" :alt="i18n.captcha" />
+    <v-button v-text="i18n.reloadCaptcha"></v-button>
+</v-form-item>

@@ -6,14 +6,13 @@ import { VEstimate } from './estimate'
     name: 'v-summary',
     data: () => ({
         title: 'content'
-    })
+    }),
+    components: {
+        VEstimate
+    }
 })
 export class VSummary extends Vue {
     mounted () {
-        this.init()
-    }
-
-    init () {
-
+        
     }
 }

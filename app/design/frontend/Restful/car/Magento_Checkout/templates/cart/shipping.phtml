@@ -3,9 +3,7 @@
 ?>
 
 <div class="in-summary">
-    <h2 class="title">
-        <?= /* @escapeNotVerified */ $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?>
-    </h2>
+    <h2 class="title"><?= $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?></h2>
     <div class="content">
         <v-estimate></v-estimate>
     </div>

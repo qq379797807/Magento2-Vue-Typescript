@@ -10,6 +10,7 @@ const modulesConfig: string[] = [
     'customer_login',
     'customer_create',
     'customer_account',
+    'customer_password',
     'customer_logout',
     'sales_order',
     'downloadable_product',

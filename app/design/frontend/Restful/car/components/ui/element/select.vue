@@ -120,8 +120,11 @@ export default {
         if (this.filterable) {
             this.keywords = this.value ? this.text : ''
         }
-        this.filterOption = this.options
-        this.selectCode = this.value ? this.value : ''
+
+        this.$nextTick(() => {
+            this.filterOption = this.options
+            this.selectCode = this.value ? this.value : ''
+        })
     },
     methods: {
         _showHide (e) {

@@ -4,7 +4,11 @@ import Component from 'vue-class-component'
 @Component({
     name: 'v-newsletter',
     data: () => ({
-        title: 'newsletter'
+        i18n: {
+            emailAddress: 'Enter your email address',
+            subscribe: 'Subscribe'
+        },
+        email: ''
     })
 })
 export class VNewsletter extends Vue {

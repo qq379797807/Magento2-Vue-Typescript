@@ -4,25 +4,11 @@
 
 <v-newsletter inline-template>
     <div class="block newsletter">
-        <form class="form subscribe"
-            novalidate
-            action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
-            method="post"
-            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
-            id="newsletter-validate-detail">
-            <div class="field newsletter">
-                <div class="control">
-                    <input name="email" type="email" id="newsletter"
-                        placeholder="<?= $block->escapeHtml(__('Enter your email address')) ?>"
-                        data-mage-init='{"mage/trim-input":{}}'
-                        data-validate="{required:true, 'validate-email':true}"/>
-                </div>
-            </div>
-            <div class="actions">
-                <button class="action subscribe primary" title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>" type="submit">
-                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
-                </button>
-            </div>
-        </form>
+        <v-form action="<?= $block->getFormActionUrl()?>" method="post">
+            <v-form-item>
+                <v-input type="email" name="email" v-model="email" v-bind:placeholder="i18n.emailAddress"></v-input>
+                <v-button type="primary" native="submit" v-text="i18n.subscribe"></v-button>
+            </v-form-item>
+        </v-form>
     </div>
 </v-newsletter>
