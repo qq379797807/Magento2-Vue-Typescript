@@ -6,10 +6,16 @@
                 "modules": false,
                 "loose": true
             }
+        ],
+        [
+            "@vue/babel-preset-jsx",
+            {
+              "vModel": true,
+              "vOn": true
+            }
         ]
     ],
     "plugins": [
-        "transform-vue-jsx",
         "@babel/plugin-transform-runtime"
     ],
     "comments": false,

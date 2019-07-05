@@ -18,14 +18,51 @@ class Cart extends \Magento\Framework\View\Element\Template
         $this->_jsonHelper = $JsonHelper;
     }
 
+    public function getObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
+    }
+
     public function getCartJson($version = 'pc')
     {
         $data = array();
-        $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-        $shippingHelper = $objectManger->create('Magento\Checkout\Block\Cart\Shipping');
+        $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
         $cartConfig = $shippingHelper->getCheckoutConfig();
         $data = $cartConfig;
+        $data['country'] = $this->getAddressRegion();
 
         return $this->_jsonHelper->jsonEncode($data);
+    }
+
+    public function getAddressRegion() {
+        $result = [];
+        $countryHelper = $this->getObject("Magento\Directory\Api\CountryInformationAcquirerInterface");
+        $countries = $countryHelper->getCountriesInfo();
+
+        foreach ($countries as $country) {
+            $regions = [];
+            if ($availableRegions = $country->getAvailableRegions()) {
+                foreach ($availableRegions as $region) {
+                    $regionName = $region->getName();
+                    if (preg_match('/Armed/',$regionName)) {
+                        continue;
+                    }
+                    $regions[] = [
+                        'code'   => $region->getId(),
+                        'value' => $region->getCode(),
+                        'name' => $region->getName()
+                    ];
+                }
+            }
+
+            $result[] = [
+                'code' => strtolower($country->getId()), 
+                'value'   => $country->getTwoLetterAbbreviation(),
+                'name'   => (string)$country->getFullNameLocale(),
+                'regions' => $regions
+            ];
+        }
+
+        return $result;
     }
 }

@@ -11,5 +11,12 @@ declare global {
             div: any,
             [key: string]: any
         }
+        interface PropsType {
+            children: JSX.Element
+            name: string
+        }
+        interface ElementChildrenAttribute {
+            children: {}
+        }
     }
 }
