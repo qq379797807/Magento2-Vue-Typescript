@@ -5,8 +5,8 @@
 <v-newsletter inline-template>
     <div class="block newsletter">
         <v-form action="<?= $block->getFormActionUrl()?>" method="post">
-            <v-form-item>
-                <v-input type="email" name="email" v-model="email" v-bind:placeholder="i18n.emailAddress"></v-input>
+            <v-form-item :classes="'in-flex'">
+                <v-input type="email" name="email" v-model="email" :placeholder="i18n.email_address"></v-input>
                 <v-button type="primary" native="submit" v-text="i18n.subscribe"></v-button>
             </v-form-item>
         </v-form>

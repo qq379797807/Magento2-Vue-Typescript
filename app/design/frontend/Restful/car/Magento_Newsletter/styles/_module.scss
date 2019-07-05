@@ -1,6 +1,14 @@
 //  Newsletter subscription
 .block.newsletter {
-   
+    .v-form-input {
+        flex: 1;
+    }
+
+    .v-btn {
+        margin-left: -.5rem;
+        padding: 1rem 1.5rem;
+        z-index: 20;
+    }
 }
 
 //
@@ -9,6 +17,6 @@
 
 @include min-screen($screen__m) {
     .block.newsletter {
-        width: 32%;
+        width: 30%;
     }
 }

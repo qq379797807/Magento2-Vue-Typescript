@@ -1,0 +1,13 @@
+<?php
+/*
+* @var \Magento\Customer\Block\Account\AuthorizationLink $block 
+*/
+?>
+
+<?php
+    $dataPostParam = $block->isLoggedIn() ? sprintf(" data-post='%s'", $block->getPostParams()) : '';
+?>
+
+<li>
+    <a <?= $block->getLinkAttributes() ?><?= $dataPostParam ?> title="<?= $block->getLabel() ?>"><?= $block->getLabel() ?></a>
+</li>

@@ -5,13 +5,15 @@ import Component from 'vue-class-component'
     name: 'v-newsletter',
     data: () => ({
         i18n: {
-            emailAddress: 'Enter your email address',
+            email_address: 'Enter your email address',
             subscribe: 'Subscribe'
         },
         email: ''
     })
 })
 export class VNewsletter extends Vue {
+    public email: string = ''
+
     mounted () {
         this.init()
     }

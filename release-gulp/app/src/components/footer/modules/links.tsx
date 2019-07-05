@@ -7,12 +7,4 @@ import Component from 'vue-class-component'
         title: 'links'
     })
 })
-export class VFooterLinks extends Vue {
-    mounted () {
-        this.init()
-    }
-    
-    init () {
-
-    }
-}
+export class VFooterLinks extends Vue {}

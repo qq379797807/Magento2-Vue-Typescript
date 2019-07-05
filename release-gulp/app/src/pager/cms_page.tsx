@@ -14,6 +14,7 @@ Vue.use(Lazyload.install, {
         'scroll'
     ]
 })
+UI.install(Vue)
 
 new Vue({
     el: '#app',
