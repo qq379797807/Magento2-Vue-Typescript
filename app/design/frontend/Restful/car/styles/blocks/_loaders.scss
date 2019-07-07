@@ -1,33 +1,38 @@
-.load.indicator {
-    @include lib-loader();
-    position: absolute;
+.collapse-panel {
+    .collapse-title {
+        cursor: pointer;
+        position: relative;
+        user-select: none;
 
-    > span {
-        display: none;
-    }
-}
+        i {
+            font-family: $icons__font-name;
+            font-size: 1.8rem;
+            font-style: normal;
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+            transform: translateY(-50%);
 
-.loading-mask {
-    @include lib-loading-mask();
-    background: rgba(255, 255, 255, 0.5);
-
-    .loader {
-        > img {
-            @include lib-loading-mask();
+            &:after {
+                content: '\e6ac';
+            }
         }
+    }
 
-        > p {
-            display: none;
+    .collapse-content {
+        overflow: hidden;
+        transition: all .3s;
+    }
+
+    &.active {
+        .collapse-title {
+            i {
+                transform: translateY(-50%) rotate(180deg);
+            }
         }
     }
-}
-
-body {
-    > .loading-mask {
-        z-index: $loader-overlay__z-index;
-    }
-}
-
-._block-content-loading {
-    position: relative;
 }

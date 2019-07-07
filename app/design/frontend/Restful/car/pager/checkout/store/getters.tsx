@@ -4,6 +4,18 @@ const getters: GetterTree<any, any> = {
     cartId: (state) => {
         return state.config.quoteData.entity_id
     },
+    currencyCode: (state) => {
+        return state.totalsData.base_currency_code
+    },
+    priceFormat: (state) => (price: string) => {
+        const format: any = state.config.basePriceFormat
+        price = parseFloat(price).toFixed(format.precision)
+        return format.pattern.replace('%s', price)
+    },
+    filterUrl: (state) => (item: any) => {
+        const product = item.product
+        return `${state.baseUrl}${product.request_path}`
+    },
     addressByType: (state) => (type: any) => {
         const address = { ...state[type] }
         address.street0 = address.street.length ? address.street[0] : ''
@@ -18,18 +30,11 @@ const getters: GetterTree<any, any> = {
             return state.regions.filter((region: any) => region.country_id === countryId)
         }
     },
-    isCustomerLoggedIn (state) {
-        return state.config.isCustomerLoggedIn
+    couponCode: (state) => {
+        return state.totalsData.coupon_code !== null ? state.totalsData.coupon_code : ''
     },
-    totals (state) {
-        return (state.totals !== null) ? state.totals : state.config.totalsData
-    },
-    couponCode (state, getters) {
-        if (getters.totals.hasOwnProperty('coupon_code') && getters.totals.coupon_code !== null) {
-            return getters.totals.coupon_code
-        } else {
-            return ''
-        }
+    totalsData: (state) => {
+        return state.totalsData
     }
 }
 

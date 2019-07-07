@@ -5,12 +5,13 @@ declare let window: any
 
 let params: any = {
     version: 'pc',
-    form_key: window.commonDataJSON.form_key
+    form_key: window.commonJson.form_key
 }
 
 axios.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json'
-    config.headers['tocken'] = window.commonDataJSON.form_key
+    config.headers['tocken'] = window.commonJson.form_key
+    config.baseURL = window.commonJson.base_url
     config.timeout = 10 * 1000
     return config
 }, error => {
@@ -21,7 +22,6 @@ axios.interceptors.response.use(response => {
     if (response.data.code === 200) {  
         return Promise.resolve(response.data)
     } else if (response.data.code === 1401) {
-        // store.dispatch('login', {})
         return Promise.reject(response.data)
     } else {
         return Promise.reject(response.data)

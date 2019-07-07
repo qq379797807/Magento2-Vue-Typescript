@@ -3,8 +3,12 @@
 ?>
 
 <div class="in-summary">
-    <h2 class="title"><?= $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?></h2>
-    <div class="content">
-        <v-estimate></v-estimate>
-    </div>
+    <v-collapse value="estimate">
+        <v-collapse-panel name="estimate">
+            <h2 class="title"><?= $block->getQuote()->isVirtual() ? __('Estimate Tax') : __('Estimate Shipping and Tax') ?></h2>
+            <template slot="content">
+                <v-estimate></v-estimate>
+            </template>
+        </v-collapse-panel>
+    </v-collapse>
 </div>

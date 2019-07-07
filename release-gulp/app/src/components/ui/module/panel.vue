@@ -2,6 +2,7 @@
     <div class="collapse-panel" :class="{'active':visible}">
         <div class="collapse-title" @click="_slideToggle">
             <slot></slot>
+            <i class="v-icon-arrow"></i>
         </div>
         <transition
             v-on:before-enter="beforeEnter"
@@ -22,7 +23,7 @@ export default {
     name: `${prefix}-collapse-panel`,
     data: () => ({
         padding: [],
-        randomName: this.name || Math.random().toString(36).substr(2, 8)
+        randomName: ''
     }),
     props: {
         name: {
@@ -45,6 +46,7 @@ export default {
         }
     },
     mounted () {
+        this.randomName = this.name || Math.random().toString(36).substr(2, 8)
         this.parent.panelName.push(this.randomName)
     },
     methods: {

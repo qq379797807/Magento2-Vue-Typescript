@@ -33,4 +33,25 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    .list {
+        margin: 2rem 0;
+        padding: 2rem;
+        border: 1px dashed $border__color;
+    }
+
+    .in-button {
+        display: flex;
+        padding: 3rem 4rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.in-collection {
+    > li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

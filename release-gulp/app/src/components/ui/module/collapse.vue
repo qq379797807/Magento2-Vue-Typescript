@@ -1,5 +1,5 @@
 <template>
-    <div :class="`${prefix}-collapse`">
+    <div class="v-collapse">
         <slot></slot>
     </div>
 </template>
@@ -10,7 +10,7 @@ const prefix = 'v'
 export default {
     name: `${prefix}-collapse`,
     data: () => ({
-        active: [this.value],
+        active: [],
         panelName: []
     }),
     props: {
@@ -24,6 +24,9 @@ export default {
             type: String,
             default: 'collapse'
         }
+    },
+    mounted () {
+        this.active.push(this.value)
     },
     methods: {
         _change (v) {
