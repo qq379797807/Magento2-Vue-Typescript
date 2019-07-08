@@ -1,18 +1,22 @@
 declare let window: any
 
+const commonJson = window.commonJson
+const cartJson = window.cartJson
+
 const state: any = {
-    config: window.cartJson,
-    baseUrl: window.commonJson.base_url,
-    customer: null,
-    orderId: null,
+    config: cartJson,
+    baseUrl: commonJson.base_url,
+    countries: cartJson.country,
+    customerData: cartJson.customerData,
+    quoteItemData: cartJson.quoteItemData,
     shippingMethods: [],
     selectedShippingMethod: null,
+    paymentMethods: [],
     selectedPaymentMethod: null,
     shippingAddress: null,
     billingAddress: null,
-    newBillingAddress: null,
-    paymentMethods: [],
-    totals: null
+    totalsData: cartJson.totalsData,
+    postCodes: cartJson.postCodes
 }
 
 export default state

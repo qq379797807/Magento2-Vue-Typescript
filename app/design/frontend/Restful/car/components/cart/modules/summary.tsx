@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VEstimate } from './estimate'
+import { VTotals } from './totals'
 
 @Component({
     name: 'v-summary',
@@ -8,7 +9,8 @@ import { VEstimate } from './estimate'
         title: 'content'
     }),
     components: {
-        VEstimate
+        VEstimate,
+        VTotals
     }
 })
 export class VSummary extends Vue {
