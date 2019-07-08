@@ -9,6 +9,14 @@
         display: block;
         @include lib-heading(h3);
     }
+
+    .in-checkout {
+        margin: 3rem 0;
+
+        button {
+            width: 100%;
+        }
+    }
 }
 
 .in-summary {

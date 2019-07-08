@@ -6,7 +6,7 @@
 <?= $block->getChildHtml('customer.form.register.extra') ?>
 
 <v-create inline-template>
-    <v-form class="v-account" action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>" enctype="multipart/form-data" method="post">
+    <v-form class="v-account" action="<?= $block->getPostActionUrl() ?>" enctype="multipart/form-data" method="post">
         <?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
         <?php $_gender = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Gender') ?>
         <?php if ($_gender->isEnabled()): ?>

@@ -22,16 +22,14 @@ export class VTotals extends Vue {
     render (h: CreateElement): JSX.Element {
         return (
             <div class="in-totals">
-                 <div class="list">
-                    {this.totalsData.total_segments.map((item: any, key: number) => {
-                        return (
-                            <div class="item" v-for="item in ">
-                                <p>{item.title}</p>
-                                <p>{this.priceFormat(item.value)}</p>
-                            </div>
-                        )
-                    })}
-                </div>
+                {this.totalsData.total_segments.map((item: any, key: number) => {
+                    return (
+                        <div class="item">
+                            <p>{item.title}</p>
+                            <p>{this.priceFormat(item.value)}</p>
+                        </div>
+                    )
+                })}
             </div>
         )
     }

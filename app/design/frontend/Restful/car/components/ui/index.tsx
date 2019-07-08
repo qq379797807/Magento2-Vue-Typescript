@@ -9,6 +9,8 @@ import Button from './element/button.vue'
 import Select from './element/select.vue'
 import Collapse from './module/collapse.vue'
 import CollapsePanel from './module/panel.vue'
+import Table from './table/table.vue'
+import TableColumn from './table/column.vue'
 
 const component: any[] = [
     Input,
@@ -20,7 +22,9 @@ const component: any[] = [
     Button,
     Select,
     Collapse,
-    CollapsePanel
+    CollapsePanel,
+    Table,
+    TableColumn
 ]
 
 const UI: any = {

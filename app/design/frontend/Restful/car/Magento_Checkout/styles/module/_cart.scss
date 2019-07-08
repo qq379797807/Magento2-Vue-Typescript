@@ -1,8 +1,6 @@
 //
 //  Shopping cart
 //  ---------------------------------------------
-
-//  Summary block
 .cart-summary {
     padding: 2rem 3rem;
     @include lib-css(background, $sidebar__background-color);
@@ -12,36 +10,11 @@
         @include lib-heading(h3);
     }
 
-    .block {
-        .item-options {
-            margin-left: 0;
-        }
+    .in-checkout {
+        margin: 3rem 0;
 
-        .fieldset {
-            margin: 15px 0 $indent__m $indent__xs;
-
-            .field {
-                margin: 0 0 $indent__s;
-
-                &.note {
-                    font-size: $font-size__s;
-                }
-            }
-
-            .methods {
-                .field {
-                    > .label {
-                        display: inline;
-                    }
-                }
-            }
-        }
-
-        .fieldset.estimate {
-            > .legend,
-            > .legend + br {
-                @extend .abs-no-display;
-            }
+        button {
+            width: 100%;
         }
     }
 }
@@ -53,130 +26,14 @@
 }
 
 .cart-totals {
-    @extend .abs-sidebar-totals;
-    border-top: 1px solid $border-color__base;
-    padding-top: $indent__s;
-
-    .table-wrapper {
-        margin-bottom: 0;
-        overflow: inherit;
-    }
+    padding: 1rem 0;
 }
 
-//  Products table
-.cart.table-wrapper {
-    .items {
-        thead + .item {
-            border-top: $border-width__base solid $border-color__base;
-        }
-
-        > .item {
-            border-bottom: $border-width__base solid $border-color__base;
-            position: relative;
-        }
-    }
-
-    .col {
-        padding-top: $indent__base;
-
-        &.qty {
-            .input-text {
-                @extend .abs-input-qty;
-                margin-top: -5px;
-            }
-
-            .label {
-                @extend .abs-visually-hidden;
-            }
-        }
-    }
-
+.in-totals {
     .item {
-        &-actions td {
-            padding-bottom: $indent__s;
-            text-align: center;
-            white-space: normal;
-        }
-
-        .col {
-            &.item {
-                display: block;
-                min-height: 75px;
-                padding: $indent__m 0 $indent__s 75px;
-                position: relative;
-            }
-        }
-    }
-
-    .actions-toolbar {
-        @extend .abs-add-clearfix;
-
-        > .action {
-            @extend button;
-            @include lib-link-as-button();
-            margin-bottom: $indent__s;
-            margin-right: $indent__s;
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-
-    .action {
-        &.help.map {
-            @extend .abs-action-button-as-link;
-            font-weight: $font-weight__regular;
-        }
-    }
-
-    .product {
-        &-item-photo {
-            display: block;
-            left: 0;
-            max-width: 60px;
-            padding: 0;
-            position: absolute;
-            top: 15px;
-            width: 100%;
-        }
-
-        &-item-details {
-            white-space: normal;
-        }
-
-        &-item-name {
-            display: inline-block;
-            font-weight: $font-weight__regular;
-            margin-top: -6px;
-        }
-    }
-
-    .gift-registry-name-label {
-        &:after {
-            content: ':';
-        }
-    }
-
-    //  Product options
-    .item-options {
-        @extend .abs-product-options-list;
-        @extend .abs-add-clearfix;
-        font-size: $font-size__s;
-        margin-bottom: $indent__s;
-    }
-
-    .product-item-name + .item-options {
-        margin-top: $indent__s;
-    }
-
-    .product-image-wrapper {
-        @extend .abs-reset-image-wrapper;
-    }
-
-    .action.configure {
-        display: inline-block;
-        margin: 0 0 $indent__base;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 
