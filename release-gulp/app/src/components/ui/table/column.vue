@@ -22,7 +22,7 @@ export default {
         },
         type: {
             validator: (value) => {
-                return ['selection', 'index', 'extend'].indexOf(value) !== -1
+                return ['selection', 'index', 'extend', 'cart'].indexOf(value) !== -1
             }
         },
         fixed: {

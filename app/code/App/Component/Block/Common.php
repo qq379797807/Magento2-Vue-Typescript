@@ -46,6 +46,11 @@ class Common extends \Magento\Framework\View\Element\Template
         $this->_storeManager = $context->getStoreManager();
     }
 
+    public function createObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->create($className);
+    }
+
     public function getCurrentStore()
     {
         if ($this->current_store) {
@@ -77,12 +82,11 @@ class Common extends \Magento\Framework\View\Element\Template
 
     public function getStoresSubCategories()
     {
-        $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-        $categoryHelper = $objectManger->create('Magento\Catalog\Helper\Category');
+        $categoryHelper = $this->createObject('Magento\Catalog\Helper\Category');
         $categories = $categoryHelper ->getStoreCategories($sorted = false, $asCollection = false, $toLoad = true);
         $arr = array();
         foreach ($categories as $category) {
-            $loadCategory = $objectManger->create('Magento\Catalog\Model\Category')->load($category->getId());
+            $loadCategory = $this->createObject('Magento\Catalog\Model\Category')->load($category->getId());
             $subCategories = $loadCategory->getChildrenCategories();
             $subArr = array();
 
@@ -128,6 +132,20 @@ class Common extends \Magento\Framework\View\Element\Template
         $refer = $this->urlEncoder->encode($this->urlBuilder->getCurrentUrl());
         $form_key = $this->formKey->getFormKey();
         $data['form_key'] = $form_key;
+
+        $cookieHelper = $this->createObject('Magento\Framework\View\Element\Js\Cookie');
+        $data['cookie'] = [
+            'expires' => null,
+            'path' => $cookieHelper->getPath(),
+            'domain' =>  $cookieHelper->getDomain(),
+            'secure' =>  false,
+            'lifetime' =>  $cookieHelper->getLifetime() 
+        ];
+        
+        $pageCacheHelper = $this->createObject('Magento\PageCache\Block\Javascript');
+        $pageCache = $pageCacheHelper->getScriptOptions();
+        $data['pageCache'] = $this->_jsonHelper->jsonDecode($pageCache);
+
         $storeCode = $current_store->getCode();;
         $data['store_code'] = $storeCode;
         $data['country_id'] = $this->directoryHelper->getDefaultCountry($storeCode);

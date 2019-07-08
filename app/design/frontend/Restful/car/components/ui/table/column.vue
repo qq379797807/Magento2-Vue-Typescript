@@ -3,6 +3,7 @@ const prefix = 'v'
 
 export default {
     name: `${prefix}-table-column`,
+    componentName: `${prefix}-table-column`,
     data: () => ({
         renderCell: {}
     }),
@@ -21,7 +22,7 @@ export default {
         },
         type: {
             validator: (value) => {
-                return ['selection', 'index', 'extend'].indexOf(value) !== -1
+                return ['selection', 'index', 'extend', 'cart'].indexOf(value) !== -1
             }
         },
         fixed: {
@@ -69,7 +70,7 @@ export default {
     },
     methods: {
         _handleChange (row) {
-        this.$parent.handleChange(row)
+            this.$parent.handleChange(row)
         }
     },
     render (h) {

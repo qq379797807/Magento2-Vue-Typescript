@@ -1,6 +1,6 @@
 <template>
     <tbody>
-        <template v-for="(row,rowIndex) in data">
+        <template v-for="(row, rowIndex) in data">
             <tr :key="rowIndex" :class="{'warning':$parent.selectedRows.indexOf(row) !== -1, [`parent-tr-${rowIndex+1}`]:isExtend, [row.trClass]:row.trClass}">
                 <v-table-id
                     v-for="(column,indexTd) in cols"

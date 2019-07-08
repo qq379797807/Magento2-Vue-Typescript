@@ -1,9 +1,6 @@
 <script>
 export default {
     name: 'v-table-id',
-    data: () => ({
-    
-    }),
     props: ['column', 'row', 'index', 'title'],
     render (h) {
         const row = this.row

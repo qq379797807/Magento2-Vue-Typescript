@@ -35,7 +35,7 @@
             </thead>
             <tbody v-if="data.length===0">
                 <tr>
-                    <td :colspan="columnsFilter.length" class="empty">{{emptyText}}</td>
+                    <td :colspan="columnsFilter.length" class="empty" v-text="emptyText"></td>
                 </tr>
             </tbody>
             <v-table-body :data="data" v-else></v-table-body>
@@ -63,9 +63,9 @@ export default {
         drag: Boolean,
         updateChild: String,
         data: {
-        type: Array,
+            type: Array,
             default: () => {
-                return {}
+                return []
             }
         },
         showHeader: {
@@ -96,7 +96,7 @@ export default {
         },
         emptyText: {
             type: String,
-            default: '暂无数据'
+            default: 'No data'
         },
         title: {
             type: Boolean,
@@ -121,7 +121,7 @@ export default {
     },
      mounted () {
         this.$nextTick(() => {
-        this._fixedHead()
+            this._fixedHead()
             if (this.drag) {
                 this.$refs.tableContainer.style.overflowX = 'auto'
                 document.addEventListener('mouseup', this._headMouseUp)
@@ -278,15 +278,15 @@ export default {
             this.$nextTick(() => {
                 let child = this.$children
                 this.columns = child.filter(item => {
-                    return item.$options.componentName === 'Column'
+                    return item.$options.componentName === 'v-table-column'
                 })
 
                 this.columnsFilter = child.filter(item => {
-                    return item.$options.componentName === 'Column' && item.type !== 'extend'
+                    return item.$options.componentName === 'v-table-column' && item.type !== 'extend'
                 })
                 this.colWidth = []
                     child.forEach(item => {
-                    if (item.$options.componentName === 'Column' && item.type !== 'extend') {
+                    if (item.$options.componentName === 'v-table-column' && item.type !== 'extend') {
                         this.colWidth.push(item.width)
                     }
                 })

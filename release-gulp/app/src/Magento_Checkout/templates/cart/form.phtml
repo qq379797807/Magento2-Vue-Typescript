@@ -2,52 +2,38 @@
 /**  @var $block \Magento\Checkout\Block\Cart\Grid */
 ?>
 
-<?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
 <?= $block->getChildHtml('form_before') ?>
-
-<form action="<?= /* @escapeNotVerified */ $block->getUrl('checkout/cart/updatePost') ?>" method="post" class="form form-cart">
-    <div class="cart table-wrapper<?= $mergedCells == 2 ? ' detailed' : '' ?>">
-        <?php if ($block->getPagerHtml()): ?>
-            <div class="cart-products-toolbar cart-products-toolbar-top toolbar" data-attribute="cart-products-toolbar-top"><?= $block->getPagerHtml() ?></div>
-        <?php endif ?>
-        <table id="shopping-cart-table"
-            class="cart items data table"
-            data-mage-init='{"shoppingCart":{"emptyCartButton": "action.clear",
-            "updateCartActionContainer": "#update_cart_action_container"}}'>
-            <caption role="heading" aria-level="2" class="table-caption"><?= /* @escapeNotVerified */ __('Shopping Cart Items') ?></caption>
-            <thead>
-                <tr>
-                    <th class="col item" scope="col"><span><?= /* @escapeNotVerified */ __('Item') ?></span></th>
-                    <th class="col price" scope="col"><span><?= /* @escapeNotVerified */ __('Price') ?></span></th>
-                    <th class="col qty" scope="col"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></th>
-                    <th class="col subtotal" scope="col"><span><?= /* @escapeNotVerified */ __('Subtotal') ?></span></th>
-                </tr>
-            </thead>
-            <?php foreach ($block->getItems() as $_item): ?>
-                <?= $block->getItemHtml($_item) ?>
-            <?php endforeach ?>
-        </table>
-    </div>
-</form>
-
 <v-shipping inline-template>
     <div class="in-shipping">
-        <v-table :data="tableData">
-            <v-table-column label="日期" prop="date"></v-table-column >
-            <v-table-column label="姓名" prop="name"></v-table-column >
-            <v-table-column label="省份" prop="province"></v-table-column >
-            <v-table-column label="城市" prop="city"></v-table-column >
-            <v-table-column label="地址" prop="address"></v-table-column >
-            <v-table-column label="邮编" prop="zip"></v-table-column >
-            <v-table-column label="操作">
+        <v-table :data="quoteItemData">
+            <v-table-column :label="i18n.item">
                 <template slot-scope="scope">
-                    <a href="javascript:;">删除</a>
+                    <a :href="filterUrl(scope.row)" :title="scope.row.name">
+                        <img :src="scope.row.thumbnail" />
+                    </a>
+                    <p class="name" v-text="scope.row.name"></p>
                 </template>
-            </v-table-column >
+            </v-table-column>
+            <v-table-column :label="i18n.price">
+                <template slot-scope="scope">
+                    <span v-text="priceFormat(scope.row.base_price_incl_tax)"></span>
+                </template>
+            </v-table-column>
+            <v-table-column :label="i18n.qty" prop="qty"></v-table-column >
+            <v-table-column :label="i18n.subtotal">
+                <template slot-scope="scope">
+                    <span v-text="priceFormat(scope.row.row_total_incl_tax)"></span>
+                </template>
+            </v-table-column>
+            <v-table-column :label="i18n.operation">
+                <template slot-scope="scope">
+                    <a href="javascript:;" v-text="i18n.moveWishlist" @click="moveWishlist(scope.row)"></a>
+                    <a href="javascript:;" v-text="i18n.remove" @click="removeItem(scope.row)"></a>
+                </template>
+            </v-table-column>
         </v-table>
     </div>
 </v-shipping>
 
 <?= $block->getChildHtml('checkout.cart.order.actions') ?>
 <?= $block->getChildHtml('shopping.cart.table.after') ?>
-

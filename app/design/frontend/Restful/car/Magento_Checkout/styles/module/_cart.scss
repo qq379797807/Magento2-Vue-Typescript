@@ -1,6 +1,12 @@
 //
 //  Shopping cart
 //  ---------------------------------------------
+.checkout-cart-index {
+    .page-main {
+        margin-bottom: 5rem;
+    }
+}
+
 .cart-summary {
     padding: 2rem 3rem;
     @include lib-css(background, $sidebar__background-color);
@@ -167,12 +173,9 @@
 
 @include min-screen($screen__m) {
     .cart-container {
-        .form-cart {
+        .form-cart,
+        .in-shipping {
             @extend .abs-shopping-cart-items-desktop;
-        }
-
-        .widget {
-            float: left;
         }
     }
 

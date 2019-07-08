@@ -35,7 +35,7 @@
             </thead>
             <tbody v-if="data.length===0">
                 <tr>
-                    <td :colspan="columnsFilter.length" class="empty">{{emptyText}}</td>
+                    <td :colspan="columnsFilter.length" class="empty" v-text="emptyText"></td>
                 </tr>
             </tbody>
             <v-table-body :data="data" v-else></v-table-body>
@@ -96,7 +96,7 @@ export default {
         },
         emptyText: {
             type: String,
-            default: '暂无数据'
+            default: 'No data'
         },
         title: {
             type: Boolean,

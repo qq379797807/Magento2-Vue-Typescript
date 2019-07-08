@@ -105,6 +105,7 @@
         "url-loader": "^1.1.2",
         "vue": "^2.6.10",
         "vue-class-component": "^7.1.0",
+        "vue-cookies": "^1.5.13",
         "vue-lazyload": "^1.2.6",
         "vue-loader": "^15.7.0",
         "vue-social-sharing": "^2.4.5",
