@@ -6,38 +6,10 @@ $helper = $this->helper(\Magento\Search\Helper\Data::class);
 
 <v-search inline-template>
     <div class="block block-search">
-        <div class="block block-content">
-            <form class="form minisearch" id="search_mini_form" action="<?= /* @escapeNotVerified */ $helper->getResultUrl() ?>" method="get">
-                <div class="field search">
-                    <div class="control">
-                        <input id="search"
-                            data-mage-init='{"quickSearch":{
-                                    "formSelector":"#search_mini_form",
-                                    "url":"<?= /* @escapeNotVerified */ $helper->getSuggestUrl()?>",
-                                    "destinationSelector":"#search_autocomplete"}
-                            }'
-                            type="text"
-                            name="<?= /* @escapeNotVerified */ $helper->getQueryParamName() ?>"
-                            value="<?= /* @escapeNotVerified */ $helper->getEscapedQueryText() ?>"
-                            placeholder="<?= /* @escapeNotVerified */ __('Search entire store here...') ?>"
-                            class="input-text"
-                            maxlength="<?= /* @escapeNotVerified */ $helper->getMaxQueryLength() ?>"
-                            role="combobox"
-                            aria-haspopup="false"
-                            aria-autocomplete="both"
-                            autocomplete="off"/>
-                        <div id="search_autocomplete" class="search-autocomplete"></div>
-                        <?= $block->getChildHtml() ?>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button type="submit"
-                            title="<?= $block->escapeHtml(__('Search')) ?>"
-                            class="action search">
-                        <span><?= /* @escapeNotVerified */ __('Search') ?></span>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <v-form class="form minisearch" action="<?= $helper->getResultUrl() ?>" method="get">
+            <v-form-item>
+                <v-input name="<?= $helper->getQueryParamName() ?>" v-model="search" maxlength="<?= $helper->getMaxQueryLength() ?>" :placeholder="i18n.search"></v-input>
+            </v-form-item>
+        </v-form>
     </div>
 </v-search>
