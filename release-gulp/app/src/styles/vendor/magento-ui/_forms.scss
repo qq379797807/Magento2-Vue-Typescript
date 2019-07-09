@@ -392,6 +392,7 @@
     textarea {
         @include lib-form-element-input($_type: textarea);
         @include lib-form-element-textarea-resize();
+        padding: 1.5rem;
     }
 
     input[type="checkbox"] {

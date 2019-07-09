@@ -80,7 +80,7 @@ export default {
         zip: '',
         company: '',
         phone: '',
-        saveBook: true,
+        saveBook: false,
         selectCountry: '',
         selectRegion: '',
         showRegion: false

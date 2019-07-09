@@ -1,5 +1,5 @@
 <template>
-  <textarea :class="`${prefix}-textarea`" ref="text" :style="style" @input="_change" v-model="textValue"></textarea>
+    <textarea class="v-textarea" ref="text" :style="style" @input="_change" v-model="textValue"></textarea>
 </template>
 
 <script>
