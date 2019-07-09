@@ -1,4 +1,7 @@
 import Vue from 'vue'
-import VueCookie from 'vue-cookies'
+const VueCookies = require('vue-cookies')
 
-Vue.use(VueCookie)
+declare let window: any
+
+VueCookies.set('form_key', window.commonJson.form_key)
+Vue.use(VueCookies)

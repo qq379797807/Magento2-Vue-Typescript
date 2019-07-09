@@ -7,6 +7,7 @@ import getters from './checkout/store/getters'
 import actions from './checkout/store/actions'
 import mutations from './checkout/store/mutations'
 import UI from '../components/ui'
+import './cookie/cookie'
 
 const Lazyload: any = VueLazyload
 

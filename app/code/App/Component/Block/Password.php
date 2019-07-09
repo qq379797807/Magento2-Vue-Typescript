@@ -1,7 +1,6 @@
 <?php
 namespace App\Component\Block;
 
-use Magento\Checkout\Model\Cart as CustomerCart;
 class Password extends \Magento\Framework\View\Element\Template
 {
     private $_jsonHelper;

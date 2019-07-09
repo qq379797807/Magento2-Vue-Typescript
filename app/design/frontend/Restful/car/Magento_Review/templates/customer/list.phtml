@@ -1,0 +1,27 @@
+<?php
+/*
+* @var \Magento\Review\Block\Customer\ListCustomer $block 
+*/
+?>
+
+<v-reviews inline-template>
+    <div class="in-reviews">
+        <v-table :data="reviewData">
+            <v-table-column :label="i18n.name">
+                <template slot-scope="scope">
+                    <a :href="scope.row.product_url" :title="scope.row.product_name">
+                        <p class="name" v-text="scope.row.product_name"></p>
+                    </a>
+                </template>
+            </v-table-column>
+            <v-table-column :label="i18n.create" prop="create_date"></v-table-column>
+            <v-table-column :label="i18n.rating" prop="rating_count"></v-table-column >
+            <v-table-column :label="i18n.review" prop="rating_detail"></v-table-column>
+            <v-table-column :label="i18n.operation">
+                <template slot-scope="scope">
+                    <a href="javascript:;" v-text="i18n.seeDetail" @click="seeDetail(scope.row.rating_url)"></a>
+                </template>
+            </v-table-column>
+        </v-table>
+    </div>
+</v-reviews>

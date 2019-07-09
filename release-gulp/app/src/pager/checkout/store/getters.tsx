@@ -4,6 +4,9 @@ const getters: GetterTree<any, any> = {
     cartId: (state) => {
         return state.config.quoteData.entity_id
     },
+    storeCode: (state) => {
+        return state.config.storeCode
+    },
     currencyCode: (state) => {
         return state.totalsData.base_currency_code
     },

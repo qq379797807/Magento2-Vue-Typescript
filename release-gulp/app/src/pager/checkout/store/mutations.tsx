@@ -1,10 +1,14 @@
 import { MutationTree } from 'vuex'
 
 const mutations: MutationTree<any> = {
-    setItem(state, { item, value }) {
+    valideEmail (state, payload) {
+        const { item, value } = payload
         state[item] = value
     },
-    setAddress(state, payload) {
+    setItem (state, { item, value }) {
+        state[item] = value
+    },
+    setAddress (state, payload) {
         const address = payload.address
         const type = payload.type
 
