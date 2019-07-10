@@ -1,0 +1,12 @@
+<?php
+/*
+* @var \Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist $block 
+*/
+?>
+
+<?php if ($block->isWishListAllowed()) : ?>
+    <a href="javascript:;"
+       class="action towishlist"
+       data-post='<?= /* @noEscape */ $block->getWishlistParams() ?>'
+       data-action="add-to-wishlist"><span><?= $block->escapeHtml(__('Add to Wish List')) ?></span></a>
+<?php endif; ?>

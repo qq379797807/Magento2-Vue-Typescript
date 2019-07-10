@@ -17,6 +17,8 @@
             </block>
         </referenceContainer>
         <referenceContainer name="product.info.media" remove="true" />
+        <referenceBlock name="html_calendar" remove="true" />
+        <referenceBlock name="product.info.addtocart.instantPurchase" remove="true" />
         <move element="product.info.main" destination="vue.product.main" />
     </body>
 </page>

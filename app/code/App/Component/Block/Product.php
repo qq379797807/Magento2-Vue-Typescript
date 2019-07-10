@@ -31,6 +31,11 @@ class Product extends \Magento\Framework\View\Element\Template
         $this->catalogData = $catalogData;
     }
 
+    public function createObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->create($className);
+    }
+
     public function getObject($className)
     {
         return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
@@ -43,6 +48,7 @@ class Product extends \Magento\Framework\View\Element\Template
             return $this->currentStore;
         }
         $this->currentStore =$this->storeManger->getStore();
+        
         return $this->currentStore;
     }
 
@@ -51,17 +57,15 @@ class Product extends \Magento\Framework\View\Element\Template
         $data = array();
         $params = $this ->request->getParams();
         $id = $params['id'];
-        $size = $version == 'mobile' ? '400x400' : '800x800';
         $baseMediaUrl = $this ->_storeManager-> getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA );
         $emailHelper = $this->getObject('Magento\Catalog\Helper\Product');
-        $currentStore = $this->getCurrentStore();
-        $baseUrl = $currentStore->getBaseUrl('media') . 'catalog/product/';
-        $website_id = $currentStore->getWebsite()->getId();
-        $store_id = $currentStore->getId();
         $product = $this->getObject('Magento\Catalog\Model\Product')->load($id);
         $data['product_id'] = $id;
         $data['type'] = $this->_request->getParam('type', '');
         $data['email_to'] = $emailHelper->getEmailToFriendUrl($product);
+
+        $reviewHelper = $this->createObject('Magento\Review\Block\Product\Review');
+        $data['review_url'] = $reviewHelper->getProductReviewUrl();
 
         return $data;
     }
