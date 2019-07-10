@@ -26,3 +26,23 @@
         }
     }
 }
+
+.v-icon-reduce,
+.v-icon-increase {
+    font-family: $icons__font-name;
+    font-size: 1.4rem;
+    font-style: normal;
+    display: inline-block;
+}
+
+.v-icon-reduce {
+    &::before {
+        content: '\e634';
+    }
+}
+
+.v-icon-increase {
+    &::before {
+        content: '\e619';
+    }
+}

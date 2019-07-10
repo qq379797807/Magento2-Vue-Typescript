@@ -6,7 +6,7 @@
 
 <v-reviews inline-template>
     <div class="in-reviews">
-        <v-table :data="reviewData">
+        <v-table :data="reviewData" :drag="true">
             <v-table-column :label="i18n.name">
                 <template slot-scope="scope">
                     <a :href="scope.row.product_url" :title="scope.row.product_name">

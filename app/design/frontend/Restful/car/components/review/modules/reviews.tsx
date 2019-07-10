@@ -28,4 +28,8 @@ export class VReviews extends Vue {
         let reviewJson: any = window.reviewJson
         this.reviewData = reviewJson.reviews
     }
+
+    seeDetail (url: string): void {
+        window.location.href = url
+    }
 }

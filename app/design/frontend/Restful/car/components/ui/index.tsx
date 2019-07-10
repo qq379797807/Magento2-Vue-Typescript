@@ -9,6 +9,7 @@ import Button from './element/button.vue'
 import Select from './element/select.vue'
 import Collapse from './module/collapse.vue'
 import CollapsePanel from './module/panel.vue'
+import Qplus from './module/qplus.vue'
 import Table from './table/table.vue'
 import TableColumn from './table/column.vue'
 
@@ -23,6 +24,7 @@ const component: any[] = [
     Select,
     Collapse,
     CollapsePanel,
+    Qplus,
     Table,
     TableColumn
 ]

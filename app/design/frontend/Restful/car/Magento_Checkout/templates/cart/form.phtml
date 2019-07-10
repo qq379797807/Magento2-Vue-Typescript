@@ -5,7 +5,7 @@
 <?= $block->getChildHtml('form_before') ?>
 <v-shipping inline-template>
     <div class="in-shipping">
-        <v-table :data="quoteItemData">
+        <v-table :data="quoteItemData" :drag="true">
             <v-table-column :label="i18n.item">
                 <template slot-scope="scope">
                     <a :href="filterUrl(scope.row)" :title="scope.row.name">

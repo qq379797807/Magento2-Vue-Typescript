@@ -12,6 +12,19 @@
     }
 }
 
+.in-method,
+.in-payment {
+    ul {
+        margin: 2rem 0;
+        padding: 1rem 2rem;
+        border: 1px dashed $border__color;
+
+        li {
+            margin: 2rem 0;
+        }
+    }
+}
+
 .v-form-item {
     margin-bottom: 1rem;
 }
@@ -21,7 +34,8 @@
     margin-bottom: .5rem;
 }
 
-.v-checkbox-text {
+.v-checkbox-text,
+.radio-text {
     display: inline-block;
     margin-left: .5rem;
 }
@@ -45,6 +59,11 @@
         padding: 2rem 0;
         justify-content: space-between;
         align-items: center;
+
+        .v-btn {
+            flex-basis: 100%;
+            padding: 1.5rem;
+        }
     }
 }
 
@@ -53,5 +72,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        img {
+            display: block;
+        }
     }
 }

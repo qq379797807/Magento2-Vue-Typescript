@@ -10,6 +10,7 @@
                     <img v-lazy="item.thumbnail" />
                     <span v-text="item.name"></span>
                 </a>
+                <v-qplus name="qty" v-model="item.qty"></v-qplus>
                 <p class="in-price" v-text="priceFormat(item.base_price)"></p>
             </li>
         </ul>
@@ -65,8 +66,7 @@
             <a href="javacript:;" class="in-agree" v-text="i18n.agreement"></a>
         </v-checkbox>
         <div class="in-button">
-            <v-button type="primary" native="button" v-text="i18n.placeOrder" @click="checkout"></v-button>
-            <v-button type="primary" native="button" v-text="i18n.goShopping" @click="shopping"></v-button>
+            <v-button type="primary" native="button" :disabled="disabled" v-text="i18n.placeOrder" @click="checkout"></v-button>
         </div>
     </div>
 </template>
@@ -80,7 +80,6 @@ export default {
         i18n: {
             summaryitle: 'Order Review',
             placeOrder: 'Place Order',
-            goShopping: 'Go Shopping',
             coupon: 'Enter discount code',
             gift: 'Enter gift card code',
             comments: 'Enter comments',
@@ -91,7 +90,8 @@ export default {
         gift: '',
         comments: '',
         agreement: false,
-        autoHeight: true
+        autoHeight: true,
+        disabled: true
     }),
     computed: {
         ...mapState([
@@ -109,9 +109,6 @@ export default {
     methods: {
         init () {
             
-        },
-        shopping () {
-            window.location.href = this.$store.state.baseUrl
         },
         checkout () {
             console.log(`Go checkout ...`)

@@ -2,7 +2,7 @@
     <label :class="{
         'disabled':disabled,
         'checked':isChecked === modelValue, [prefix+'-radio']: true}">
-        <input type="radio" v-model="modelValue" :value="isChecked" @change="_onChange" :disabled="disabled" />
+        <input type="radio" v-bind="$attrs" v-model="modelValue" :value="isChecked" @change="_onChange" :disabled="disabled" />
         <span class="radio-inner"></span>
         <span class="radio-text"><slot/></span>
     </label>
@@ -13,6 +13,7 @@ const prefix = 'v'
 
 export default {
     name: `${prefix}-radio`,
+    inheritAttrs: false,
     data: () => ({
         prefix: prefix,
         isChecked: null,

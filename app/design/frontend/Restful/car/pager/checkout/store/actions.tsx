@@ -2,14 +2,14 @@ import { ActionTree } from 'vuex'
 import api from '../../api/api'
 
 const actions: ActionTree<any, any> = {
-    async validateEmail({ commit, state, getters }, email: string) {
-        let url = `rest/default/V1/customers/isEmailAvailable`
+    async validateEmail({ commit, getters }, email: string) {
+        let url = `rest/${getters.storeCode}/V1/customers/isEmailAvailable`
         let data: any = {
             'customerEmail': email
         }
         
-        let res = await api.post(url, data)
-        console.log(res)
+        let res: any = await api.post(url, data)
+        commit('valideEmail', { item: 'exist', value: res })
     },
     updateShippingMethods({ commit, getters }, countryId: any) {
         let data = {

@@ -40,6 +40,12 @@
                     </v-form-item>
                 </template>
             </v-form>
+            <ul class="list" v-if="paymentMethods.length > 0">
+                <li v-for="(method, index) in paymentMethods" :key="index">
+                    <v-radio name="payment[method]" v-model="selectPayment" :checked="method.value">{{method.label}}</v-radio>
+                </li>
+            </ul>
+            <p class="no" v-else v-text="i18n.noMethod"></p>
         </div>
     </div>
 </template>
@@ -63,7 +69,8 @@ export default {
             company: 'Company',
             phone: 'Phone Number',
             chooseCountry: 'Choose Country',
-            chooseRegion: 'Choose Region'
+            chooseRegion: 'Choose Region',
+            noMethod: 'There is no available payment.'
         },
         filterable: true,
         icon: true,
@@ -80,11 +87,13 @@ export default {
         phone: '',
         selectCountry: '',
         selectRegion: '',
-        showRegion: false
+        showRegion: false,
+        selectPayment: ''
     }),
     computed: {
         ...mapState([
-            'countries'
+            'countries',
+            'paymentMethods'
         ])
     },
     mounted () {

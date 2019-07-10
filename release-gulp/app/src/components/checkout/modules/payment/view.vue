@@ -38,8 +38,17 @@
                     <v-form-item :label="i18n.phone">
                         <v-input name="telephone" v-model="phone"></v-input>
                     </v-form-item>
+                    <v-form-item>
+                        <v-checkbox v-model="saveBook">{{i18n.saveBook}}</v-checkbox>
+                    </v-form-item>
                 </template>
             </v-form>
+            <ul class="list" v-if="paymentMethods.length > 0">
+                <li v-for="(method, index) in paymentMethods" :key="index">
+                    <v-radio name="payment[method]" v-model="selectPayment" :checked="method.value">{{method.label}}</v-radio>
+                </li>
+            </ul>
+            <p class="no" v-else v-text="i18n.noMethod"></p>
         </div>
     </div>
 </template>
@@ -63,7 +72,9 @@ export default {
             company: 'Company',
             phone: 'Phone Number',
             chooseCountry: 'Choose Country',
-            chooseRegion: 'Choose Region'
+            chooseRegion: 'Choose Region',
+            noMethod: 'There is no available payment.',
+            saveBook: 'Save in address book'
         },
         filterable: true,
         icon: true,
@@ -78,13 +89,16 @@ export default {
         zip: '',
         company: '',
         phone: '',
+        saveBook: false,
         selectCountry: '',
         selectRegion: '',
-        showRegion: false
+        showRegion: false,
+        selectPayment: ''
     }),
     computed: {
         ...mapState([
-            'countries'
+            'countries',
+            'paymentMethods'
         ])
     },
     mounted () {

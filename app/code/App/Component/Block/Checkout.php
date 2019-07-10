@@ -5,17 +5,25 @@ class Checkout extends \Magento\Framework\View\Element\Template
 {
     private $helper;
     private $_jsonHelper;
+    private $shippingConfig;
+    private $paymentConfig;
+    private $scopeConfig;
 
     public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
         \App\Component\Helper\Data $helper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
-        \Magento\Framework\View\Element\Template\Context $context
+        \Magento\Shipping\Model\Config $shippingConfig,
+        \Magento\Payment\Model\Config $paymentConfig,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     )
     {
         parent::__construct($context);
-        $this->_isScopePrivate = true;
         $this->helper = $helper;
         $this->_jsonHelper = $JsonHelper;
+        $this->shippingConfig = $shippingConfig;
+        $this->paymentConfig = $paymentConfig;
+        $this->scopeConfig = $scopeConfig;
     }
 
     public function createObject($className)
@@ -55,6 +63,50 @@ class Checkout extends \Magento\Framework\View\Element\Template
         return $result;
     }
 
+    public function getShippingMethods() {
+        $methods = [];
+        $activeCarriers = $this->shippingConfig->getActiveCarriers();
+        foreach($activeCarriers as $carrierCode => $carrierModel) {
+            $options = [];
+            $carrierMethods = $carrierModel->getAllowedMethods();
+
+            if ($carrierMethods) {
+                foreach ($carrierMethods as $methodCode => $method) {
+                    $options[]= [
+                        'carrier_code' => $methodCode,
+                        'label' => $method
+                    ];
+                    // base_amount price_excl_tax price_incl_tax
+                }
+
+                $carrierTitle = $this->scopeConfig->getValue('carriers/'. $carrierCode . '/title');
+            }
+
+            $methods[] = [
+                'options' => $options,
+                'carrier_title' => $carrierTitle,
+                'available' => $carrierModel->isActive()
+            ];
+        }
+
+        return $methods;   
+    }
+
+    public function getPaymentMethods()
+    {
+        $methods = [];
+        $payments = $this->paymentConfig->getActiveMethods();
+        foreach ($payments as $paymentCode => $paymentModel) {
+            $paymentTitle = $this->scopeConfig->getValue('payment/' . $paymentCode . '/title');
+            
+            $methods[] = [
+                'label' => $paymentTitle,
+                'value' => $paymentCode
+            ];
+        }
+        return $methods;
+    }
+
     public function getCheckoutJson($version = 'pc')
     {
         $data = array();
@@ -62,6 +114,8 @@ class Checkout extends \Magento\Framework\View\Element\Template
         $checkoutConfig = $checkoutHelper->getCheckoutConfig();
         $data = $checkoutConfig;
         $data['country'] = $this->getAddressRegion();
+        $data['shippingMethods'] = $this->getShippingMethods();
+        $data['paymentMethods'] = $this->getPaymentMethods();
 
         return $this->_jsonHelper->jsonEncode($data);
     }

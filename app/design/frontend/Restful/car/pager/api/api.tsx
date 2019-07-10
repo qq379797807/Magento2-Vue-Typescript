@@ -4,27 +4,30 @@ import throwErr from './err'
 declare let window: any
 
 let params: any = {
-    version: 'pc',
     form_key: window.commonJson.form_key
 }
 
+axios.defaults.baseURL = window.commonJson.base_url
+axios.defaults.headers['Accept'] = 'application/json'
+axios.defaults.headers['Content-Type'] = 'application/json'
+
 axios.interceptors.request.use(config => {
-    config.headers['Content-Type'] = 'application/json'
-    config.headers['tocken'] = window.commonJson.form_key
-    config.baseURL = window.commonJson.base_url
     config.timeout = 10 * 1000
     return config
 }, error => {
     return Promise.reject(error)
 })
 
-axios.interceptors.response.use(response => {
-    if (response.data.code === 200) {  
-        return Promise.resolve(response.data)
-    } else if (response.data.code === 1401) {
-        return Promise.reject(response.data)
+axios.interceptors.response.use(res => {
+    let xhr: any = res.request
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200 || xhr.status == 304) {
+            return Promise.resolve(res)
+        } else {
+            return Promise.resolve(res)
+        }
     } else {
-        return Promise.reject(response.data)
+        return Promise.resolve(xhr)
     }
 }, (error: any) => {
     if (error && error.response) {
@@ -41,13 +44,12 @@ const api: any = {
     async get (url: string, data: any) {
         try {
             let res: any = await axios.get(url, { params: Object.assign(params, data) })
-            res = res.data
 
             return new Promise((resolve, reject) => {
-                if (res.code === 0) {
-                    resolve(res)
+                if (res.status == 200) {
+                    resolve(res.data)
                 } else {
-                    reject(res)
+                    reject(res.data)
                 }
             })
         } catch (err) {
@@ -57,13 +59,12 @@ const api: any = {
     async post (url: string, data: any) {
         try {
             let res: any = await axios.post(url, Object.assign(params, data))
-            res = res.data
 
             return new Promise((resolve, reject) => {
-                if (res.code === 0) {
-                    resolve(res)
+                if (res.status == 200) {
+                    resolve(res.data)
                 } else {
-                    reject(res)
+                    reject(res.data)
                 }
             })
         } catch (err) {

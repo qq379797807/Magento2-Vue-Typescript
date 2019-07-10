@@ -59,6 +59,17 @@ $form-calendar-icon__color: $primary__color !default;
     margin: 2rem 0;
 }
 
+.v-qplus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+        width: 2rem;
+        text-align: center;
+    }
+}
+
 .fieldset {
     @include lib-form-fieldset();
     &:last-child {
@@ -102,22 +113,6 @@ $form-calendar-icon__color: $primary__color !default;
     }
 }
 
-.legend + .fieldset,
-.legend + div {
-    clear: both;
-}
-
-.legend {
-    strong {
-        margin-left: $indent__xs;
-    }
-}
-
-fieldset.field {
-    border: 0;
-    padding: 0;
-}
-
 .field {
     &.date {
         @extend .abs-field-date;
@@ -136,76 +131,10 @@ fieldset.field {
     }
 }
 
-.field-error,
-div.mage-error[generated] {
-    margin-top: 7px;
-}
-
-.field-error {
-    @include lib-form-validation-note();
-}
-
-.field .tooltip {
-    @include lib-tooltip(right);
-    .tooltip-content {
-        min-width: 200px;
-        white-space: normal;
-    }
-}
-
 input,
 select {
     &:focus ~ .tooltip .tooltip-content {
         display: block;
-    }
-}
-
-._has-datepicker {
-    ~ .ui-datepicker-trigger {
-        @include lib-button-reset();
-        @include lib-icon-font(
-            $_icon-font-content     : $icon-calendar,
-            $_icon-font-color       : $primary__color__lighter,
-            $_icon-font-size        : $icon-calendar__font-size,
-            $_icon-font-line-height : $icon-calendar__font-size,
-            $_icon-font-display     : block,
-            $_icon-font-text-hide   : true
-        );
-        display: inline-block;
-        vertical-align: middle;
-
-        &:focus {
-            box-shadow: none;
-            outline: 0;
-        }
-    }
-}
-
-//
-//  Sidebar forms
-//  -----------------------------------------
-
-.sidebar {
-    .fieldset {
-        margin: 0;
-
-        & > .field:not(.choice),
-        .fields > .field {
-            &:not(:last-child) {
-                margin: 0 0 $form-field__vertical-indent;
-            }
-
-            .label {
-                margin: 0 0 4px;
-                padding: 0 0 $indent__xs;
-                text-align: left;
-                width: 100%;
-            }
-
-            .control {
-                width: 100%;
-            }
-        }
     }
 }
 
