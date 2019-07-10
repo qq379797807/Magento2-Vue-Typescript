@@ -11,6 +11,7 @@
         <referenceContainer name="cart.summary">
             <block class="Magento\Framework\View\Element\Template" name="vue.cart.gift" before="checkout.cart.methods.bottom" template="Magento_Checkout::cart/gift.phtml" />
         </referenceContainer>
+        <referenceBlock name="checkout.cart.order.actions.gift_options" remove="true" />
         <move element="cart.summary" destination="vue.cart.summary" />
     </body>
 </page>

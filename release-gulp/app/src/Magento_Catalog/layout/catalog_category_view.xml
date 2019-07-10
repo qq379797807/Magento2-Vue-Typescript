@@ -8,6 +8,7 @@
         <referenceContainer name="columns.top">
             <block class="Magento\Framework\View\Element\Template" name="vue.category.view" after="-"  template="Magento_Catalog::category/view.phtml" />
         </referenceContainer>
+        <referenceBlock name="category.product.list.additional.wishlist_addto" remove="true" />
         <move element="category.view.container" destination="vue.category.view" />
     </body>
 </page>

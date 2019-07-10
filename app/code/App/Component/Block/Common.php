@@ -47,6 +47,11 @@ class Common extends \Magento\Framework\View\Element\Template
         return \Magento\Framework\App\ObjectManager::getInstance()->create($className);
     }
 
+    public function getObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
+    }
+
     public function getCurrentStore()
     {
         if ($this->currentStore) {
@@ -142,6 +147,13 @@ class Common extends \Magento\Framework\View\Element\Template
         $pageCache = $pageCacheHelper->getScriptOptions();
         $data['pageCache'] = $this->jsonHelper->jsonDecode($pageCache);
 
+        $translateHelper = $this->createObject('Magento\Translation\Block\Js');
+        $data['translate'] = [
+            'enabled' => $translateHelper->dictionaryEnabled(),
+            'dictionaryFile' => 'js-translation.json',
+            'version' => $translateHelper->getTranslationFileVersion()
+        ];
+
         $storeCode = $currentStore->getCode();;
         $data['store_code'] = $storeCode;
         $data['country_id'] = $this->directoryHelper->getDefaultCountry($storeCode);
@@ -158,7 +170,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['stores'] = $storeArr;
         $data['base_url'] = $this->urlBuilder->getUrl('/');
         $data['media_path'] = $currentStore->getBaseUrl('media');
-        $data['img_path'] = $this->getViewFileUrl('images');
+        $data['pub_path'] = $this->getViewFileUrl('/');
         $welcomeMsg = __("welcome to our online website")->render();
         $data['login_url'] = $this->urlBuilder->getUrl("customer/account/login", array('uenc' => $refer));
         $data['is_login'] = false;
@@ -171,7 +183,7 @@ class Common extends \Magento\Framework\View\Element\Template
         }
         $data['welcome'] = $welcomeMsg;
 
-        $logoObject = $objectManger->create('Magento\Theme\Block\Html\Header\Logo');
+        $logoObject = $this->createObject('Magento\Theme\Block\Html\Header\Logo');
         $logo = $logoObject ->getLogoSrc();
         $data['logo']['url'] = $logo;
         $data['logo']['link'] = $this->urlBuilder->getUrl('/');
@@ -179,18 +191,18 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['logo']['height'] = $logoObject->getLogoHeight();
         $data['logo']['alt'] = $logoObject->getLogoAlt();
 
-        $pageTitle = $objectManger->create('Magento\Theme\Block\Html\Title');
+        $pageTitle = $this->createObject('Magento\Theme\Block\Html\Title');
         $title = $pageTitle->getPageHeading();
         $data['title'] = $title;
 
-        $minicartHelper = $objectManger->create('Magento\Checkout\Block\Cart\Sidebar');
+        $minicartHelper = $this->createObject('Magento\Checkout\Block\Cart\Sidebar');
         $minicart = $minicartHelper->getConfig();
         $data['minicart'] = $minicart;
 
         $categories = $this->getStoresSubCategories();
         $data['categories'] = $categories;
 
-        $searchTerm = $objectManger->create('Magento\Search\Block\Term');
+        $searchTerm = $this->createObject('Magento\Search\Block\Term');
         if (empty($this->terms)) {
             $this->terms = [];
             $terms = $this->queryCollectionFactory->create()->setPopularQueryFilter(
@@ -230,12 +242,12 @@ class Common extends \Magento\Framework\View\Element\Template
             }
         }
 
-        $footer = $objectManger->create('Magento\Theme\Block\Html\Footer');
+        $footer = $this->createObject('Magento\Theme\Block\Html\Footer');
         $copyright = $footer ->getCopyright();
         $data['copyright'] = $copyright;
         $data['cart_qty'] = $this->getCheckoutSession()->getQuote()->getItemsSummaryQty();
 
-        $currencyHelper = $objectManger->create('Magento\Directory\Model\PriceCurrency');
+        $currencyHelper = $this->createObject('Magento\Directory\Model\PriceCurrency');
         $currentStore = $this->getCurrentStore();
         $current_currency = $currentStore->getCurrentCurrencyCode();
         $available_currency = $currentStore->getAvailableCurrencyCodes();
