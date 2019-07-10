@@ -22,7 +22,7 @@ export class VTotals extends Vue {
     render (h: CreateElement): JSX.Element {
         return (
             <div class="in-totals">
-                 <div class="in-methods">
+                <div class="in-methods">
                     {this.shippingMethods.length > 0 ? (
                         <ul class="list">
                             {this.shippingMethods.map((item: any, key: number) => {
