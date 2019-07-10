@@ -1,16 +1,17 @@
 <v-discount inline-template>
     <div class="in-discount">
-        <h3 class="title" v-text="i18n.discountTilte"></h3>
-        <div class="content">
-            <v-form class="v-discount" action="<?= $block->getUrl('checkout/cart/couponPost') ?>" method="post">
-                <v-form-item :label="i18n.coupon">
-                    <v-input name="coupon_code" v-model="coupon"></v-input>
-                </v-form-item>
-                <v-form-item :classes="'in-flex'">
-                    <v-button type="primary" native="button" v-text="i18n.applay"></v-button>
-                    <v-button type="primary" native="button" v-text="i18n.cancelCoupon"></v-button>
-                </v-form-item>
-            </v-form>
-        </div>
+        <v-collapse>
+            <v-collapse-panel name="discount">
+                <h4 v-text="i18n.coupon"></h4>
+                <template slot="content">
+                    <v-form-item>
+                        <v-input name="coupon_code" v-model="coupon" :placeholder="i18n.coupon"></v-input>
+                    </v-form-item>
+                    <v-form-item>
+                        <v-button type="primary" native="button" v-text="i18n.applay"></v-button>
+                    </v-form-item>
+                </template>
+            </v-collapse-panel>
+        </v-collapse>
     </div>
 </v-discount>

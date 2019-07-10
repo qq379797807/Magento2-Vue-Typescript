@@ -19,7 +19,11 @@
                     <span v-text="priceFormat(scope.row.base_price_incl_tax)"></span>
                 </template>
             </v-table-column>
-            <v-table-column :label="i18n.qty" prop="qty"></v-table-column >
+            <v-table-column :label="i18n.qty">
+                <template slot-scope="scope">
+                    <v-qplus name="qty" v-model="scope.row.qty"></v-qplus>
+                </template>
+            </v-table-column >
             <v-table-column :label="i18n.subtotal">
                 <template slot-scope="scope">
                     <span v-text="priceFormat(scope.row.row_total_incl_tax)"></span>
@@ -32,6 +36,10 @@
                 </template>
             </v-table-column>
         </v-table>
+        <div class="in-buttons">
+            <v-button type="primary" native="button" v-text="i18n.continue" @click="shopping"></v-button>
+            <v-button type="primary" native="button" v-text="i18n.clear" @click="clearCart"></v-button>
+        </div>
     </div>
 </v-shipping>
 

@@ -4,6 +4,7 @@ import Component from 'vue-class-component'
 import { VEstimate } from './estimate'
 import { VTotals } from './totals'
 import { VDiscount } from './discount'
+import { VGift } from './gift'
 
 @Component({
     name: 'v-summary',
@@ -15,7 +16,8 @@ import { VDiscount } from './discount'
     components: {
         VEstimate,
         VTotals,
-        VDiscount
+        VDiscount,
+        VGift
     },
     computed: {
         ...mapState([

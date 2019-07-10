@@ -5,10 +5,8 @@ import Component from 'vue-class-component'
     name: 'v-totals',
     data: () => ({
         i18n: {
-            discountTilte: 'Apply Discount Code',
             coupon: 'Enter discount code',
-            applay: 'Apply Discount',
-            cancelCoupon: 'Cancel Coupon'
+            applay: 'Apply'
         },
         coupon: ''
     })

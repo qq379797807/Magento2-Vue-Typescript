@@ -43,6 +43,16 @@
     }
 }
 
+.in-shipping {
+    .in-buttons {
+        padding: 2rem 1rem;
+
+        button {
+            margin-right: 2rem;
+        }
+    }
+}
+
 .cart-container {
     .form-cart {
         @extend .abs-shopping-cart-items;

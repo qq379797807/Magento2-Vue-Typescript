@@ -1,11 +1,11 @@
-<v-discount inline-template>
-    <div class="in-discount">
+<v-gift inline-template>
+    <div class="in-gift">
         <v-collapse>
-            <v-collapse-panel name="discount">
-                <h3 v-text="i18n.coupon"></h3>
+            <v-collapse-panel name="gift">
+                <h4 v-text="i18n.gift"></h4>
                 <template slot="content">
                     <v-form-item>
-                        <v-input name="coupon_code" v-model="coupon" :placeholder="i18n.coupon"></v-input>
+                        <v-input name="gift_code" v-model="gift" :placeholder="i18n.gift"></v-input>
                     </v-form-item>
                     <v-form-item>
                         <v-button type="primary" native="button" v-text="i18n.applay"></v-button>
@@ -14,4 +14,4 @@
             </v-collapse-panel>
         </v-collapse>
     </div>
-</v-discount>
+</v-gift>

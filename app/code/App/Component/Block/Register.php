@@ -5,13 +5,11 @@ use Magento\Checkout\Model\Cart as CustomerCart;
 class Register extends \Magento\Framework\View\Element\Template
 {
     protected $urlBuilder;
-    protected $formKey;
-    private $_jsonHelper;
+    private $jsonHelper;
     protected $urlEncoder;
 
     public function __construct(
         \Magento\Framework\Json\Helper\Data $JsonHelper,
-        \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Url\EncoderInterface $urlEncoder,
         \Magento\Framework\View\Element\Template\Context $context
     )
@@ -19,8 +17,7 @@ class Register extends \Magento\Framework\View\Element\Template
         parent::__construct($context);
         $this->urlBuilder = $context->getUrlBuilder();
         $this->urlEncoder =$urlEncoder;
-        $this->formKey =$formKey;
-        $this->_jsonHelper =$JsonHelper;
+        $this->jsonHelper =$JsonHelper;
     }
 
     public function getObject($className)
@@ -90,6 +87,6 @@ class Register extends \Magento\Framework\View\Element\Template
             'options' => $genderOptions
         ];
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

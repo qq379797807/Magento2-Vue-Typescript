@@ -3,7 +3,7 @@ namespace App\Component\Block;
 
 class Password extends \Magento\Framework\View\Element\Template
 {
-    private $_jsonHelper;
+    private $jsonHelper;
 
     public function __construct(
         \Magento\Framework\Json\Helper\Data $JsonHelper,
@@ -11,7 +11,7 @@ class Password extends \Magento\Framework\View\Element\Template
     )
     {
         parent::__construct($context);
-        $this->_jsonHelper =$JsonHelper;
+        $this->jsonHelper =$JsonHelper;
     }
 
     public function createObject($className)
@@ -29,6 +29,6 @@ class Password extends \Magento\Framework\View\Element\Template
         $passwordHelper = $this->createObject('Magento\Customer\Block\Account\Forgotpassword');
         $data['password_action'] = $passwordHelper->getUrl('*/*/forgotpasswordpost');
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

@@ -61,12 +61,24 @@ $form-calendar-icon__color: $primary__color !default;
 
 .v-qplus {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     input {
         width: 2rem;
+        padding: 0 1rem;
         text-align: center;
+    }
+
+    button {
+        padding: .95rem;
+    }
+
+    .v-btn-reduce {
+        border-radius: 3px 0 0 3px;
+    }
+
+    .v-btn-increase {
+        border-radius: 0 3px 3px 0;
     }
 }
 

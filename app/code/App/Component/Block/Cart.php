@@ -3,19 +3,15 @@ namespace App\Component\Block;
 
 class Cart extends \Magento\Framework\View\Element\Template
 {
-    private $helper;
-    private $_jsonHelper;
+    private $jsonHelper;
 
     public function __construct(
-        \App\Component\Helper\Data $helper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Framework\View\Element\Template\Context $context
     )
     {
         parent::__construct($context);
-        $this->_isScopePrivate = true;
-        $this->helper = $helper;
-        $this->_jsonHelper = $JsonHelper;
+        $this->jsonHelper = $JsonHelper;
     }
 
     public function getObject($className)
@@ -63,6 +59,6 @@ class Cart extends \Magento\Framework\View\Element\Template
         $data = $cartConfig;
         $data['country'] = $this->getAddressRegion();
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

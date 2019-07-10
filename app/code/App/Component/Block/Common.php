@@ -5,25 +5,23 @@ class Common extends \Magento\Framework\View\Element\Template
 {   
     private $stores;
     private $checkoutsesion;
-    private $helper;
     private $directoryHelper;
-    private $current_store;
-    private $_jsonHelper;
+    private $currentStore;
+    private $jsonHelper;
     protected $urlBuilder;
-    protected $_storeManager;
+    protected $storeManager;
     protected $formKey;
     protected $urlEncoder;
     protected $customerSession;
-    protected $_categoryCollectionFactory;
-    protected $_terms;
-    protected $_minPopularity;
-    protected $_maxPopularity;
-    protected $_queryCollectionFactory;
+    protected $categoryCollectionFactory;
+    protected $terms;
+    protected $minPopularity;
+    protected $maxPopularity;
+    protected $queryCollectionFactory;
 
     public function __construct(
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Checkout\Model\Session $checkoutsesion,
-        \App\Component\Helper\Data $helper,
         \Magento\Directory\Helper\Data $directoryHelper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Framework\Data\Form\FormKey $formKey,
@@ -33,17 +31,15 @@ class Common extends \Magento\Framework\View\Element\Template
     )
     {
         parent::__construct($context);
-        $this->_isScopePrivate = true;
         $this->urlBuilder = $context->getUrlBuilder();
-        $this->helper = $helper;
         $this->directoryHelper = $directoryHelper;
         $this->urlEncoder = $urlEncoder;
         $this->formKey = $formKey;
-        $this->_jsonHelper = $JsonHelper;
+        $this->jsonHelper = $JsonHelper;
         $this->customerSession = $customerSession;
         $this->checkoutsesion = $checkoutsesion;
-        $this->_queryCollectionFactory = $queryCollectionFactory;
-        $this->_storeManager = $context->getStoreManager();
+        $this->queryCollectionFactory = $queryCollectionFactory;
+        $this->storeManager = $context->getStoreManager();
     }
 
     public function createObject($className)
@@ -53,12 +49,12 @@ class Common extends \Magento\Framework\View\Element\Template
 
     public function getCurrentStore()
     {
-        if ($this->current_store) {
-            return $this->current_store;
+        if ($this->currentStore) {
+            return $this->currentStore;
         }
 
-        $this->current_store = $this->_storeManager->getStore();
-        return $this->current_store;
+        $this->currentStore = $this->storeManager->getStore();
+        return $this->currentStore;
     }
 
     public function getCustomerSession()
@@ -76,7 +72,7 @@ class Common extends \Magento\Framework\View\Element\Template
         if ($this->stores) {
             return $this->stores;
         }
-        $this->stores = $this->_storeManager->getStores();
+        $this->stores = $this->storeManager->getStores();
         return $this->stores;
     }
 
@@ -126,7 +122,7 @@ class Common extends \Magento\Framework\View\Element\Template
     {
         $data = array();
         $stores = $this->getStores();
-        $current_store = $this->getCurrentStore();
+        $currentStore = $this->getCurrentStore();
         $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
         $storeArr = array();
         $refer = $this->urlEncoder->encode($this->urlBuilder->getCurrentUrl());
@@ -144,9 +140,9 @@ class Common extends \Magento\Framework\View\Element\Template
         
         $pageCacheHelper = $this->createObject('Magento\PageCache\Block\Javascript');
         $pageCache = $pageCacheHelper->getScriptOptions();
-        $data['pageCache'] = $this->_jsonHelper->jsonDecode($pageCache);
+        $data['pageCache'] = $this->jsonHelper->jsonDecode($pageCache);
 
-        $storeCode = $current_store->getCode();;
+        $storeCode = $currentStore->getCode();;
         $data['store_code'] = $storeCode;
         $data['country_id'] = $this->directoryHelper->getDefaultCountry($storeCode);
 
@@ -161,7 +157,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['uenc'] = $uenc;
         $data['stores'] = $storeArr;
         $data['base_url'] = $this->urlBuilder->getUrl('/');
-        $data['media_path'] = $current_store->getBaseUrl('media');
+        $data['media_path'] = $currentStore->getBaseUrl('media');
         $data['img_path'] = $this->getViewFileUrl('images');
         $welcomeMsg = __("welcome to our online website")->render();
         $data['login_url'] = $this->urlBuilder->getUrl("customer/account/login", array('uenc' => $refer));
@@ -195,34 +191,34 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['categories'] = $categories;
 
         $searchTerm = $objectManger->create('Magento\Search\Block\Term');
-        if (empty($this->_terms)) {
-            $this->_terms = [];
-            $terms = $this->_queryCollectionFactory->create()->setPopularQueryFilter(
-                $this->_storeManager->getStore()->getId()
+        if (empty($this->terms)) {
+            $this->terms = [];
+            $terms = $this->queryCollectionFactory->create()->setPopularQueryFilter(
+                $this->storeManager->getStore()->getId()
             )->setPageSize(
                 6
             )->load()->getItems();
             if (count($terms) > 0) {
-                $this->_maxPopularity = reset($terms)->getPopularity();
-                $this->_minPopularity = end($terms)->getPopularity();
-                $range = $this->_maxPopularity - $this->_minPopularity;
+                $this->maxPopularity = reset($terms)->getPopularity();
+                $this->minPopularity = end($terms)->getPopularity();
+                $range = $this->maxPopularity - $this->minPopularity;
                 foreach ($terms as $term) {
                     if (!$term->getPopularity()) {
                         continue;
                     }
 
-                    $term->setRatio(($term->getPopularity() - $this->_minPopularity) / $range);
-                    $this->_terms['query_text'] = $term->getData('query_text');
-                    $this->_terms['url'] = $searchTerm -> getSearchUrl($term);
-                    $data['search_terms'][]= $this->_terms;
+                    $term->setRatio(($term->getPopularity() - $this->minPopularity) / $range);
+                    $this->terms['query_text'] = $term->getData('query_text');
+                    $this->terms['url'] = $searchTerm -> getSearchUrl($term);
+                    $data['searchterms'][]= $this->terms;
                 }
             }
 
         }
         
         $recentSearch = [];
-        $recent_searches = $this->_queryCollectionFactory->create()->setRecentQueryFilter(
-            $this->_storeManager->getStore()->getId()
+        $recent_searches = $this->queryCollectionFactory->create()->setRecentQueryFilter(
+            $this->storeManager->getStore()->getId()
         )->setPageSize(
             6
         )->load()->getItems();
@@ -254,6 +250,6 @@ class Common extends \Magento\Framework\View\Element\Template
             $data['currency'][] = $currency;
         }
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

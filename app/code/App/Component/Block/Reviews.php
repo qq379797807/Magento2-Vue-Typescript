@@ -3,7 +3,7 @@ namespace App\Component\Block;
 
 class Reviews extends \Magento\Framework\View\Element\Template
 {
-    private $_jsonHelper;
+    private $jsonHelper;
 
     public function __construct(
         \Magento\Framework\Json\Helper\Data $JsonHelper,
@@ -11,7 +11,7 @@ class Reviews extends \Magento\Framework\View\Element\Template
     )
     {
         parent::__construct($context);
-        $this->_jsonHelper =$JsonHelper;
+        $this->jsonHelper =$JsonHelper;
     }
 
     public function createObject($className)
@@ -38,6 +38,6 @@ class Reviews extends \Magento\Framework\View\Element\Template
 
         $data['reviews'] = $reviews;
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

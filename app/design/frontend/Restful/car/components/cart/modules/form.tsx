@@ -12,11 +12,14 @@ import Component from 'vue-class-component'
             subtotal: 'Subtotal',
             operation: 'Operation',
             moveWishlist: 'Move Wishlist',
-            remove: 'Remove Item'
+            remove: 'Remove Item',
+            continue: 'Continue Shopping',
+            clear: 'Clear Cart'
         }
     }),
     computed: {
         ...mapState([
+            'baseUrl',
             'quoteItemData'
         ]),
         ...mapGetters([
@@ -26,12 +29,12 @@ import Component from 'vue-class-component'
     }
 })
 export class VShipping extends Vue {
-    mounted () {
-        this.init()
+    shopping () {
+        window.location.href = this.baseUrl
     }
 
-    init () {
-
+    clearCart () {
+        
     }
 
     moveWishlist (item: any) {

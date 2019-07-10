@@ -8,6 +8,9 @@
         <referenceContainer name="checkout.cart.container">
             <block class="Magento\Framework\View\Element\Template" name="vue.cart.summary" template="Magento_Checkout::cart/summary.phtml" />
         </referenceContainer>
+        <referenceContainer name="cart.summary">
+            <block class="Magento\Framework\View\Element\Template" name="vue.cart.gift" before="checkout.cart.methods.bottom" template="Magento_Checkout::cart/gift.phtml" />
+        </referenceContainer>
         <move element="cart.summary" destination="vue.cart.summary" />
     </body>
 </page>

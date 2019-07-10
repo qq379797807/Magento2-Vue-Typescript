@@ -1,17 +1,17 @@
 <template>
     <div :class="`${prefix}-qplus`">
-        <button type="button" @click="_reduce">
+        <button type="button" :class="`${prefix}-btn-primary ${prefix}-btn-reduce`" @click="_reduce">
             <i :class="`${prefix}-icon-reduce`"></i>
         </button>
         <input v-bind="$attrs"
             type="number" 
-            :value="value"
+            :value="number"
             :class="{'disabled': disabled, [prefix + '-input-control']: true}"
             :disabled="disabled"
             @input="_input"
             @focus="_focus"
             @blur="_blur" />
-        <button type="button" @click="_increase">
+        <button type="button" :class="`${prefix}-btn-primary ${prefix}-btn-increase`" @click="_increase">
             <i :class="`${prefix}-icon-increase`"></i>
         </button>
     </div>
@@ -25,6 +25,7 @@ export default {
     inheritAttrs: false,
     data: () => ({
         prefix: prefix,
+        number: 1,
         minsV: 1,
         maxsV: 100
     }),
@@ -49,7 +50,13 @@ export default {
         focus: Function,
         blur: Function
     },
+    watch: {
+        value (v) {
+            this.number = v
+        }
+    },
     mounted () {
+        this.number = this.value
         this.minsV = this.mins
         this.maxsV = this.maxs
     },
@@ -80,17 +87,17 @@ export default {
             this.$emit(type, e)
         },
         _reduce () {
-            if (this.value > this.minsV) {
-                this.value -= 1
-                this.$emit('input', this.value)
-                this.change && this.change(this.value)
+            if (this.number > this.minsV) {
+                this.number -= 1
+                this.$emit('input', this.number)
+                this.change && this.change(this.number)
             }
         },
         _increase () {
-            if (this.value < this.maxsV) {
-                this.value += 1
-                this.$emit('input', this.value)
-                this.change && this.change(this.value)
+            if (this.number < this.maxsV) {
+                this.number += 1
+                this.$emit('input', this.number)
+                this.change && this.change(this.number)
             }
         }
     }

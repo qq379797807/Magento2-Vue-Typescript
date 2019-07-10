@@ -38,6 +38,9 @@
                     <v-form-item :label="i18n.phone">
                         <v-input name="telephone" v-model="phone"></v-input>
                     </v-form-item>
+                    <v-form-item>
+                        <v-checkbox v-model="saveBook">{{i18n.saveBook}}</v-checkbox>
+                    </v-form-item>
                 </template>
             </v-form>
             <ul class="list" v-if="paymentMethods.length > 0">
@@ -70,7 +73,8 @@ export default {
             phone: 'Phone Number',
             chooseCountry: 'Choose Country',
             chooseRegion: 'Choose Region',
-            noMethod: 'There is no available payment.'
+            noMethod: 'There is no available payment.',
+            saveBook: 'Save in address book'
         },
         filterable: true,
         icon: true,
@@ -85,6 +89,7 @@ export default {
         zip: '',
         company: '',
         phone: '',
+        saveBook: false,
         selectCountry: '',
         selectRegion: '',
         showRegion: false,

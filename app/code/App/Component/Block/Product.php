@@ -7,11 +7,10 @@ class Product extends \Magento\Framework\View\Element\Template
 {
     private $current_store;
     private $storeManger;
-    private $_jsonHelper;
+    private $jsonHelper;
     protected $scopeConfig;
-    protected $categoryHelper;
     protected $urlEncoder;
-    protected $_catalogData;
+    protected $catalogData;
 
     public function __construct(
         \Magento\Store\Model\StoreManagerInterface $storeManger,
@@ -19,19 +18,17 @@ class Product extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \App\Component\Helper\Category $categoryHelper,
         \Magento\Catalog\Helper\Data $catalogData,
         \Magento\Framework\Url\EncoderInterface $urlEncoder
     )
     {
         parent::__construct($context);
         $this->scopeConfig = $scopeConfig;
-        $this->categoryHelper = $categoryHelper;
         $this->storeManger = $storeManger;
         $this->request = $request;
-        $this->_jsonHelper = $JsonHelper;
+        $this->jsonHelper = $JsonHelper;
         $this->urlEncoder = $urlEncoder;
-        $this->_catalogData = $catalogData;
+        $this->catalogData = $catalogData;
     }
 
     public function getObject($className)
@@ -384,10 +381,10 @@ class Product extends \Magento\Framework\View\Element\Template
                     'link' => $this->_storeManager->getStore()->getBaseUrl()
                 ]
         );
-        $path = $this->_catalogData->getBreadcrumbPath();
+        $path = $this->catalogData->getBreadcrumbPath();
         $path = array_merge($home, $path);
         $result['breadcrumbs'] = $path;
 
-        return $this->_jsonHelper->jsonEncode($result);
+        return $this->jsonHelper->jsonEncode($result);
     }
 }

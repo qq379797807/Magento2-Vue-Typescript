@@ -3,15 +3,13 @@ namespace App\Component\Block;
 
 class Checkout extends \Magento\Framework\View\Element\Template
 {
-    private $helper;
-    private $_jsonHelper;
+    private $jsonHelper;
     private $shippingConfig;
     private $paymentConfig;
     private $scopeConfig;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \App\Component\Helper\Data $helper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Shipping\Model\Config $shippingConfig,
         \Magento\Payment\Model\Config $paymentConfig,
@@ -19,8 +17,7 @@ class Checkout extends \Magento\Framework\View\Element\Template
     )
     {
         parent::__construct($context);
-        $this->helper = $helper;
-        $this->_jsonHelper = $JsonHelper;
+        $this->jsonHelper = $JsonHelper;
         $this->shippingConfig = $shippingConfig;
         $this->paymentConfig = $paymentConfig;
         $this->scopeConfig = $scopeConfig;
@@ -117,6 +114,6 @@ class Checkout extends \Magento\Framework\View\Element\Template
         $data['shippingMethods'] = $this->getShippingMethods();
         $data['paymentMethods'] = $this->getPaymentMethods();
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

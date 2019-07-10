@@ -3,20 +3,16 @@ namespace App\Component\Block;
 
 class Page extends \Magento\Framework\View\Element\Template
 {
-    private $helper;
-    private $_jsonHelper;
+    private $jsonHelper;
     private $_filterProvider;
 
     public function __construct(
-        \App\Component\Helper\Data $helper,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magento\Framework\View\Element\Template\Context $context
     ) {
         parent::__construct($context);
-        $this->_isScopePrivate = true;
-        $this->helper = $helper;
-        $this->_jsonHelper = $JsonHelper;
+        $this->jsonHelper = $JsonHelper;
         $this->_filterProvider = $filterProvider;
     }
 
@@ -39,6 +35,6 @@ class Page extends \Magento\Framework\View\Element\Template
         $data['title'] = $cmsTitle;
         $data['pager'] = $wrapper;
 
-        return $this->_jsonHelper->jsonEncode($data);
+        return $this->jsonHelper->jsonEncode($data);
     }
 }

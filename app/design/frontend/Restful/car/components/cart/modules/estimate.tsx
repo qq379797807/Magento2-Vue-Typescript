@@ -20,7 +20,7 @@ declare let window: any
         zip: '',
         filterable: true,
         icon: true,
-        number: 8,
+        number: 4,
         showRegion: false
     })
 })
@@ -32,7 +32,7 @@ export class VEstimate extends Vue {
     public zip: string = ''
     public filterable: boolean = true
     public icon: boolean = true
-    public number: number = 8
+    public number: number = 4
     public showRegion: boolean = false
 
     mounted () {
