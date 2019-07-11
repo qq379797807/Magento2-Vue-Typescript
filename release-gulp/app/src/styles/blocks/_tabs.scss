@@ -1,0 +1,43 @@
+@include ns(tabs){
+    .tabs-nav {
+        position: relative;
+        height: 4rem;
+        border-bottom: 1px solid $color-gray82;
+        
+        .tabs-tab{
+            float: left;
+            padding: 0 2rem;
+            position: relative;
+            line-height: 4rem;
+            cursor: pointer;
+            z-index: 2;
+
+            &:after {
+                content: '';
+                width: 0;
+                height: 2px;
+                display: block;
+                margin: 0 auto;
+                background: $color-blue1;
+                opacity: 0;
+                transition: all .3s;
+            }
+
+            &.active {
+                &:after {
+                    opacity: 1;
+                    width: 100%;
+                }
+            }
+
+            &.disabled {
+                color: $color-gray60;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .tabs-content {
+        padding: 2rem 0;
+    }
+}

@@ -12,6 +12,8 @@ import CollapsePanel from './module/panel.vue'
 import Qplus from './module/qplus.vue'
 import Table from './table/table.vue'
 import TableColumn from './table/column.vue'
+import Tabs from './tabs/tabs.vue'
+import TabsPanel from './tabs/panel.vue'
 
 const component: any[] = [
     Input,
@@ -26,7 +28,9 @@ const component: any[] = [
     CollapsePanel,
     Qplus,
     Table,
-    TableColumn
+    TableColumn,
+    Tabs,
+    TabsPanel
 ]
 
 const UI: any = {

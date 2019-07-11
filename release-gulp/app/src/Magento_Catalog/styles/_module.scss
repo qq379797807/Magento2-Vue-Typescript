@@ -503,14 +503,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
         }
     }
 
-    .product-info-main .box-tocart {
-        .actions {
-            .action.tocart {
-                @extend .abs-button-responsive-smaller;
-            }
-        }
-    }
-
     .block.related {
         .action.select {
             display: block;
@@ -531,32 +523,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .product-info-main,
-    .product-options-bottom {
-        .box-tocart {
-            display: table;
-
-            .field.qty {
-                display: table-cell;
-            }
-
-            .actions {
-                display: table-cell;
-                padding-top: $indent__m;
-                text-align: center;
-                vertical-align: bottom;
-            }
-        }
-    }
-
-    .product-info-main {
-        .page-title-wrapper {
-            .page-title {
-                margin-top: -13px;
-            }
-        }
-    }
-
     .sidebar {
         .product-items {
             .product-item-info {
@@ -613,34 +579,18 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
 //  ---------------------------------------------
 
 @include min-screen($screen__m) {
+    .product-info-view {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+
     .product-info-main {
-        float: right;
+        flex-basis: 40%;
     }
 
     .product-info-media {
-        float: left;
-        margin-bottom: $indent__m;
-    }
-
-    .page-layout-1column {
-        .product-info-main {
-            width: 40%;
-        }
-        .product-info-media {
-            width: 57%;
-        }
-    }
-
-    .page-layout-2columns-left,
-    .page-layout-2columns-right,
-    .page-layout-3columns {
-        .product-info-main {
-            width: 48%;
-        }
-
-        .product-info-media {
-            width: 50%;
-        }
+        flex-basis: 55%;
     }
 }
 

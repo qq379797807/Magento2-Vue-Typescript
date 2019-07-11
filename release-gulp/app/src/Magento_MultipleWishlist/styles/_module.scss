@@ -62,21 +62,6 @@ $desktop-popup-position-top  : 20% !default;
             }
         }
 
-        .product-info-main &,
-        .block-bundle-summary &,
-        .product-add-form & {
-            .action {
-                &.split,
-                &.toggle {
-                    @include lib-button-s();
-                }
-
-                &.toggle {
-                    padding: 0;
-                }
-            }
-        }
-
         .cart.table-wrapper & {
             margin-bottom: $indent__s;
 
