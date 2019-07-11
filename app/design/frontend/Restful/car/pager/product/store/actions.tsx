@@ -1,5 +1,5 @@
 import { ActionTree } from 'vuex'
-import api from '../../api/api'
+import rest from '../../api/rest'
 
 interface ProductParams {
     product: string,
@@ -12,10 +12,13 @@ interface ProductParams {
 const actions: ActionTree<any, any> = {
     async addToProduct ({ commit, getters }, options: ProductParams) {
         let url = `${getters.postAction}`
-        let data: any = Object.assign({}, options)
-        
-        let res: any = await api.post(url, data)
-        console.log(res)
+        let data: FormData = new FormData();
+
+        for (const [key, value] of Object.entries(options)) {
+            data.append(`${key}`, value)
+        }
+
+        let res: any = await rest.fetch(url, data)
         // commit('addToProduct', { item: 'exist', value: res })
     }
 }

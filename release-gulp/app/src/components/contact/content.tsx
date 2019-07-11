@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VTitle } from '../title/title'
 import { VMessage } from '../message/message'
+import { VContactForm } from './modules/form'
 
 @Component({
     name: 'v-content',
@@ -10,7 +11,8 @@ import { VMessage } from '../message/message'
     }),
     components: {
         VTitle,
-        VMessage
+        VMessage,
+        VContactForm
     }
 })
 export class VContent extends Vue {

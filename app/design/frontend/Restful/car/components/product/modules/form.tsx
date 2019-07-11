@@ -40,7 +40,9 @@ export class VProductForm extends Vue {
         this.addToProduct({
             product: this.productId,
             item: this.productId,
-            qty: this.qty
+            qty: this.qty,
+            selected_configurable_option: '',
+            related_product: ''
         })
     }
 }

@@ -4,7 +4,7 @@ const commonJson = window.commonJson
 const productJson = window.productJson
 
 const state: any = {
-    config: productJson,
+    config: commonJson,
     baseUrl: commonJson.base_url,
     productId: productJson.product_id,
     productAction: productJson.product_action,
