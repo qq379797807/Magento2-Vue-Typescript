@@ -61,18 +61,23 @@ class Product extends \Magento\Framework\View\Element\Template
         $emailHelper = $this->getObject('Magento\Catalog\Helper\Product');
         $product = $this->getObject('Magento\Catalog\Model\Product')->load($id);
         $data['product_id'] = $id;
-        $data['type'] = $this->_request->getParam('type', '');
+        $type = $product->getTypeId();
+        $data['product_type'] = $type;
         $data['email_to'] = $emailHelper->getEmailToFriendUrl($product);
+
+        $viewHelper = $this->createObject('Magento\Catalog\Block\Product\View');
+        $data['default_qty'] = $viewHelper->getProductDefaultQty();
+        $data['product_action'] = $viewHelper->getSubmitUrl($product);
 
         $reviewHelper = $this->createObject('Magento\Review\Block\Product\Review');
         $data['review_url'] = $reviewHelper->getProductReviewUrl();
 
         $configurableHelper = $this->createObject('Magento\Swatches\Block\Product\Renderer\Configurable');
-        $data['configurable'] = [
+        $data['configurable'] = $type === 'configurable' ? [
             'jsonConfig' =>  $this->jsonHelper->jsonDecode($configurableHelper->getJsonConfig()),
             'jsonSwatchConfig' => $this->jsonHelper->jsonDecode($configurableHelper->getJsonSwatchConfig()),
             'mediaCallback' => $configurableHelper->getMediaCallback()
-        ];
+        ] : [];
 
         return $data;
     }

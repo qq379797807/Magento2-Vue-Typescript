@@ -5,34 +5,12 @@
 ?>
 
 <?php $_product = $block->getProduct(); ?>
-<?php $buttonTitle = __('Add to Cart'); ?>
 <?php if ($_product->isSaleable()): ?>
-<div class="box-tocart">
-    <div class="fieldset">
-        <?php if ($block->shouldRenderQuantity()): ?>
-        <div class="field qty">
-            <label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>
-            <div class="control">
-                <input type="number"
-                       name="qty"
-                       id="qty"
-                       value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>"
-                       title="<?= /* @escapeNotVerified */ __('Qty') ?>"
-                       class="input-text qty"
-                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                       />
-            </div>
-        </div>
-        <?php endif; ?>
-        <div class="actions">
-            <button type="submit"
-                    title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
-                    class="action primary tocart"
-                    id="product-addtocart-button">
-                <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
-            </button>
-            <?= $block->getChildHtml('', true) ?>
-        </div>
-    </div>
-</div>
+    <v-form-item :label="i18n.qty">
+        <v-qplus name="qty" v-model="qty"></v-qplus>
+    </v-form-item>
+    <v-form-item>
+        <v-button type="primary" native="button" v-text="i18n.buttonTitle" @click="addCart"></v-button>
+        <?= $block->getChildHtml('', true) ?>
+    </v-form-item>
 <?php endif; ?>

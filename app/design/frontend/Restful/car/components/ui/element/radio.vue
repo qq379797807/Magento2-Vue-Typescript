@@ -1,7 +1,7 @@
 <template>
     <label :class="{
-        'disabled':disabled,
-        'checked':isChecked === modelValue, [prefix+'-radio']: true}">
+        'disabled': disabled,
+        'checked': isChecked === modelValue, [prefix+'-radio']: true}">
         <input type="radio" v-bind="$attrs" v-model="modelValue" :value="isChecked" @change="_onChange" :disabled="disabled" />
         <span class="radio-inner"></span>
         <span class="radio-text"><slot/></span>

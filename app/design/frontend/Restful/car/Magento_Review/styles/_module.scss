@@ -1,122 +1,39 @@
 //
 //  Variables
 //  _____________________________________________
-
 $review-ratings-left: 280px !default;
 $reviews-indent-desktop: 30px !default;
 
-.rating-summary {
-    @include lib-rating-summary();
-    .rating-result {
-        margin-left: -5px;
-    }
-}
-
-.product-reviews-summary,
-.table-reviews {
-    .rating-summary {
-        @include lib-rating-summary-label-hide();
-    }
-}
-
-.review-control-vote {
-    @include lib-rating-vote();
-}
-
-//
-//  Add review block
-//  ---------------------------------------------
-
-.block {
-    &.add.review {
-        margin-bottom: $indent__xl;
-
-        > .title {
-            @include lib-heading(h2);
-        }
-
-        .legend {
-            @include lib-heading(h3);
-            margin: 0 0 $indent__base;
-        }
-
-        .field.rating {
-            display: table-row;
-
-            .label {
-                display: table-cell;
-                padding: $indent__xs 0;
-                vertical-align: middle;
-            }
-
-            .control {
-                display: table-cell;
-                vertical-align: top;
-            }
-        }
-    }
-
-    &.reviews.list {
-        > .title {
-            @include lib-heading(h2);
-        }
-
-        .review {
-            &.item {
-                margin-bottom: $indent__xl;
-            }
-
-            &.title {
-                @include lib-heading(h3);
-            }
-        }
-    }
-}
-
-.data.table.reviews {
-    .rating-summary {
-        margin-top: -4px;
-    }
-}
-
-.customer-review.view {
-    margin-bottom: $indent__base;
-
-    .review.title,
-    .ratings-summary,
-    .product-details {
-        margin-bottom: $indent__base;
-    }
-}
-
-.product-reviews-summary {
-    display: table;
-    margin: $indent__s 0 12px;
-
-    .products.wrapper.list & {
-        margin: 0 auto;
-    }
-
-    &.empty {
-        margin-left: 0;
-    }
-
-    .rating-summary {
-        display: table-cell;
-        left: -$indent__xs;
+.in-reviews {
+    .v-radio {
         position: relative;
-        text-align: left;
-        vertical-align: middle;
+
+        &.hover {
+            .radio-inner {
+                color: $color-orange-red1;
+            }
+        }
     }
 
-    .reviews-actions {
-        display: table-cell;
-        line-height: $rating-icon__font-size;
-        vertical-align: middle;
+    .radio-inner {
+        font-family: $icons__font-name;
+        font-size: 2.2rem;
+        font-style: normal;
+        display: inline-block;
 
-        a {
-            margin-right: $indent__xs;
+        &:before {
+            content: '\e60f';
         }
+    }
+
+    input[type=radio] {
+        position: absolute;
+        top: -.7rem;
+        left: .2rem;
+        width: 2rem;
+        height: 2rem;
+        opacity: 0;
+        z-index: 20;
     }
 }
 
@@ -125,82 +42,7 @@ $reviews-indent-desktop: 30px !default;
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .product-reviews-summary {
-        .products.wrapper.list & {
-            margin: 0;
-        }
-    }
-}
-
-.customer-review {
-    .product-details {
-        @extend .abs-add-clearfix;
-        margin-bottom: $indent__xl;
-    }
-
-    .product-media {
-        float: left;
-        margin-right: 3%;
-        max-width: 285px;
-        width: 30%;
-    }
-
-    .review-details {
-        .customer-review-rating {
-            @include lib-css(margin-bottom, $indent__base);
-
-            .item {
-                @include lib-css(margin-bottom, $indent__s);
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-
-        .review-title {
-            @include lib-heading(h3);
-            @include lib-css(font-weight, $font-weight__semibold);
-            @include lib-css(margin-bottom, $indent__base);
-        }
-
-        .review-content {
-            @include lib-css(margin-bottom, $indent__base);
-        }
-    }
-
-    .product-reviews-summary {
-        .rating-summary,
-        .reviews-actions {
-            display: block;
-        }
-    }
-}
-
-.review-field-ratings {
-    .nested {
-        display: table;
-    }
-
-    .review-field-rating {
-        display: table-row;
-
-        .label,
-        .control {
-            display: table-cell;
-            padding-bottom: $indent__s;
-            vertical-align: top;
-        }
-
-        .label {
-            padding-right: $indent__s;
-            padding-top: 6px;
-        }
-
-        .control {
-            padding-top: 2px;
-        }
-    }
+   
 }
 
 //
