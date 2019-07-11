@@ -13,7 +13,7 @@ export default {
     }),
     props: {
         value: String,
-        autoHeight: {
+        auto: {
             type: Boolean,
             default: true
         },
@@ -32,7 +32,7 @@ export default {
                 width: this.width,
                 height: this.height,
                 minHeight: this.height,
-                overflow: this.autoHeight ? 'hidden' : '',
+                overflow: this.auto ? 'hidden' : '',
                 boxSizing: 'border-box'
             }
         }
@@ -40,7 +40,7 @@ export default {
     watch: {
         textValue (v) {
             this.$emit('input', v)
-            if (this.autoHeight) {
+            if (this.auto) {
                 let el = this.$refs.text
                 el.style.height = 'auto'
                 el.style.height = (el.scrollHeight + this.border) + 'px'

@@ -56,7 +56,7 @@
                     <h4 v-text="i18n.comments"></h4>
                     <template slot="content">
                         <v-form-item>
-                            <v-textarea :autoHeight="autoHeight" v-model="comments" :placeholder="i18n.comments"></v-textarea>
+                            <v-textarea :auto="auto" v-model="comments" :placeholder="i18n.comments"></v-textarea>
                         </v-form-item>
                     </template>
                 </v-collapse-panel>
@@ -90,7 +90,7 @@ export default {
         gift: '',
         comments: '',
         agreement: false,
-        autoHeight: true,
+        auto: true,
         disabled: true
     }),
     computed: {

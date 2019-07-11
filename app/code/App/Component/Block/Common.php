@@ -172,7 +172,8 @@ class Common extends \Magento\Framework\View\Element\Template
         $data['media_path'] = $currentStore->getBaseUrl('media');
         $data['pub_path'] = $this->getViewFileUrl('/');
         $welcomeMsg = __("welcome to our online website")->render();
-        $data['login_url'] = $this->urlBuilder->getUrl("customer/account/login", array('uenc' => $refer));
+        $data['login_url'] = $this->urlBuilder->getUrl('customer/account/login', array('uenc' => $refer));
+        $data['create_url'] = $this->urlBuilder->getUrl('customer/account/create');
         $data['is_login'] = false;
         if ($this->getCustomerSession()->isLoggedIn()) {
             $data['is_login'] = true;
