@@ -3,4 +3,5 @@
     <preference for="Magento\Framework\View\Element\Html\Date" type="App\Framework\View\Element\Html\Date" />
     <preference for="Magento\Catalog\Controller\Category\View" type="App\Framework\Block\Category\Page" />
     <preference for="Magento\Catalog\Helper\Product\View" type="App\Framework\Block\Product\Page" />
+    <preference for="Magento\Review\Block\Product\Review" type="App\Framework\Block\Product\Review" />
 </config>
