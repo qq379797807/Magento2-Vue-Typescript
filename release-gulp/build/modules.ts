@@ -5,6 +5,7 @@ const modulesConfig: string[] = [
     'cms_page',
     'catalog_category',
     'catalog_product',
+    'catalog_compare',
     'checkout_cart',
     'checkout_index',
     'customer_login',

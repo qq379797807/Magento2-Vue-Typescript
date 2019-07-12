@@ -22,7 +22,7 @@ export class VAdvancedForm extends Vue {
     public price_to: string = ''
     public currency: string = ''
     public color: any[] = []
-    public selectColor: any[] = []
+    public selectColor: any[] = ['0']
 
     mounted () {
         this.init()

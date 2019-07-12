@@ -3,7 +3,7 @@ declare let window: any
 const commonJson = window.commonJson
 const cartJson = window.cartJson
 
-const state: any = {
+const state: any = cartJson ? {
     config: cartJson,
     baseUrl: commonJson.base_url,
     countries: cartJson.country,
@@ -17,6 +17,6 @@ const state: any = {
     billingAddress: null,
     totalsData: cartJson.totalsData,
     postCodes: cartJson.postCodes
-}
+} : {}
 
 export default state

@@ -1,6 +1,9 @@
 import { GetterTree } from 'vuex'
 
-const getters: GetterTree<any, any> = {
+declare let window: any
+const cartJson = window.cartJson
+
+const getters: GetterTree<any, any> = cartJson ? {
     cartId: (state) => {
         return state.config.quoteData.entity_id
     },
@@ -26,6 +29,6 @@ const getters: GetterTree<any, any> = {
     totalsData: (state) => {
         return state.totalsData
     }
-}
+} : {}
 
 export default getters
