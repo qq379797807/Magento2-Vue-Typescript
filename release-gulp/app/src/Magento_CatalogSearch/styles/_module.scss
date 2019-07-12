@@ -8,6 +8,16 @@ $autocomplete-item__border       : 1px solid $color-gray90 !default;
 $autocomplete-item__hover__color : $color-gray91 !default;
 $autocomplete-item-amount__color : $color-gray60 !default;
 
+.in-line {
+    display: flex;
+    align-items: center;
+
+    span {
+        display: inline-block;
+        margin: 0 1rem;
+    }
+}
+
 .block-search {
     margin-bottom: 0;
 

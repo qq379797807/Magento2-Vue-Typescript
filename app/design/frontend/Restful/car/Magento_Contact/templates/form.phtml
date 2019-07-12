@@ -6,10 +6,6 @@
 
 <v-contact-form inline-template>
     <v-form class="in-contact" action="<?= $block->getActionUrl() ?>" method="post"> 
-        <v-form-item>
-            <legend class="legend"><span><?= $block->escapeHtml(__('Write Us')) ?></span></legend>
-            <p class="in-label"><?= $block->escapeHtml(__('Jot us a note and we’ll get back to you as quickly as possible.')) ?></p>
-        </v-form-item>
         <v-form-item :label="i18n.name">
             <v-input name="name" v-model="name"></v-input>
         </v-form-item>

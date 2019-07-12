@@ -1,7 +1,6 @@
 <?php
 namespace App\Component\Block;
 
-use Magento\Checkout\Model\Cart as CustomerCart;
 class Register extends \Magento\Framework\View\Element\Template
 {
     protected $urlBuilder;

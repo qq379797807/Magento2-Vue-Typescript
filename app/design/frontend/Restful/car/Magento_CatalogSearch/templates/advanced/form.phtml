@@ -3,120 +3,50 @@
  * @var $block \Magento\CatalogSearch\Block\Advanced\Form
  */
 ?>
-<?php $maxQueryLength = $this->helper('Magento\CatalogSearch\Helper\Data')->getMaxQueryLength();?>
-<form class="form search advanced" action="<?= /* @escapeNotVerified */ $block->getSearchPostUrl() ?>" method="get" id="form-validate">
-    <fieldset class="fieldset">
-        <legend class="legend"><span><?= /* @escapeNotVerified */ __('Search Settings') ?></span></legend><br />
+<?php 
+    $jsonHelper = \Magento\Framework\App\ObjectManager::getInstance()->create('Magento\Framework\Json\Helper\Data');
+    $maxQueryLength = $this->helper('Magento\CatalogSearch\Helper\Data')->getMaxQueryLength();
+?>
+
+<v-advanced-form inline-template>
+    <v-form class="in-advanced" action="<?= $block->getSearchPostUrl() ?>" method="get"> 
         <?php foreach ($block->getSearchableAttributes() as $_attribute): ?>
         <?php $_code = $_attribute->getAttributeCode() ?>
-            <div class="field <?= /* @escapeNotVerified */ $_code ?>">
-                <label class="label" for="<?= /* @escapeNotVerified */ $_code ?>">
-                    <span><?= $block->escapeHtml(__($block->getAttributeLabel($_attribute))) ?></span>
-                </label>
-                <div class="control">
+            <v-form-item label="<?= $block->getAttributeLabel($_attribute) ?>">
                 <?php switch ($block->getAttributeInputType($_attribute)):
                     case 'number': ?>
-                    <div class="range fields group group-2">
-                        <div class="field no-label">
-                            <div class="control">
-                                <input type="text"
-                                    name="<?= /* @escapeNotVerified */ $_code ?>[from]"
-                                    value="<?= $block->escapeHtml($block->getAttributeValue($_attribute, 'from')) ?>"
-                                    id="<?= /* @escapeNotVerified */ $_code ?>"
-                                    title="<?= $block->escapeHtml($block->getAttributeLabel($_attribute)) ?>"
-                                    class="input-text"
-                                    maxlength="<?= /* @escapeNotVerified */ $maxQueryLength ?>"
-                                    data-validate="{number:true, 'less-than-equals-to':'#<?= /* @escapeNotVerified */ $_code ?>_to'}" />
-                            </div>
+                        <div class="in-line">
+                            <v-input name="<?= $_code ?>[from]" v-model="<?= $_code . '_from' ?>" maxlength="<?= $maxQueryLength ?>" value="<?= $block->getAttributeValue($_attribute, 'from') ?>"></v-input>
+                            <v-input name="<?= $_code ?>[to]" v-model="<?= $_code . '_to' ?>" maxlength="<?= $maxQueryLength ?>" value="<?= $block->getAttributeValue($_attribute, 'to') ?>"></v-input>
                         </div>
-                        <div class="field no-label">
-                            <div class="control">
-                                <input type="text"
-                                    name="<?= /* @escapeNotVerified */ $_code ?>[to]"
-                                    value="<?= $block->escapeHtml($block->getAttributeValue($_attribute, 'to')) ?>"
-                                    id="<?= /* @escapeNotVerified */ $_code ?>_to"
-                                    title="<?= $block->escapeHtml($block->getAttributeLabel($_attribute)) ?>"
-                                    class="input-text"
-                                    maxlength="<?= /* @escapeNotVerified */ $maxQueryLength ?>"
-                                    data-validate="{number:true, 'greater-than-equals-to':'#<?= /* @escapeNotVerified */ $_code ?>'}" />
-                            </div>
-                        </div>
-                    </div>
                     <?php break;
                     case 'price': ?>
-                    <div class="range price fields group group-2">
-                        <div class="field no-label">
-                            <div class="control">
-                                <input name="<?= /* @escapeNotVerified */ $_code ?>[from]"
-                                    value="<?= $block->escapeHtml($block->getAttributeValue($_attribute, 'from')) ?>"
-                                    id="<?= /* @escapeNotVerified */ $_code ?>"
-                                    title="<?= $block->escapeHtml($block->getAttributeLabel($_attribute)) ?>"
-                                    class="input-text"
-                                    type="text"
-                                    maxlength="<?= /* @escapeNotVerified */ $maxQueryLength ?>"
-                                    data-validate="{number:true, 'less-than-equals-to':'#<?= /* @escapeNotVerified */ $_code ?>_to'}" />
-                            </div>
+                        <div class="in-line">
+                            <v-input name="<?= $_code ?>[from]" v-model="<?= $_code . '_from' ?>" maxlength="<?= $maxQueryLength ?>" value="<?= $block->getAttributeValue($_attribute, 'from') ?>"></v-input>
+                            <span>-</span>
+                            <v-input name="<?= $_code ?>[to]" v-model="<?= $_code . '_to' ?>" maxlength="<?= $maxQueryLength ?>" value="<?= $block->getAttributeValue($_attribute, 'to') ?>"></v-input>
+                            <span v-text="currency"></span>
                         </div>
-                        <div class="field with-addon no-label">
-                            <div class="control">
-                                <div class="addon">
-                                    <input name="<?= /* @escapeNotVerified */ $_code ?>[to]"
-                                        value="<?= $block->escapeHtml($block->getAttributeValue($_attribute, 'to')) ?>"
-                                        id="<?= /* @escapeNotVerified */ $_code ?>_to"
-                                        title="<?= $block->escapeHtml($block->getAttributeLabel($_attribute)) ?>"
-                                        class="input-text"
-                                        type="text"
-                                        maxlength="<?= /* @escapeNotVerified */ $maxQueryLength ?>"
-                                        data-validate="{number:true, 'greater-than-equals-to':'#<?= /* @escapeNotVerified */ $_code ?>'}" />
-                                    <label class="addafter"
-                                        for="<?= /* @escapeNotVerified */ $_code ?>_to">
-                                        <?= /* @escapeNotVerified */ $block->getCurrency($_attribute) ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <?php break;
                     case 'select': ?>
-                        <?= /* @escapeNotVerified */ $block->getAttributeSelectElement($_attribute) ?>
+                        <v-select name="<?= $_attribute->getAttributeCode() ?>" :options="<?= $_attribute->getAttributeCode() ?>" v-model="selectColor" :filterable=true :multiple=true size="4"></v-select>
                     <?php break;
                     case 'yesno': ?>
-                        <?= /* @escapeNotVerified */ $block->getAttributeYesNoElement($_attribute) ?>
+                        <?= $block->getAttributeYesNoElement($_attribute) ?>
                     <?php break;
                     case 'date': ?>
-                    <div class="range dates fields group group-2">
-                        <div class="field date no-label">
-                            <div class="control">
-                                <?= /* @escapeNotVerified */ $block->getDateInput($_attribute, 'from') ?>
-                            </div>
+                        <div class="in-flex">
+                            <?= $block->getDateInput($_attribute, 'from') ?>
+                            <?= $block->getDateInput($_attribute, 'to') ?>
                         </div>
-                        <div class="field date no-label">
-                            <div class="control">
-                                <?= /* @escapeNotVerified */ $block->getDateInput($_attribute, 'to') ?>
-                            </div>
-                        </div>
-                    </div>
                     <?php break;
                     default: ?>
-                    <input type="text"
-                        name="<?= /* @escapeNotVerified */ $_code ?>"
-                        id="<?= /* @escapeNotVerified */ $_code ?>"
-                        value="<?= $block->escapeHtml($block->getAttributeValue($_attribute)) ?>"
-                        title="<?= $block->escapeHtml($block->getAttributeLabel($_attribute)) ?>"
-                        class="input-text <?= /* @escapeNotVerified */ $block->getAttributeValidationClass($_attribute) ?>"
-                        maxlength="<?= /* @escapeNotVerified */ $maxQueryLength ?>" />
+                        <v-input name="<?= $_code ?>" v-model="<?= $_code ?>" maxlength="<?= $maxQueryLength ?>" value="<?= $block->getAttributeValue($_attribute) ?>"></v-input>
                 <?php endswitch; ?>
-                </div>
-            </div>
+            </v-form-item>
         <?php endforeach; ?>
-    </fieldset>
-    <div class="actions-toolbar">
-    <div class="primary">
-        <button type="submit"
-                class="action search primary"
-                title="<?= $block->escapeHtml(__('Search')) ?>">
-            <span><?= /* @escapeNotVerified */ __('Search') ?></span>
-        </button>
-    </div>
-    </div>
-</form>
+        <v-form-item>
+            <v-button type="primary" native="submit" v-text="i18n.search"></v-button>
+        </v-form-item>
+    </v-form>
+</v-advanced-form>
