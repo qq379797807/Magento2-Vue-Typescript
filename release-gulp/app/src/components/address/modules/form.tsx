@@ -4,64 +4,19 @@ import Component from 'vue-class-component'
 declare let window: any
 
 @Component({
-    name: 'v-create',
+    name: 'v-address-edit',
     data: () => ({
         i18n: {
             prefix: 'Name Prefix',
             suffix: 'Name Suffix',
             firstname: 'First Name',
             middlename: 'Middle Name/Initial',
-            lastname: 'Last Name',
-            email: 'Email',
-            password: 'Password',
-            comfirm: 'Confirm Password',
-            street: 'Street Address',
-            city: 'City',
-            country: 'Country',
-            state: 'State/Province',
-            zip: 'Zip',
-            subscribed: 'Sign Up for Newsletter',
-            button: 'Create an Account',
-            telephone: 'Phone Number',
-            company: 'Company',
-            fax: 'Fax',
-            taxvat: 'Tax/VAT number',
-            gender: 'Gender'
-        },
-        showEye: true,
-        showRegion: false,
-        prefixEnabled: false,
-        prefixOption: [],
-        suffixEnabled: false,
-        suffixOption: [],
-        counter: [],
-        firstname: '',
-        middlename: '',
-        lastname: '',
-        email: '',
-        password: '',
-        comfirm: '',
-        street: [],
-        city: '',
-        postcode: '',
-        country: [],
-        region: [],
-        selectCountry: '',
-        selectRegion: '',
-        address_count: 0,
-        subscribed: false,
-        telephone: '',
-        company: '',
-        fax: '',
-        taxVat: '',
-        dob: '',
-        selectPrefix: '',
-        selectSuffix: '',
-        genderOption: [],
-        selectGender: ''
+            lastname: 'Last Name'
+        }
     })
 })
-export class VCreate extends Vue {
+export class VAddessEdit extends Vue {
+    public showEye: boolean = true
     public showRegion: boolean = false
     public prefixEnabled: boolean = false
     public prefixOption: any[] = []
@@ -92,7 +47,7 @@ export class VCreate extends Vue {
     public selectSuffix: string = ''
     public genderOption: any[] = []
     public selectGender: string = ''
-
+    
     mounted () {
         this.init()
     }

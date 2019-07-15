@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { VTitle } from '../title/title'
 import { VMessage } from '../message/message'
-import { VCreate } from './modules/create'
+import { VCreate } from './modules/form'
 
 @Component({
     name: 'v-content',

@@ -1,0 +1,7 @@
+<?php 
+/*
+* @var $block \Magento\Catalog\Block\Product\Image 
+*/ 
+?>
+
+<img v-lazy="'<?= $block->getImageUrl() ?>'" class="product-image-photo" max-width="<?= $block->getWidth() ?>" max-height="<?= $block->getHeight() ?>" alt="<?= $block->stripTags($block->getLabel(), null, true) ?>" />

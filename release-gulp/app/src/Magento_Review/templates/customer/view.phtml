@@ -16,7 +16,7 @@ $product = $block->getProductData();
                 <h2 class="name" v-text="productName"></h2>
                 <div class="in-rating" v-if="reviewData.length > 0">
                     <span v-text="i18n.average + ':'"></span>
-                    <template v-html="reviewHtml"></template>
+                    <div v-html="reviewHtml"></div>
                 </div>
             </div>
         </div>

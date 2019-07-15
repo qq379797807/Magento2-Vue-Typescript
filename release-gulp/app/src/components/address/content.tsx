@@ -13,12 +13,4 @@ import { VMessage } from '../message/message'
         VMessage
     }
 })
-export class VContent extends Vue {
-    mounted () {
-        this.init()
-    }
-
-    init () {
-
-    }
-}
+export class VContent extends Vue {}

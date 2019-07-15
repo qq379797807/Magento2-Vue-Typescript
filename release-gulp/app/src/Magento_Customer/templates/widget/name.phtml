@@ -26,7 +26,7 @@
 <v-form-item :label="i18n.lastname">
     <v-input name="<?= $block->getFieldName('lastname') ?>" v-model="lastname"></v-input>
 </v-form-item>
-<v-form-item :label="i18n.suffix" v-if="prefixEnabled">
+<v-form-item :label="i18n.suffix" v-if="suffixEnabled">
     <?php if ($block->getPrefixOptions() === false): ?>
         <v-input name="<?= $block->getFieldName('suffix') ?>" v-model="selectSuffix"></v-input>
     <?php else: ?>
