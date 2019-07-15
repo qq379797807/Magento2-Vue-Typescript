@@ -1,0 +1,50 @@
+<?php
+/*
+* @var \Magento\Review\Block\Customer\View $block 
+*/
+
+$product = $block->getProductData();
+?>
+
+<v-customer-review inline-template>
+    <div class="customer-review" v-if="productId">
+        <div class="product-details">
+            <a :href="productUrl" class="product-photo">
+                <?= $block->getImage($block->getProductData(), 'customer_account_product_review_page')->toHtml() ?>
+            </a>
+            <div class="product-info">
+                <h2 class="name" v-text="productName"></h2>
+                <div class="in-rating" v-if="reviewData.length > 0">
+                    <span v-text="i18n.average + ':'"></span>
+                    <template v-html="reviewHtml"></template>
+                </div>
+            </div>
+        </div>
+        <div class="review-details">
+            <template v-if="reviewData.length > 0">
+                <div class="title">
+                    <strong v-text="i18n.yourRivew"></strong>
+                </div>
+                <div class="customer-review-rating">
+                    <?php foreach ($block->getRating() as $_rating): ?>
+                        <?php if ($_rating->getPercent()): ?>
+                            <?php $rating = ceil($_rating->getPercent()) ?>
+                            <div class="rating-summary item">
+                                <span class="rating-label"><span><?= $block->escapeHtml($_rating->getRatingCode()) ?></span></span>
+                                <div class="rating-result" title="<?= /* @noEscape */ $rating ?>%">
+                                    <span style="width:<?= /* @noEscape */ $rating ?>%">
+                                        <span><?= /* @noEscape */ $rating ?>%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </template>
+            <h3 class="review-title" v-text="reviewTitle"></h3>
+            <div class="review-content" v-html="reviewDetail"></div>
+            <p class="date"><?= __('Submitted on <time class="date" v-text="reviewTime"></time>') ?></p>
+        </div>
+        <a :href="backUrl" class="action back" v-text="i18n.return"></a>
+    </div>
+</v-customer-review>    

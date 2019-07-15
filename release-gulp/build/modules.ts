@@ -21,6 +21,7 @@ const modulesConfig: string[] = [
     'vault_cards',
     'paypal_billing',
     'review_customer',
+    'review_details',
     'newsletter_index',
     'search_term',
     'sales_guest',

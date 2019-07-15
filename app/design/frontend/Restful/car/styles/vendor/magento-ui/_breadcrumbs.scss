@@ -156,10 +156,9 @@
             @include lib-icon-font(
                 $_icon-font-content: $_breadcrumbs-icon-font-content,
                 $_icon-font: $_icon-font,
-                $_icon-font-size: $_icon-font-size,
-                $_icon-font-line-height: $_icon-font-line-height,
+                $_icon-font-size: 1.4rem,
                 $_icon-font-color: $_icon-font-color,
-                $_icon-font-margin: $_icon-font-margin,
+                $_icon-font-margin: 0 .5rem,
                 $_icon-font-vertical-align: $_icon-font-vertical-align,
                 $_icon-font-position: after
             );
