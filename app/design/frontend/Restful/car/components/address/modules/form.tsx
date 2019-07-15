@@ -4,18 +4,38 @@ import Component from 'vue-class-component'
 declare let window: any
 
 @Component({
-    name: 'v-address-edit',
+    name: 'v-address-form',
     data: () => ({
         i18n: {
             prefix: 'Name Prefix',
             suffix: 'Name Suffix',
             firstname: 'First Name',
             middlename: 'Middle Name/Initial',
-            lastname: 'Last Name'
+            lastname: 'Last Name',
+            email: 'Email',
+            password: 'Password',
+            comfirm: 'Confirm Password',
+            street: 'Street Address',
+            city: 'City',
+            country: 'Country',
+            state: 'State/Province',
+            zip: 'Zip',
+            button: 'Create an Account',
+            telephone: 'Phone Number',
+            company: 'Company',
+            fax: 'Fax',
+            taxvat: 'Tax/VAT number',
+            gender: 'Gender',
+            saveAddress: 'Save Address',
+            cancel: 'Cancel',
+            defaultShipping: 'It\'s a default billing address.',
+            defaultBilling: 'It\'s a default shipping address.',
+            useShipping: 'Use as my default shipping address',
+            useBilling: 'Use as my default billing address'
         }
     })
 })
-export class VAddessEdit extends Vue {
+export class VAddressForm extends Vue {
     public showEye: boolean = true
     public showRegion: boolean = false
     public prefixEnabled: boolean = false
@@ -37,7 +57,6 @@ export class VAddessEdit extends Vue {
     public selectCountry: string = ''
     public selectRegion: string = ''
     public address_count: number = 0
-    public subscribed: boolean = false
     public telephone: string = ''
     public company: string = ''
     public fax: string = ''
@@ -47,6 +66,8 @@ export class VAddessEdit extends Vue {
     public selectSuffix: string = ''
     public genderOption: any[] = []
     public selectGender: string = ''
+    public defaultBilling: boolean = false
+    public defaultShipping: boolean = false
     
     mounted () {
         this.init()

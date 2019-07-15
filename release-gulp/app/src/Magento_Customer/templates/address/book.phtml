@@ -80,9 +80,6 @@
         <?php endif ?>
     </div>
 </div>
-
-<div class="actions-toolbar">
-    <div class="primary">
-        <button type="button" role="add-address" title="<?= $block->escapeHtmlAttr(__('Add New Address')) ?>" class="action primary add"><span><?= $block->escapeHtml(__('Add New Address')) ?></span></button>
-    </div>
-</div>
+<v-form-item>
+    <v-button type="primary" native="button" v-text="i18n.addAddress" @click="addAddress"></v-button>
+</v-form-item>

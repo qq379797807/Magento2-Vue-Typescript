@@ -4,7 +4,7 @@ import Component from 'vue-class-component'
 declare let window: any
 
 @Component({
-    name: 'v-address-form',
+    name: 'v-address-edit',
     data: () => ({
         i18n: {
             prefix: 'Name Prefix',
@@ -20,22 +20,17 @@ declare let window: any
             country: 'Country',
             state: 'State/Province',
             zip: 'Zip',
+            subscribed: 'Sign Up for Newsletter',
             button: 'Create an Account',
             telephone: 'Phone Number',
             company: 'Company',
             fax: 'Fax',
             taxvat: 'Tax/VAT number',
-            gender: 'Gender',
-            saveAddress: 'Save Address',
-            cancel: 'Cancel',
-            defaultShipping: 'It\'s a default billing address.',
-            defaultBilling: 'It\'s a default shipping address.',
-            useShipping: 'Use as my default shipping address',
-            useBilling: 'Use as my default billing address'
+            gender: 'Gender'
         }
     })
 })
-export class VAddressForm extends Vue {
+export class VAddessEdit extends Vue {
     public showEye: boolean = true
     public showRegion: boolean = false
     public prefixEnabled: boolean = false
@@ -57,6 +52,7 @@ export class VAddressForm extends Vue {
     public selectCountry: string = ''
     public selectRegion: string = ''
     public address_count: number = 0
+    public subscribed: boolean = false
     public telephone: string = ''
     public company: string = ''
     public fax: string = ''
@@ -66,8 +62,6 @@ export class VAddressForm extends Vue {
     public selectSuffix: string = ''
     public genderOption: any[] = []
     public selectGender: string = ''
-    public defaultBilling: boolean = false
-    public defaultShipping: boolean = false
     
     mounted () {
         this.init()

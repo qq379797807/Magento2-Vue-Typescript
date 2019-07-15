@@ -19,7 +19,7 @@ const modulesConfig: string[] = [
     'wishlist_index',
     'customer_address',
     'customer_edit',
-    'address_edit',
+    'address_form',
     'vault_cards',
     'paypal_billing',
     'review_customer',

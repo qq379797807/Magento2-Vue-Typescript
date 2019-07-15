@@ -109,22 +109,19 @@ $_password-very-strong               : #81b562 !default;
     }
 }
 
-//  Full name fieldset
-.fieldset {
-    .fullname {
-        &.field {
-            > .label {
-                @extend .abs-visually-hidden;
+.v-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 
-                + .control {
-                    width: 100%;
-                }
-            }
-        }
+    .v-form-item {
+        padding: 0 1rem;
+        flex-basis: calc((100% - 4rem) / 2);
+    }
 
-        .field {
-            @extend .abs-add-clearfix;
-        }
+    .v-form-line {
+        flex-basis: 100%;
     }
 }
 

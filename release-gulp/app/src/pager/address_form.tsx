@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import { VApp } from './container/address_edit'
+import { VApp } from './container/address_form'
 import UI from '../components/ui'
 
 const Lazyload: any = VueLazyload

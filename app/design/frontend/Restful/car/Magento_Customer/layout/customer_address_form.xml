@@ -2,8 +2,8 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
-            <block class="App\Component\Block\Register" name="vue.address.html" after="vue.common" template="Magento_Customer::create/page.phtml" />
-            <block class="Magento\Framework\View\Element\Template" name="vue.address.js" after="-" template="Magento_Customer::address/component.phtml" />
+            <block class="App\Component\Block\Register" name="vue.address.form.html" after="vue.common" template="Magento_Customer::create/page.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.address.form.js" after="-" template="Magento_Customer::address/form/component.phtml" />
         </referenceContainer>
     </body>
 </page>

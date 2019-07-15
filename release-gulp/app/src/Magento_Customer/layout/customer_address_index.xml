@@ -2,6 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
+            <block class="App\Component\Block\Address" name="vue.address.html" after="vue.common" template="Magento_Customer::address/data.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.address.js" after="-" template="Magento_Customer::address/component.phtml" />
         </referenceContainer>
     </body>
