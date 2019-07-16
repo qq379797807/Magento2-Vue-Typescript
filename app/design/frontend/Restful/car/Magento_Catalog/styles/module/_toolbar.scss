@@ -1,34 +1,7 @@
 $toolbar-mode-icon-font-size: 24px !default;
 $toolbar-element-background : $panel__background-color !default;
 
-.page-products {
-    .columns {
-        position: relative;
-        z-index: 1;
-    }
-}
-
-.toolbar {
-    @extend .abs-add-clearfix;
-}
-
-.toolbar-amount {
-    display: block;
-    line-height: $toolbar-mode-icon-font-size + 2;
-    margin: 0;
-    padding: 8px 0 0;
-
-    .products.wrapper ~ .toolbar & {
-        display: none;
-    }
-}
-
 .toolbar-products {
-    @extend .abs-add-clearfix;
-    margin-bottom: $indent__xl;
-    padding: 0 $indent__s;
-    text-align: center;
-
     .pages {
         display: none;
 
@@ -48,10 +21,6 @@ $toolbar-element-background : $panel__background-color !default;
 
 .sorter {
     padding: 4px 0 0;
-
-    .products.wrapper ~ .toolbar & {
-        display: none;
-    }
 }
 
 .sorter-options {
@@ -111,20 +80,6 @@ $toolbar-element-background : $panel__background-color !default;
         }
     }
 
-    .toolbar {
-        .products.wrapper ~ & .pages {
-            float: left;
-        }
-    }
-
-    .toolbar-amount {
-        float: left;
-    }
-
-    .sorter {
-        float: right;
-    }
-
     .modes {
         display: block;
         float: left;
@@ -175,13 +130,5 @@ $toolbar-element-background : $panel__background-color !default;
 
     .mode-list {
         @include lib-icon-font-symbol($icon-list);
-    }
-
-    .limiter {
-        float: right;
-
-        .products.wrapper ~ .toolbar & {
-            display: block;
-        }
     }
 }

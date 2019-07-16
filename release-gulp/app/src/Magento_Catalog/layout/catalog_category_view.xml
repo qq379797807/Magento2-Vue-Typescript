@@ -8,7 +8,16 @@
         <referenceContainer name="columns.top">
             <block class="Magento\Framework\View\Element\Template" name="vue.category.view" after="-"  template="Magento_Catalog::category/view.phtml" />
         </referenceContainer>
+        <referenceContainer name="main">
+            <block class="Magento\Framework\View\Element\Template" name="vue.category.content" after="-"  template="Magento_Catalog::category/content.phtml" />
+        </referenceContainer>
+        <referenceBlock name="catalog.leftnav">
+            <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="vue.category.sort" template="Magento_Catalog::product/list/toolbar/sorter.phtml" />
+        </referenceBlock>
+        <referenceBlock name="product_list_toolbar" remove="true" />
         <referenceBlock name="category.product.list.additional.wishlist_addto" remove="true" />
         <move element="category.view.container" destination="vue.category.view" />
+        <move element="catalog.leftnav" before="-" destination="vue.category.content" />
+        <move element="category.products" destination="vue.category.content" />
     </body>
 </page>

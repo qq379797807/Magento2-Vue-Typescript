@@ -2,9 +2,6 @@
 //  Product Lists
 //  _____________________________________________
 
-.products {
-    margin: $indent__l 0;
-}
 
 .product {
     &-items {
@@ -12,14 +9,6 @@
     }
 
     &-item {
-        @extend .abs-add-box-sizing;
-        vertical-align: top;
-
-        .products-grid & {
-            display: inline-block;
-            width: 50%;
-        }
-
         &-name {
             @extend .abs-product-link;
             display: block;
@@ -29,12 +18,7 @@
         }
 
         &-info {
-            max-width: 100%;
-            width: 152px;
-
-            .page-products & {
-                width: 240px;
-            }
+            padding: 1rem;
         }
 
         &-actions {
@@ -140,32 +124,10 @@
             white-space: nowrap;
         }
 
-        .price-from,
-        .price-to {
-            margin: 0;
-        }
-
         .action.tocompare {
             @include lib-icon-font-symbol($icon-compare-empty);
         }
-
-        .tocart {
-            white-space: nowrap;
-        }
     }
-}
-
-.column.main {
-    .product {
-        &-items {
-            margin-left: -$indent__base;
-        }
-
-        &-item {
-            padding-left: $indent__base;
-        }
-    }
-
 }
 
 .price-container {
@@ -238,64 +200,11 @@
 //  _____________________________________________
 
 @include max-screen($screen__s) {
-    .products-list .product {
-        &-item {
-            table-layout: fixed;
-
-            &-photo {
-                padding: 0 $indent__s $indent__s 0;
-                width: 30%;
-            }
-        }
-    }
+    
 }
 
 @include min-screen($screen__s) {
-    .product {
-        &-item {
-            .products-grid & {
-                margin-bottom: $indent__l;
-            }
-
-            &-actions {
-                display: block;
-
-                .products-grid & {
-                    margin: $indent__s 0;
-                }
-
-                .actions-primary + .actions-secondary {
-                    display: table-cell;
-                    padding-left: 5px;
-                    white-space: nowrap;
-                    width: 50%;
-                    & > * {
-                        white-space: normal;
-                    }
-                }
-
-                .actions-primary {
-                    display: table-cell;
-                }
-            }
-        }
-    }
-
-    .products-grid .product-item {
-        width: 33.3333%;
-    }
-
-    .page-products,
-    .page-layout-1column,
-    .page-layout-3columns,
-    .page-products.page-layout-1column,
-    .page-products.page-layout-3columns {
-        .products-grid {
-            .product-item {
-                width: 33.3333%;
-            }
-        }
-    }
+    
 }
 
 //
@@ -303,96 +212,32 @@
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .page-products {
-        .products-grid {
-            .product-item {
-                width: 33.3333%;
-            }
+   .in-category {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        .product-items {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            flex-basis: 25%;
         }
     }
 
-    .page-products.page-layout-1column {
-        .products-grid {
-            .product-item {
-                width: 25%;
-            }
-        }
+    .in-filters {
+        flex-basis: 25%;
     }
 
-    .page-products.page-layout-3columns {
-        .products-grid {
-            .product-item {
-                width: 50%;
-            }
-        }
+    .in-products {
+        flex-basis: 75%;
     }
 }
+
 @include min-screen($screen__l) {
-    .products-grid {
-        .product-item {
-            width: 20%;
-        }
-    }
-
-    .page-layout-1column {
-        .products-grid {
-            .product-item {
-                width: 16.6666%;
-            }
-        }
-    }
-
-    .page-layout-3columns {
-        .products-grid {
-            .product-item {
-                width: 25%;
-            }
-        }
-    }
-
-    .page-products {
-        .products-grid {
-            .product-items {
-                margin: 0;
-            }
-
-            .product-item {
-                margin-left: calc((100% - 4 * 23.233%) / 3);
-                padding: 0;
-                width: 23.233%;
-
-                &:nth-child(4n + 1) {
-                    margin-left: 0;
-                }
-            }
-        }
-    }
-
-    .page-products {
-        &.page-layout-1column {
-            .products-grid {
-                .product-item {
-                    margin-left: 0;
-                    width: 20%;
-                }
-            }
-        }
-
-        &.page-layout-3columns {
-            .products-grid {
-                .product-item {
-                    margin-left: 1%;
-                    width: 32.667%;
-
-                    &:nth-child(3n) {
-                        margin-left: 1%;
-                    }
-
-                    &:nth-child(3n + 1) {
-                        margin-left: 0;
-                    }
-                }
-            }
-        }
-    }
+    
 }

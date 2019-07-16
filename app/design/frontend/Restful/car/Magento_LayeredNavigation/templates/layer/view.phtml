@@ -1,0 +1,33 @@
+<?php
+/*
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <div class="in-filters">
+        <?= $block->getChildHtml() ?>
+        <div class="in-content">
+            <?= $block->getChildHtml('state') ?>
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?= $block->getClearUrl() ?>" class="action clear filter-clear"><span><?= __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter): ?>
+                <?php if (!$wrapOptions): ?>
+                    <strong class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
+                    <dl class="filter-options" id="narrow-by-list">
+                <?php $wrapOptions = true; endif; ?>
+                    <?php if ($filter->getItemsCount()): ?>
+                        <dt class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
+                        <dd class="filter-options-content"><?= $block->getChildBlock('renderer')->render($filter) ?></dd>
+                    <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if ($wrapOptions): ?>
+                </dl>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
