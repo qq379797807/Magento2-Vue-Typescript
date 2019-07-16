@@ -114,7 +114,6 @@ export default {
         }
     },
     mounted () {
-        this._setFirstText()
         document.addEventListener('click', this._showHide)
 
         if (this.filterable) {
@@ -122,6 +121,7 @@ export default {
         }
 
         this.$nextTick(() => {
+            this._setFirstText()
             this.filterOption = this.options
             this.selectCode = this.value ? this.value : ''
         })

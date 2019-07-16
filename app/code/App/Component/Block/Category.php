@@ -24,16 +24,19 @@ class Category extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    public function createObject($className)
+    {
+        return \Magento\Framework\App\ObjectManager::getInstance()->create($className);
+    }
+
     public function getCategoryJson ($version='pc')
     {
         $data = [];
         $type = $this->_request->getParam('type', null);
         $id = $this->_request->getParam('id');
         $postData = $this->_request->getParams();
-        $sort = [];
 
-        $objectManger = \Magento\Framework\App\ObjectManager::getInstance();
-        $viewHelper= $objectManger->create('Magento\Catalog\Block\Category\View');
+        $viewHelper= $this->createObject('Magento\Catalog\Block\Category\View');
         $_category = $viewHelper->getCurrentCategory();
 
         $data['category_image'] = $_category->getImageUrl();
@@ -42,22 +45,21 @@ class Category extends \Magento\Framework\View\Element\Template
         $data['category_contentMode'] = $viewHelper->isContentMode();
         $data['category_mixedMode'] = $viewHelper->isMixedMode();
         $data['category_cms'] = $viewHelper->getCmsBlockHtml();
-
-        if($this->_request->getParam('product_list_order')){
-            $sort['product_list_order'] = $this->_request->getParam('product_list_order');
-            $sort['product_list_dir'] = $this->_request->getParam('product_list_dir')? $this->_request->getParam('product_list_dir') : 'desc';
-            unset($postData['product_list_order']);
-            unset($postData['product_list_dir']);
-        }
-
-        try {
-            $pageType = $this->getPageType();
-            $data['category_id'] = $id;
-        } catch (\Exception $error) {
-            $data['error_message'] = $error->getMessage();
-        }
-
         $data['category_type'] = $type;
+
+        $sorter = [];
+        $toolHelper = $this->createObject('Magento\Catalog\Block\Product\ProductList\Toolbar');
+        $orders = $toolHelper->getAvailableOrders();
+        foreach ($orders as $_key => $_order) {
+            $sorter[] = [
+                'name' => $_order,
+                'value' => $_key,
+                'is_active' => $toolHelper->isOrderCurrent($_key)
+            ];
+        }
+        $data['sorter'] = $sorter;
+        $data['direction'] = $toolHelper->getCurrentDirection();
+
         $home = array(
             'home'=> [
                 'label' => 'Home',

@@ -19,17 +19,19 @@ $toolbar-element-background : $panel__background-color !default;
     }
 }
 
-.sorter {
-    padding: 4px 0 0;
-}
+.in-sorter {
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: flex-end;
 
-.sorter-options {
-    margin: 0 0 0 7px;
-    width: auto;
+    .v-form-item {
+        margin-bottom: 0;
+    }
 }
 
 .sorter-action {
-    vertical-align: top;
+    margin-left: 2rem;
+
     @include lib-icon-font(
         $icon-arrow-up,
         $_icon-font-size       : 28px,
@@ -46,10 +48,6 @@ $toolbar-element-background : $panel__background-color !default;
             content: $icon-arrow-down;
         }
     }
-}
-
-.modes {
-    display: none;
 }
 
 .limiter-options {

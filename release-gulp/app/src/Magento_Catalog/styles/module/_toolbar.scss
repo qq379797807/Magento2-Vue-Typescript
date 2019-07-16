@@ -20,11 +20,18 @@ $toolbar-element-background : $panel__background-color !default;
 }
 
 .in-sorter {
+    display: flex;
     margin-bottom: 2rem;
+    align-items: flex-end;
+
+    .v-form-item {
+        margin-bottom: 0;
+    }
 }
 
 .sorter-action {
-    vertical-align: top;
+    margin-left: 2rem;
+
     @include lib-icon-font(
         $icon-arrow-up,
         $_icon-font-size       : 28px,
@@ -41,10 +48,6 @@ $toolbar-element-background : $panel__background-color !default;
             content: $icon-arrow-down;
         }
     }
-}
-
-.modes {
-    display: none;
 }
 
 .limiter-options {

@@ -17,88 +17,48 @@
     font-size: 1em;
 }
 
-.swatch-attribute-selected-option {
-    color: #646464;
-    padding-left: 17px;
-}
-
 .swatch-attribute-options {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .swatch-option {
-    padding: 1px 2px;
-    min-width: 30px;
-    max-width: 90px;
-    height: 20px;
+    width: 2.5rem;
+    height: 2.5rem;
     float: left;
-    margin: 0 10px 5px 0;
-    text-align: center;
-    cursor: pointer;
     position: relative;
-    border: 1px solid rgb(218, 218, 218);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px 0px rgba(0,0,0,.1);
 
-.swatch-option.text {
-    background: #f0f0f0;
-    color: #686868;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 20px;
-    padding: 4px 8px;
-    min-width: 22px;
-    margin-right: 7px;
-}
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 50%;
+        transition: all .125s cubic-bezier(.25,.46,.45,.9399999999999999) 0s;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+    }
 
-.swatch-option.selected {
-    outline: 2px solid #ff5501;
-    border: 1px solid #fff;
-    color: #333;
-}
-
-.swatch-option.text.selected {
-    background-color: #fff !important;
-}
-
-.clearfix:after {
-    content: '';
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
+    &:hover {
+        &:after {
+            top: -.4rem;
+            bottom: -.4rem;
+            left: -.4rem;
+            right: -.4rem;
+            border-color: #d9d9d9;
+        }
+    }
 }
 
 .swatch-attribute.size .swatch-option,
 .swatch-attribute.manufacturer .swatch-option {
     background: rgb(240, 240, 240);
     color: rgb(148, 148, 148);
-}
-
-
-.swatch-attribute.size .swatch-option.selected,
-.swatch-attribute.manufacturer .swatch-option.selected {
-    color: black;
-    background: #fff;
-    border: 1px solid #fff;
-}
-
-
-.swatch-option:not(.disabled):hover {
-    outline: 1px solid #999;
-    border: 1px solid #fff;
-    color: #333;
-}
-
-.swatch-option.image:not(.disabled):hover,
-.swatch-option.color:not(.disabled):hover {
-    outline: 2px solid #ee0000;
-    border: 1px solid #fff;
-}
-
-.swatch-option.disabled {
-    cursor: default;
 }
 
 .swatch-option.disabled:after {
@@ -196,19 +156,12 @@
     margin: 20px 0;
 }
 
-.swatch-more {
-    display: inline-block;
-    margin: 2px 0;
-    text-decoration: none !important;
-    position: static;
-    z-index: 1;
-}
-
-// Layered Features
 .swatch-option-link-layered {
+    width: 4.5rem;
+    height: 3.5rem;
+    display: flex;
     position: relative;
-    margin: 0 !important;
-    padding: 0 !important;
+    justify-content: center;
 }
 
 .swatch-option-link-layered:focus > div {

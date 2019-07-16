@@ -4,20 +4,20 @@
  */
 ?>
 
-<?php if ($block->canShowBlock()): ?>
+<v-filters inline-template>
     <div class="in-filters">
         <?= $block->getChildHtml() ?>
         <div class="in-content">
             <?= $block->getChildHtml('state') ?>
             <?php if ($block->getLayer()->getState()->getFilters()): ?>
-                <div class="block-actions filter-actions">
-                    <a href="<?= $block->getClearUrl() ?>" class="action clear filter-clear"><span><?= __('Clear All') ?></span></a>
+                <div class="filter-actions">
+                    <a href="<?= $block->getClearUrl() ?>" class="action clear"><span><?= __('Clear All') ?></span></a>
                 </div>
             <?php endif; ?>
             <?php $wrapOptions = false; ?>
             <?php foreach ($block->getFilters() as $filter): ?>
                 <?php if (!$wrapOptions): ?>
-                    <dl class="filter-options" id="narrow-by-list">
+                    <dl class="filter-options">
                 <?php $wrapOptions = true; endif; ?>
                     <?php if ($filter->getItemsCount()): ?>
                         <dt class="filter-options-title"><?= $block->escapeHtml(__('Filter By ' . $filter->getName())) ?></dt>
@@ -29,4 +29,4 @@
             <?php endif; ?>
         </div>
     </div>
-<?php endif; ?>
+</v-filters>
