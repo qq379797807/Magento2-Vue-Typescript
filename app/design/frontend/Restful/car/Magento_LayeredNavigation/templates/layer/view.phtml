@@ -17,11 +17,10 @@
             <?php $wrapOptions = false; ?>
             <?php foreach ($block->getFilters() as $filter): ?>
                 <?php if (!$wrapOptions): ?>
-                    <strong class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                     <dl class="filter-options" id="narrow-by-list">
                 <?php $wrapOptions = true; endif; ?>
                     <?php if ($filter->getItemsCount()): ?>
-                        <dt class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
+                        <dt class="filter-options-title"><?= $block->escapeHtml(__('Filter By ' . $filter->getName())) ?></dt>
                         <dd class="filter-options-content"><?= $block->getChildBlock('renderer')->render($filter) ?></dd>
                     <?php endif; ?>
             <?php endforeach; ?>

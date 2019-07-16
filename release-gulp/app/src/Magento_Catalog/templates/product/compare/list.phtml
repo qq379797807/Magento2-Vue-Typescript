@@ -54,9 +54,7 @@
                                     <?php if ($item->isSaleable()): ?>
                                         <form data-role="tocart-form" action="<?= /* @escapeNotVerified */ $this->helper('Magento\Catalog\Helper\Product\Compare')->getAddToCartUrl($item) ?>" method="post">
                                             <?= $block->getBlockHtml('formkey') ?>
-                                            <button type="submit" class="action tocart primary">
-                                                <span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span>
-                                            </button>
+                                            <v-button type="primary" native="submit" v-text="'Add to Cart'"></v-button>
                                         </form>
                                     <?php else: ?>
                                         <?php if ($item->getIsSalable()): ?>
