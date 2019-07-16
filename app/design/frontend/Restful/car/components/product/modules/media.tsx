@@ -1,17 +1,28 @@
-import Vue from 'vue'
+import Vue, { CreateElement } from 'vue'
 import Component from 'vue-class-component'
 
 @Component({
     name: 'v-product-media',
-    components: {
+    data: () => ({
+        i18n: {
 
-    }
+        }
+    })
 })
 export class VProductMedia extends Vue {
-    public images: any
-    public options: any
+    mounted () {
+        this.init()
+    }
 
-    constructor () {
-        super()
+    init () {
+        
+    }
+
+    render (h: CreateElement): JSX.Element {
+        return (
+            <div class="in-gallery">
+                
+            </div>
+        )
     }
 }

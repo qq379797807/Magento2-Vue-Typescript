@@ -1,25 +1,27 @@
 <?php
 namespace App\Component\Block;
 
+use Magento\Framework\DataObject;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
-
 class Product extends \Magento\Framework\View\Element\Template
 {
     private $currentStore;
     private $storeManger;
     private $jsonHelper;
-    protected $scopeConfig;
-    protected $urlEncoder;
-    protected $catalogData;
+    private $scopeConfig;
+    private $urlEncoder;
+    private $catalogData;
+    private $imageHelper;
 
     public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManger,
         \Magento\Framework\App\Request\Http $request,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
-        \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Catalog\Helper\Data $catalogData,
-        \Magento\Framework\Url\EncoderInterface $urlEncoder
+        \Magento\Framework\Url\EncoderInterface $urlEncoder,
+        \Magento\Catalog\Helper\Image $imageHelper
     )
     {
         parent::__construct($context);
@@ -29,6 +31,7 @@ class Product extends \Magento\Framework\View\Element\Template
         $this->jsonHelper = $JsonHelper;
         $this->urlEncoder = $urlEncoder;
         $this->catalogData = $catalogData;
+        $this->imageHelper = $imageHelper;
     }
 
     public function createObject($className)
@@ -71,15 +74,56 @@ class Product extends \Magento\Framework\View\Element\Template
 
         $reviewHelper = $this->createObject('Magento\Review\Block\Product\Review');
         $data['review_url'] = $reviewHelper->getProductReviewUrl();
+        $data['product_grallery'] = $this->getProductGallery();
 
         $configurableHelper = $this->createObject('Magento\Swatches\Block\Product\Renderer\Configurable');
         $data['configurable'] = $type === 'configurable' ? [
             'jsonConfig' =>  $this->jsonHelper->jsonDecode($configurableHelper->getJsonConfig()),
-            'jsonSwatchConfig' => $this->jsonHelper->jsonDecode($configurableHelper->getJsonSwatchConfig()),
             'mediaCallback' => $configurableHelper->getMediaCallback()
         ] : [];
 
         return $data;
+    }
+
+    public function getProductGallery () {
+        $gallery = [];
+        $galleryHelper = $this->createObject('Magento\Catalog\Block\Product\View\Gallery');
+        $images = $galleryHelper->getGalleryImages();
+
+        foreach ($images as $image) {
+            $imageItem = new DataObject([
+                'thumb' => $image->getData('small_image_url'),
+                'img' => $image->getData('medium_image_url'),
+                'full' => $image->getData('large_image_url'),
+                'caption' => ($image->getLabel() ?: $galleryHelper->getProduct()->getName()),
+                'position' => $image->getData('position'),
+                'isMain'   => $galleryHelper->isMainImage($image),
+                'type' => str_replace('external-', '', $image->getMediaType()),
+                'videoUrl' => $image->getVideoUrl(),
+            ]);
+            foreach ($galleryHelper->getGalleryImagesConfig()->getItems() as $imageConfig) {
+                $imageItem->setData(
+                    $imageConfig->getData('json_object_key'),
+                    $image->getData($imageConfig->getData('data_object_key'))
+                );
+            }
+            $gallery[] = $imageItem->toArray();
+        }
+
+        if (empty($gallery)) {
+            $gallery[] = [
+                'thumb' => $this->imageHelper->getDefaultPlaceholderUrl('thumbnail'),
+                'img' => $this->imageHelper->getDefaultPlaceholderUrl('image'),
+                'full' => $this->imageHelper->getDefaultPlaceholderUrl('image'),
+                'caption' => '',
+                'position' => '0',
+                'isMain' => true,
+                'type' => 'image',
+                'videoUrl' => null,
+            ];
+        }
+
+        return $gallery;
     }
 
     public function getProductJson($version = 'pc')

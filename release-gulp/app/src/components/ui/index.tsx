@@ -14,6 +14,8 @@ import Table from './table/table.vue'
 import TableColumn from './table/column.vue'
 import Tabs from './tabs/tabs.vue'
 import TabsPanel from './tabs/panel.vue'
+import Swiper from './swiper/swiper.vue'
+import SwiperItem from './swiper/item.vue'
 
 const component: any[] = [
     Input,
@@ -30,7 +32,9 @@ const component: any[] = [
     Table,
     TableColumn,
     Tabs,
-    TabsPanel
+    TabsPanel,
+    Swiper,
+    SwiperItem
 ]
 
 const UI: any = {
