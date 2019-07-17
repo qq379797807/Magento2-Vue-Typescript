@@ -58,14 +58,6 @@
             display: none !important;
         }
     }
-
-    .product-options-wrapper {
-        .fieldset {
-            .legend.links-title {
-                @extend .abs-visually-hidden;
-            }
-        }
-    }
 }
 
 //
@@ -74,11 +66,6 @@
 
 @include min-screen($screen__m) {
     .page-product-downloadable {
-        .product-options-wrapper {
-            float: left;
-            width: 55%;
-        }
-
         .product-options-bottom {
             float: right;
             width: 40%;

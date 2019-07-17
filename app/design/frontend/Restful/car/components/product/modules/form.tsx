@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { mapState ,mapActions } from 'Vuex'
 import Component from 'vue-class-component'
+import { VProductOptions } from './options'
 
 declare let window: any
 
@@ -10,9 +11,11 @@ declare let window: any
         i18n: {
             qty: 'Qty',
             buttonTitle: 'Add to Cart'
-        },
-        qty: 1
+        }
     }),
+    components: {
+        VProductOptions
+    },
     computed: {
         ...mapState([
             'productId'

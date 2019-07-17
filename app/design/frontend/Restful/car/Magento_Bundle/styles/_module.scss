@@ -14,18 +14,6 @@
         display: none;
     }
 
-    .input-text.qty {
-        @extend .abs-input-qty;
-    }
-
-    .product-options-wrapper {
-        margin-bottom: $indent__l;
-    }
-
-    .action.back {
-        margin-bottom: $indent__l;
-    }
-
     .price-box {
         .price {
             font-size: $font-size__l;
@@ -105,25 +93,10 @@
             @extend .abs-reset-left-margin-desktop;
         }
 
-        .bundle-options-wrapper,
-        .product-options-wrapper {
-            float: left;
-            width: 57%;
-        }
-
         .block-bundle-summary {
             float: right;
             position: relative;
             width: 40%;
-        }
-
-        .bundle-options-wrapper,
-        .block-bundle-summary {
-            .page-layout-2columns-left &,
-            .page-layout-2columns-right &,
-            .page-layout-3columns & {
-                width: 48%;
-            }
         }
     }
 }

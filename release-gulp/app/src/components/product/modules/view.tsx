@@ -13,6 +13,4 @@ import { VProductMedia } from './media'
         VProductMedia
     }
 })
-export class VProductView extends Vue {
-    
-}
+export class VProductView extends Vue {}

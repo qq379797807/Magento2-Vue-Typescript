@@ -13,6 +13,7 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
         }
         return $result;
     }
+    
     public function is_serialized($value, &$result = null)
     {
         if (!is_string($value)) {

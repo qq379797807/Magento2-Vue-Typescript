@@ -22,10 +22,6 @@
         }
     }
 
-    .product-options-wrapper .field:first-of-type {
-        margin-top: $form-field__vertical-indent;
-    }
-
     .fieldset.giftcard {
         > .legend {
             @extend .abs-visually-hidden;

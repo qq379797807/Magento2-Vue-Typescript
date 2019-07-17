@@ -67,10 +67,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
     }
 }
 
-.actual-price {
-    font-weight: $font-weight__bold;
-}
-
 .product.name a {
     @extend .abs-product-link;
 }
@@ -89,57 +85,14 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
 }
 
 //
-//  Product images general container
-//  ---------------------------------------------
-.product-image-photo {
-    max-width: 100%;
-}
-
-//
 //  Product view
 //  ---------------------------------------------
-
-.product-info-media {
-    .product.photo .photo.image {
-        @extend .abs-adaptive-images-centered;
-    }
-
-    .placeholder .photo.container {
-        max-width: 100%;
-    }
-
-    .notice {
-        @include lib-css(color, $text__color__muted);
-        @include lib-font-size($font-size__s);
-        margin: $indent__s 0;
-    }
-
-    .product.thumbs {
-        margin: $indent__base 0 $indent__l;
-    }
-
-    .items.thumbs {
-        @include lib-list-inline();
-
-        .active {
-            display: block;
-            line-height: 1;
-        }
-    }
-}
-
-.product.info.detailed {
-    clear: both;
-    margin-bottom: 30px;
-
-    .additional-attributes {
-        width: auto;
-        @include lib-table-resize(
-            $_th-padding-left   : 0,
-            $_th-padding-right  : $indent__l,
-            $_th-padding-bottom : $indent__s,
-            $_td-padding-bottom : $indent__s
-        );
+.product-social-links {
+    display: flex;
+    align-items: center;
+    
+    a {
+        margin-right: 2rem;
     }
 }
 
@@ -199,57 +152,7 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
     }
 }
 
-.product-options-wrapper {
-    .fieldset-product-options-inner {
-        .legend {
-            @include lib-css(font-weight, $font-weight__bold);
-            @include lib-css(margin, 0 0 $indent__xs);
-            @include lib-font-size(14px);
-            border: none;
-            display: inline-block;
-            float: none;
-            padding: 0;
-        }
-
-        //  Date & Time custom option (Affect Time that goes only after Date)
-        input.datetime-picker {
-            ~ select.datetime-picker {
-                margin-top: $indent__s;
-            }
-        }
-
-        &.required,
-        &._required {
-            .legend {
-                &:after {
-                    content: '*';
-                    @include lib-typography(
-                        $_font-size   : $form-field-label-asterisk__font-size,
-                        $_color       : $form-field-label-asterisk__color,
-                        $_font-family : $form-field-label-asterisk__font-family,
-                        $_font-weight : $form-field-label-asterisk__font-weight,
-                        $_line-height : $form-field-label-asterisk__line-height,
-                        $_font-style  : $form-field-label-asterisk__font-style
-                    );
-                    @include lib-css(margin, $form-field-label-asterisk__margin);
-                }
-            }
-        }
-    }
-
-    .field {
-        .note {
-            display: block;
-        }
-
-        .price-notice {
-            @extend .abs-adjustment-incl-excl-tax;
-        }
-    }
-}
-
-.product-info-main,
-.product-options-bottom {
+.product-info-main {
     .price-box {
         .price-including-tax + .price-excluding-tax,
         .weee + .price-excluding-tax,
@@ -318,10 +221,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
             @extend .abs-button-l;
         }
     }
-
-    .product-addto-links {
-        margin: $indent__base 0;
-    }
 }
 
 .prices-tier {
@@ -343,16 +242,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
             @include lib-font-size(14);
             font-weight: $font-weight__bold;
         }
-    }
-}
-
-.ui-dialog-titlebar-close {
-    @include lib-button-as-link();
-}
-
-.block.related {
-    .action.select {
-        margin: 0 $indent__xs;
     }
 }
 
@@ -548,6 +437,7 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
 @include min-screen($screen__m) {
     .product-info-view {
         display: flex;
+        margin-bottom: 3rem;
         justify-content: space-between;
         flex-direction: row-reverse;
     }
@@ -643,15 +533,6 @@ body.catalog-product-compare-index {
 
     .product-addto-links {
         margin-top: 15px;
-
-        .action.split,
-        .action.toggle {
-            @include lib-button-s();
-        }
-
-        .action.toggle {
-            padding: 0;
-        }
     }
 
     .cell.remove {

@@ -14,21 +14,14 @@ declare let window: any
             submitReview: 'Submit Review',
             signIn: 'Sign in',
             create: 'Create an account'
-        },
-        nickname: '',
-        summary: '',
-        detail: '',
-        auto: true,
-        selectQuality: '',
-        selectPrice: '',
-        selectValue: '',
-        notLogin: ''
+        }
     })
 })
 export class VReviews extends Vue {
     public nickname: string = ''
     public summary: string = ''
     public detail: string = ''
+    public auto: boolean = true
     public selectQuality: string = ''
     public selectPrice: string = ''
     public selectValue: string = ''
