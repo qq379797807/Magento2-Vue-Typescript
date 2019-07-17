@@ -34,18 +34,6 @@
         align-items: center;
         flex-shrink: 0;
         transition-property: transform;
-
-        &:nth-child(1) {
-            background: #2d8cf0;
-        }
-
-        &:nth-child(2) {
-            background: #999;
-        }
-
-        &:nth-child(3) {
-            background: #c6e2ff;
-        }
     }
 
     .direction-nav {
@@ -91,10 +79,10 @@
         a { 
             display: inline-block; 
             vertical-align: middle; 
-            width: 6px; 
-            height: 6px; 
+            width: 10px; 
+            height: 10px; 
             border-radius: 50%; 
-            background: #fff; 
+            background: #ccc; 
             margin: 0 5px;
 
             &.control-nav-active { 
