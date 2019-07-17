@@ -11,11 +11,11 @@
         <div class="swiper-wrapper" :style="styleWrap">
             <slot/>
         </div>
-        <div class="direction-nav" v-if="directionNav">
+        <div class="direction-nav" v-if="directionNav && swipes.length > 1">
             <a href="javascript:;" class="swiper-prev" @click="_directionNavClick(-1)"></a>
             <a href="javascript:;" class="swiper-next" @click="_directionNavClick(1)"></a>
         </div>
-        <div class="control-nav" v-if="controlNav">
+        <div class="control-nav" v-if="controlNav && swipes.length > 1">
             <a href="javascript:;"
                 v-for="(item,index) in swipes"
                 :class="{'control-nav-active':index===current}"
@@ -245,7 +245,7 @@ export default {
             return [moveFirstOrLast, index]
         },
         _autoPlay () {
-            if (this.autoPlay) {
+            if (this.autoPlay && this.swipes.length > 1) {
                 this.timer = setInterval(() => {
                     this._directionNavClick(1)
                 }, this.showTime)

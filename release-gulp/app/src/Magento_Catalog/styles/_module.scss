@@ -322,11 +322,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
     .product-addto-links {
         margin: $indent__base 0;
     }
-
-    .action.tocompare {
-        @extend .abs-action-addto-product;
-        vertical-align: top;
-    }
 }
 
 .prices-tier {
@@ -487,13 +482,6 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
             display: block;
             margin: $indent__xs 0;
         }
-    }
-
-    .compare,
-    .product-addto-links .action.tocompare,
-    .product-item-actions .actions-secondary > .action.tocompare,
-    [class*='block-compare'] {
-        display: none;
     }
 }
 

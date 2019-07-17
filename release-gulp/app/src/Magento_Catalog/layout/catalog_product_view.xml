@@ -23,5 +23,6 @@
         <referenceBlock name="product.info.addtocart.instantPurchase.additional" remove="true" />
         <referenceBlock name="product.info.addtocart.instantPurchase" remove="true" />
         <move element="product.info.main" destination="vue.product.main" />
+        <move element="product.info.mailto" destination="product.info.addto" />
     </body>
 </page>
