@@ -1,5 +1,5 @@
 <template>
-    <div class="swiper-slide" :style="style" :class="{'active':active}">
+    <div class="swiper-slide" :style="style" :class="{'active': active}">
         <slot/>
     </div>
 </template>
@@ -16,7 +16,6 @@ export default {
     computed: {
         style () {
             let animation = {
-                width: this.$parent.containerWidth + 'px',
                 float: 'left',
                 transform: `translate3d(${this.offset}px, 0, 0)`,
                 transition: `transform 0ms`

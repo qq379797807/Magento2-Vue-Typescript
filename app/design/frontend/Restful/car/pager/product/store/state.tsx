@@ -1,14 +1,17 @@
 declare let window: any
 
-const commonJson = window.commonJson
-const productJson = window.productJson
+const commonJson: any = window.commonJson
+const productJson: any = window.productJson
 
 const state: any = {
     config: commonJson,
+    data: productJson,
     baseUrl: commonJson.base_url,
     productId: productJson.product_id,
     productAction: productJson.product_action,
-    product_type: productJson.product_type
+    productType: productJson.product_type,
+    productGrallery: [],
+    configurable: productJson.configurable
 }
 
 export default state

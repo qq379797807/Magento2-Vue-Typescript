@@ -1,7 +1,7 @@
 declare let window: any
 
-const commonJson = window.commonJson
-const checkoutJson = window.checkoutJson
+const commonJson: any = window.commonJson
+const checkoutJson: any = window.checkoutJson
 
 const state: any = {
     config: checkoutJson,

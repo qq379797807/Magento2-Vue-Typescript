@@ -11,6 +11,4 @@ import { VProductForm } from './form'
         VProductForm
     }
 })
-export class VProductMain extends Vue {
-    
-}
+export class VProductMain extends Vue {}

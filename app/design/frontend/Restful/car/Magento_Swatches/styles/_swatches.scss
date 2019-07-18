@@ -164,75 +164,50 @@
     justify-content: center;
 }
 
-.swatch-option-link-layered:focus > div {
-    box-shadow: 0 0 3px 1px #68a8e0;
-}
+.v-color {
+    .v-form-box {
+        display: flex;
+        align-items: center;
+    }
 
-.swatch-option-tooltip-layered {
-    width: 140px;
-    position: absolute;
-    background: #fff;
-    color: rgb(148, 148, 148);
-    border: 1px solid #adadad;
-    display: none;
-    z-index: 999;
-    left: -47px;
-}
+    .v-attr {
+        width: 4rem;
+        height: 3rem;
+        display: flex;
+        position: relative;
+        justify-content: center;
 
-.swatch-visual-tooltip-layered {
-    height: 160px;
-    top: -170px;
-}
+        span {
+            width: 2.5rem;
+            height: 2.5rem;
+            float: left;
+            position: relative;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 
-.swatch-textual-tooltip-layered {
-    height: 30px;
-    top: -40px;
-}
+            &:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-width: 2px;
+                border-style: solid;
+                border-color: transparent;
+                border-radius: 50%;
+                transition: all 0.125s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+            }
+        }
 
-.swatch-option-link-layered:hover > .swatch-option-tooltip-layered {
-    display: block;
-}
-
-.swatch-attribute-options .swatch-option-tooltip-layered .title {
-    width: 100%;
-    height: 20px;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    color: rgb(40, 40, 40);
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.swatch-option-disabled:after {
-    content: '';
-    position: absolute;
-    width: 42px;
-    height: 2px;
-    background: red;
-    transform: rotate(-30deg);
-    z-index: 995;
-    left: -4px;
-    top: 10px;
-}
-
-.swatch-option-disabled {
-    outline: none !important;
-    cursor: default;
-    border: 0;
-}
-
-// Bugfix for Add To Cart button
-.swatch-opt-listing {
-    margin-bottom: 10px;
-}
-
-.swatch-option-loading {
-    content: url(../Magento_Swatches/images/loader-2.gif);
-}
-
-.swatch-input {
-    left: -1000px;
-    position: absolute;
-    visibility: hidden;
+        &:hover {
+            span:after {
+                top: -.4rem;
+                bottom: -.4rem;
+                left: -.4rem;
+                right: -.4rem;
+                border-color: #d9d9d9;
+            }
+        }
+    }
 }

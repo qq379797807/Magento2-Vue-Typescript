@@ -35,7 +35,7 @@ export default {
         containerHeight: '',
         swipes: [],
         translate: 0,
-        duration2: '',
+        durationT: '',
         startX: 0,
         current: 0,
         timer: ''
@@ -89,9 +89,8 @@ export default {
     computed: {
         styleWrap () {
             let animation = {
-                width: this.containerWidth * this.swipes.length + 'px',
                 transform: `translate3d(${this.translate}px,0,0)`,
-                transition: `transform ${this.duration2}ms`
+                transition: `transform ${this.durationT}ms`
             }
             if (this.animation === 'fade') {
                 animation = {
@@ -116,6 +115,9 @@ export default {
         this._translate(this.current)
         this._autoPlay()
     },
+    updated () {
+        console.log()
+    },
     methods: {
         _getTouch (event) {
             return event.changedTouches[0] || event.touches[0]
@@ -136,7 +138,7 @@ export default {
             const touch = this._getTouch(event)
             const distance = touch.clientX - this.startX
             this._setItem(-distance)
-            this.duration2 = 0
+            this.durationT = 0
             this.translate = -this.containerWidth * this.current + distance
             event.preventDefault()
         },
@@ -176,7 +178,7 @@ export default {
             }, this.duration)
         },
         _translate (current, duration) {
-            this.duration2 = duration === 0 ? 0 : this.duration
+            this.durationT = duration === 0 ? 0 : this.duration
             this.translate = -this.containerWidth * current
             if (this.animation === 'fade') {
                 this._swipesActive(current)

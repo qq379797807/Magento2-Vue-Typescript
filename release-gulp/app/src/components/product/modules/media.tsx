@@ -1,28 +1,25 @@
 import Vue, { CreateElement } from 'vue'
+import { mapGetters } from 'vuex'
 import Component from 'vue-class-component'
-
-declare let window: any
 
 @Component({
     name: 'v-product-media',
     data: () => ({
         i18n: {
-
+            media: 'media'
         }
-    })
+    }),
+    computed: {
+        ...mapGetters([
+            'grallery'
+        ])
+    }
 })
 export class VProductMedia extends Vue {
-    public grallery: any[] = []
-
     mounted () {
-        this.init()
-    }
 
-    init () {
-        let productJson: any = window.productJson
-        this.grallery = productJson.product_grallery
     }
-
+    
     render (h: CreateElement): JSX.Element {
         return (
             <div class="in-gallery">

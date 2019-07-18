@@ -21,8 +21,13 @@
     $_icon-font-display        : $icon-font__display
 ) {
     @include _lib-icon-text-hide($_icon-font-text-hide);
-    @include lib-css(display, $_icon-font-display);
+    @include lib-css(display, flex);
+    align-items: center;
     text-decoration: none;
+
+    span {
+        margin-left: .5rem;
+    }
 
     @if $_icon-font-position == before {
         &:before {

@@ -1,4 +1,5 @@
 import Vue, { CreateElement } from 'vue'
+import { mapActions } from 'vuex'
 import Component from 'vue-class-component'
 
 declare let window: any
@@ -7,7 +8,12 @@ declare let window: any
     name: 'v-product-options',
     data: () => ({
         title: 'options'
-    })
+    }),
+    methods: {
+        ...mapActions([
+            'chooseOption'
+        ])
+    }
 })
 export class VProductOptions extends Vue {
     public attributes: any = {}
@@ -21,8 +27,11 @@ export class VProductOptions extends Vue {
         this.attributes = productJson.configurable.attributes
     }
 
-    chooseOption (code: any, option: any) {
-        console.log(code, option)
+    choose (id: any, option: any) {
+        this.chooseOption({
+            key: id,
+            optId: option.id
+        })
     }
 
     render (h: CreateElement): JSX.Element {
@@ -35,7 +44,7 @@ export class VProductOptions extends Vue {
                             {item.options.map((option: any) => {
                                 return (
                                     <a href="javascript:;" class="v-attr" title={option.label} onClick={() => {
-                                        this.chooseOption(item.code, option)
+                                        this.choose(item.id, option)
                                     }}>
                                         {item.code === 'color' ? (
                                             <span style={`background-color:${option.value}`}></span>

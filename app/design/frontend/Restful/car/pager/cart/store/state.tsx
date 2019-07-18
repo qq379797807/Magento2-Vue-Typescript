@@ -1,7 +1,7 @@
 declare let window: any
 
-const commonJson = window.commonJson
-const cartJson = window.cartJson
+const commonJson: any = window.commonJson
+const cartJson: any = window.cartJson
 
 const state: any = cartJson ? {
     config: cartJson,

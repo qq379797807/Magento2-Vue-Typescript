@@ -437,6 +437,7 @@ $product-h1-margin-bottom-desktop                   : $indent__base !default;
 @include min-screen($screen__m) {
     .product-info-view {
         display: flex;
+        margin-bottom: 3rem;
         justify-content: space-between;
         flex-direction: row-reverse;
     }
