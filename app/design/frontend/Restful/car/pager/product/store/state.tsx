@@ -10,6 +10,7 @@ const state: any = {
     productId: productJson.product_id,
     productAction: productJson.product_action,
     productType: productJson.product_type,
+    productPrices: null,
     productGrallery: [],
     configurable: productJson.configurable
 }

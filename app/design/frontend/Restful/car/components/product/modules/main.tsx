@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { VProductPrice } from './price'
 import { VProductForm } from './form'
 
 @Component({
@@ -8,6 +9,7 @@ import { VProductForm } from './form'
         title: 'main'
     }),
     components: {
+        VProductPrice,
         VProductForm
     }
 })

@@ -52,6 +52,7 @@
         .price-box {
             display: flex;
             margin: 1rem 0;
+            flex-wrap: wrap;
 
             .price {
                 font-size: 14px;
@@ -94,12 +95,6 @@
             }
         }
 
-        .minimal-price {
-            .price-container {
-                display: block;
-            }
-        }
-
         .minimal-price-link {
             margin-top: 5px;
 
@@ -122,42 +117,6 @@
 
         .action.tocompare {
             @include lib-icon-font-symbol($icon-compare-empty);
-        }
-    }
-}
-
-.price-container {
-    .price {
-        font-size: 14px;
-    }
-
-    .price-including-tax + .price-excluding-tax,
-    .weee {
-        margin-top: $indent__xs;
-    }
-
-    .price-including-tax + .price-excluding-tax,
-    .weee,
-    .price-including-tax + .price-excluding-tax .price,
-    .weee .price,
-    .weee + .price-excluding-tax:before,
-    .weee + .price-excluding-tax .price {
-        font-size: 11px;
-    }
-
-    .weee {
-        &:before {
-            content: '('attr(data-label) ': ';
-        }
-
-        &:after {
-            content: ')';
-        }
-
-        + .price-excluding-tax {
-            &:before {
-                content: attr(data-label) ': ';
-            }
         }
     }
 }

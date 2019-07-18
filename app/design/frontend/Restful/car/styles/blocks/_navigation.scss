@@ -9,6 +9,7 @@ nav {
     .in-list {
         @include lib-css(display, flex);
         @include lib-css(align-items, center);
+        @include lib-css(flex-wrap, wrap);
 
         li {
             @include lib-css(padding, 1.5rem);

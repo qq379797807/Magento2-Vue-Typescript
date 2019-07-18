@@ -13,9 +13,16 @@ import Component from 'vue-class-component'
         ...mapGetters([
             'grallery'
         ])
+    },
+    watch: {
+        grallery (v) {
+            this.key = !this.key
+        }
     }
 })
 export class VProductMedia extends Vue {
+    public key: boolean = false
+
     mounted () {
 
     }
@@ -23,7 +30,7 @@ export class VProductMedia extends Vue {
     render (h: CreateElement): JSX.Element {
         return (
             <div class="in-gallery">
-                <v-swiper>
+                <v-swiper key={this.key}>
                     {this.grallery.map((item: any, key: number) => {
                         return (
                             <v-swiper-item>

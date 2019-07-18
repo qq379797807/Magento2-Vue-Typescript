@@ -1,0 +1,8 @@
+<div class="price-box">
+    <span class="special-price">
+        <span class="price" v-text="priceFormat(finalPrice.amount)"></span>
+    </span>
+    <span class="old-price" v-if="!hasSpecial">
+        <span class="price" v-text="priceFormat(oldPrice.amount)"></span>
+    </span>
+</div>

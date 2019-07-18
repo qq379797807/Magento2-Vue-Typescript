@@ -115,9 +115,6 @@ export default {
         this._translate(this.current)
         this._autoPlay()
     },
-    updated () {
-        console.log()
-    },
     methods: {
         _getTouch (event) {
             return event.changedTouches[0] || event.touches[0]

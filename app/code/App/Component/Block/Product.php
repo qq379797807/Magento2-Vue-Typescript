@@ -82,6 +82,24 @@ class Product extends \Magento\Framework\View\Element\Template
         $data['product_type'] = $type;
         $data['email_to'] = $emailHelper->getEmailToFriendUrl($product);
 
+        $priceInfo = $product->getPriceInfo();
+        $prices= $this->variationPrices->getFormattedPrices($priceInfo);
+        $data['prices'] = $prices;
+
+        $tierPrices = [];
+        $tierPriceModel =  $priceInfo->getPrice('tier_price');
+        $tierPricesList = $tierPriceModel->getTierPriceList();
+        foreach ($tierPricesList as $tierPrice) {
+            $tierPrices[] = [
+                'qty' => $this->localeFormat->getNumber($tierPrice['price_qty']),
+                'price' => $this->localeFormat->getNumber($tierPrice['price']->getValue()),
+                'percentage' => $this->localeFormat->getNumber(
+                    $tierPriceModel->getSavePercent($tierPrice['price'])
+                ),
+            ];
+        }
+        $data['prices']['tierPrices'] = $tierPrices;
+
         $viewHelper = $this->createObject('Magento\Catalog\Block\Product\View');
         $data['default_qty'] = $viewHelper->getProductDefaultQty();
         $data['product_action'] = $viewHelper->getSubmitUrl($product);
@@ -89,7 +107,7 @@ class Product extends \Magento\Framework\View\Element\Template
         $reviewHelper = $this->createObject('Magento\Review\Block\Product\Review');
         $data['review_url'] = $reviewHelper->getProductReviewUrl();
         $data['product_grallery'] = $this->getProductGallery();
-        $data['configurable'] = $type === 'configurable' ? $this->getConfigurable($product) : null;
+        $data['configurable'] = $type === 'configurable' ? $this->getConfigurable($product) : [];
 
         return $data;
     }

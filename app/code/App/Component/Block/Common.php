@@ -1,6 +1,7 @@
 <?php
 namespace App\Component\Block;
 
+use Magento\Framework\Locale\Format;
 class Common extends \Magento\Framework\View\Element\Template
 {   
     private $stores;
@@ -18,8 +19,10 @@ class Common extends \Magento\Framework\View\Element\Template
     protected $minPopularity;
     protected $maxPopularity;
     protected $queryCollectionFactory;
+    private $localeFormat;
 
     public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Checkout\Model\Session $checkoutsesion,
         \Magento\Directory\Helper\Data $directoryHelper,
@@ -27,7 +30,7 @@ class Common extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Url\EncoderInterface $urlEncoder,
         \Magento\Search\Model\ResourceModel\Query\CollectionFactory $queryCollectionFactory,
-        \Magento\Framework\View\Element\Template\Context $context
+        Format $localeFormat = null
     )
     {
         parent::__construct($context);
@@ -40,6 +43,7 @@ class Common extends \Magento\Framework\View\Element\Template
         $this->checkoutsesion = $checkoutsesion;
         $this->queryCollectionFactory = $queryCollectionFactory;
         $this->storeManager = $context->getStoreManager();
+        $this->localeFormat = $localeFormat ?: $this->getObject(Format::class);
     }
 
     public function createObject($className)
@@ -167,6 +171,7 @@ class Common extends \Magento\Framework\View\Element\Template
 
         $uenc = $this->getRequest()->getParam('uenc', '');
         $data['uenc'] = $uenc;
+        $data['priceFormat'] = $this->localeFormat->getPriceFormat();
         $data['stores'] = $storeArr;
         $data['base_url'] = $this->urlBuilder->getUrl('/');
         $data['media_path'] = $currentStore->getBaseUrl('media');
