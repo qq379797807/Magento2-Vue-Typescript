@@ -1,20 +1,27 @@
 <template>
     <div :class="`${prefix}-form-input`">
-        <input v-bind="$attrs" 
-            :value="value"
-            :type="inputType"
-            :class="{'disabled': disabled, [prefix + '-input-control']: true}"
-            :disabled="disabled"
-            @input="_input"
-            @focus="_focus"
-            @blur="_blur" />
-        <i :class="`${prefix}-icon-clear`" v-if="clear&&value" @click.stop="_clear"></i>
-        <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="value && show && type==='password'" @click.stop="eye=!eye"></i>
+        <validation-provider :name="name" :rules="rules">
+            <template #default="{errors}">
+                <input v-bind="$attrs"
+                    :type="inputType"
+                    :name="name"
+                    :class="{'disabled': disabled, [prefix + '-input-control']: true}"
+                    :disabled="disabled"
+                    v-model="currentV"
+                    @input="_input"
+                    @focus="_focus"
+                    @blur="_blur" />
+                <p :class="`${prefix}-error`" v-if="errors[0]">{{ errors[0] }}</p>
+            </template>
+        </validation-provider>
+        <i :class="`${prefix}-icon-clear`" v-if="clear&&currentV" @click.stop="_clear"></i>
+        <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="currentV && show && type==='password'" @click.stop="eye=!eye"></i>
     </div>
 </template>
 
 <script>
 const prefix = 'v'
+import { ValidationProvider } from 'vee-validate'
 
 export default {
     name: `${prefix}-input`,
@@ -22,7 +29,8 @@ export default {
     data: () => ({
         prefix: prefix,
         eye: false,
-        inputType: 'text'
+        inputType: 'text',
+        currentV: null
     }),
     props: {
         value: null,
@@ -33,6 +41,14 @@ export default {
         type: {
             type: String,
             default: 'text'
+        },
+        name: {
+            type: String,
+            default: ''
+        },
+        rules: {
+            type: String,
+            default: ''
         },
         clear: {
             type: Boolean,
@@ -46,6 +62,9 @@ export default {
         focus: Function,
         blur: Function
     },
+    components: {
+        ValidationProvider
+    },
     watch: {
         eye (value) {
             this.inputType = value ? 'text' : 'password'
@@ -53,6 +72,7 @@ export default {
     },
     mounted () {
         this.inputType = this.type
+        this.currentV = this.value
     },
     methods: {
         _blur (e) {

@@ -1,13 +1,20 @@
 <template>
     <div :class="`${prefix}-form-input`">
-        <input v-bind="$attrs" 
-            :value="value"
-            :type="inputType"
-            :class="{'disabled': disabled, [prefix + '-input-control']: true}"
-            :disabled="disabled"
-            @input="_input"
-            @focus="_focus"
-            @blur="_blur" />
+        <validation-provider name="name" rules="rules">
+            <template #default="{ errors }">
+                <input v-bind="$attrs" 
+                    :value="value"
+                    :name="name"
+                    :type="inputType"
+                    :class="{'disabled': disabled, [prefix + '-input-control']: true}"
+                    :disabled="disabled"
+                    v-validate="rules"
+                    @input="_input"
+                    @focus="_focus"
+                    @blur="_blur" />
+                <p>{{ errors[0] }}</p>
+            </template>
+        </validation-provider>
         <i :class="`${prefix}-icon-clear`" v-if="clear&&value" @click.stop="_clear"></i>
         <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="value && show && type==='password'" @click.stop="eye=!eye"></i>
     </div>
@@ -15,6 +22,7 @@
 
 <script>
 const prefix = 'v'
+import { ValidationProvider } from 'vee-validate'
 
 export default {
     name: `${prefix}-input`,
@@ -34,6 +42,14 @@ export default {
             type: String,
             default: 'text'
         },
+        name: {
+            type: String,
+            default: ''
+        },
+        rules: {
+            type: String,
+            default: ''
+        },
         clear: {
             type: Boolean,
             default: false
@@ -45,6 +61,9 @@ export default {
         change: Function,
         focus: Function,
         blur: Function
+    },
+    components: {
+        ValidationProvider
     },
     watch: {
         eye (value) {
