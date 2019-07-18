@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import { mapState ,mapActions } from 'Vuex'
+import { mapState, mapMutations, mapActions } from 'Vuex'
 import Component from 'vue-class-component'
 import { VProductOptions } from './options'
-
-declare let window: any
 
 @Component({
     name: 'v-product-form',
@@ -18,10 +16,14 @@ declare let window: any
     },
     computed: {
         ...mapState([
-            'productId'
+            'productId',
+            'defaultQty'
         ])
     },
     methods: {
+        ...mapMutations([
+            'changeQty'
+        ]),
         ...mapActions([
             'addToProduct'
         ])
@@ -35,8 +37,11 @@ export class VProductForm extends Vue {
     }
 
     init () {
-        let productJson: any = window.productJson
-        this.qty = productJson.default_qty
+        this.qty = this.defaultQty
+    }
+
+    qtyChange () {
+        this.changeQty(this.qty)
     }
 
     addCart () {

@@ -2,7 +2,7 @@ import { GetterTree } from 'vuex'
 
 const getters: GetterTree<any, any> = {
     priceFormat: (state) => (price: string) => {
-        const format: any = state.config.basePriceFormat
+        const format: any = state.config.priceFormat
         price = parseFloat(price).toFixed(format.precision)
         return format.pattern.replace('%s', price)
     },

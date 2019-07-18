@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Component from 'vue-class-component'
 
 @Component({
@@ -8,14 +8,27 @@ import Component from 'vue-class-component'
         title: 'price'
     }),
     computed: {
+        ...mapState([
+            'tierPrice'
+        ]),
         ...mapGetters([
             'prices',
             'priceFormat'
         ])
+    },
+    watch: {
+        tierPrice (price: number) {
+            if (price > 0) {
+                this.hasTier = true
+            } else {
+                this.hasTier = false
+            }
+        }
     }
 })
 export class VProductPrice extends Vue {
     public hasSpecial: boolean = false
+    public hasTier: boolean = false
 
     get basePrice () {
         return this.prices.basePrice

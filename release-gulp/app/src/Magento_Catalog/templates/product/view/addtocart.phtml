@@ -7,7 +7,7 @@
 <?php $_product = $block->getProduct(); ?>
 <?php if ($_product->isSaleable()): ?>
     <v-form-item :label="i18n.qty">
-        <v-qplus name="qty" v-model="qty"></v-qplus>
+        <v-qplus name="qty" v-model="qty" :change="qtyChange"></v-qplus>
     </v-form-item>
     <v-form-item>
         <v-button type="primary" native="button" v-text="i18n.buttonTitle" @click="addCart"></v-button>

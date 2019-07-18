@@ -66,8 +66,7 @@ export default {
             this.blur && this.blur(e)
         },
         _input (e) {
-            const value = Number(e.target.value)
-
+            let value = Number(e.target.value)
             if (value <= this.minsV) {
                 value = this.minsV
             }

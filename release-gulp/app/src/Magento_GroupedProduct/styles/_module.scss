@@ -1,3 +1,7 @@
+.tier-price {
+    @include lib-css(color, $color-dark-green1);
+}
+
 .table.grouped {
     @include lib-table-bordered(
         $_table_type: horizontal

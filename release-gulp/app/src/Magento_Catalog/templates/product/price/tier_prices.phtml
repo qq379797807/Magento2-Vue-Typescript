@@ -1,0 +1,11 @@
+<?php
+/*
+* @var \Magento\Catalog\Pricing\Render\PriceBox $block 
+*/
+?>
+
+<ul class="prices-tier items" v-if="tierPrices.length > 0">
+    <li class="item" v-for="tier in tierPrices">
+        Buy <span v-text="tier.qty"></span> for <span class="weee"><span class="price" v-text="priceFormat(tier.price)"></span></span>&nbsp;each and <strong class="benefit">save&nbsp;<span class="percent" v-text="tier.percentage"></span>%</strong>
+    </li>
+</ul>
