@@ -1,7 +1,7 @@
 <template>
-    <div :class="`${prefix}-form-input`">
-        <validation-provider :name="name" :rules="rules">
-            <template #default="{errors}">
+    <validation-provider :name="name" :rules="rules">
+        <template #default="{errors}">
+            <div :class="`${prefix}-form-input`">
                 <input v-bind="$attrs"
                     :type="inputType"
                     :name="name"
@@ -11,12 +11,12 @@
                     @input="_input"
                     @focus="_focus"
                     @blur="_blur" />
-                <p :class="`${prefix}-error`" v-if="errors[0]">{{ errors[0] }}</p>
-            </template>
-        </validation-provider>
-        <i :class="`${prefix}-icon-clear`" v-if="clear&&currentV" @click.stop="_clear"></i>
-        <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="currentV && show && type==='password'" @click.stop="eye=!eye"></i>
-    </div>
+                <i :class="`${prefix}-icon-clear`" v-if="clear&&currentV" @click.stop="_clear"></i>
+                <i :class="[prefix+'-icon-eye',{ 'show': eye }]" v-if="currentV && show && type==='password'" @click.stop="eye=!eye"></i>
+            </div>
+            <p :class="`${prefix}-error`" v-if="errors[0]">{{ errors[0] }}</p>
+        </template> 
+    </validation-provider>
 </template>
 
 <script>
