@@ -10,12 +10,11 @@ const mutations: MutationTree<any> = {
         const tierPrices: any[] = state.productPrices.tierPrices
 
         tierPrices.forEach((item: any) => {
-            if (item.qty >= qty) {
+            if (qty >= item.qty) {
                 tier_price = item.price
             }
         })
 
-        console.log(tier_price)
         state.tierPrice = tier_price
     },
     addToProduct (state, payload) {

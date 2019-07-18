@@ -15,6 +15,15 @@ import Component from 'vue-class-component'
             'prices',
             'priceFormat'
         ])
+    },
+    watch: {
+        tierPrice (price: number) {
+            if (price > 0) {
+                this.hasTier = true
+            } else {
+                this.hasTier = false
+            }
+        }
     }
 })
 export class VProductPrice extends Vue {

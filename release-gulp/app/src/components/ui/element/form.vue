@@ -12,7 +12,6 @@ export default {
     inheritAttrs: false,
     data: () => ({
         prefix: prefix,
-        fields: [],
         defaultModel: {}
     })
 }

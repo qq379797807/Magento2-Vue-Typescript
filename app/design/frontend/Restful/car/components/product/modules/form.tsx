@@ -17,7 +17,8 @@ import { VProductOptions } from './options'
     computed: {
         ...mapState([
             'productId',
-            'defaultQty'
+            'defaultQty',
+            'productPrices'
         ])
     },
     methods: {
@@ -41,7 +42,8 @@ export class VProductForm extends Vue {
     }
 
     qtyChange () {
-        this.changeQty(this.qty)
+        const tierPrices: any = this.productPrices.tierPrices
+        if (tierPrices.length > 0) this.changeQty(this.qty)
     }
 
     addCart () {
