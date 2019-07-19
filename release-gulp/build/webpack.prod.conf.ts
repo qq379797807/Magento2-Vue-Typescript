@@ -58,7 +58,12 @@ const baseConfig = new WebpackConfig({
         //     statsOptions: null,
         //     logLevel: 'info',
         // }),
-        new ProgressBarPlugin(),
+        new ProgressBarPlugin({
+            entries: true,
+            modules: true,
+            modulesCount: 100,
+            profile: true
+        }),
         new HappyPack({
             id: 'happyBabel',
             loaders: ['babel-loader?cacheDirectory=true'],
@@ -83,9 +88,24 @@ const baseConfig = new WebpackConfig({
         usedExports: true,
         concatenateModules: true,
         splitChunks: {
+            chunks: 'async',
             minSize: 30000,
+            minChunks: 1, 
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
+            name: true,
+            automaticNameDelimiter: '~',
+            cacheGroups: {
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true,
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                }
+            }
         },
         noEmitOnErrors: true,
         minimize: true,
@@ -100,7 +120,6 @@ const baseConfig = new WebpackConfig({
                         beautify: false
                     },
                     compress: {
-                        // drop_console: true,
                         collapse_vars: true,
                         reduce_vars: true
                     }

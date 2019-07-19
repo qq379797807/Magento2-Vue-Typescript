@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VContent } from '../../components/sales/print/content'
+import { VContent } from '@components/sales/print/content'
 
 @Component({
     name: 'v-app',

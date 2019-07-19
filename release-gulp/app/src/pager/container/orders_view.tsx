@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VHeader } from '../../components/header/header'
-import { VNavagition } from '../../components/navagition/navagition'
-import { VContent } from '../../components/sales/view/content'
-import { VFooter } from '../../components/footer/footer'
+import { VHeader } from '@components/header/header'
+import { VNavagition } from '@components/navagition/navagition'
+import { VContent } from '@components/sales/view/content'
+import { VFooter } from '@components/footer/footer'
 
 @Component({
     name: 'v-app',

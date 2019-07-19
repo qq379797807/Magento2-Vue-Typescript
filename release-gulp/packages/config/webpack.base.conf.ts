@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { InputConfig } from '../decorators'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const resolve = (dir: string) => path.join(__dirname, '../../', dir)
 
 export class WebpackConfig {
     private path: string
@@ -109,8 +110,13 @@ export class WebpackConfig {
                     '.css', 
                     '.json'
                 ],
+                modules: [
+                    resolve('app/src/components/'),
+                    resolve('node_modules')
+                ],
                 alias: {
-                    'vue$': 'vue/dist/vue.esm.js'
+                    'vue$': 'vue/dist/vue.esm.js',
+                    '@components': resolve('app/src/components/')
                 }
             },
             module: {
