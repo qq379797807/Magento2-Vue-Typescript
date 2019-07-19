@@ -131,7 +131,7 @@ export class WebpackConfig {
                     },
                     {
                         test: /\.js$/,
-                        loader: 'happypack/loader?id=happyBabel',
+                        loader: 'happypack/loader?id=happy-babel',
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -145,7 +145,7 @@ export class WebpackConfig {
                         ],
                         use: [
                             'cache-loader',
-                            'happypack/loader?id=happyBabel',
+                            'happypack/loader?id=happy-babel',
                             {
                                 loader: 'ts-loader',
                                 options: { 

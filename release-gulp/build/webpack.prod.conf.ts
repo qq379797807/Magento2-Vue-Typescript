@@ -23,6 +23,12 @@ const createEntry: any = ((list: string[]) => {
 
     return new Promise((resolve) => resolve(params))
 })
+const createHappyPlugin: any = (id: string, loaders: string[]) => new HappyPack({
+    id: id,
+    loaders: loaders,
+    threadPool: happyThreadPool,
+    verboseWhenProfiling: true
+})
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -64,12 +70,13 @@ const baseConfig = new WebpackConfig({
             modulesCount: 100,
             profile: true
         }),
-        new HappyPack({
-            id: 'happyBabel',
-            loaders: ['babel-loader?cacheDirectory=true'],
-            threadPool: happyThreadPool,
-            verboseWhenProfiling: true
-        }),
+        createHappyPlugin('happy-babel', [{
+            loader: 'babel-loader',
+            options: {
+                babelrc: true,
+                cacheDirectory: true
+            }
+        }]),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: `[name].[contenthash:8].css`
