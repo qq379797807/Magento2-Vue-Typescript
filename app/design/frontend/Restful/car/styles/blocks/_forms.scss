@@ -17,6 +17,12 @@ $form-calendar-icon__color: $primary__color !default;
     position: relative;
 }
 
+.v-error {
+    color: $color-red9;
+    font-size: 1.3rem;
+    margin-top: .5rem;
+}
+
 .v-form-item {
     .v-form-input {
         &:focus {

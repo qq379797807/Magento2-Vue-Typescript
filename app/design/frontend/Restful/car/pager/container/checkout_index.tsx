@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VHeader } from '../../components/checkout/header'
-import { VContent } from '../../components/checkout/content'
-import { VFooter } from '../../components/footer/footer'
+import { VHeader } from '@components/checkout/header'
+import { VContent } from '@components/checkout/content'
+import { VFooter } from '@components/footer/footer'
 
 @Component({
     name: 'v-app',

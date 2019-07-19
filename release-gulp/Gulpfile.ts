@@ -4,7 +4,7 @@ import * as sourcemaps from 'gulp-sourcemaps'
 import * as ts from 'gulp-typescript'
 import { Gulp } from 'gulp'
 import { Util } from './util/util'
-import { themeConfig, webpackDevConfig, webpackProdConfig } from './build'
+import { themeConfig, webpackDevConfig, webpackProdConfig, webpackDllConfig } from './build'
 import { GulpFile, Task, Watch, WebpackServer, Vkoa, GT } from './packages'
 const clean = require('gulp-clean')
 const pump = require('pump')
@@ -248,6 +248,16 @@ export class Gulpflie {
         await Promise.resolve(
             webpackServer.setConfig(
                 webpackProdConfig,
+                'production'
+            ).runBuild()
+        )
+    }
+
+    @Task()
+    public async dll(gulp: Gulp, webpackServer: WebpackServer) {
+        await Promise.resolve(
+            webpackServer.setConfig(
+                webpackDllConfig,
                 'production'
             ).runBuild()
         )

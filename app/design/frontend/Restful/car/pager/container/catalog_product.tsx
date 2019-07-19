@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { VHeader } from '../../components/header/header'
-import { VNavagition } from '../../components/navagition/navagition'
-import { VBreadcrumbs } from '../../components/product/breadcrumbs'
-import { VContent } from '../../components/product/content'
-import { VFooter } from '../../components/footer/footer'
+import { VHeader } from '@components/header/header'
+import { VNavagition } from '@components/navagition/navagition'
+import { VBreadcrumbs } from '@components/product/breadcrumbs'
+import { VContent } from '@components/product/content'
+import { VFooter } from '@components/footer/footer'
 
 @Component({
     name: 'v-app',

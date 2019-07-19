@@ -1,0 +1,87 @@
+import * as path from 'path'
+import * as webpack from 'webpack'
+import * as os from 'os'
+import { WebpackConfig, InputConfig } from '../packages'
+import { themeConfig } from '../build'
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+
+const { area, src } = themeConfig.default
+
+const baseConfig = new WebpackConfig({
+    root:  path.join(__dirname, '../app'),
+    entry: {
+        vue: ['vue', 'vue-class-component','vuex','vue-lazyload', 'vue-cookies', 'vee-validate', 'axios']
+    },
+    output: {
+        path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`),
+        filename: '[name].dll.js',
+        library: '_dll_[name]'
+    },
+    mode: 'development',
+    performance: {
+        hints: 'warning',
+        maxAssetSize: 50000000,
+        maxEntrypointSize: 30000000
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV':  JSON.stringify('development')
+        }),
+        new webpack.DllPlugin({
+            name: '_dll_[name]',
+            path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`, '[name].dll.manifest.json')
+        }),
+    ],
+    optimization: {
+        namedModules: false,
+        namedChunks: false,
+        nodeEnv: 'development',
+        flagIncludedChunks: true,
+        occurrenceOrder: true,
+        sideEffects: true,
+        usedExports: true,
+        concatenateModules: true,
+        splitChunks: {
+            chunks: 'async',
+            minSize: 30000,
+            minChunks: 1, 
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            name: true,
+            automaticNameDelimiter: '~',
+            cacheGroups: {
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true,
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                }
+            }
+        },
+        noEmitOnErrors: true,
+        minimize: true,
+        minimizer: [
+            new ParallelUglifyPlugin({
+                cacheDir: '.cache/',
+                workerCount: os.cpus().length,
+                sourceMap: false,
+                uglifyJS: {
+                    output: {
+                        comments: false,
+                        beautify: false
+                    },
+                    compress: {
+                        collapse_vars: true,
+                        reduce_vars: true
+                    }
+                }
+            })
+        ]
+    }
+})
+const webpackDllConfig: InputConfig = baseConfig.getConfig()
+
+export default webpackDllConfig

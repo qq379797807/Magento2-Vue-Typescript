@@ -265,11 +265,7 @@ $_password-very-strong               : #81b562 !default;
     }
 
     p:last-child {
-        margin: 0;
-    }
-
-    .box-actions {
-        margin-top: $indent__xs;
+        margin-bottom: 0;
     }
 }
 

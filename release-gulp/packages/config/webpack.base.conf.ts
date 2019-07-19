@@ -131,7 +131,7 @@ export class WebpackConfig {
                     },
                     {
                         test: /\.js$/,
-                        loader: 'happypack/loader?id=happy-babel',
+                        use: ['happypack/loader?id=happy-babel'],
                         include: [this.path],
                         exclude: [
                             /node_modules/
@@ -139,10 +139,6 @@ export class WebpackConfig {
                     },
                     {
                         test: /\.tsx?$/,
-                        include: [this.path],
-                        exclude: [
-                            /node_modules/
-                        ],
                         use: [
                             'cache-loader',
                             'happypack/loader?id=happy-babel',
@@ -154,6 +150,10 @@ export class WebpackConfig {
                                     appendTsxSuffixTo: [/\.vue$/] 
                                 }
                             }
+                        ],
+                        include: [this.path],
+                        exclude: [
+                            /node_modules/
                         ]
                     },
                     {

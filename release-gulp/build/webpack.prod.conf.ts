@@ -5,6 +5,7 @@ import { VueLoaderPlugin } from 'vue-loader'
 import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
 import compileModules from './modules'
+const readJsonSync = require('read-json-sync')
 const HappyPack = require('happypack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -29,6 +30,7 @@ const createHappyPlugin: any = (id: string, loaders: string[]) => new HappyPack(
     threadPool: happyThreadPool,
     verboseWhenProfiling: true
 })
+const dllJson: any = readJsonSync(`../app/design/${area}/${src}/web/dll/vue.dll.manifest.json`)
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -70,11 +72,19 @@ const baseConfig = new WebpackConfig({
             modulesCount: 100,
             profile: true
         }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: { 
+                content: dllJson.content, 
+                name: dllJson.name 
+            }
+        }),
         createHappyPlugin('happy-babel', [{
             loader: 'babel-loader',
             options: {
                 babelrc: true,
-                cacheDirectory: true
+                cacheDirectory: true,
+                cacheCompression: true
             }
         }]),
         new VueLoaderPlugin(),
