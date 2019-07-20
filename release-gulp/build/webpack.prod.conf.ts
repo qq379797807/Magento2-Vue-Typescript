@@ -30,7 +30,7 @@ const createHappyPlugin: any = (id: string, loaders: string[]) => new HappyPack(
     threadPool: happyThreadPool,
     verboseWhenProfiling: true
 })
-const dllJson: any = readJsonSync(`../app/design/${area}/${src}/web/dll/vue.dll.manifest.json`)
+const dllJson: any = readJsonSync(`../app/design/${area}/${src}/web/dll/vendor.dll.manifest.json`)
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -50,6 +50,13 @@ const baseConfig = new WebpackConfig({
         maxEntrypointSize: 30000000
     },
     plugins: [
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: { 
+                content: dllJson.content, 
+                name: dllJson.name 
+            }
+        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify('development')
         }),
@@ -71,13 +78,6 @@ const baseConfig = new WebpackConfig({
             modules: true,
             modulesCount: 100,
             profile: true
-        }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: { 
-                content: dllJson.content, 
-                name: dllJson.name 
-            }
         }),
         createHappyPlugin('happy-babel', [{
             loader: 'babel-loader',
@@ -113,14 +113,19 @@ const baseConfig = new WebpackConfig({
             name: true,
             automaticNameDelimiter: '~',
             cacheGroups: {
-                default: {
+                common: {
+                    chunks: 'initial',
+                    minSize: 0,
                     minChunks: 2,
                     priority: -20,
-                    reuseExistingChunk: true,
                 },
-                vendors: {
+                vendor: {
+                    chunks: 'initial', 
+                    minSize: 0,
+                    minChunks: 2,
                     test: /[\\/]node_modules[\\/]/,
-                    priority: -10
+                    priority: -10,
+                    reuseExistingChunk: true
                 }
             }
         },

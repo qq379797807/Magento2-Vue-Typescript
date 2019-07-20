@@ -10,7 +10,7 @@ const { area, src } = themeConfig.default
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: {
-        vue: ['vue', 'vue-class-component','vuex','vue-lazyload', 'vue-cookies', 'vee-validate', 'axios']
+        vendor: ['vue', 'vue-class-component','vuex','vue-lazyload', 'vue-cookies', 'vee-validate', 'axios']
     },
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`),
@@ -29,7 +29,8 @@ const baseConfig = new WebpackConfig({
         }),
         new webpack.DllPlugin({
             name: '_dll_[name]',
-            path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`, '[name].dll.manifest.json')
+            path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`, '[name].dll.manifest.json'),
+            context: __dirname
         }),
     ],
     optimization: {
@@ -47,19 +48,7 @@ const baseConfig = new WebpackConfig({
             minChunks: 1, 
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
-            name: true,
-            automaticNameDelimiter: '~',
-            cacheGroups: {
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true,
-                },
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                }
-            }
+            name: true
         },
         noEmitOnErrors: true,
         minimize: true,

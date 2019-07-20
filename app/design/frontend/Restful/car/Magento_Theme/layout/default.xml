@@ -5,6 +5,7 @@
         <referenceContainer name="root">
             <block class="App\Component\Block\Common" name="vue.common" before="-" template="Magento_Theme::common.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.app" template="Magento_Theme::app.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.component" after="-" template="Magento_Theme::component.phtml" />
         </referenceContainer>
         <referenceContainer name="page.wrapper">
             <block class="Magento\Framework\View\Element\Template" name="vue.header" before="-" template="Magento_Theme::header.phtml" />
