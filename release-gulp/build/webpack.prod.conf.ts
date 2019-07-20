@@ -111,23 +111,7 @@ const baseConfig = new WebpackConfig({
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
             name: true,
-            automaticNameDelimiter: '~',
-            cacheGroups: {
-                common: {
-                    chunks: 'initial',
-                    minSize: 0,
-                    minChunks: 2,
-                    priority: -20,
-                },
-                vendor: {
-                    chunks: 'initial', 
-                    minSize: 0,
-                    minChunks: 2,
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    reuseExistingChunk: true
-                }
-            }
+            automaticNameDelimiter: '~'
         },
         noEmitOnErrors: true,
         minimize: true,
