@@ -25,8 +25,8 @@
                 <slot v-else></slot>
             </div>
             <div :class="`${prefix}-modal-footer`" v-if="confirm||cancel">
-                <d-button type="cancel" v-if="cancel" @click="_cancel">{{cancel}}</d-button>
-                <d-button type="primary" v-if="confirm" @click="_confirm">{{confirm}}</d-button>
+                <v-button type="cancel" v-if="cancel" @click="_cancel">{{cancel}}</v-button>
+                <v-button type="primary" v-if="confirm" @click="_confirm">{{confirm}}</v-button>
             </div>
         </div>
     </transition>
@@ -34,7 +34,7 @@
 
 <script>
 const prefix = 'v'
-import dButton from '../button'
+import VButton from '../element/button'
 
 export default {
     name: `${prefix}-modal`,
@@ -43,12 +43,12 @@ export default {
         autoTime: 0,
         scrollStyle: '',
         scrollbarWidth: 0,
-        modalWidth: 0
+        modalWidth: 0,
         modalHeight: 0,
         windowHeight: 0,
         windowWidth: 0,
         zIndex: 2019,
-        showHide: this.visible,
+        showHide: false,
         clearTime: '',
         style: {
             left: '',
@@ -116,7 +116,7 @@ export default {
         }
     },
     components: {
-        dButton
+        VButton
     },
     created () {
         this.scrollbarWidth = this.getScrollbarWidth()
@@ -126,6 +126,7 @@ export default {
             if (this.appendToBody && this.$el) {
                 document.body.appendChild(this.$el)
             }
+            this.showHide = this.visible
             this._setPosition()
             this.after && this.after()
         })
