@@ -1,21 +1,16 @@
 <?php
 namespace App\Component\Block;
 
-class Account extends \Magento\Framework\View\Element\Template
+class History extends \Magento\Framework\View\Element\Template
 {
-    private $urlBuilder;
     private $jsonHelper;
-    private $urlEncoder;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Framework\Json\Helper\Data $JsonHelper,
-        \Magento\Framework\Url\EncoderInterface $urlEncoder
+        \Magento\Framework\Json\Helper\Data $JsonHelper
     )
     {
         parent::__construct($context);
-        $this->urlBuilder = $context->getUrlBuilder();
-        $this->urlEncoder =$urlEncoder;
         $this->jsonHelper =$JsonHelper;
     }
 
@@ -29,11 +24,11 @@ class Account extends \Magento\Framework\View\Element\Template
         return \Magento\Framework\App\ObjectManager::getInstance()->get($className);
     }
 
-    public function getAccountJson($version = 'pc'){
+    public function getHistoryJson($version = 'pc') {
         $data = [];
-        $recentHelper = $this->getObject('Magento\Sales\Block\Order\Recent');
+        $historyHelper = $this->getObject('Magento\Sales\Block\Order\History');
         $orderData = [];
-        $orders = $recentHelper->getOrders();
+        $orders = $historyHelper->getOrders();
         
         foreach ($orders as $order) {
             $orderData[] = [
@@ -48,8 +43,7 @@ class Account extends \Magento\Framework\View\Element\Template
             ];
         }
         
-        $data['rencent_orders'] = $orderData;
-        $data['sales_url'] = $this->urlBuilder->getUrl('sales/order/history');
+        $data['history_order'] = $orderData;
 
         return $this->jsonHelper->jsonEncode($data);
     }

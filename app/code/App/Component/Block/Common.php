@@ -169,8 +169,7 @@ class Common extends \Magento\Framework\View\Element\Template
             $storeArr[] = $ret;
         }
 
-        $uenc = $this->getRequest()->getParam('uenc', '');
-        $data['uenc'] = $uenc;
+        $data['uenc'] = $refer;
         $data['priceFormat'] = $this->localeFormat->getPriceFormat();
         $data['stores'] = $storeArr;
         $data['base_url'] = $this->urlBuilder->getUrl('/');

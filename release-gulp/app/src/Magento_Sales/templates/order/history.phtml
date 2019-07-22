@@ -1,0 +1,22 @@
+<v-order-history inline-template>
+    <div class="orders-history">
+        <?= $block->getChildHtml('info') ?>
+        <v-table :data="historyOrder" :empty="i18n.noOrder" :drag="true">
+            <v-table-column :label="i18n.order" prop="orderId"></v-table-column>
+            <v-table-column :label="i18n.date" prop="date"></v-table-column>
+            <v-table-column :label="i18n.shipTo" prop="shipTo"></v-table-column >
+            <v-table-column :label="i18n.orderTotal">
+                <template slot-scope="scope">
+                    <span v-text="priceFormat(scope.row.total)"></span>
+                </template>
+            </v-table-column>
+            <v-table-column :label="i18n.status" prop="status"></v-table-column>
+            <v-table-column :label="i18n.action">
+                <template slot-scope="scope">
+                    <a :href="scope.row.view_url" v-text="i18n.viewOrder"></a>
+                    <a href="javascript:;" v-text="i18n.reOrder" @click="reOrder(scope.row.reorder_url)"></a>
+                </template>
+            </v-table-column>
+        </v-table>
+    </div>
+</v-order-history>

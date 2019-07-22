@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+declare let window: any
+
 @Component({
     name: 'v-account-newsletter',
     data: () => ({
@@ -12,6 +14,7 @@ import Component from 'vue-class-component'
     })
 })
 export class VAccountNewsletter extends Vue {
+    public action: string = ''
     public subscribed: boolean = false
 
     mounted () {
@@ -19,6 +22,8 @@ export class VAccountNewsletter extends Vue {
     }
 
     init () {
-
+        let newsletterJson: any = window.newsletterJson
+        this.action = newsletterJson.action
+        this.subscribed = newsletterJson.isSubscribed
     }
 }

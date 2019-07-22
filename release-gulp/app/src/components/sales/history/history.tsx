@@ -4,11 +4,9 @@ import Component from 'vue-class-component'
 declare let window: any
 
 @Component({
-    name: 'v-account-orders',
+    name: 'v-order-history',
     data: () => ({
         i18n: {
-            recentOrders: 'Recent Orders',
-            viewAll: 'View All',
             order: 'Order #',
             date: 'Date',
             shipTo: 'Ship To',
@@ -21,11 +19,10 @@ declare let window: any
         }
     })
 })
-export class VAccountOrders extends Vue {
+export class VOrderHistory extends Vue {
     public form_key: string = ''
     public uenc: string = ''
-    public salesUrl: string = ''
-    public recentOrders: any[] = []
+    public historyOrder: any[] = []
 
     mounted () {
         this.init()
@@ -33,11 +30,10 @@ export class VAccountOrders extends Vue {
 
     init () {
         let commonJson: any = window.commonJson
-        let accountJson: any = window.accountJson
+        let historyJson: any = window.historyJson
         this.form_key = commonJson.form_key
         this.uenc = commonJson.uenc
-        this.salesUrl = accountJson.sales_url
-        this.recentOrders = accountJson.rencent_orders
+        this.historyOrder = historyJson.history_order
     }
 
     reOrder (url: string): void {
