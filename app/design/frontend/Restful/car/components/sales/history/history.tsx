@@ -20,6 +20,8 @@ declare let window: any
     })
 })
 export class VOrderHistory extends Vue {
+    public form_key: string = ''
+    public uenc: string = ''
     public historyOrder: any[] = []
 
     mounted () {
@@ -27,12 +29,27 @@ export class VOrderHistory extends Vue {
     }
 
     init () {
+        let commonJson: any = window.commonJson
         let historyJson: any = window.historyJson
+        this.form_key = commonJson.form_key
+        this.uenc = commonJson.uenc
         this.historyOrder = historyJson.history_order
     }
 
-    reOrder (id: string): void {
-        console.log(id)
+    reOrder (url: string): void {
+        const formTemplate = `
+            <div class="in-form">
+                <input name="form_key" value="${this.form_key}" />
+                <input name="uenc" value="${this.uenc}" />
+            </div>
+        `
+        let form = document.createElement('form')
+        form.action = url
+        form.method = 'post'
+        form.enctype = 'multipart/form-data'
+        form.innerHTML = formTemplate
+        document.body.appendChild(form)
+        form.submit()
     }
 
     priceFormat (price: string): string {

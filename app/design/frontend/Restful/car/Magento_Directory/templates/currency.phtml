@@ -5,7 +5,7 @@
 ?>
 
 <v-currency inline-template>
-    <div class="switcher switcher-currency" v-if="currency.length > 0">
+    <div class="switcher switcher-currency" v-if="currency.length > 1">
         <v-select placeholder="Choose Currency" :options="currency" v-model="selectCurrency" :filterable=true :number=6></v-select>
     </div>
 </v-currency>

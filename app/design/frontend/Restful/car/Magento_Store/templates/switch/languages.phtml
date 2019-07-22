@@ -1,10 +1,9 @@
 <?php
 /** @var \Magento\Store\Block\Switcher $block */
 ?>
-<?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : ''; ?>
 
 <v-language inline-template>
-    <div class="switcher switcher-language" v-if="language.length > 0">
+    <div class="switcher switcher-language" v-if="language.length > 1">
         <v-select placeholder="Choose Language" :options="language" v-model="selectLanguage" :filterable=true :icon=true :number=6></v-select>
     </div>
 </v-language>
