@@ -1,6 +1,6 @@
 <template>
     <transition name="slide-toggle">
-        <div :class="`${prefix}-date-picker clearfix`" v-if="showHide" :style="pickerStyle" @click="_stopPropagation">
+        <div :class="`${prefix}-date-picker`" v-if="showHide" :style="pickerStyle" @click="_stopPropagation">
             <div class="calendar">
                 <div class="calendar-head">
                     <a class="calendar-prev-year" @click="_yearClick(0)">«</a>
@@ -31,7 +31,7 @@ import Day from './day'
 const prefix = 'v'
 
 export default {
-    name: 'datePicker',
+    name: `datePicker`,
     data: () => ({
         prefix: prefix,
         activeValue: '',

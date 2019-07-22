@@ -5,7 +5,7 @@
 ?>
 
 <v-form-item :label="'<?= $block->getLabel() ?>'">
-    <v-input name="<?= $block->getHtmlId() ?>" v-model="<?= $block->getHtmlId() ?>"></v-input>
+    <v-datepicker name="<?= $block->getHtmlId() ?>" type="ymdHms" v-model="<?= $block->getHtmlId() ?>"></v-datepicker>
     <?php if ($_message = $block->getAdditionalDescription()) : ?>
         <div class="note"><?= $block->escapeHtml($_message) ?></div>
     <?php endif; ?>

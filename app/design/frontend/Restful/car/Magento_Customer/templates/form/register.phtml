@@ -76,7 +76,9 @@
         <?= $block->getChildHtml('form_additional_info') ?>
         <?php if ($block->isNewsletterEnabled()): ?>
             <v-form-item>
-                <v-checkbox name="is_subscribed" v-model="subscribed" value="1">{{i18n.subscribed}}</v-checkbox>
+                <v-checkbox name="is_subscribed" v-model="subscribed" value="1">
+                    <span v-text="i18n.subscribed"></span>
+                </v-checkbox>
             </v-form-item>
             <?= $block->getChildHtml('customer.form.register.newsletter') ?>
         <?php endif ?>

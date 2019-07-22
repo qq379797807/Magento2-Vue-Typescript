@@ -68,6 +68,9 @@ export default {
     watch: {
         eye (value) {
             this.inputType = value ? 'text' : 'password'
+        },
+        value (v) {
+            this.currentV = v
         }
     },
     mounted () {

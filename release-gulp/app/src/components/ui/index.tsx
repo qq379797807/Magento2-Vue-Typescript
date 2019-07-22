@@ -16,6 +16,7 @@ import Tabs from './tabs/tabs.vue'
 import TabsPanel from './tabs/panel.vue'
 import Swiper from './swiper/swiper.vue'
 import SwiperItem from './swiper/item.vue'
+import Datepicker from './datepicker/datepicker.vue'
 
 const component: any[] = [
     Input,
@@ -34,7 +35,8 @@ const component: any[] = [
     Tabs,
     TabsPanel,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    Datepicker
 ]
 
 const UI: any = {

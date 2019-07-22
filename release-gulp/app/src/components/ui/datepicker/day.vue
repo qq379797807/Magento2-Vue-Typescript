@@ -1,26 +1,20 @@
 <template>
 	<div class="calendar-days">
-		<div class="calendar-week clearfix">
-			<a>日</a>
-			<a>一</a>
-			<a>二</a>
-			<a>三</a>
-			<a>四</a>
-			<a>五</a>
-			<a>六</a>
+		<div class="calendar-week">
+			<span v-for="item in dateData" v-text="item"></span>
 		</div>
-		<div class="calendar-list clearfix">
-			<a v-for="(item,index) in days" :class="[_dayClass(item)]" @click="_selectDay(item,$event)" :key="index">{{item.d}}
+		<div class="calendar-list">
+			<a href="javacript:;" v-for="(item, index) in days" :class="[_dayClass(item)]" @click="_selectDay(item, $event)" :key="index">{{item.d}}
 				<span v-text="_innerHTML(item)" v-if="_innerHTML(item)"></span>
 			</a>
 		</div>
-		<div class="calendar-time clearfix" v-if="type==='ymdHms'">
+		<div class="calendar-time" v-if="type==='ymdHms'">
 			<div class="calendar-time-input">
-				<input type="text" v-model="hours" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')">:
-				<input type="text" v-model="minutes" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')">:
-				<input type="text" v-model="seconds" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')">
+				<input type="text" v-model="hours" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')" />:
+				<input type="text" v-model="minutes" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')" />:
+				<input type="text" v-model="seconds" maxlength="2" oninput="value=value.replace(/[^\d]/g,'')" />
 			</div>
-			<a class="btn-time" @click="_selectConfirm">确定</a>
+			<a class="btn-time" @click="_selectConfirm" v-text="i18n.comfirm"></a>
 		</div>
 	</div>
 </template>
@@ -29,14 +23,32 @@
 export default {
 	name: 'day',
 	data: () => ({
-		selectValue: this.bodyValue,
-		hours: this.value.getHours(),
-		minutes: this.value.getMinutes(),
-		seconds: this.value.getSeconds()
+		i18n: {
+			comfirm: 'Comfirm'
+		},
+		selectValue: null,
+		hours: null,
+		minutes: null,
+		seconds: null,
+		dateData: [
+			'Su',
+			'Mo',
+			'Tu',
+			'We',
+			'Th',
+			'Fr',
+			'Sa'
+		]
 	}),
 	props: {
-		value: null,
-		bodyValue: null,
+		value: {
+			type: Date,
+			default: null
+		},
+		bodyValue: {
+			type: Date,
+			default: null
+		},
 		type: String
 	},
 	computed: {
@@ -59,7 +71,7 @@ export default {
 				count--
 			}
 			time.setMonth(time.getMonth() + 2, 0)
-			lastDay = time.getDate()/
+			lastDay = time.getDate()
 			for (let i = 1; i <= lastDay; i++) {
 					days.push({
 					d: i,
@@ -78,14 +90,21 @@ export default {
 			return days
 		}
 	},
+	mounted () {
+		this.selectValue = this.bodyValue,
+		this.hours = this.value.getHours(),
+		this.minutes = this.value.getMinutes(),
+		this.seconds = this.value.getSeconds()
+	},
 	methods: {
 		_dayClass (item) {
 			let time = new Date(item.y, item.m, item.d)
-			let time2 = this.selectValue.toDateString()
+			let selectTimer = this.selectValue == null ? this.selectValue : this.selectValue.toDateString()
+			
 			return {
 				'calendar-date-out': item.p || item.n,
 				'calendar-date-today': time.toDateString() === new Date().toDateString(), 
-				'calendar-date-select': time.toDateString() === time2,
+				'calendar-date-select': time.toDateString() === selectTimer,
 				'calendar-date-disabled': this.$parent.disabledDate(time)
 			}
 		},
@@ -93,6 +112,7 @@ export default {
 			let disabled = e.target.className
 			if (disabled.indexOf('calendar-date-disabled') === -1) {
 				const date = new Date(item.y, item.m, item.d)
+
 				if (this.type === 'ymdHms') {
 					this.selectValue = date
 				} else {

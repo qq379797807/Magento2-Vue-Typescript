@@ -1,6 +1,6 @@
 <template>
-    <div class="calendar-year clearfix">
-        <a v-for="(item,index) in yearList" :class="[_getClass(item)]" @click="_selectYear(item,$event)" :key="index" v-text="item"></a>
+    <div class="calendar-year">
+        <a href="javacript:;" v-for="(item,index) in yearList" :class="[_getClass(item)]" @click="_selectYear(item,$event)" :key="index" v-text="item"></a>
     </div>
 </template>
 
@@ -11,8 +11,14 @@ export default {
 
     }),
     props: {
-        value: null,
-        bodyValue: null
+        value: {
+			type: Date,
+			default: null
+		},
+		bodyValue: {
+			type: Date,
+			default: null
+		}
     },
     computed: {
         yearList () {
@@ -23,7 +29,7 @@ export default {
             }
             return array
         }
-    }
+    },
     methods: {
         _selectYear (item, e) {
             let disabled = e.target.className

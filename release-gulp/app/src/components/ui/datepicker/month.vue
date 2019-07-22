@@ -1,6 +1,6 @@
 <template>
-    <div class="calendar-months clearfix">
-        <a v-for="(item,index) in monthList" :class="[_getClass(index)]" v-text="item" :key="index" @click="_selectMonth(index,$event)"></a>
+    <div class="calendar-months">
+        <a href="javacript:;" v-for="(item, index) in monthList" :class="[_getClass(index)]" v-text="item" :key="index" @click="_selectMonth(index,$event)"></a>
     </div>
 </template>
 
@@ -8,16 +8,30 @@
 export default {
     name: 'month',
     data: () => ({
-
+        monthList: [
+            'Jan', 
+            'Feb', 
+            'Mar', 
+            'Apr', 
+            'May', 
+            'Jun', 
+            'Jul', 
+            'Aug', 
+            'Sep', 
+            'Oct', 
+            'Nov', 
+            'Dec'
+        ]
     }),
     props: {
-        value: null,
-        bodyValue: null
-    },
-    computed: {
-        monthList () {
-            return ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-        }
+        value: {
+			type: Date,
+			default: null
+		},
+		bodyValue: {
+			type: Date,
+			default: null
+		}
     },
     methods: {
         _getClass (index) {
