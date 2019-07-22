@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import VueBus from './tool/bus'
-import VueResize from './tool/resize'
+import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import { VApp } from './container/sales_guest'
 

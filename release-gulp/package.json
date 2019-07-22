@@ -28,7 +28,6 @@
         "reflect-metadata": "^0.1.12",
         "ts-node": "^7.0.0",
         "typescript": "^2.9.2",
-        "vue-social-sharing": "^2.4.5",
         "webpack": "^4.25.1",
         "webpack-dev-server": "^3.1.10",
         "webpack-stream": "^4.0.3"

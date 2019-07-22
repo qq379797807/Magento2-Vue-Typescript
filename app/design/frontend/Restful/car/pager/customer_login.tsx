@@ -2,8 +2,7 @@ import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 import { VApp } from './container/customer_login'
 import { VContentLoader } from './loader/loader'
-import VueBus from './tool/bus'
-import VueResize from './tool/resize'
+import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 
 const Lazyload: any = VueLazyload

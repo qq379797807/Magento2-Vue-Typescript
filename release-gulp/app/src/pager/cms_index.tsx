@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import VueBus from './tool/bus'
-import VueResize from './tool/resize'
+import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import { VContentLoader } from './loader/loader'
 import { VApp } from './container/cms_index'
-const SocialSharing = require('vue-social-sharing')
 
 const Lazyload: any = VueLazyload
 
 Vue.config.productionTip = false
-Vue.use(SocialSharing)
 Vue.use(Lazyload.install, {
     preLoad: 1.3,
     error: '',
