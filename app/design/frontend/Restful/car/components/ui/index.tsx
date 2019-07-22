@@ -10,6 +10,7 @@ import Select from './element/select.vue'
 import Collapse from './module/collapse.vue'
 import CollapsePanel from './module/panel.vue'
 import Qplus from './module/qplus.vue'
+import Modal from './module/modal.vue'
 import Table from './table/table.vue'
 import TableColumn from './table/column.vue'
 import Tabs from './tabs/tabs.vue'
@@ -30,6 +31,7 @@ const component: any[] = [
     Collapse,
     CollapsePanel,
     Qplus,
+    Modal,
     Table,
     TableColumn,
     Tabs,

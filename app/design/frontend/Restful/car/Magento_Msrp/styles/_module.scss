@@ -1,20 +1,4 @@
-.map-popup-wrapper.popup {
-    .action.close {
-        @include lib-css(top, $popup-button-close__position-top);
-    }
-}
-
 .map-popup {
-    @include lib-popup(
-        $_popup-margin-top      : $indent__s,
-        $_popup-margin-left     : false,
-        $_popup-content-margin  : $indent__s 0 0,
-        $_popup-position-bottom : false,
-        $_popup-position-right  : false,
-        $_popup-position        : absolute
-    );
-    box-sizing: border-box;
-
     .map-info-price {
         @extend .abs-add-clearfix;
         margin-bottom: 15px;

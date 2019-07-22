@@ -6,7 +6,7 @@
             ref="input"
             :value="value"
             :disabled="disabled"
-            :clear="showClear&&!disabled"
+            :clear="showClear && !disabled"
             @input="_input">
         </v-input>
         <i :class="`${prefix}-icon-date`" v-if="!disabled"></i>

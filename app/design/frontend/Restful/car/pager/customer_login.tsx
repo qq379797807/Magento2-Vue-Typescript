@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 import { VApp } from './container/customer_login'
 import { VContentLoader } from './loader/loader'
+import VueBus from './tool/bus'
+import VueResize from './tool/resize'
 import UI from '../components/ui'
 
 const Lazyload: any = VueLazyload
@@ -14,6 +16,12 @@ Vue.use(Lazyload.install, {
     listenEvents: [
         'scroll'
     ]
+})
+Vue.use(VueBus)
+Vue.use(VueResize, {
+    mobile: 640,
+    tablet: 768,
+    desktop: 1200
 })
 Vue.component('v-content-loader', VContentLoader)
 UI.install(Vue)

@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import VueLazyload from 'vue-lazyload'
-import { VApp } from './container/catalog_product'
+import VueBus from './tool/bus'
+import VueResize from './tool/resize'
+import UI from '../components/ui'
+import './cookie/cookie'
 import state from './product/store/state'
 import getters from './product/store/getters'
 import actions from './product/store/actions'
 import mutations from './product/store/mutations'
-import UI from '../components/ui'
-import './cookie/cookie'
+import { VApp } from './container/catalog_product'
 
 const Lazyload: any = VueLazyload
 
@@ -21,6 +23,12 @@ Vue.use(Lazyload.install, {
     listenEvents: [
         'scroll'
     ]
+})
+Vue.use(VueBus)
+Vue.use(VueResize, {
+    mobile: 640,
+    tablet: 768,
+    desktop: 1200
 })
 UI.install(Vue)
 

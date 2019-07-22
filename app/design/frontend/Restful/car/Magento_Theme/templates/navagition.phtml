@@ -1,5 +1,5 @@
 <v-navagition inline-template>
-    <nav class="navigation">
+    <nav class="navigation" v-resize="'desktop'">
         <ul class="in-list" v-if="counter > 0">
             <li v-for="category in categories">
                 <a :href="category.url" :title="category.name">

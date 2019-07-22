@@ -1,14 +1,17 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import VueLazyload from 'vue-lazyload'
-import { VApp } from './container/checkout_cart'
+import VueBus from './tool/bus'
+import VueResize from './tool/resize'
+import UI from '../components/ui'
 import state from './cart/store/state'
 import getters from './cart/store/getters'
 import actions from './cart/store/actions'
 import mutations from './cart/store/mutations'
-import UI from '../components/ui'
+import { VApp } from './container/checkout_cart'
 
 const Lazyload: any = VueLazyload
+
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(Lazyload.install, {
@@ -19,6 +22,12 @@ Vue.use(Lazyload.install, {
     listenEvents: [
         'scroll'
     ]
+})
+Vue.use(VueBus)
+Vue.use(VueResize, {
+    mobile: 640,
+    tablet: 768,
+    desktop: 1200
 })
 UI.install(Vue)
 

@@ -72,7 +72,7 @@ $namespace: 'v-';
             position: absolute; 
             padding: 0 5px; 
             font-weight: 700; 
-            font-size: 12px; 
+            font-size: 12px;
         }
 
         .calendar-prev-year { 
@@ -124,6 +124,7 @@ $namespace: 'v-';
             padding: 1rem 0;
             flex: calc(100% / 3);
             cursor: pointer;
+            text-decoration: none;
 
             &:hover { 
                 background: #eaf8fe;
@@ -158,8 +159,9 @@ $namespace: 'v-';
             color: #333; 
             padding: 5px 0;
             flex: calc(100% / 7);
-            cursor: pointer; 
             position: relative;
+            cursor: pointer;
+            text-decoration: none;
 
             &:hover { 
                 background: #eaf8fe; 
@@ -195,11 +197,6 @@ $namespace: 'v-';
             &:hover { 
                 background: $color-blue1;
             }
-        }
-
-        .calendar-date-today {
-            color: $color-blue1; 
-            text-decoration: underline;
         }
     }
 
