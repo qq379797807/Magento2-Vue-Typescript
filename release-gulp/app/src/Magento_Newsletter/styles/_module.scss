@@ -1,7 +1,9 @@
 //  Newsletter subscription
 .block.newsletter {
-    .v-form-input {
-        flex: 1;
+    .v-form-box {
+        > span {
+            flex: 1;
+        }
     }
 
     .v-btn {
