@@ -2,6 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
+            <block class="App\Component\Block\Account" name="vue.account.html" after="vue.common" template="Magento_Customer::account/data.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.account.js" after="-" template="Magento_Customer::account/component.phtml" />
         </referenceContainer>
     </body>

@@ -17,5 +17,6 @@
         <referenceBlock name="customer.data.invalidation.rules" remove="true" />
         <referenceBlock name="authentication-popup" remove="true" />
         <referenceBlock name="sales.order.print.js" remove="true" />
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
     </body>
 </page>
