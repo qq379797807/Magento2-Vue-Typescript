@@ -10,7 +10,7 @@ const { area, src } = themeConfig.default
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: {
-        vendor: ['vue', 'vue-class-component','vuex','vue-lazyload', 'vue-cookies', 'vee-validate', 'axios']
+        vendor: ['vue', 'vue-class-component','vuex','vue-lazyload', 'vue-cookies', 'vue-notification', 'vee-validate', 'axios']
     },
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`),
