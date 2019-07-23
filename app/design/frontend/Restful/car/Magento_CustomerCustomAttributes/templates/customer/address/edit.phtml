@@ -1,0 +1,87 @@
+<?php
+/*
+ * @var $block \Magento\Customer\Block\Address\Edit
+ */
+/** @var \Magento\Customer\Helper\Address $addressHelper */
+$addressHelper = $this->helper('Magento\Customer\Helper\Address');
+?>
+
+<v-address-form inline-template>
+    <v-form class="v-address" action="<?= $block->getSaveUrl() ?>" method="post" enctype="multipart/form-data">
+        <v-form-item v-show="false">
+            <?= $block->getBlockHtml('formkey') ?>
+            <input type="hidden" name="success_url" value="<?= $block->escapeUrl($block->getSuccessUrl()) ?>" />
+            <input type="hidden" name="error_url" value="<?= $block->escapeUrl($block->getErrorUrl()) ?>" />
+        </v-form-item>
+        <?= $block->getNameBlockHtml() ?>
+        <v-form-item class="v-country" :label="i18n.country">
+            <v-select name="country_id" placeholder="Choose Country" :options="country" v-model="selectCountry" :filterable=true :icon=true :number=8 @change="changeRegion"></v-select>
+        </v-form-item>
+        <v-form-item :label="i18n.state">
+            <v-input name="region" v-if="!showRegion" v-model="selectRegion"></v-input>
+            <v-select name="region_id" v-if="showRegion" placeholder="Choose Region" :options="region" v-model="selectRegion" :filterable=true :number=8></v-select>
+        </v-form-item>
+        <v-form-item :label="i18n.city">
+            <v-input name="city" v-model="city"></v-input>
+        </v-form-item>
+        <v-form-item :label="i18n.street">
+            <v-input name="street[]" v-model="street[0]"></v-input>
+            <template v-if="address_count > 0">
+                <v-input name="street[]" class="v-form-address" v-for="item in counter" :key="item" v-model="street[item + 1]"></v-input>
+            </template>
+        </v-form-item>
+        <?php if ($addressHelper->isAttributeVisible('company')): ?>
+            <v-form-item :label="i18n.company">
+                <v-input name="company" v-model="company"></v-input>
+            </v-form-item>
+        <?php endif; ?>
+        <?php if ($addressHelper->isAttributeVisible('telephone')): ?>
+            <v-form-item :label="i18n.telephone">
+                <v-input name="telephone" v-model="telephone"></v-input>
+            </v-form-item>
+        <?php endif; ?>
+        <?php if ($addressHelper->isAttributeVisible('fax')): ?>
+            <v-form-item :label="i18n.fax">
+                <v-input name="fax" v-model="fax"></v-input>
+            </v-form-item>
+        <?php endif; ?>
+        <v-form-item :label="i18n.zip">
+            <v-input name="postcode" v-model="postcode"></v-input>
+        </v-form-item>
+        <?php if ($addressHelper->isVatAttributeVisible('tax')) : ?>
+            <v-form-item :label="i18n.tax">
+                <v-input name="tax" v-model="tax"></v-input>
+            </v-form-item>
+        <?php endif; ?>
+        <?php $userDefinedAttributes = $block->getLayout()->getBlock('customer_form_address_user_attributes'); ?>
+        <?php if ($userDefinedAttributes):?>
+            <?= $userDefinedAttributes->setShowContainer(false)->toHtml() ?>
+        <?php endif;?>
+        <?php if ($block->isDefaultBilling()): ?>
+            <div class="message info">
+                <span v-text="i18n.defaultBilling"></span>
+            </div>
+        <?php elseif ($block->canSetAsDefaultBilling()): ?>
+            <v-form-item>
+                <v-checkbox name="default_billing" v-model="defaultBilling" value="1">{{i18n.useBilling}}</v-checkbox>
+            </v-form-item>
+        <?php else: ?>
+            <input type="hidden" name="default_billing" value="1" />
+        <?php endif; ?>
+        <?php if ($block->isDefaultShipping()): ?>
+            <div class="message info">
+                <span v-text="i18n.defaultShipping"></span>
+            </div>
+        <?php elseif ($block->canSetAsDefaultShipping()): ?>
+            <v-form-item>
+                <v-checkbox name="default_shipping" v-model="defaultShipping" value="1">{{i18n.useShipping}}</v-checkbox>
+            </v-form-item>
+        <?php else: ?>
+            <input type="hidden" name="default_shipping" value="1">
+        <?php endif; ?>
+        <v-form-item>
+            <v-button type="primary" native="submit" v-text="i18n.saveAddress"></v-button>
+            <v-button type="primary" v-text="i18n.cancel"></v-button>
+        </v-form-item>
+    </v-form>
+</v-address-form>

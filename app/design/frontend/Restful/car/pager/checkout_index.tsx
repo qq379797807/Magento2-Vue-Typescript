@@ -4,10 +4,7 @@ import VueLazyload from 'vue-lazyload'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import './cookie/cookie'
-import state from './checkout/store/state'
-import getters from './checkout/store/getters'
-import actions from './checkout/store/actions'
-import mutations from './checkout/store/mutations'
+import storeOption from './checkout/store'
 import { VApp } from './container/checkout_index'
 
 const Lazyload: any = VueLazyload
@@ -32,11 +29,7 @@ Vue.use(VueResize, {
 UI.install(Vue)
 
 const store: Store<any> = new Vuex.Store({
-    state: state,
-    getters,
-    actions,
-    mutations,
-    modules: {}
+    ...storeOption
 })
 
 new Vue({

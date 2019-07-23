@@ -24,7 +24,7 @@ declare let window: any
             telephone: 'Phone Number',
             company: 'Company',
             fax: 'Fax',
-            taxvat: 'Tax/VAT number',
+            tax: 'Tax/VAT number',
             gender: 'Gender',
             saveAddress: 'Save Address',
             cancel: 'Cancel',
@@ -60,7 +60,7 @@ export class VAddressForm extends Vue {
     public telephone: string = ''
     public company: string = ''
     public fax: string = ''
-    public taxVat: string = ''
+    public tax: string = ''
     public dob: string = ''
     public selectPrefix: string = ''
     public selectSuffix: string = ''

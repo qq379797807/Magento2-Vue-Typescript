@@ -1,0 +1,20 @@
+<?php
+/*
+ * @var \Magento\GiftCardAccount\Block\Account\Redeem $block
+ */
+?>
+
+<v-gift-card inline-template>
+    <div class="gift-card">
+        <v-form class="form-giftcard" action="<?= $block->getUrl('*/*/*') ?>" method="post">
+            <v-form-item :label="i18n.giftCode">
+                <v-input name="giftcard_code" v-model="giftCode" rules="required" value="<?= $block->getCurrentGiftcard() ?>"></v-input>
+            </v-form-item>
+            <?= $block->getChildHtml('captcha') ?>
+            <v-form-item classes="'in-flex'">
+                <v-button type="primary" native="button" v-text="i18n.removeGift" @click="removeGift"></v-button>
+                <v-button type="primary" native="button" v-text="i18n.checkGift" @click="checkGift"></v-button>
+            </v-form-item>
+        </v-form>
+    </div>
+</v-gift-card>
