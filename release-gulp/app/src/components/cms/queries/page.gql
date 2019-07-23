@@ -1,0 +1,12 @@
+query getHomePage($id: Int!, $onServer: Boolean!) {
+    cmsPage(id: $id) {
+        url_key
+        title
+        content
+        content_heading
+        page_layout
+        meta_title @include(if: $onServer)
+        meta_keywords @include(if: $onServer)
+        meta_description @include(if: $onServer)
+    }
+}

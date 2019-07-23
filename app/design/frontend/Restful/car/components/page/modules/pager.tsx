@@ -1,20 +1,17 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { getCmsPage } from '../queries/cms.gql'
 
 declare let window: any
 
 @Component({
     name: 'v-pager',
     data: () => ({
-        title: '',
-        identities: [],
-        pager: ''
+        cmsPage: null
     })
 })
 export class VPager extends Vue {
-    public title: string = ''
-    public identities: string[] = []
-    public pager: string = ''
+    public pageId: number = 0
 
     mounted () {
         this.init()
@@ -22,8 +19,12 @@ export class VPager extends Vue {
 
     init () {
         let pageJson: any = window.pageJson
-        this.title = pageJson.title
-        this.identities = pageJson.identities
-        this.pager = pageJson.pager
+        this.$apollo.addSmartQuery('cmsPage', {
+            query: getCmsPage,
+            variables: () => ({
+                id: this.pageId,
+                onServer: false
+            })
+        })
     }
 }

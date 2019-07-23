@@ -24,12 +24,13 @@ class Page extends \Magento\Framework\View\Element\Template
         $pagerHelper = $this->getObject('Magento\Cms\Block\Page');
         $identities = $pagerHelper->getIdentities();
         $page = $pagerHelper->getPage();
-        $heading = $page->getContentHeading();
+        $id = $page->getId();
         $title = $page->getTitle();
         
-        $data['identities'] = $identities;
-        $data['title'] = $title;
-        $data['heading'] = $heading;
+        $data['page_id'] = $id;
+        $data['page_identities'] = $identities;
+        $data['page_title'] = $title;
+
 
         return $this->jsonHelper->jsonEncode($data);
     }

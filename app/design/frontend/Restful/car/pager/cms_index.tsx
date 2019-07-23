@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import VueLazyload from 'vue-lazyload'
-import apolloClient from './apollo/client';
+import apolloOptions from './apollo/client'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import { VApp } from './container/cms_index'
 
 const Lazyload: any = VueLazyload
 const apolloProvider: any = new VueApollo({
-    defaultClient: apolloClient
+   ...apolloOptions
 })
 
 Vue.config.productionTip = false
