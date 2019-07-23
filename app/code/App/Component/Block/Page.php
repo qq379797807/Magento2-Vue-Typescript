@@ -4,16 +4,13 @@ namespace App\Component\Block;
 class Page extends \Magento\Framework\View\Element\Template
 {
     private $jsonHelper;
-    private $_filterProvider;
 
     public function __construct(
-        \Magento\Framework\Json\Helper\Data $JsonHelper,
-        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Framework\View\Element\Template\Context $context
+        \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Framework\Json\Helper\Data $JsonHelper
     ) {
         parent::__construct($context);
         $this->jsonHelper = $JsonHelper;
-        $this->_filterProvider = $filterProvider;
     }
 
     public function getObject($className)
@@ -27,13 +24,12 @@ class Page extends \Magento\Framework\View\Element\Template
         $pagerHelper = $this->getObject('Magento\Cms\Block\Page');
         $identities = $pagerHelper->getIdentities();
         $page = $pagerHelper->getPage();
-        $content = $page->getContent();
-        $wrapper = $this->_filterProvider->getPageFilter()->filter($content);
-        $cmsTitle = $page->getContentHeading();
+        $heading = $page->getContentHeading();
+        $title = $page->getTitle();
         
         $data['identities'] = $identities;
-        $data['title'] = $cmsTitle;
-        $data['pager'] = $wrapper;
+        $data['title'] = $title;
+        $data['heading'] = $heading;
 
         return $this->jsonHelper->jsonEncode($data);
     }

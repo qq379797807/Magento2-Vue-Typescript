@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import gql from 'graphql-tag'
 
 declare let window: any
 
@@ -8,8 +9,23 @@ declare let window: any
     data: () => ({
         title: '',
         identities: [],
-        pager: ''
-    })
+        pager: '',
+        cmsPage: null
+    }),
+    apollo: {
+        cmsPage: gql`query {
+            cmsPage(id: 2) {
+              url_key
+              title
+              content
+              content_heading
+              page_layout
+              meta_title
+              meta_description
+              meta_keywords
+            }
+        }`
+    }
 })
 export class VPager extends Vue {
     public title: string = ''

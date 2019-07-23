@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import VueLazyload from 'vue-lazyload'
+import VueNotifications from 'vue-notification'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import './cookie/cookie'
@@ -26,6 +27,7 @@ Vue.use(VueResize, {
     tablet: 768,
     desktop: 1200
 })
+Vue.use(VueNotifications)
 UI.install(Vue)
 
 const store: Store<any> = new Vuex.Store({
