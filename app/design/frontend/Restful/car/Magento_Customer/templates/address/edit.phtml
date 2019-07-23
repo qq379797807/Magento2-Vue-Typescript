@@ -53,7 +53,9 @@
             </div>
         <?php elseif ($block->canSetAsDefaultBilling()): ?>
             <v-form-item>
-                <v-checkbox name="default_billing" v-model="defaultBilling" value="1">{{i18n.useBilling}}</v-checkbox>
+                <v-checkbox name="default_billing" v-model="defaultBilling" value="1">
+                    <span v-text="i18n.useBilling"></span>
+                </v-checkbox>
             </v-form-item>
         <?php else: ?>
             <input type="hidden" name="default_billing" value="1" />
@@ -64,7 +66,9 @@
             </div>
         <?php elseif ($block->canSetAsDefaultShipping()): ?>
             <v-form-item>
-                <v-checkbox name="default_shipping" v-model="defaultShipping" value="1">{{i18n.useShipping}}</v-checkbox>
+                <v-checkbox name="default_shipping" v-model="defaultShipping" value="1">
+                    <span v-text="i18n.useShipping"></span>
+                </v-checkbox>
             </v-form-item>
         <?php else: ?>
             <input type="hidden" name="default_shipping" value="1">

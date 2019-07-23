@@ -8,7 +8,9 @@
         <h2 class="title" v-text="i18n.subscription"></h2>
         <?= $block->getBlockHtml('formkey') ?>
         <v-form-item>
-            <v-checkbox name="is_subscribed" v-model="subscribed" value="1">{{i18n.general}}</v-checkbox>
+            <v-checkbox name="is_subscribed" v-model="subscribed" value="1">
+                <span v-text="i18n.general"></span>
+            </v-checkbox>
         </v-form-item>
         <?= $block->getChildHtml('customer.form.newsletter.extra') ?>
         <v-form-item>

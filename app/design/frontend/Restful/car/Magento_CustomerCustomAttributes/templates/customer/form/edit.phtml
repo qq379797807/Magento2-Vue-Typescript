@@ -25,8 +25,12 @@
         <?= $block->getChildHtml('form_fields_before_in_form') ?>
         <div class="v-form-line">
             <v-form-item :classes="'in-line'">
-                <v-checkbox name="change_email" v-model="changeEmail" value="1">{{i18n.changeEmail}}</v-checkbox>
-                <v-checkbox name="change_password" v-model="changePassword" value="1">{{i18n.changePassword}}</v-checkbox>
+                <v-checkbox name="change_email" v-model="changeEmail" value="1">
+                    <span v-text="i18n.changeEmail"></span>
+                </v-checkbox>
+                <v-checkbox name="change_password" v-model="changePassword" value="1">
+                    <span v-text="i18n.changePassword"></span>
+                </v-checkbox>
             </v-form-item>
         </div>
         <template v-if="changeEmail">

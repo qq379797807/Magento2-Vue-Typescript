@@ -38,7 +38,9 @@
                     <v-input name="telephone" v-model="phone"></v-input>
                 </v-form-item>
                  <v-form-item>
-                    <v-checkbox v-model="saveBook">{{i18n.saveBook}}</v-checkbox>
+                    <v-checkbox v-model="saveBook">
+                        <span v-text="i18n.saveBook"></span>
+                    </v-checkbox>
                 </v-form-item>
             </v-form>
         </div>
