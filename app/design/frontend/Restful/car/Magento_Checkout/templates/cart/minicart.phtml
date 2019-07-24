@@ -1,26 +1,19 @@
 <?php
-/** @var $block \Magento\Checkout\Block\Cart\Sidebar */
+/*
+* @var $block \Magento\Checkout\Block\Cart\Sidebar 
+*/
 ?>
 
 <v-minicart inline-template>
-    <div data-block="minicart" class="minicart-wrapper">
-        <a class="action showcart" href="<?= /* @escapeNotVerified */ $block->getShoppingCartUrl() ?>" data-bind="scope: 'minicart_content'">
-            <span class="text"><?= /* @escapeNotVerified */ __('My Cart') ?></span>
-            <span class="counter qty empty"
-                data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-                <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
-                <span class="counter-label">
-                <!-- ko if: getCartParam('summary_count') -->
-                    <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-                    <!-- ko i18n: 'items' --><!-- /ko -->
-                <!-- /ko -->
-                </span>
+    <div class="minicart-wrapper">
+        <a class="action showcart" href="<?= $block->getShoppingCartUrl() ?>" data-bind="scope: 'minicart_content'">
+            <span class="counter qty empty">
+                <span class="counter-number"></span>
             </span>
         </a>
         <?php if ($block->getIsNeedToDisplaySideBar()): ?>
             <div class="block block-minicart">
-                <div id="minicart-content-wrapper">
-                </div>
+                <div class="minicart-content"></div>
                 <?= $block->getChildHtml('minicart.addons') ?>
             </div>
         <?php endif ?>

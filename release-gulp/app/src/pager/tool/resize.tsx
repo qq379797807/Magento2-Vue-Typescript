@@ -7,8 +7,8 @@ const BREAKPOINTS: any = {
     tablet: 768,
     tablet_landscape: 1024,
     desktop: 1200,
-    desktop_large: 1440,
-    hd: 1920,
+    desktop_big: 1440,
+    desktop_large: 1920,
 }
 
 const VueResize: any = {

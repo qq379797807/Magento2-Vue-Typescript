@@ -8,7 +8,7 @@ declare let window: any;
     data: () => ({
         navResize: {
             point: 'tablet',
-            visible: false
+            visible: true
         }
     })
 })
