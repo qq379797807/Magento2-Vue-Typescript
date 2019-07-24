@@ -5,6 +5,7 @@
  */
 namespace Magento\Catalog\Model;
 
+use Magento\Authorization\Model\UserContextInterface;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -14,6 +15,7 @@ use Magento\Catalog\Model\FilterProductCustomAttribute;
 use Magento\Framework\Api\AttributeValueFactory;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Pricing\SaleableInterface;
 
@@ -315,7 +317,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     /**
      * List of attributes in ProductInterface
      *
-     * @deprecated
+     * @deprecated 103.0.0
      * @see ProductInterface::ATTRIBUTES
      * @var array
      */
@@ -353,6 +355,16 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      * @var FilterProductCustomAttribute|null
      */
     private $filterCustomAttribute;
+
+    /**
+     * @var UserContextInterface
+     */
+    private $userContext;
+
+    /**
+     * @var AuthorizationInterface
+     */
+    private $authorization;
 
     /**
      * @param \Magento\Framework\Model\Context $context
@@ -486,6 +498,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
         $this->_init(\Magento\Catalog\Model\ResourceModel\Product::class);
     }
 
+    // phpcs:disable Generic.CodeAnalysis.UselessOverridingMethod
     /**
      * Get resource instance
      *
@@ -498,6 +511,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     {
         return parent::_getResource();
     }
+    // phpcs:enable
 
     /**
      * Get a list of custom attribute codes that belongs to product attribute set.
@@ -533,9 +547,9 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     public function getStoreId()
     {
         if ($this->hasData(self::STORE_ID)) {
-            return $this->getData(self::STORE_ID);
+            return (int)$this->getData(self::STORE_ID);
         }
-        return $this->_storeManager->getStore()->getId();
+        return (int)$this->_storeManager->getStore()->getId();
     }
 
     /**
@@ -724,7 +738,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     public function getCategoryId()
     {
         $category = $this->_registry->registry('current_category');
-        if ($category) {
+        if ($category && in_array($category->getId(), $this->getCategoryIds())) {
             return $category->getId();
         }
         return false;
@@ -819,6 +833,9 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
         if (!$this->hasStoreIds()) {
             $storeIds = [];
             if ($websiteIds = $this->getWebsiteIds()) {
+                if ($this->_storeManager->isSingleStoreMode()) {
+                    $websiteIds = array_keys($websiteIds);
+                }
                 foreach ($websiteIds as $websiteId) {
                     $websiteStores = $this->_storeManager->getWebsite($websiteId)->getStoreIds();
                     $storeIds = array_merge($storeIds, $websiteStores);
@@ -857,6 +874,34 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     }
 
     /**
+     * Get user context.
+     *
+     * @return UserContextInterface
+     */
+    private function getUserContext(): UserContextInterface
+    {
+        if (!$this->userContext) {
+            $this->userContext = ObjectManager::getInstance()->get(UserContextInterface::class);
+        }
+
+        return $this->userContext;
+    }
+
+    /**
+     * Get authorization service.
+     *
+     * @return AuthorizationInterface
+     */
+    private function getAuthorization(): AuthorizationInterface
+    {
+        if (!$this->authorization) {
+            $this->authorization = ObjectManager::getInstance()->get(AuthorizationInterface::class);
+        }
+
+        return $this->authorization;
+    }
+
+    /**
      * Check product options and type options and save them, too
      *
      * @return void
@@ -872,6 +917,22 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
         $this->setRequiredOptions(false);
 
         $this->getTypeInstance()->beforeSave($this);
+
+        //Validate changing of design.
+        $userType = $this->getUserContext()->getUserType();
+        if ((
+                $userType === UserContextInterface::USER_TYPE_ADMIN
+                || $userType === UserContextInterface::USER_TYPE_INTEGRATION
+            )
+            && !$this->getAuthorization()->isAllowed('Magento_Catalog::edit_product_design')
+        ) {
+            $this->setData('custom_design', $this->getOrigData('custom_design'));
+            $this->setData('page_layout', $this->getOrigData('page_layout'));
+            $this->setData('options_container', $this->getOrigData('options_container'));
+            $this->setData('custom_layout_update', $this->getOrigData('custom_layout_update'));
+            $this->setData('custom_design_from', $this->getOrigData('custom_design_from'));
+            $this->setData('custom_design_to', $this->getOrigData('custom_design_to'));
+        }
 
         $hasOptions = false;
         $hasRequiredOptions = false;
@@ -929,8 +990,8 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      *
      * If value specified, it will be set.
      *
-     * @param   bool $value
-     * @return  bool
+     * @param bool $value
+     * @return bool
      */
     public function canAffectOptions($value = null)
     {
@@ -987,7 +1048,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      */
     public function getQty()
     {
-        return $this->getData('qty');
+        return (float)$this->getData('qty');
     }
 
     /**
@@ -1166,7 +1227,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     /**
      * Get formatted by currency product price
      *
-     * @return  array|double
+     * @return array|double
      *
      * @deprecated 102.0.6
      * @see getFormattedPrice()
@@ -1560,9 +1621,10 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      * Add image to media gallery
      *
      * @param string $file file path of image in file system
-     * @param string|array $mediaAttribute code of type 'media_image', leave blank if image should be only in gallery
-     * @param boolean $move if true, it will move source file
-     * @param boolean $exclude mark image as disabled in product page view
+     * @param string|array $mediaAttribute code of attribute with type 'media_image',
+     * leave blank if image should be only in gallery
+     * @param bool $move if true, it will move source file
+     * @param bool $exclude mark image as disabled in product page view
      * @return \Magento\Catalog\Model\Product
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -1816,7 +1878,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     /**
      * Save current attribute with code $code and assign new value
      *
-     * @param string $code  Attribute code
+     * @param string $code Attribute code
      * @param mixed $value New attribute value
      * @param int $store Store ID
      * @return void
@@ -2007,7 +2069,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     }
 
     /**
-     * Set options for product
+     * Set product options
      *
      * @param \Magento\Catalog\Api\Data\ProductCustomOptionInterface[] $options
      * @return $this
@@ -2034,7 +2096,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      *
      * @param string $code Option code
      * @param mixed $value Value of the option
-     * @param int|Product $product Product ID
+     * @param int|Product|null $product Product ID
      * @return $this
      */
     public function addCustomOption($code, $value, $product = null)
@@ -2564,7 +2626,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     }
 
     /**
-     * Retrieve existing extension attributes object or create a new one.
+     * @inheritdoc
      *
      * @return \Magento\Framework\Api\ExtensionAttributesInterface
      */
@@ -2574,7 +2636,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     }
 
     /**
-     * Set an extension attributes object.
+     * @inheritdoc
      *
      * @param \Magento\Catalog\Api\Data\ProductExtensionInterface $extensionAttributes
      * @return $this
@@ -2587,7 +2649,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
     //@codeCoverageIgnoreEnd
 
     /**
-     * Convert to media gallery interface
+     * Convert Image to ProductAttributeMediaGalleryEntryInterface
      *
      * @param array $mediaGallery
      * @return \Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterface[]

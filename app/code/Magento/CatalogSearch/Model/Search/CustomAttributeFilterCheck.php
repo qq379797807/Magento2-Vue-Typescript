@@ -12,7 +12,7 @@ use Magento\Catalog\Model\Product;
 /**
  * Checks if FilterInterface is by custom attribute
  *
- * @deprecated
+ * @deprecated 101.0.0
  * @see \Magento\ElasticSearch
  */
 class CustomAttributeFilterCheck
@@ -44,7 +44,7 @@ class CustomAttributeFilterCheck
 
         return $attribute
             && $filter->getType() === FilterInterface::TYPE_TERM
-            && in_array($attribute->getFrontendInput(), ['select', 'multiselect'], true);
+            && in_array($attribute->getFrontendInput(), ['select', 'multiselect', 'boolean'], true);
     }
 
     /**

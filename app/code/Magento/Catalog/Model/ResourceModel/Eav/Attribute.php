@@ -167,6 +167,8 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
+     * Init model
+     *
      * @return void
      */
     protected function _construct()
@@ -191,6 +193,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
             if ($this->_data[self::KEY_IS_GLOBAL] != $this->_origData[self::KEY_IS_GLOBAL]) {
                 try {
                     $this->attrLockValidator->validate($this);
+                    // phpcs:ignore Magento2.Exceptions.ThrowCatch
                 } catch (\Magento\Framework\Exception\LocalizedException $exception) {
                     throw new \Magento\Framework\Exception\LocalizedException(
                         __('Do not change the scope. %1', $exception->getMessage())
@@ -234,6 +237,8 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
         ) {
             $this->_indexerEavProcessor->markIndexerAsInvalid();
         }
+        
+        $this->_source = null;
 
         return parent::afterSave();
     }
@@ -242,6 +247,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
      * Is attribute enabled for flat indexing
      *
      * @return bool
+     * @since 103.0.0
      */
     public function isEnabledInFlat()
     {
@@ -362,6 +368,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
 
     /**
      * Retrieve apply to products array
+     *
      * Return empty array if applied to all products
      *
      * @return string[]
@@ -478,7 +485,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
         $backendType = $this->getOrigData('backend_type');
         $frontendInput = $this->getOrigData('frontend_input');
 
-        if ($backendType == 'int' && $frontendInput == 'select') {
+        if ($backendType == 'int' && ($frontendInput == 'select' || $frontendInput == 'boolean')) {
             return true;
         } elseif ($backendType == 'varchar' && $frontendInput == 'multiselect') {
             return true;
@@ -507,8 +514,8 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
+     * @inheritdoc
      * @codeCoverageIgnoreStart
-     * {@inheritdoc}
      */
     public function getIsWysiwygEnabled()
     {
@@ -516,7 +523,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsHtmlAllowedOnFront()
     {
@@ -524,7 +531,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getUsedForSortBy()
     {
@@ -532,7 +539,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsFilterable()
     {
@@ -540,7 +547,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsFilterableInSearch()
     {
@@ -548,7 +555,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsUsedInGrid()
     {
@@ -556,7 +563,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsVisibleInGrid()
     {
@@ -564,7 +571,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsFilterableInGrid()
     {
@@ -572,7 +579,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getPosition()
     {
@@ -580,7 +587,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsSearchable()
     {
@@ -588,7 +595,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsVisibleInAdvancedSearch()
     {
@@ -596,7 +603,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsComparable()
     {
@@ -604,7 +611,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsUsedForPromoRules()
     {
@@ -612,7 +619,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsVisibleOnFront()
     {
@@ -620,7 +627,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getUsedInProductListing()
     {
@@ -628,7 +635,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIsVisible()
     {
@@ -638,7 +645,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     //@codeCoverageIgnoreEnd
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getScope()
     {
@@ -720,7 +727,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     /**
      * Set apply to value for the element
      *
-     * @param string []|string
+     * @param string[]|string $applyTo
      * @return $this
      */
     public function setApplyTo($applyTo)
@@ -829,7 +836,7 @@ class Attribute extends \Magento\Eav\Model\Entity\Attribute implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function afterDelete()
     {

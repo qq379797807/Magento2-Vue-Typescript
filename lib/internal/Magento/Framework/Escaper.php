@@ -68,7 +68,7 @@ class Escaper
             foreach ($data as $item) {
                 $result[] = $this->escapeHtml($item, $allowedTags);
             }
-        } elseif (strlen($data)) {
+        } elseif (!empty($data)) {
             if (is_array($allowedTags) && !empty($allowedTags)) {
                 $allowedTags = $this->filterProhibitedTags($allowedTags);
                 $wrapperElementId = uniqid();
@@ -78,6 +78,7 @@ class Escaper
                         throw new \Exception($errorString, $errorNumber);
                     }
                 );
+                $data = $this->prepareUnescapedCharacters($data);
                 $string = mb_convert_encoding($data, 'HTML-ENTITIES', 'UTF-8');
                 try {
                     $domDocument->loadHTML(
@@ -104,6 +105,19 @@ class Escaper
             $result = $data;
         }
         return $result;
+    }
+
+    /**
+     * Used to replace characters, that mb_convert_encoding will not process
+     *
+     * @param string $data
+     * @return string|null
+     */
+    private function prepareUnescapedCharacters(string $data): ?string
+    {
+        $patterns = ['/\&/u'];
+        $replacements = ['&amp;'];
+        return \preg_replace($patterns, $replacements, $data);
     }
 
     /**
@@ -315,7 +329,8 @@ class Escaper
      */
     private function escapeScriptIdentifiers(string $data): string
     {
-        $filteredData = preg_replace(self::$xssFiltrationPattern, ':', $data) ?: '';
+        $filteredData = preg_replace('/[\x00-\x1F\x7F\xA0]/u', '', $data) ?: '';
+        $filteredData = preg_replace(self::$xssFiltrationPattern, ':', $filteredData) ?: '';
         if (preg_match(self::$xssFiltrationPattern, $filteredData)) {
             $filteredData = $this->escapeScriptIdentifiers($filteredData);
         }
