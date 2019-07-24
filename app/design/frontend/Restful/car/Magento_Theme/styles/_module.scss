@@ -54,8 +54,16 @@ body {
 
 .header {
     &.content {
+        display: flex;
         margin: 2rem auto;
-        position: relative;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .in-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 
@@ -244,10 +252,6 @@ body {
                 font-size: $font-size__base;
                 margin-left: 1.5rem;
             }
-        }
-
-        &.content {
-            @extend .abs-add-clearfix-desktop;
         }
     }
 

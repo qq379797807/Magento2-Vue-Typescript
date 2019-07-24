@@ -194,7 +194,6 @@ $autocomplete-item-amount__color : $color-gray60 !default;
 
 @include min-screen($screen__m) {
     .block-search {
-        float: right;
         width: 30rem;
         position: relative;
         z-index: 4;

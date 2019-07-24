@@ -82,7 +82,6 @@ $minicart-qty__height         : 24px !default;
         $_icon-font-color-hover               : $minicart-icons-color-hover,
         $_icon-font-color-active              : $minicart-icons-color
     );
-    float: right;
 
     .block-minicart {
         @include lib-css(padding, 25px $minicart__padding-horizontal);
@@ -366,7 +365,8 @@ $minicart-qty__height         : 24px !default;
 
 @include min-screen($screen__m) {
     .minicart-wrapper {
-        margin-left: 13px;
+        margin-left: 1.5rem;
+
         .block-minicart {
             right: -15px;
             width: 390px;

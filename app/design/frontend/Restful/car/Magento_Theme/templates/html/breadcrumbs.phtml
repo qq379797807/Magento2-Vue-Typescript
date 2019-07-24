@@ -1,17 +1,10 @@
 <v-breadcrumbs inline-template>
     <section class="breadcrumbs">
-        <ul class="items">
-            <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
-                <li class="item <?= /* @escapeNotVerified */ $crumbName ?>">
-                <?php if ($crumbInfo['link']) : ?>
-                    <a href="<?= /* @escapeNotVerified */ $crumbInfo['link'] ?>" title="<?= $block->escapeHtml($crumbInfo['title']) ?>"><?= $block->escapeHtml($crumbInfo['label']) ?></a>
-                <?php elseif ($crumbInfo['last']) : ?>
-                    <strong><?= $block->escapeHtml($crumbInfo['label']) ?></strong>
-                <?php else: ?>
-                    <?= $block->escapeHtml($crumbInfo['label']) ?>
-                <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
+        <ul class="items" v-if="breadcrumbs">
+            <li class="item" v-for="crumb in breadcrumbs">
+                <a :href="crumb.link" :title="crumb.label" v-if="crumb.link" v-text="crumb.label"></a>
+                <span v-if="!crumb.link" v-text="crumb.label"></span>
+            </li>
         </ul>
     </section>
 </v-breadcrumbs>
