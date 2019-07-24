@@ -6,6 +6,7 @@ import { VHeaderLinks } from './modules/links'
 import { VLogo } from './modules/logo'
 import { VMinicart } from './modules/minicart'
 import { VSearch } from './modules/search'
+import { VNavagition } from '../navagition/navagition'
 
 @Component({
     name: 'v-header',
@@ -18,9 +19,8 @@ import { VSearch } from './modules/search'
         VHeaderLinks,
         VLogo,
         VMinicart,
-        VSearch
+        VSearch,
+        VNavagition
     }
 })
-export class VHeader extends Vue {
-
-}
+export class VHeader extends Vue {}

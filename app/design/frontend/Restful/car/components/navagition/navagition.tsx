@@ -6,13 +6,16 @@ declare let window: any;
 @Component({
     name: 'v-navagition',
     data: () => ({
-        categories: [],
-        counter: 0
+        title: 'navagition'
     })
 })
 export class VNavagition extends Vue {
     public categories: string[] = []
     public counter: number = 0
+    public navResize: any = {
+        point: 'tablet',
+        visible: false
+    }
 
     mounted () {
         this.init()

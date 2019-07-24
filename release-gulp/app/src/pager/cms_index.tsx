@@ -26,7 +26,7 @@ Vue.use(VueBus)
 Vue.use(VueResize, {
     mobile: 640,
     tablet: 768,
-    desktop: 1200
+    desktop: 1920
 })
 UI.install(Vue)
 

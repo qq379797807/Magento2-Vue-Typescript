@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="default_remove_ce" />
+    <update handle="default_remove_ee" />
     <body>
         <referenceContainer name="root">
             <block class="App\Component\Block\Common" name="vue.common" before="-" template="Magento_Theme::common.phtml" />
@@ -26,6 +26,7 @@
             <block class="Magento\Framework\View\Element\Template" name="vue.footer.links" after="store_switcher" template="Magento_Theme::footer/links.phtml" />
         </referenceContainer>
         <move element="page.wrapper" destination="vue.app" />
+        <move element="vue.navagition" destination="header.container" />
         <move element="header.container" destination="vue.header" />
         <move element="currency" destination="vue.header.setting" />
         <move element="store_language" destination="vue.header.setting" />

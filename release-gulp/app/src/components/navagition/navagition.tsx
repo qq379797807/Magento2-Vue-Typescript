@@ -6,8 +6,10 @@ declare let window: any;
 @Component({
     name: 'v-navagition',
     data: () => ({
-        categories: [],
-        counter: 0
+        navResize: {
+            point: 'tablet',
+            visible: false
+        }
     })
 })
 export class VNavagition extends Vue {

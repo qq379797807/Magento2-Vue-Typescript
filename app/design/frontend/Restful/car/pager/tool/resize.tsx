@@ -23,20 +23,21 @@ const VueResize: any = {
         Vue.directive('resize', {
             bind (el, binding) {
                 let removeChild = document.createComment(' ')
-                if (!_breakpoints[binding.value]) {
-                    throw new Error(`Missing breakpoint for ${binding.value}`)
-                }
-                $bus.$on('$vueResize', (value: any) => {
-                    if (_breakpoints[binding.value] > value) {
-                        if (el.parentNode) {
-                            el.parentNode.replaceChild(removeChild, el)
-                        }
-                    } else {
-                        if (removeChild.parentNode) {
-                            removeChild.parentNode.replaceChild(el, removeChild)
-                        }
-                    }
-                })
+                console.log(binding)
+                // if (!_breakpoints[binding.value]) {
+                //     throw new Error(`Missing breakpoint for ${binding.value}`)
+                // }
+                // $bus.$on('$vueResize', (value: any) => {
+                //     if (_breakpoints[binding.value] > value) {
+                //         if (el.parentNode) {
+                //             el.parentNode.replaceChild(removeChild, el)
+                //         }
+                //     } else {
+                //         if (removeChild.parentNode) {
+                //             removeChild.parentNode.replaceChild(el, removeChild)
+                //         }
+                //     }
+                // })
             },
             inserted () {
                 window.dispatchEvent(new Event('resize'))
