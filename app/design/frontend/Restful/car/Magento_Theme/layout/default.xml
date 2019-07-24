@@ -16,6 +16,9 @@
             <block class="Magento\Framework\View\Element\Template" name="vue.header.setting" template="Magento_Theme::header/setting.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.header.links" template="Magento_Theme::header/links.phtml" />
         </referenceContainer>
+        <referenceContainer name="header-wrapper">
+            <container name="vue.header.wrapper" htmlTag="div" htmlClass="in-wrapper" />
+        </referenceContainer>
         <referenceContainer name="page.top">
             <block class="Magento\Framework\View\Element\Template" name="vue.navagition" before="-" template="Magento_Theme::navagition.phtml" />
         </referenceContainer>
@@ -31,6 +34,8 @@
         <move element="currency" destination="vue.header.setting" />
         <move element="store_language" destination="vue.header.setting" />
         <move element="top.links" destination="vue.header.links" />
+        <move element="minicart" destination="vue.header.wrapper" />
+        <move element="top.search" after="-" destination="vue.header.wrapper" />
         <move element="main.content" destination="vue.content" />
         <move element="page.messages" destination="vue.message" />
         <move element="footer" destination="footer-container" />
