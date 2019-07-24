@@ -19,6 +19,7 @@ export class VPager extends Vue {
 
     init () {
         let pageJson: any = window.pageJson
+        this.pageId = Number(pageJson.page_id)
         this.$apollo.addSmartQuery('cmsPage', {
             query: getCmsPage,
             variables: () => ({

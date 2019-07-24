@@ -6,19 +6,3 @@ $productId = $block->getProduct()->getId();
 ?>
 
 <div class="swatch-opt-<?= $productId ?>"></div>
-
-<script type="text/x-magento-init">
-    {
-        "[data-role=swatch-option-<?= /* @escapeNotVerified */ $productId ?>]": {
-            "Magento_Swatches/js/swatch-renderer": {
-                "selectorProduct": ".product-item-details",
-                "onlySwatches": true,
-                "enableControlLabel": false,
-                "numberToShow": <?= /* @escapeNotVerified */ $block->getNumberSwatchesPerProduct(); ?>,
-                "jsonConfig": <?= /* @escapeNotVerified */ $block->getJsonConfig(); ?>,
-                "jsonSwatchConfig": <?= /* @escapeNotVerified */ $block->getJsonSwatchConfig(); ?>,
-                "mediaCallback": "<?= /* @escapeNotVerified */ $block->getMediaCallback() ?>"
-            }
-        }
-    }
-</script>
