@@ -7,6 +7,7 @@ const state: any = {
     config: commonJson,
     data: productJson,
     baseUrl: commonJson.base_url,
+    cartId: null,
     productId: productJson.product_id,
     productAction: productJson.product_action,
     productType: productJson.product_type,

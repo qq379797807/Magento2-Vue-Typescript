@@ -9,10 +9,10 @@
         <v-form-item :label="i18n.findOrder">
             <v-select name="oar_type" :options="type" v-model="selectType" :filterable=true></v-select>
         </v-form-item>
-        <v-form-item :label="i18n.email">
+        <v-form-item :label="i18n.email" v-if="selectType === 'email'">
             <v-input name="oar_email" v-model="email"></v-input>
         </v-form-item>
-        <v-form-item :label="i18n.zip">
+        <v-form-item :label="i18n.zip" v-else="selectType === 'zip'">
             <v-input name="oar_zip" v-model="zip"></v-input>
         </v-form-item>
         <v-form-item>
@@ -21,4 +21,4 @@
     </v-form>
 </v-guest-form>
 
-<script src="<?= $block->getViewFileUrl('js/sales_guest.bundle.js') ?>" async="true"></script>
+<script src="<?= $block->getViewFileUrl('js/sales_guest.bundle.js') ?>" defer="true"></script>

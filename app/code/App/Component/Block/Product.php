@@ -80,6 +80,7 @@ class Product extends \Magento\Framework\View\Element\Template
         $type = $product->getTypeId();
         $data['product_id'] = $id;
         $data['product_type'] = $type;
+        $data['product_sku'] = $product->getSku();
         $data['email_to'] = $emailHelper->getEmailToFriendUrl($product);
 
         $priceInfo = $product->getPriceInfo();

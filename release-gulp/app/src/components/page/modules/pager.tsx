@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { getCmsPage } from '../queries/cms.gql'
+import { getCmsPage } from '../../queries/getCmsPage.gql'
 
 declare let window: any
 
