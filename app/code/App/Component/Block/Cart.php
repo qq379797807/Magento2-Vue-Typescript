@@ -93,9 +93,15 @@ class Cart extends \Magento\Framework\View\Element\Template
     public function getCartJson($version = 'pc')
     {
         $data = array();
-        $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
-        $cartConfig = $shippingHelper->getCheckoutConfig();
-        $data = $cartConfig;
+        $cartHelper = $this->getObject('Magento\Checkout\Block\Cart');
+        $itemCount = $cartHelper->getItemsCount();
+
+        if ($itemCount > 0) {
+            $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
+            $cartConfig = $shippingHelper->getCheckoutConfig();
+            $data = $cartConfig;
+        }
+        
         $data['country'] = $this->getAddressRegion();
         $data['shippingMethods'] = $this->getShippingMethods();
 
