@@ -28,15 +28,15 @@ export class VProductView extends Vue {
     }
 
     async init () {
-        // const result: any = await this.$apollo.mutate({
-        //     mutation: createCart,
-        //     variables: {
-        //         cart_id: null
-        //     }
-        // })
+        const result: any = await this.$apollo.mutate({
+            mutation: createCart,
+            variables: {
+                cart_id: null
+            }
+        })
 
-        // if (result.data) {
-        //     this.setCartId(result.data.createEmptyCart)
-        // }
+        if (result.data) {
+            this.setCartId(result.data.createEmptyCart)
+        }
     }
 }

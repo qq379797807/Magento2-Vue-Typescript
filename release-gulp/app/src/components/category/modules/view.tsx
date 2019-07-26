@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 import { VCategoryImage } from './image'
 import { VCategoryDescription } from './description'
 import { VCategoryCms } from './cms'
-import { getProducts } from '../queries/category.gql'
+import { getProducts } from '../../queries/getProducts.gql'
 
 declare let window: any
 

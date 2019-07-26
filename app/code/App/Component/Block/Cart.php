@@ -100,10 +100,9 @@ class Cart extends \Magento\Framework\View\Element\Template
             $shippingHelper = $this->getObject('Magento\Checkout\Block\Cart\Shipping');
             $cartConfig = $shippingHelper->getCheckoutConfig();
             $data = $cartConfig;
+            $data['country'] = $this->getAddressRegion();
+            $data['shippingMethods'] = $this->getShippingMethods();
         }
-        
-        $data['country'] = $this->getAddressRegion();
-        $data['shippingMethods'] = $this->getShippingMethods();
 
         return $this->jsonHelper->jsonEncode($data);
     }

@@ -1,7 +1,7 @@
 import { GetterTree } from 'vuex'
 
 declare let window: any
-const cartJson = window.cartJson
+const cartJson: any = window.cartJson
 
 const getters: GetterTree<any, any> = cartJson ? {
     cartId: (state) => {
