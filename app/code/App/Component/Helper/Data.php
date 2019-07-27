@@ -24,7 +24,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
     public function getConnection() {
         if ($this->conn)
             return $this->conn;
-        $this->conn = $this->objManager->get("Magento\Framework\App\ResourceConnection")->getConnection();
+        $this->conn = $this->getObject('Magento\Framework\App\ResourceConnection')->getConnection();
 
         return $this->conn;
     }
@@ -45,13 +45,5 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
         }
 
         return $stmt;
-    }
-
-    public function formatPrice($price)
-    {
-        $priceHelper = $this->getObject('Magento\Framework\Pricing\PriceCurrencyInterface');
-        $formatPrice = $priceHelper->format($price);
-
-        return $formatPrice;
     }
 }

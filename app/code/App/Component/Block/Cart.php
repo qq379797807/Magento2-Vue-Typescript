@@ -4,18 +4,21 @@ namespace App\Component\Block;
 class Cart extends \Magento\Framework\View\Element\Template
 {
     private $jsonHelper;
+    private $cart;
     private $shippingConfig;
     private $scopeConfig;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\Json\Helper\Data $JsonHelper,
+        \Magento\Checkout\Model\Cart $cart,
         \Magento\Shipping\Model\Config $shippingConfig,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig        
     )
     {
         parent::__construct($context);
         $this->jsonHelper = $JsonHelper;
+        $this->cart = $cart;
         $this->shippingConfig = $shippingConfig;
         $this->scopeConfig = $scopeConfig;
     }

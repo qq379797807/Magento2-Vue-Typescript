@@ -20,17 +20,28 @@ declare let window: any
     }
 })
 export class VCategoryView extends Vue {
+    public pageSize: number = 20
+    public currentPage: number = 1
+    public categoryId: string = ''
+
     mounted () {
         this.init()
     }
 
     init () {
-        let commonJson: any = window.commonJson
-        
+        let categoryJson: any = window.categoryJson
+        this.categoryId = categoryJson.category_id
+        this.getProducts(this.pageSize, this.currentPage)
+    }
+
+    getProducts (size: number, current: number) {
         this.$apollo.addSmartQuery('category', {
             query: getProducts,
             variables: () => ({
-                id: 11
+                id: this.categoryId,
+                pageSize: size,
+                currentPage: current,
+                onServer: false
             })
         })
     }

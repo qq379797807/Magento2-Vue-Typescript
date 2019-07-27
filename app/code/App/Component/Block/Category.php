@@ -38,7 +38,7 @@ class Category extends \Magento\Framework\View\Element\Template
 
         $viewHelper= $this->createObject('Magento\Catalog\Block\Category\View');
         $_category = $viewHelper->getCurrentCategory();
-
+        $data['category_id'] = $_category->getId();
         $data['category_image'] = $_category->getImageUrl();
         $data['category_name'] = $_category->getName();
         $data['category_description'] = $_category->getDescription();
