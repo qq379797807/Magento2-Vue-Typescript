@@ -1,10 +1,21 @@
-mutation shippingMethods($card_id: String!, $carrier_code: String!, $method_code: String!) {
-    setShippingMethodsOnCart(
+mutation shippingAddress($cart_id: String!, $customer_address_id: Int, $city: String!, $company: String, $country_code: String!, $firstname: String!, $lastname: String!, $postcode: String, $region: String, $save_in_address_book: Boolean!, $street: [String]!, $telephone: String!) {
+    setShippingAddressesOnCart(
         input: {
-            card_id: $card_id,
-            shipping_methods: {
-                carrier_code: $carrier_code,
-                method_code: $method_code
+            cart_id: $cart_id,
+            shipping_addresses: {
+                customer_address_id: $customer_address_id
+                address: {
+                    city: $city,
+                    company: $company,
+                    country_code: $country_code,
+                    firstname: $firstname,
+                    lastname: $lastname,
+                    postcode: $postcode,
+                    region: $region,
+                    save_in_address_book: $save_in_address_book,
+                    street: $street,
+                    telephone: $telephone
+                }
             }
         }
     ){
