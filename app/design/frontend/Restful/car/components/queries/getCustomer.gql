@@ -1,4 +1,3 @@
-
 query getCustomer() {
     customer {
         addresses {

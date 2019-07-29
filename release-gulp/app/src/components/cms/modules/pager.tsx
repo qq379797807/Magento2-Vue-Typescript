@@ -12,6 +12,7 @@ declare let window: any
 })
 export class VPager extends Vue {
     public pageId: number = 0
+    public visible: boolean = false
 
     mounted () {
         this.init()
@@ -26,7 +27,12 @@ export class VPager extends Vue {
             variables: () => ({
                 id: this.pageId,
                 onServer: false
-            })
+            }),
+            result ({ data }) {
+                if (data) {
+                    this.visible = true
+                }
+            }
         })
     }
 }

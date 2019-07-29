@@ -2,10 +2,11 @@
     <transition :name="animation">
         <div v-show="showHide"
             :class="{'active':showHide,[prefix+'-modal']:true,[className]:className,[prefix+'-modal-isAlert']:isAlert}"
-            :style="{zIndex:zIndex,
-            animationDuration: '.3s',
-            left:style.left,
-            top:style.top
+            :style="{
+                zIndex:zIndex,
+                animationDuration: '.3s',
+                left:style.left,
+                top:style.top
             }">
             <a href="javascript:;" :class="`${prefix}-modal-close ${prefix}-icon-close`" v-if="showClose" @click="_close"></a>
             <div :class="`${prefix}-modal-auto-close`" v-if="autoClose>0">

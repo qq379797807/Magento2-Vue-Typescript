@@ -58,8 +58,8 @@ export class VSendFirend extends Vue {
 
         if (len > 1) {
             this.items.splice(index, 1)
-            this.recipientsName.slice(index, 1)
-            this.recipientsEmail.slice(index, 1)
+            this.$delete(this.recipientsName, index)
+            this.$delete(this.recipientsEmail, index)
         } else {
             return false
         }

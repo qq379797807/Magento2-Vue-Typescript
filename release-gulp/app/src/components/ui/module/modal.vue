@@ -1,28 +1,30 @@
 <template>
     <transition :name="animation">
         <div v-show="showHide"
-            :class="{'active':showHide,[prefix+'-modal']:true,[className]:className,[prefix+'-modal-isAlert']:isAlert}"
-            :style="{zIndex:zIndex,
-            animationDuration: '.3s',
-            left:style.left,
-            top:style.top
+            :class="{[prefix + '-modal']: true, 'active': showHide, [className]: className, [prefix + '-modal-alert']: alert}"
+            :style="{
+                zIndex: zIndex,
+                left: style.left,
+                top: style.top
             }">
             <a href="javascript:;" :class="`${prefix}-modal-close ${prefix}-icon-close`" v-if="showClose" @click="_close"></a>
-            <div :class="`${prefix}-modal-auto-close`" v-if="autoClose>0">
-                <span v-text="autoTime"></span>秒后自动关闭
+            <div :class="`${prefix}-modal-auto-close`" v-if="autoClose > 0">
+                <span v-text="i18n.autoClose"></span>
+                <span v-text="autoTime"></span>
+                <span v-text="i18n.seconds"></span>
             </div>
             <div :class="`${prefix}-modal-header`" :style="{cursor: move?'move':''}" ref="head"
-                v-if="title||$slots.title" @mousedown="_mouseDown">
+                v-if="title || $slots.title" @mousedown="_mouseDown">
                 <template v-if="title">{{title}}</template>
                 <slot name="title" v-else></slot>
             </div>
-            <div v-if="content||$slots.default"
+            <div v-if="$slots.default"
                 :style="scrollStyle"
                 :class="{
-                [prefix+'-modal-alert']:isAlert,
-                [prefix+'-modal-content']:true}">
-                <div v-if="content" :class="[prefix+'-modal-text',{[prefix+'-icon-type'+type]:type>0}]">{{content}}</div>
-                <slot v-else></slot>
+                    [prefix+'-modal-alert']: alert,
+                    [prefix+'-modal-content']: true
+                }">
+                <slot></slot>
             </div>
             <div :class="`${prefix}-modal-footer`" v-if="confirm||cancel">
                 <v-button type="cancel" v-if="cancel" @click="_cancel">{{cancel}}</v-button>
@@ -39,6 +41,10 @@ import VButton from '../element/button'
 export default {
     name: `${prefix}-modal`,
     data: () => ({
+        i18n: {
+            autoClose: 'Automatic shutdown after',
+            seconds: 'seconds'
+        },
         prefix: prefix,
         autoTime: 0,
         scrollStyle: '',
@@ -47,7 +53,7 @@ export default {
         modalHeight: 0,
         windowHeight: 0,
         windowWidth: 0,
-        zIndex: 2019,
+        zIndex: 300,
         showHide: false,
         clearTime: '',
         style: {
@@ -61,7 +67,6 @@ export default {
             default: false
         },
         title: String,
-        content: null,
         appendToBody: {
             type: Boolean,
             default: true
@@ -106,7 +111,7 @@ export default {
             type: Boolean,
             default: true
         },
-        isAlert: {
+        alert: {
             type: Boolean,
             default: false
         },
@@ -117,6 +122,16 @@ export default {
     },
     components: {
         VButton
+    },
+    watch: {
+        visible (v) {
+            this.showHide = this.visible
+            if (v) {
+                this.$nextTick(function () {
+                    this._openModal()
+                })
+            }
+        }
     },
     created () {
         this.scrollbarWidth = this.getScrollbarWidth()
@@ -130,16 +145,6 @@ export default {
             this._setPosition()
             this.after && this.after()
         })
-    },
-    watch: {
-        visible (v) {
-            this.showHide = this.visible
-            if (v) {
-                this.$nextTick(function () {
-                    this._openModal()
-                })
-            }
-        }
     },
     methods: {
         _mouseDown (ev) {
@@ -204,13 +209,13 @@ export default {
         },
         _hide () {
             if (this.modal) {
-                const modal = document.querySelector(`.${prefix}-modal-modal.active`)
+                const modal = document.querySelector(`.${prefix}-modal-overlay.active`)
                 let wait = 0
                 let animationDuration = '0s'
                 const prevModal = document.getElementById('modal' + this.zIndex)
 
                 if (prevModal) {
-                    prevModal.className = `${prefix}-modal-modal active`
+                    prevModal.className = `${prefix}-modal-overlay active`
                     prevModal.style.display = 'block'
                     prevModal.animationDuration = '0s'
                 } else {
@@ -230,7 +235,7 @@ export default {
                 }
             }
 
-            if (this.isAlert) {
+            if (this.alert) {
                 setTimeout(() => {
                     if (this.$el && this.$el.parentNode) {
                         this.$el.parentNode.removeChild(this.$el)
@@ -302,26 +307,22 @@ export default {
             }
 
             if (this.modal) {
-                let zIndex = 2018
-                let animationDuration = '.3s'
-                const modal = document.querySelector(`.${prefix}-modal-modal.active`)
+                let zIndex = this.zIndex - 1
+                const modal = document.querySelector(`.${prefix}-modal-overlay.active`)
 
                 if (modal) {
                     const activeZindex = modal.style.zIndex
                     zIndex = parseInt(activeZindex) + 2
                     this.zIndex = parseInt(activeZindex) + 3
-                    modal.style.animationDuration = '0s'
-                    animationDuration = '0s'
-                    modal.className = `${prefix}-modal-modal`
+                    modal.className = `${prefix}-modal-overlay`
                     modal.style.display = 'none'
                     modal.id = 'modal' + this.zIndex
                 }
 
                 const modalDiv = document.createElement('div')
-                modalDiv.className = `${prefix}-modal-modal active`
+                modalDiv.className = `${prefix}-modal-overlay active`
                 modalDiv.style.display = 'block'
                 modalDiv.style.zIndex = zIndex
-                modalDiv.style.animationDuration = animationDuration
                 document.body.appendChild(modalDiv)
 
                 if (this.closeModal) {

@@ -1,0 +1,87 @@
+mutation updateCart($cart_id: String!, $cart_item_id: Int!, quantity: Float!) {
+    updateCartItems(
+        input: {
+            cart_id: $cart_id,
+            cart_items: {
+                cart_item_id: $cart_item_id,
+                quantity: $quantity
+            }
+        }
+    ){
+        cart {
+            email
+            applied_coupon {
+                code
+            }
+            items {
+                id
+                product {
+                    id
+                    name
+                    sku
+                    type_id
+                    image {
+                        label
+                        url
+                    }
+                    price {
+                        maximalPrice {
+                            amount {
+                                currency
+                                value        
+                            }
+                        }
+                        minimalPrice {
+                            amount {
+                                currency
+                                value        
+                            }
+                        }
+                        regularPrice {
+                            amount {
+                                currency
+                                value        
+                            }
+                        }
+                    }
+                    swatch_image
+                    special_price
+                    tier_price
+                    stock_status
+                    new_from_date
+                    new_to_date
+                    special_from_date
+                    special_to_date
+                    created_at
+                    updated_at
+                }
+                quantity
+            }
+            prices {
+                applied_taxes {
+                    amount {
+                        currency
+                        value
+                    }
+                    label
+                }
+                grand_total {
+                    currency
+                    value
+                }
+                subtotal_excluding_tax {
+                    currency
+                    value
+                }
+                subtotal_including_tax {
+                    currency
+                    value
+                }
+                subtotal_with_discount_excluding_tax {
+                    currency
+                    value
+                }
+            }
+        }
+    }
+}
