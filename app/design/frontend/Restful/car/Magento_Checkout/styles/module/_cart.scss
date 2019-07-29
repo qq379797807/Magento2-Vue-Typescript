@@ -54,6 +54,8 @@
 }
 
 .cart-container {
+    overflow: hidden;
+    
     .form-cart {
         @extend .abs-shopping-cart-items;
     }

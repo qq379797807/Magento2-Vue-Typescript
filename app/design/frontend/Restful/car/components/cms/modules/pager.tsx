@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { getHomePage } from '../queries/page.gql'
+import { getCmsPage } from '../../queries/getCmsPage.gql'
 
 declare let window: any
 
@@ -22,7 +22,7 @@ export class VPager extends Vue {
         this.pageId = Number(pageJson.page_id)
 
         this.$apollo.addSmartQuery('cmsPage', {
-            query: getHomePage,
+            query: getCmsPage,
             variables: () => ({
                 id: this.pageId,
                 onServer: false

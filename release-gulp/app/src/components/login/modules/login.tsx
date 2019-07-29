@@ -13,15 +13,13 @@ declare let window: any
             password: 'Password',
             signIn: 'Sign In',
             forgot: 'Forgot Your Password?'
-        },
-        showEye: true,
-        email: null,
-        password: null,
-        post_action: '',
-        forgot_url: ''
+        }
     })
 })
 export class VLoginForm extends Vue {
+    public showEye: boolean = true
+    public email: string = ''
+    public password: string = ''
     public post_action: string = ''
     public forgot_url: string = ''
     

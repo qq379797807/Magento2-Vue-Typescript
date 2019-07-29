@@ -30,7 +30,8 @@ const modulesConfig: string[] = [
     'sales_guest',
     'sales_print',
     'orders_view',
-    'gift_card'
+    'gift_card',
+    'send_friend'
 ]
 let compileModules: string[] = []
 const compileM: string = args.module

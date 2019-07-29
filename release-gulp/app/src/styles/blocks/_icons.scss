@@ -46,3 +46,9 @@
         content: '\e619';
     }
 }
+
+.icon-remove {
+    &::before {
+        content: '\e600';
+    }
+}

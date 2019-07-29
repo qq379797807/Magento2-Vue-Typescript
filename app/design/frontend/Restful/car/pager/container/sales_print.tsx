@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { VBreadcrumbs } from '@components/breadcrumbs/breadcrumbs'
 import { VContent } from '@components/sales/print/content'
 
 @Component({
@@ -8,6 +9,7 @@ import { VContent } from '@components/sales/print/content'
         theme: 'Magento2 Vue Theme'
     }),
     components: {
+        VBreadcrumbs,
         VContent
     }
 })

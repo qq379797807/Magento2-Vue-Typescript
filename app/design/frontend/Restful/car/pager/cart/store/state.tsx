@@ -3,7 +3,7 @@ declare let window: any
 const commonJson: any = window.commonJson
 const cartJson: any = window.cartJson
 
-const state: any = cartJson ? {
+const state: any = Object.keys(cartJson).length > 0 ? {
     config: cartJson,
     baseUrl: commonJson.base_url,
     countries: cartJson.country,

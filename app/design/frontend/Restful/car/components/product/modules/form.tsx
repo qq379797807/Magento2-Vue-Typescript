@@ -1,7 +1,10 @@
 import Vue from 'vue'
-import { mapState, mapMutations, mapActions } from 'Vuex'
+import { mapState, mapMutations } from 'Vuex'
 import Component from 'vue-class-component'
 import { VProductOptions } from './options'
+import { addSimpleCart } from '../../queries/addSimpleCart.gql'
+
+declare let window: any
 
 @Component({
     name: 'v-product-form',
@@ -16,6 +19,7 @@ import { VProductOptions } from './options'
     },
     computed: {
         ...mapState([
+            'cartId',
             'productId',
             'defaultQty',
             'productPrices'
@@ -24,21 +28,21 @@ import { VProductOptions } from './options'
     methods: {
         ...mapMutations([
             'changeQty'
-        ]),
-        ...mapActions([
-            'addToProduct'
         ])
     }
 })
 export class VProductForm extends Vue {
     public qty: number = 1
+    public sku: string = ''
 
     mounted () {
         this.init()
     }
 
     init () {
+        let productJson: any = window.productJson
         this.qty = this.defaultQty
+        this.sku = productJson.product_sku
     }
 
     qtyChange () {
@@ -46,13 +50,16 @@ export class VProductForm extends Vue {
         if (tierPrices.length > 0) this.changeQty(this.qty)
     }
 
-    addCart () {
-        this.addToProduct({
-            product: this.productId,
-            item: this.productId,
-            qty: this.qty,
-            selected_configurable_option: '',
-            related_product: ''
+    async addCart () {
+        const result: any = await this.$apollo.mutate({
+            mutation: addSimpleCart,
+            variables: {
+                cart_id: this.cartId,
+                quantity: this.qty,
+                sku: this.sku
+            }
         })
+
+        console.log(result)
     }
 }

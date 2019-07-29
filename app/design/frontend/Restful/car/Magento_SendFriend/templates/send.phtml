@@ -1,0 +1,47 @@
+<?php
+/*
+* @var \Magento\SendFriend\Block\Send $block 
+*/
+?>
+
+<v-send-firend inline-template>
+    <v-form class="v-friend" :action="action" method="post">
+        <v-form-item>
+            <?= $block->getBlockHtml('formkey') ?>
+            <h2 class="title" v-text="i18n.sender"></h2>
+        </v-form-item>
+        <v-form-item :label="i18n.name">
+            <v-input name="sender[name]" v-model="name" :placeholder="i18n.name"></v-input>
+        </v-form-item>
+        <v-form-item :label="i18n.email">
+            <v-input type="email" name="sender[email]" v-model="email" :placeholder="i18n.email"></v-input>
+        </v-form-item>
+        <v-form-item :label="i18n.message">
+            <v-textarea name="sender[message]" :auto="auto" v-model="message" :placeholder="i18n.message"></v-textarea>
+        </v-form-item>
+        <v-form-item>
+            <h2 class="title" v-text="i18n.invitee"></h2>
+        </v-form-item>
+        <template v-if="maxRows > 0">
+            <div class="v-position" v-for="(item, i) of items">
+                <v-form-item :label="i18n.name">
+                    <v-input name="recipients[name][i]" v-model="recipientsName[i]" :placeholder="i18n.name"></v-input>
+                </v-form-item>
+                <v-form-item :label="i18n.email">
+                    <v-input type="email" name="recipients[email][i]" v-model="recipientsEmail[i]" :placeholder="i18n.email"></v-input>
+                </v-form-item>
+                <v-button type="primary" native="button" @click="_removeInvitee(i)">
+                    <i class="icon icon-remove"></i>
+                </v-button>
+            </div>
+            <v-form-item>
+                <v-button type="primary" native="button" v-text="i18n.addInvitee" @click="_addInvitee"></v-button>
+            </v-form-item>
+        </template>
+        <?= $block->getChildHtml('captcha'); ?>
+        <v-form-item>
+            <v-button type="primary" native="submit" v-text="i18n.sendEmail"></v-button>
+            <v-button type="primary" native="button" v-text="i18n.cancel" @click="_cancel"></v-button>
+        </v-form-item>
+    </v-form>
+</v-send-firend>

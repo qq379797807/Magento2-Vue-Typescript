@@ -1,8 +1,4 @@
-.form.send.friend {
-    @extend .abs-add-fields;
-}
-
-.action.mailto.friend {
+.mailto.friend {
     @include lib-icon-font(
         $_icon-font-content: $icon-envelope,
         $_icon-font-size: 28px,
@@ -11,12 +7,33 @@
     );
 }
 
+.v-position {
+    position: relative;
+
+    .v-btn {
+        position: absolute;
+        bottom: .3rem;
+        right: -8rem;
+        z-index: 20
+    }
+}
+
 //
 //  Desktop
 //  _____________________________________________
 
 @include min-screen($screen__m) {
-    .form.send.friend {
-        @extend .abs-add-fields-desktop;
+    .v-friend {
+        max-width: 50%;
+
+        .v-form-item {
+            &:last-child {
+                margin: 5rem 0;
+
+                .v-btn {
+                    margin-right: 2rem;
+                }
+            }
+        }
     }
 }

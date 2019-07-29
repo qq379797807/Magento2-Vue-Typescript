@@ -1,6 +1,9 @@
 import { MutationTree } from 'vuex'
 
 const mutations: MutationTree<any> = {
+    setCartId (state, payload) {
+        state.cartId = payload
+    },
     chooseOption (state, payload) {
         state.productGrallery = payload
     },
@@ -16,10 +19,6 @@ const mutations: MutationTree<any> = {
         })
 
         state.tierPrice = tier_price
-    },
-    addToProduct (state, payload) {
-        const { item, value } = payload
-        state[item] = value
     }
 }
 

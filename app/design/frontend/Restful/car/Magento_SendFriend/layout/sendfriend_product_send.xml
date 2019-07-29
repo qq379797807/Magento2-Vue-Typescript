@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="root">
+            <block class="App\Component\Block\Friend" name="vue.sendfriend.html" after="vue.common" template="Magento_SendFriend::send/data.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="vue.sendfriend.js" after="-" template="Magento_SendFriend::send/component.phtml" />
+        </referenceContainer>
+    </body>
+</page>
