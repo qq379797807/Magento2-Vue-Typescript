@@ -12,8 +12,8 @@
 
     .v-btn {
         position: absolute;
-        bottom: 0;
-        right: -15rem;
+        bottom: .3rem;
+        right: -8rem;
         z-index: 20
     }
 }
@@ -25,5 +25,15 @@
 @include min-screen($screen__m) {
     .v-friend {
         max-width: 50%;
+
+        .v-form-item {
+            &:last-child {
+                margin: 5rem 0;
+
+                .v-btn {
+                    margin-right: 2rem;
+                }
+            }
+        }
     }
 }

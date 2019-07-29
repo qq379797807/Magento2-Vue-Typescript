@@ -25,10 +25,10 @@
         <template v-if="maxRows > 0">
             <div class="v-position" v-for="(item, i) of items">
                 <v-form-item :label="i18n.name">
-                    <v-input name="recipients[name][i]" v-model="recipientsName[i]" :placeholder="i18n.name"></v-input>
+                    <v-input :name="`recipients[name][${i}]`" v-model="recipientsName[i]" :placeholder="i18n.name"></v-input>
                 </v-form-item>
                 <v-form-item :label="i18n.email">
-                    <v-input type="email" name="recipients[email][i]" v-model="recipientsEmail[i]" :placeholder="i18n.email"></v-input>
+                    <v-input type="email" :name="`recipients[email][${i}]`" v-model="recipientsEmail[i]" :placeholder="i18n.email"></v-input>
                 </v-form-item>
                 <v-button type="primary" native="button" @click="_removeInvitee(i)">
                     <i class="icon icon-remove"></i>
