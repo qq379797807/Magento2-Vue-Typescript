@@ -1,35 +1,36 @@
 <template>
     <transition :name="animation">
-        <div v-if="showHide"
-            :class="{[prefix + '-modal']: true, 'active': showHide, [className]: className, [prefix + '-modal-alert']: alert}"
-            :style="{
-                zIndex: zIndex,
-                left: style.left,
-                top: style.top
-            }">
-            <a href="javascript:;" :class="`${prefix}-modal-close ${prefix}-icon-close`" v-if="showClose" @click="_close"></a>
-            <div :class="`${prefix}-modal-auto-close`" v-if="autoClose > 0">
-                <span v-text="i18n.autoClose"></span>
-                <span v-text="autoTime"></span>
-                <span v-text="i18n.seconds"></span>
-            </div>
-            <div :class="`${prefix}-modal-header`" :style="{cursor: move?'move':''}" ref="head"
-                v-if="title || $slots.title" @mousedown="_mouseDown">
-                <template v-if="title">{{title}}</template>
-                <slot name="title" v-else></slot>
-            </div>
-            <div v-if="$slots.default"
-                :style="scrollStyle"
-                :class="{
-                    [prefix+'-modal-alert']: alert,
-                    [prefix+'-modal-content']: true
+        <div :class="`${prefix}-modal`"  v-if="showHide">
+            <div :class="{[prefix + '-modal-container']: true, [className]: className}"
+                :style="{
+                    zIndex: zIndex,
+                    left: style.left,
+                    top: style.top
                 }">
-                <slot></slot>
+                <a href="javascript:;" :class="`${prefix}-modal-close ${prefix}-icon-close`" v-if="showClose" @click="_close"></a>
+                <div :class="`${prefix}-modal-auto-close`" v-if="autoClose > 0">
+                    <span v-text="i18n.autoClose"></span>
+                    <span v-text="autoTime"></span>
+                    <span v-text="i18n.seconds"></span>
+                </div>
+                <div :class="`${prefix}-modal-header`" :style="{cursor: move?'move':''}" ref="head"
+                    v-if="title || $slots.title" @mousedown="_mouseDown">
+                    <template v-if="title">{{title}}</template>
+                    <slot name="title" v-else></slot>
+                </div>
+                <div v-if="$slots.default"
+                    :style="scrollStyle"
+                    :class="{
+                        [prefix+'-modal-content']: true
+                    }">
+                    <slot></slot>
+                </div>
+                <div :class="`${prefix}-modal-footer`" v-if="confirm||cancel">
+                    <v-button type="cancel" v-if="cancel" @click="_cancel">{{cancel}}</v-button>
+                    <v-button type="primary" v-if="confirm" @click="_confirm">{{confirm}}</v-button>
+                </div>
             </div>
-            <div :class="`${prefix}-modal-footer`" v-if="confirm||cancel">
-                <v-button type="cancel" v-if="cancel" @click="_cancel">{{cancel}}</v-button>
-                <v-button type="primary" v-if="confirm" @click="_confirm">{{confirm}}</v-button>
-            </div>
+            <div :class="`${prefix}-modal-overlay`" @click="_modalClick"></div>
         </div>
     </transition>
 </template>
@@ -111,10 +112,6 @@ export default {
             type: Boolean,
             default: true
         },
-        alert: {
-            type: Boolean,
-            default: false
-        },
         type: {
             type: Number,
             default: 0
@@ -127,7 +124,8 @@ export default {
         visible (v) {
             this.showHide = this.visible
             if (v) {
-                this.$nextTick(function () {
+                this.$nextTick(() => {
+                    this._setPosition()
                     this._openModal()
                 })
             }
@@ -142,8 +140,11 @@ export default {
                 document.body.appendChild(this.$el)
             }
             this.showHide = this.visible
-            this._setPosition()
             this.after && this.after()
+
+            window.addEventListener('resize', () => {
+                if (this.showHide) this._setPosition()
+            })
         })
     },
     methods: {
@@ -151,7 +152,7 @@ export default {
             let head = this.$refs.head
             if (this.move && head) {
                 let flag = false
-                let offSet = this.getOffset(this.$el)
+                let offSet = this.getOffset(this.$el.firstChild)
                 let x = ev.pageX - offSet.left
                 let y = ev.pageY - offSet.top
                 const scrollTop = this.scrollTop()
@@ -171,8 +172,9 @@ export default {
                         } else if (top > this.windowHeight - this.modalHeight) {
                             top = this.windowHeight - this.modalHeight
                         }
-                        this.$el.style.left = left + 'px'
-                        this.$el.style.top = top + 'px'
+
+                        this.$el.firstChild.style.left = left + 'px'
+                        this.$el.firstChild.style.top = top + 'px'
                     }
                     return false
                 }
@@ -197,7 +199,7 @@ export default {
             if (this.autoClose) {
                 clearInterval(this.clearTime)
             }
-            if (type === 'confirm' && typeof this.callback === 'function') {
+            if (typeof this.callback === 'function') {
                 this.callback(this._hide)
                 return false
             }
@@ -208,65 +210,32 @@ export default {
             }
         },
         _hide () {
-            if (this.modal) {
-                const modal = document.querySelector(`.${prefix}-modal-overlay.active`)
-                let wait = 0
-                let animationDuration = '0s'
-                const prevModal = document.getElementById('modal' + this.zIndex)
-
-                if (prevModal) {
-                    prevModal.className = `${prefix}-modal-overlay active`
-                    prevModal.style.display = 'block'
-                    prevModal.animationDuration = '0s'
-                } else {
-                    wait = 300
-                    animationDuration = '.3s'
-                }
-
-                modal.style.animationDuration = animationDuration
-                modal.style.opacity = 0
-                
-                if (wait > 0) {
-                    setTimeout(() => {
-                        modal.parentNode.removeChild(modal)
-                    }, wait)
-                } else {
-                    modal.parentNode.removeChild(modal)
-                }
-            }
-
-            if (this.alert) {
-                setTimeout(() => {
-                    if (this.$el && this.$el.parentNode) {
-                        this.$el.parentNode.removeChild(this.$el)
-                    }
-                }, 300)
-            }
-
             if (this.lockScroll) {
-                const num = document.querySelectorAll(`.${prefix}-modal.active`)
+                const num = document.querySelectorAll(`.${prefix}-modal`)
                 if (num.length === 1) {
                     document.body.style = ''
                 }
             }
+
             this.$emit('update:visible', false)
             this.showHide = false
         },
         _setPosition () {
-            const obj = this.$el
-            const clone = obj.cloneNode(true)
+            const target = this.$el.firstChild
+            const clone = target.cloneNode(true)
             clone.style.display = 'block'
             clone.style.position = 'absolute'
             clone.style.top = '-10000px'
-            obj.parentNode.appendChild(clone)
+            target.parentNode.appendChild(clone)
             this.modalWidth = this.width || clone.offsetWidth
             this.modalHeight = this.height || clone.offsetHeight
             this.windowHeight = this.getWindow().height
             this.windowWidth = this.getWindow().width
         
             if (this.width) {
-                obj.style.width = this.width + 'px'
+                target.style.width = this.width + 'px'
             }
+
             if (this.center) {
                 let top = (this.windowHeight - this.modalHeight) / 2
                 if (top < 0) {
@@ -275,17 +244,20 @@ export default {
                 this.style.left = (this.windowWidth - this.modalWidth) / 2 + 'px'
                 this.style.top = top + 'px'
             }
+
             if (this.height || this.windowHeight < this.modalHeight) {
                 const header = clone.querySelector(`.${prefix}-modal-header`)
                 let titleHeight = 0
                 if (header) {
                     titleHeight = header.offsetHeight
                 }
+
                 let footerHeight = 0
                 const footer = clone.querySelector(`.${prefix}-modal-footer`)
                 if (footer) {
                     footerHeight = footer.offsetHeight
                 }
+
                 let scrollHeight = this.modalHeight
                 if (this.height) {
                     scrollHeight = this.height
@@ -298,7 +270,7 @@ export default {
                     overflowY: 'auto'
                 }
             }
-            obj.parentNode.removeChild(clone)
+            target.parentNode.removeChild(clone)
         },
         _openModal () {
             if (this.lockScroll) {
@@ -306,29 +278,6 @@ export default {
                 document.body.style.paddingRight = this.scrollbarWidth + 'px'
             }
 
-            if (this.modal) {
-                let zIndex = this.zIndex - 1
-                const modal = document.querySelector(`.${prefix}-modal-overlay.active`)
-
-                if (modal) {
-                    const activeZindex = modal.style.zIndex
-                    zIndex = parseInt(activeZindex) + 2
-                    this.zIndex = parseInt(activeZindex) + 3
-                    modal.className = `${prefix}-modal-overlay`
-                    modal.style.display = 'none'
-                    modal.id = 'modal' + this.zIndex
-                }
-
-                const modalDiv = document.createElement('div')
-                modalDiv.className = `${prefix}-modal-overlay active`
-                modalDiv.style.display = 'block'
-                modalDiv.style.zIndex = zIndex
-                document.body.appendChild(modalDiv)
-
-                if (this.closeModal) {
-                    modalDiv.addEventListener('click', this._modalClick)
-                }
-            }
             this._autoClose()
         },
         _modalClick (e) {
@@ -416,6 +365,7 @@ export default {
             document.body.style = ''
             this.scrollbarWidth = 0
         }
+        window.dispatchEvent(new Event('resize'))
     }
 }
 </script>

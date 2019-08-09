@@ -22,10 +22,10 @@
                     <v-input type="email" name="login[username]" rules="required|email" v-model="email"></v-input>
                 </v-form-item>
                 <v-form-item :label="i18n.password">
-                    <v-input type="password" name="login[password]" rules="required" :show="showEye" v-model="password"></v-input>
+                    <v-input type="password" name="login[password]" rules="required|alpha_num|min:6" :show="showEye" v-model="password"></v-input>
                 </v-form-item>
                 <v-form-item :classes="'in-flex'">
-                    <v-button type="primary" native="submit" v-text="i18n.signIn"></v-button>
+                    <v-button type="primary" native="button" v-text="i18n.signIn" @click="_login"></v-button>
                     <v-button type="link" :href="forgot_url" v-text="i18n.forgot"></v-button>
                 </v-form-item>
             </v-form>

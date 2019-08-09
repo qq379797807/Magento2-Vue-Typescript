@@ -32,4 +32,12 @@ export class VLoginForm extends Vue {
         this.post_action = loginJson.post_action
         this.forgot_url = loginJson.forgot_url
     }
+
+    _login () {
+        this.$validator.validate().then((valid: boolean) => {
+            if (!valid) {
+                console.log('validate success')
+            }
+        })
+    }
 }

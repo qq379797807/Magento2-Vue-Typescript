@@ -10,8 +10,7 @@ declare let window: any
             createTitle: 'New Customers',
             createMsg: 'Creating an account has many benefits: check out faster, keep more than one address, track orders and more.',
             createButton: 'Create an Account'
-        },
-        create_url: ''
+        }
     })
 })
 export class VLoginCustomer extends Vue {

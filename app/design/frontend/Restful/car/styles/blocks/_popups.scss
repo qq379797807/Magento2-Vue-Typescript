@@ -1,13 +1,14 @@
 @include ns(modal) {
-    position: fixed;
-    min-width: 30rem;
-    overflow: hidden;
-    z-index: 300;
-    background-color: $color-white; 
-    border-radius: 5px; 
-    box-shadow: 1px 1px 20px rgba(0, 0, 0, .3); 
-    transition: top .3s ease-in-out;
-    
+	@include ns(modal-container) {
+		position: fixed;
+		min-width: 30rem;
+		overflow: hidden;
+		z-index: 300;
+		background-color: $color-white; 
+		border-radius: 5px; 
+		box-shadow: 1px 1px 20px rgba(0, 0, 0, .3); 
+		transition: top .3s ease-in-out;
+	}
     
     @include ns(modal-close) {
 		display: block;
@@ -62,40 +63,19 @@
         left: 10px; 
         top: 45px;
         display: none;
-    }
-
-    @include ns(icon-type1) {
-        &:before {
-            color: green;
-            content: '\f058';
-        }
-    }
-
-    @include ns(icon-type2) {
-        &:before{
-            color: red;
-            content: '\f05c';
-        }
-    }
-        
-    @include ns(icon-type3) {
-        &:before{
-            color: orange;
-            content:'\f06a';
-        }
-    }
-}
-
-@include ns(modal-overlay) {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 299;
-    background: rgba(55, 55, 55, .6); 
-    animation: overlay .3s;
-    transition: .3s;
+	}
+	
+	@include ns(modal-overlay) {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 299;
+		background: rgba(55, 55, 55, .6); 
+		animation: overlay .3s;
+		transition: .3s;
+	}
 }
 
 @keyframes overlay {
