@@ -264,23 +264,6 @@ export class Gulpflie {
     }
 
     @Task()
-    public async rollup (gulp: Gulp, watch: Watch) {
-        await Promise.resolve(
-            watch.run(
-                path.join(__dirname, 'src/**/*.ts'),
-                (gulp: Gulp) => {
-                    console.log('rollup init ...')
-
-                    gulp.src([path.join(__dirname, 'src/**/*.ts')])
-                        .pipe(sourcemaps.init())
-                        .pipe(sourcemaps.write('./sourcemaps'))
-                        .pipe(gulp.dest('./dist'))
-                }
-            )
-        )
-    }
-
-    @Task()
     public async test (vkoa: Vkoa) {
         await Promise.resolve(
             vkoa
