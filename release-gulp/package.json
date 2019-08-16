@@ -125,7 +125,7 @@
         "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.3.5",
         "webpack-dashboard": "^3.0.7",
-        "webpack-parallel-uglify-plugin": "^1.1.0",
+        "webpack-parallel-uglify-plugin": "1.1.0",
         "yargs": "^13.2.4"
     }
 }
