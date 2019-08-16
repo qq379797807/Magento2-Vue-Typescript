@@ -138,6 +138,7 @@
     @include lib-css(background, $_background);
     @include lib-css(background-clip, $_background-clip);
     @include lib-css(border, 1px solid rgba(34,36,38,.15));
+    @include lib-css(box-shadow, inset 0 1px 1px rgba(0,0,0,.075));
     @include lib-css(border-radius, .28571429rem);
     transition: box-shadow .1s ease, border-color .1s ease, -webkit-box-shadow .1s ease;
 
@@ -483,6 +484,7 @@
         @include _lib-form-element-state-add-border($_border-state, $_border-default);
         @include _lib-form-element-state-add-font-color($_color-state, $_color-default);
         @include _lib-form-element-state-add-font-style($_font-style-state, $_font-style-default);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
     }
 }
 

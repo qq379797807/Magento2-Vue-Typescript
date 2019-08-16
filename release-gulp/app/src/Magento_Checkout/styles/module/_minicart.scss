@@ -89,10 +89,6 @@ $minicart-qty__height         : 24px !default;
         width: 320px;
         z-index: 101;
 
-        .block-title {
-            display: none;
-        }
-
         &:after {
             left: auto;
             right: 25px;
@@ -365,8 +361,6 @@ $minicart-qty__height         : 24px !default;
 
 @include min-screen($screen__m) {
     .minicart-wrapper {
-        margin-left: 1.5rem;
-
         .block-minicart {
             right: -15px;
             width: 390px;
