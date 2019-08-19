@@ -18,6 +18,7 @@ import TabsPanel from './tabs/panel.vue'
 import Swiper from './swiper/swiper.vue'
 import SwiperItem from './swiper/item.vue'
 import Datepicker from './datepicker/datepicker.vue'
+import LazyComponent from './module/lazyComponent.vue'
 
 const component: any[] = [
     Input,
@@ -38,7 +39,8 @@ const component: any[] = [
     TabsPanel,
     Swiper,
     SwiperItem,
-    Datepicker
+    Datepicker,
+    LazyComponent
 ]
 
 const UI: any = {
