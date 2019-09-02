@@ -60,6 +60,8 @@ atlassian*
 /pub/static/*
 !/pub/static/.htaccess
 
+/relese-gulp/node_modules/*
+
 /var/*
 !/var/.htaccess
 /vendor/*
