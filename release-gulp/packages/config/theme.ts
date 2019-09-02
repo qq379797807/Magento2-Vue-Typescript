@@ -5,7 +5,7 @@ export interface ThemeConfig {
         src: string,
         locale: string,
         parent?: string,
-        mode: string,
+        mode: 'production' | 'development' | 'none',
         styles: string,
         scripts: string,
         files: Array<string>

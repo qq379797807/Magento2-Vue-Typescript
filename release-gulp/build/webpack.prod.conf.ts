@@ -15,7 +15,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
-const { area, src } = themeConfig.default
+const { area, src, mode } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
     const params: any = {}
     list.map((url: string) => {    
@@ -42,7 +42,7 @@ const baseConfig = new WebpackConfig({
         filename: '[name].bundle.js',
         publicPath: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`)
     },
-    mode: 'development',
+    mode: mode,
     devtool: 'inline-source-map',
     performance: {
         hints: 'warning',
@@ -58,7 +58,7 @@ const baseConfig = new WebpackConfig({
             }
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':  JSON.stringify('development')
+            'process.env.NODE_ENV':  JSON.stringify(mode)
         }),
         new FirendlyErrorePlugin(),
         // new BundleAnalyzerPlugin({
@@ -98,7 +98,7 @@ const baseConfig = new WebpackConfig({
     optimization: {
         namedModules: false,
         namedChunks: false,
-        nodeEnv: 'development',
+        nodeEnv: mode,
         flagIncludedChunks: true,
         occurrenceOrder: true,
         sideEffects: true,

@@ -5,7 +5,7 @@ import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
-const { area, src } = themeConfig.default
+const { area, src, mode } = themeConfig.default
 
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
@@ -17,7 +17,7 @@ const baseConfig = new WebpackConfig({
         filename: '[name].dll.js',
         library: '_dll_[name]'
     },
-    mode: 'development',
+    mode: mode,
     performance: {
         hints: 'warning',
         maxAssetSize: 50000000,
@@ -25,7 +25,7 @@ const baseConfig = new WebpackConfig({
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':  JSON.stringify('development')
+            'process.env.NODE_ENV':  JSON.stringify(mode)
         }),
         new webpack.DllPlugin({
             name: '_dll_[name]',
@@ -36,7 +36,7 @@ const baseConfig = new WebpackConfig({
     optimization: {
         namedModules: false,
         namedChunks: false,
-        nodeEnv: 'development',
+        nodeEnv: mode,
         flagIncludedChunks: true,
         occurrenceOrder: true,
         sideEffects: true,

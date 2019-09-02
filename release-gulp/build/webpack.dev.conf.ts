@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
-const { area, src } = themeConfig.default
+const { area, src, mode } = themeConfig.default
 const createEntry: any = ((list: string[]) => {
     const params: any = {}
     list.map((url: string) => {    
@@ -29,7 +29,7 @@ const baseConfig = new WebpackConfig({
         filename: '[name].bundle.js',
         publicPath: path.resolve(__dirname, `../../app/design/${area}/${src}/web/js`)
     },
-    mode: 'development',
+    mode: mode,
     devtool: 'inline-source-map',
     devServer: {
         open: true,
@@ -53,7 +53,7 @@ const baseConfig = new WebpackConfig({
         new webpack.NamedModulesPlugin(),
         new webpack.NamedChunksPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
+            'process.env.NODE_ENV': JSON.stringify(mode)
         }),
         new ProgressBarPlugin(),
         new VueLoaderPlugin(),
@@ -66,7 +66,7 @@ const baseConfig = new WebpackConfig({
     optimization: {
         namedModules: true,
         namedChunks: true,
-        nodeEnv: 'development',
+        nodeEnv: mode,
         flagIncludedChunks: false,
         occurrenceOrder: false,
         sideEffects: false,
