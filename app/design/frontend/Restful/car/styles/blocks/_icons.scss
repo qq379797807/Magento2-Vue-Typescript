@@ -5,6 +5,12 @@
     $font-style : normal
 );
 
+.icon {
+    font-family: $icons__font-name;
+    font-size: 1.4rem;
+    font-style: normal;
+    display: inline-block;
+}
 
 .v-icon-eye {
     position: absolute;
@@ -50,5 +56,11 @@
 .icon-remove {
     &::before {
         content: '\e600';
+    }
+}
+
+.icon-search {
+    &::before {
+        content: '\e71f';
     }
 }

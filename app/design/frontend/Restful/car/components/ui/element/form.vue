@@ -1,8 +1,6 @@
 <template>
-    <validation-observer ref="observer" @submit.prevent="onSubmit">
-        <form :class="`${prefix}-form`" v-bind="$attrs">
-            <slot></slot>
-        </form>
+    <validation-observer ref="observer" tag="form" :class="`${prefix}-form`" v-bind="$attrs" @submit.prevent="onSubmit">
+        <slot></slot>
     </validation-observer>
 </template>
 

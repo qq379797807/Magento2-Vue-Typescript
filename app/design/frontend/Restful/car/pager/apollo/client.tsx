@@ -7,7 +7,7 @@ declare let window: any
 
 // HTTP connection to the API
 const httpLink: ApolloLink = createHttpLink({
-    uri: 'http://dev.car.cn:80/graphql'
+    uri: `${window.location.origin}/graphql`
 })
 
 // HTTP headers middleware
