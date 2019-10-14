@@ -187,6 +187,7 @@ export default {
                     } else {
                         if (option.value === this.value) {
                             this.text = option.name || option.value
+                            this.keywords = option.name || option.value
                             break
                         }
                     }
