@@ -2,7 +2,7 @@
     <label :class="{
         'disabled': disabled,
         'checked': isChecked === modelValue, [prefix+'-radio']: true}">
-        <input type="radio" v-bind="$attrs" v-model="modelValue" :value="isChecked" @change="_onChange" :disabled="disabled" />
+        <input type="radio" v-bind="$attrs" :checked="state" :value="isChecked" :disabled="disabled" @change="_onChange" />
         <span class="radio-inner"></span>
         <span class="radio-text"><slot/></span>
     </label>
@@ -17,7 +17,8 @@ export default {
     data: () => ({
         prefix: prefix,
         isChecked: null,
-        modelValue: false
+        modelValue: null,
+        state: false
     }),
     props: {
         value: null,
@@ -31,6 +32,9 @@ export default {
     watch: {
         value (v) {
             this.modelValue = v
+        },
+        state () {
+            return this.isChecked === this.modelValue ? true : false
         }
     },
     mounted () {
@@ -41,6 +45,8 @@ export default {
                 this.isChecked = this.value
             }
         }
+        this.modelValue = this.value
+        this.state = this.isChecked === this.modelValue ? true : false
     },
     methods: {
         _onChange (e) {
