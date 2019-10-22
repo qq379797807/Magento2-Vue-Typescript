@@ -1,5 +1,5 @@
 <template>
-    <validation-observer ref="observer" tag="form" :class="`${prefix}-form`" v-bind="$attrs" @submit.prevent="onSubmit">
+    <validation-observer ref="observer" tag="form" :class="`${prefix}-form`" v-bind="$attrs" @submit.native.prevent="onSubmit">
         <slot></slot>
     </validation-observer>
 </template>
@@ -19,8 +19,8 @@ export default {
         ValidationObserver
     },
     methods: {
-        async submit () {
-            const isValid = await this.$refs.observer.validate();
+        async onSubmit () {
+            const isValid = await this.$refs.observer.validate()
             if (!isValid) {
                 console.log(isValid)
             }
