@@ -2,9 +2,9 @@ import { ThemeConfig } from '../packages'
 
 const themeConfig: ThemeConfig = {
     default: {
-        name: 'car',
+        name: 'vue',
         area: 'frontend',
-        src: 'Restful/car',
+        src: 'Restful/vue',
         locale: 'en_US',
         parent: '',
         mode: 'development',
