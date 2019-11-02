@@ -1,5 +1,5 @@
 {
-    "name": "magento/theme-frontend-car",
+    "name": "magento/theme-frontend-vue",
     "description": "N/A",
     "config": {
         "sort-packages": true

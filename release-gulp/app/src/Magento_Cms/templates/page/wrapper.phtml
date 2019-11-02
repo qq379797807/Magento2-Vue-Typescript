@@ -2,11 +2,5 @@
     <div class="in-page">
         <h1 class="title" v-if="cmsPage" v-text="cmsPage.title"></h1>
         <div class="content" v-if="cmsPage" v-html="cmsPage.content"></div>
-        <v-modal title="title" :visible.sync="visible">
-            <template v-if="visible">
-                <p>窗口内容，可包含任何内容</p>
-                <p>就是样式丑了点点</p>
-            </template>
-        </v-modal>
     </div>
 </v-pager>

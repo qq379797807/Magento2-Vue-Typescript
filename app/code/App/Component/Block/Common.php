@@ -192,8 +192,8 @@ class Common extends \Magento\Framework\View\Element\Template
         $logo = $logoObject ->getLogoSrc();
         $data['logo']['url'] = $logo;
         $data['logo']['link'] = $this->urlBuilder->getUrl('/');
-        $data['logo']['width'] = $logoObject->getLogoWidth();
-        $data['logo']['height'] = $logoObject->getLogoHeight();
+        $data['logo']['width'] = $logoObject->getLogoWidth() ? $logoObject->getLogoWidth() : 189;
+        $data['logo']['height'] = $logoObject->getLogoHeight() ? $logoObject->getLogoHeight(): 65;
         $data['logo']['alt'] = $logoObject->getLogoAlt();
 
         $pageTitle = $this->createObject('Magento\Theme\Block\Html\Title');
