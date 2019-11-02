@@ -2,8 +2,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
+            <block class="App\Component\Block\Home" name="vue.cms.html" after="vue.common" template="Magento_Cms::home/data.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.cms.js" after="-" template="Magento_Cms::home/component.phtml" />
         </referenceContainer>
+        <referenceBlock name="vue.page.html" remove="true" />
         <referenceBlock name="vue.page.js" remove="true" />
+        <referenceBlock name="breadcrumbs" remove="true" />
     </body>
 </page>
