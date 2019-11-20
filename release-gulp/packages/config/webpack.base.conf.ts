@@ -108,7 +108,10 @@ export class WebpackConfig {
                     '.less', 
                     '.stylus', 
                     '.css', 
-                    '.json'
+                    '.json',
+                    '.svg',
+                    '.png',
+                    '.jpg'
                 ],
                 modules: [
                     resolve('app/src/components/'),
@@ -183,12 +186,16 @@ export class WebpackConfig {
                         }
                     },
                     {
-                        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                        test: /\.(png|jpe?g|gif)(\?.*)?$/,
                         loader: 'url-loader',
                         options: {
                             limit: 10000,
                             name: this.utils.assetsPath(`${this.path}/[name].[hash:7].[ext]`)
                         }
+                    },
+                    {
+                        test: /\.svg$/,
+                        loader: 'raw-loader',
                     },
                     {
                         test: /\.(woff2?|eot|ttf|otf|rtf)(\?.*)?$/,

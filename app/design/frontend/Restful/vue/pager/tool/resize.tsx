@@ -1,7 +1,5 @@
 import { VueConstructor } from 'vue'
 
-declare let window: any
-
 const BREAKPOINTS: any = {
     mobile: 640,
     tablet: 768,
