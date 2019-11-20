@@ -146,10 +146,6 @@ class Common extends \Magento\Framework\View\Element\Template
             'secure' =>  false,
             'lifetime' =>  $cookieHelper->getLifetime() 
         ];
-        
-        $pageCacheHelper = $this->createObject('Magento\PageCache\Block\Javascript');
-        $pageCache = $pageCacheHelper->getScriptOptions();
-        $data['pageCache'] = $this->jsonHelper->jsonDecode($pageCache);
 
         $translateHelper = $this->createObject('Magento\Translation\Block\Js');
         $data['translate'] = [
@@ -169,7 +165,6 @@ class Common extends \Magento\Framework\View\Element\Template
             $storeArr[] = $ret;
         }
 
-        $data['uenc'] = $refer;
         $data['priceFormat'] = $this->localeFormat->getPriceFormat();
         $data['stores'] = $storeArr;
         $data['base_url'] = $this->urlBuilder->getUrl('/');
@@ -192,8 +187,8 @@ class Common extends \Magento\Framework\View\Element\Template
         $logo = $logoObject ->getLogoSrc();
         $data['logo']['url'] = $logo;
         $data['logo']['link'] = $this->urlBuilder->getUrl('/');
-        $data['logo']['width'] = $logoObject->getLogoWidth() ? $logoObject->getLogoWidth() : 189;
-        $data['logo']['height'] = $logoObject->getLogoHeight() ? $logoObject->getLogoHeight(): 65;
+        $data['logo']['width'] = $logoObject->getLogoWidth() ? $logoObject->getLogoWidth() : 130;
+        $data['logo']['height'] = $logoObject->getLogoHeight() ? $logoObject->getLogoHeight(): 80;
         $data['logo']['alt'] = $logoObject->getLogoAlt();
 
         $pageTitle = $this->createObject('Magento\Theme\Block\Html\Title');
