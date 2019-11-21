@@ -1,0 +1,11 @@
+<v-pager inline-template>
+    <div class="in-page">
+        <v-lazy-component>
+            <?= $block->getChildHtml('bannerslider.cms.page.content.top') ?>
+            <v-skeleton slot="skeleton">
+                <v-skeleton-head :img="true"></v-skeleton-head>
+                <v-skeleton-text :lines="6"></v-skeleton-text>
+            </v-skeleton>
+        </v-lazy-component>
+    </div>
+</v-pager>

@@ -5,8 +5,13 @@
             <block class="App\Component\Block\Home" name="vue.cms.html" after="vue.common" template="Magento_Cms::home/data.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="vue.cms.js" after="-" template="Magento_Cms::home/component.phtml" />
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="vue.home.wrapper" template="Magento_Cms::home/home.phtml" />
+        </referenceContainer>
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceBlock name="breadcrumbs" remove="true" />
+        <referenceBlock name="vue.page.wrapper" remove="true" />
         <referenceBlock name="vue.page.html" remove="true" />
         <referenceBlock name="vue.page.js" remove="true" />
-        <referenceBlock name="breadcrumbs" remove="true" />
     </body>
 </page>

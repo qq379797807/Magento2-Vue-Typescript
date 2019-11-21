@@ -1,0 +1,101 @@
+.vue-carousel {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.vue-carousel--reverse {
+	flex-direction: column-reverse;
+}
+
+.vue-carousel-wrapper {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.vue-carousel-inner {
+	display: flex;
+	flex-direction: row;
+	backface-visibility: hidden;
+}
+
+.vue-carousel-inner--center {
+	justify-content: center;
+}
+
+.vue-carousel-navigation-button {
+	position: absolute;
+	top: 50%;
+	box-sizing: border-box;
+	color: #000;
+	text-decoration: none;
+	appearance: none;
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+}
+
+.vue-carousel-navigation-next {
+	right: 0;
+	transform: translateY(-50%) translateX(100%);
+	font-family: "system";
+}
+
+.vue-carousel-navigation-prev {
+	left: 0;
+	transform: translateY(-50%) translateX(-100%);
+}
+
+.vue-carousel-navigation--disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.vue-carousel-pagination {
+	text-align: center;
+}
+
+.vue-carousel-pagination--top-overlay {
+	position: absolute;
+	top: 0;
+}
+
+.vue-carousel-pagination--bottom-overlay {
+	position: absolute;
+	bottom: 0;
+}
+
+.vue-carousel-dot-container {
+	display: inline-block;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.vue-carousel-dot {
+	display: inline-block;
+	margin: 0 1rem;
+	cursor: pointer;
+	appearance: none;
+	border: none;
+	padding: 0;
+	border-radius: 100%;
+	outline: none;
+}
+
+.vue-carousel-slide {
+	flex-basis: inherit;
+	flex-grow: 0;
+	flex-shrink: 0;
+	user-select: none;
+	backface-visibility: hidden;
+	-webkit-touch-callout: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.vue-carousel-slide-adjustableHeight {
+	display: table;
+	flex-basis: auto;
+	width: 100%;
+}

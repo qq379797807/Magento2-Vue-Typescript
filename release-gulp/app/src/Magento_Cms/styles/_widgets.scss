@@ -1,17 +1,10 @@
-$widgets-indent__bottom: $indent__base !default;
-
-.block-static-block,
-.block-cms-link {
-    &.widget {
-        @include lib-css(margin-bottom, $widgets-indent__bottom);
-        .links & {
-            margin-bottom: 0;
-        }
-    }
-}
-
-.block-cms-link-inline {
-    &.widget {
-        margin: 0;
+.cms-banner {
+    margin-bottom: 1rem;
+    
+    .vue-carousel-pagination {
+        position: absolute;
+        right: 3rem;
+        bottom: 3rem;
+        z-index: 20;
     }
 }

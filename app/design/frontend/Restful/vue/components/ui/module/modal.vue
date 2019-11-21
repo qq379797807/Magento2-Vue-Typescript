@@ -1,7 +1,7 @@
 <template>
     <transition :name="animation">
         <div :class="`${prefix}-modal`"  v-if="showHide">
-            <div :class="{[prefix + '-modal-container']: true, [className]: className}"
+            <div :class="{[prefix + '-modal-container']: true, [classes]: classes}"
                 :style="{
                     zIndex: zIndex,
                     left: style.left,
@@ -86,7 +86,7 @@ export default {
             type: Boolean,
             default: true
         },
-        className: String,
+        classes: String,
         showClose: {
             type: Boolean,
             default: true

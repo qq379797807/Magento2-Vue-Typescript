@@ -1,0 +1,51 @@
+<?php
+/**
+* @var \Magestore\Bannerslider\Block\SliderItem $block 
+*/
+?>
+
+<?php
+    $styleSlide = $block->getSlider()->getStyleSlide();
+    $slider = $block->getSlider();
+    $htmlId = $block->getFlexsliderHtmlId();
+    $bannerCollection = $block->getBannerCollection();
+?>
+
+<div class="cms-banner">
+    <div class="<?= $htmlId ?>">
+        <carousel :per-page="1" :navigate-to="0" :autoplay="true" :autoplay-timeout="5000" :mouse-drag="true" :loop="true">
+            <?php foreach ($bannerCollection as $banner):?>
+                <?php if ($styleSlide == \Magestore\Bannerslider\Model\Slider::STYLESLIDE_FLEXSLIDER_TWO) : ?>
+                    <slide data-thumb="<?= $block->getBannerImageUrl($banner) ?>">
+                        <a href="<?= $banner->getClickUrl() ?>" target="<?= $banner->getTargetValue() ?>">
+                            <img src="<?= $block->getBannerImageUrl($banner) ?>" alt="<?= $banner->getImageAlt() ?>" />
+                        </a>
+                        <?php if($banner->getCaption()): ?><div class="flex-caption"><?= $banner->getCaption(); ?></div><?php endif; ?>
+                    </slide>
+                <?php else: ?>
+                    <slide>
+                        <a href="<?= $banner->getClickUrl() ?>" target="<?= $banner->getTargetValue() ?>">
+                            <img src="<?= $block->getBannerImageUrl($banner) ?>" alt="<?= $banner->getImageAlt() ?>"  />
+                        </a>
+                        <?php if($banner->getCaption()): ?>
+                            <div class="flex-caption"><?= $banner->getCaption(); ?></div>
+                        <?php endif; ?>
+                    </slide>
+                <?php endif; ?>
+            <?php endforeach ?>
+        </carousel>
+    </div>
+
+    <?php if ($styleSlide ==  \Magestore\Bannerslider\Model\Slider::STYLESLIDE_FLEXSLIDER_THREE) :?>
+        <div class="<?= $htmlId ?>-carousel">
+            <carousel :per-page="1" :navigate-to="0" :mouse-drag="true">
+                <?php foreach ($bannerCollection as $banner) :
+                ?>
+                    <slide>
+                        <img src="<?= $block->getBannerImageUrl($banner) ?>" alt="<?= $banner->getImageAlt() ?>" />
+                    </slide>
+                <?php endforeach ?>
+            </carousel>
+        </div>
+    <?php endif; ?>
+</div>

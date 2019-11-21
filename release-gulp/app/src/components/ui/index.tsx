@@ -11,6 +11,7 @@ import Collapse from './module/collapse.vue'
 import CollapsePanel from './module/panel.vue'
 import Qplus from './module/qplus.vue'
 import Modal from './module/modal.vue'
+import Top from './module/top.vue'
 import Table from './table/table.vue'
 import TableColumn from './table/column.vue'
 import Tabs from './tabs/tabs.vue'
@@ -19,6 +20,12 @@ import Swiper from './swiper/swiper.vue'
 import SwiperItem from './swiper/item.vue'
 import Datepicker from './datepicker/datepicker.vue'
 import LazyComponent from './module/lazyComponent.vue'
+import Skeleton from './skeleton/skeleton.vue'
+import SkeletonHead from './skeleton/skeletonHead.vue'
+import SkeletonImg from './skeleton/skeletonImg.vue'
+import SkeletonText from './skeleton/skeletonText.vue'
+import Carousel from './carousel/carousel.vue'
+import Slide from './carousel/slide.vue'
 
 const component: any[] = [
     Input,
@@ -33,6 +40,7 @@ const component: any[] = [
     CollapsePanel,
     Qplus,
     Modal,
+    Top,
     Table,
     TableColumn,
     Tabs,
@@ -40,7 +48,13 @@ const component: any[] = [
     Swiper,
     SwiperItem,
     Datepicker,
-    LazyComponent
+    LazyComponent,
+    Skeleton,
+    SkeletonHead,
+    SkeletonImg,
+    SkeletonText,
+    Carousel,
+    Slide
 ]
 
 const UI: any = {

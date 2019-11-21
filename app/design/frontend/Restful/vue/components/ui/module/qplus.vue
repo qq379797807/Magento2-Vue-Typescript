@@ -14,6 +14,7 @@
         <button type="button" :class="`${prefix}-btn-primary ${prefix}-btn-increase`" @click="_increase">
             <i :class="`${prefix}-icon-increase`"></i>
         </button>
+        <slot></slot>
     </div>
 </template>
 
@@ -33,6 +34,10 @@ export default {
         value: {
             type: Number,
             default: 1
+        },
+        step: {
+            type: Number,
+            default: 1,
         },
         disabled: {
             type: Boolean,
@@ -57,7 +62,7 @@ export default {
     },
     mounted () {
         this.number = this.value
-        this.minsV = this.mins
+        this.minsV = this.step > 1 ? this.step: this.mins
         this.maxsV = this.maxs
     },
     methods: {
@@ -67,11 +72,11 @@ export default {
         },
         _input (e) {
             let value = Number(e.target.value)
-            if (value <= this.minsV) {
+            if (value + this.step <= this.minsV) {
                 value = this.minsV
             }
 
-            if (value >= this.maxsV) {
+            if (value - this.step >= this.maxsV) {
                 value = this.maxsV
             }
                 
@@ -87,14 +92,14 @@ export default {
         },
         _reduce () {
             if (this.number > this.minsV) {
-                this.number -= 1
+                this.number -= this.step
                 this.$emit('input', this.number)
                 this.change && this.change(this.number)
             }
         },
         _increase () {
             if (this.number < this.maxsV) {
-                this.number += 1
+                this.number += this.step
                 this.$emit('input', this.number)
                 this.change && this.change(this.number)
             }

@@ -5,7 +5,6 @@ import apolloOptions from './apollo/client'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
 import { VApp } from './container/customer_login'
-import { VContentLoader } from './loader/loader'
 
 const Lazyload: any = VueLazyload
 const apolloProvider: any = new VueApollo({
@@ -29,7 +28,6 @@ Vue.use(VueResize, {
     tablet: 768,
     desktop: 1200
 })
-Vue.component('v-content-loader', VContentLoader)
 UI.install(Vue)
 
 new Vue({
