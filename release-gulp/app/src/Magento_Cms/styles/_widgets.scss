@@ -8,3 +8,47 @@
         z-index: 20;
     }
 }
+
+.v-countdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 30;
+
+    li {
+        display: inline-block;
+        margin: 0 8px;
+        text-align: center;
+        position: relative;
+
+        .digit {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .text {
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        &:after {
+            content: ":";
+            position: absolute;
+            top: 0;
+            right: -1.3rem;
+            font-size: 1.6rem;
+        }
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        &:last-of-type {
+            margin-right: 0;
+
+            &:after {
+                content: "";
+            }
+        }
+    }
+}
