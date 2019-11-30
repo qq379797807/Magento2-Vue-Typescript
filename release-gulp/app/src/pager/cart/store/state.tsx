@@ -1,5 +1,3 @@
-declare let window: any
-
 const commonJson: any = window.commonJson
 const cartJson: any = window.cartJson
 

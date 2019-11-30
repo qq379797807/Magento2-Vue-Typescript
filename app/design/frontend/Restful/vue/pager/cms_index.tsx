@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import VueLazyload from 'vue-lazyload'
 import apolloOptions from './apollo/client'
-import { VueBus, VueResize } from './tool'
+import { VueBus, VueResize, VueCookies, VueCurrencyFilter, VFragment } from './tool'
 import UI from '../components/ui'
 import { VApp } from './container/cms_index'
 
@@ -28,6 +28,14 @@ Vue.use(VueResize, {
     tablet: 768,
     desktop: 1920
 })
+Vue.use(VueCookies)
+Vue.use(VueCurrencyFilter, {
+    symbol: window.commonJson.current_symbol,
+    thousandsSeparator: ',',
+    fractionCount: 2,
+    fractionSeparator: '.'
+})
+Vue.component('v-fragment', VFragment)
 UI.install(Vue)
 
 new Vue({

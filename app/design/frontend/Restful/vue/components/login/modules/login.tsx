@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { generateToken } from '../../queries/generateToken.gql'
 
 declare let window: any
 
@@ -22,6 +23,8 @@ export class VLoginForm extends Vue {
     public password: string = ''
     public post_action: string = ''
     public forgot_url: string = ''
+    public modalMsg: string = ''
+    public visible: boolean = false
     
     mounted () {
         this.init()
@@ -34,10 +37,24 @@ export class VLoginForm extends Vue {
     }
 
     _login () {
-        this.$validator.validate().then((valid: boolean) => {
-            if (!valid) {
-                console.log('validate success')
-            }
+        const loginForm: any = this.$refs.loginForm
+
+        loginForm.validate(() => {
+            this.$apollo.mutate({
+                mutation: generateToken,
+                variables: {
+                    email: this.email,
+                    password: this.password
+                }
+            }).then((response: any) => {
+                const token: string = response.data.generateCustomerToken.token
+
+                window.localStorage.setItem('access_token', token)
+                window.location.href = `${window.commonJson.base_url}customer/account/`
+            }).catch((error: any) => {
+                this.modalMsg = error
+                this.visible = true
+            })
         })
     }
 }

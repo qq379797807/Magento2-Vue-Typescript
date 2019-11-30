@@ -12,18 +12,28 @@ export default {
     name: `${prefix}-form`,
     inheritAttrs: false,
     data: () => ({
-        prefix: prefix,
-        defaultModel: {}
+        prefix: prefix
     }),
     components: {
         ValidationObserver
     },
     methods: {
+        async validate (callback) {
+            const isValid = await this.$refs.observer.validate()
+            
+            if (isValid) {
+                callback()
+            }
+        },
         async onSubmit () {
             const isValid = await this.$refs.observer.validate()
-            if (!isValid) {
-                console.log(isValid)
+            
+            if (isValid) {
+                
             }
+        },
+        reset () {
+
         }
     }
 }
