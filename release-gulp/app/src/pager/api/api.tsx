@@ -1,8 +1,6 @@
 import axios from 'axios'
 import throwErr from './err'
 
-declare let window: any
-
 let params: any = {
     form_key: window.commonJson.form_key
 }

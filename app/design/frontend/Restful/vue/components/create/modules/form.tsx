@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-declare let window: any
-
 @Component({
     name: 'v-create',
     data: () => ({
@@ -132,5 +130,27 @@ export class VCreate extends Vue {
           return true
         }
         return regExp.test(param)
+    }
+
+    _register () {
+        const registerForm: any = this.$refs.registerForm
+
+        registerForm.validate(() => {
+            // this.$apollo.mutate({
+            //     mutation: generateToken,
+            //     variables: {
+            //         email: this.email,
+            //         password: this.password
+            //     }
+            // }).then((response: any) => {
+            //     const token: string = response.data.generateCustomerToken.token
+
+            //     window.localStorage.setItem('access_token', token)
+            //     window.location.href = `${window.commonJson.base_url}customer/account/`
+            // }).catch((error: any) => {
+            //     this.modalMsg = error
+            //     this.visible = true
+            // })
+        })
     }
 }

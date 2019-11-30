@@ -6,7 +6,6 @@
 <v-account-newsletter inline-template>
     <v-form class="form form-newsletter-manage" action="<?= $block->getAction() ?>" method="post">
         <h2 class="title" v-text="i18n.subscription"></h2>
-        <?= $block->getBlockHtml('formkey') ?>
         <v-form-item>
             <v-checkbox name="is_subscribed" v-model="subscribed" value="1">
                 <span v-text="i18n.general"></span>
