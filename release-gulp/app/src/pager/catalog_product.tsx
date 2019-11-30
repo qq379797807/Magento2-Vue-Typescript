@@ -5,7 +5,6 @@ import VueLazyload from 'vue-lazyload'
 import apolloOptions from './apollo/client'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
-import './cookie/cookie'
 import storeOption from './product/store'
 import { VApp } from './container/catalog_product'
 

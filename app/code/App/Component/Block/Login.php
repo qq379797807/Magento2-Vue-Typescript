@@ -28,7 +28,6 @@ class Login extends \Magento\Framework\View\Element\Template
     {
         $data = [];
         $loginHelper = $this->getObject('Magento\Customer\Block\Form\Login');
-        $data['post_action'] = $loginHelper->getPostActionUrl();
         $data['create_url'] = $this->urlBuilder->getUrl('customer/account/create');
         $data['forgot_url'] = $loginHelper->getForgotPasswordUrl();
         return $this->jsonHelper->jsonEncode($data);

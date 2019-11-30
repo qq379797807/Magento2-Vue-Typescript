@@ -2,33 +2,36 @@
 /** @var \Magento\Customer\Block\Form\Login $block */
 ?>
 
-<v-login-form inline-template>
-    <div class="block block-login">
-        <!-- <v-content-loader :height="160" :width="400" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
-            <rect x="0" y="80" rx="1" ry="1" width="160" height="8"></rect>  
-            <rect x="0" y="100" rx="3" ry="3" width="380" height="6.4"></rect>  
-            <rect x="0" y="120" rx="3" ry="3" width="201" height="6.4"></rect> 
-        </v-content-loader> -->
-        <div class="block-title">
-            <strong v-text="i18n.title"></strong>
-        </div>
-        <div class="block-content">
-            <v-form :action="post_action" method="post">
-                <v-form-item>    
-                    <p class="note" v-text="i18n.note"></p>
-                    <?= $block->getBlockHtml('formkey') ?>
-                </v-form-item>
-                <v-form-item :label="i18n.email">
-                    <v-input type="email" name="login[username]" rules="required|email" v-model="email"></v-input>
-                </v-form-item>
-                <v-form-item :label="i18n.password">
-                    <v-input type="password" name="login[password]" rules="required|alpha_num|min:6" :show="showEye" v-model="password"></v-input>
-                </v-form-item>
-                <v-form-item :classes="'in-flex'">
-                    <v-button type="primary" native="button" v-text="i18n.signIn" @click="_login"></v-button>
-                    <v-button type="link" :href="forgot_url" v-text="i18n.forgot"></v-button>
-                </v-form-item>
-            </v-form>
-        </div>
-    </div>
-</v-login-form>
+<div class="block in-login">
+    <v-lazy-component>
+        <v-login-form inline-template>
+            <div class="block-login">
+                <div class="block-title">
+                    <strong v-text="i18n.title"></strong>
+                </div>
+                <div class="block-content">
+                    <v-form ref="loginForm" method="post">
+                        <v-form-item :label="i18n.email">
+                            <v-input type="email" name="login[username]" rules="required|email" v-model="email"></v-input>
+                        </v-form-item>
+                        <v-form-item :label="i18n.password" :classes="'in-relative'">
+                            <v-input type="password" name="login[password]" rules="required|alpha_num|min:6" :show="showEye" v-model="password"></v-input>
+                        </v-form-item>
+                        <v-form-item :classes="'in-flex'">
+                            <v-button type="primary" native="button" v-text="i18n.signIn" @click="_login"></v-button>
+                            <v-button type="link" :href="forgot_url" v-text="i18n.forgot"></v-button>
+                        </v-form-item>
+                    </v-form>
+                </div>
+                <v-modal :visible.sync="visible">
+                    <template v-if="visible">
+                        <p v-text="modalMsg"></p>
+                    </template>
+                </v-modal>
+            </div>
+        </v-login-form>
+        <v-skeleton slot="skeleton">
+            <v-skeleton-text :lines="8"></v-skeleton-text>
+        </v-skeleton>
+    </v-lazy-component>
+</div>

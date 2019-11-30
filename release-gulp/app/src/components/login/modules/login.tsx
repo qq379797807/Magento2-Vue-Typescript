@@ -21,7 +21,6 @@ export class VLoginForm extends Vue {
     public showEye: boolean = true
     public email: string = ''
     public password: string = ''
-    public post_action: string = ''
     public forgot_url: string = ''
     public modalMsg: string = ''
     public visible: boolean = false
@@ -32,7 +31,6 @@ export class VLoginForm extends Vue {
 
     init () {
         let loginJson: any = window.loginJson
-        this.post_action = loginJson.post_action
         this.forgot_url = loginJson.forgot_url
     }
 

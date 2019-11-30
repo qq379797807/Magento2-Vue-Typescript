@@ -10,7 +10,7 @@ const { area, src, mode } = themeConfig.default
 const baseConfig = new WebpackConfig({
     root:  path.join(__dirname, '../app'),
     entry: {
-        vendor: ['vue', 'vue-class-component','vuex', 'apollo-client', 'apollo-link', 'apollo-link-http', 'apollo-cache-inmemory', 'graphql-tag', 'vue-apollo', 'vue-lazyload', 'vue-cookies', 'vue-notification', 'vee-validate', 'axios']
+        vendor: ['vue', 'vue-class-component', 'vuex', 'apollo-client', 'apollo-link', 'apollo-link-http', 'apollo-cache-inmemory', 'graphql-tag', 'vue-apollo', 'vue-lazyload', 'vue-notification', 'vee-validate', 'axios']
     },
     output: {
         path: path.join(__dirname, `../../app/design/${area}/${src}/web/dll`),

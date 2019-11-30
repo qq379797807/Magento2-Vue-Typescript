@@ -9,7 +9,7 @@ import { VApp } from './container/customer_login'
 const Lazyload: any = VueLazyload
 const apolloProvider: any = new VueApollo({
     ...apolloOptions
-}) 
+})
 
 Vue.config.productionTip = false
 Vue.use(VueApollo)

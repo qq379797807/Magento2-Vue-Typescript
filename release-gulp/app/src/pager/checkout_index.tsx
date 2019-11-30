@@ -4,7 +4,6 @@ import VueLazyload from 'vue-lazyload'
 import VueNotifications from 'vue-notification'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
-import './cookie/cookie'
 import storeOption from './checkout/store'
 import { VApp } from './container/checkout_index'
 

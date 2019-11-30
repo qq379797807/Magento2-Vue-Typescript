@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 import { VueBus, VueResize } from './tool'
 import UI from '../components/ui'
-import './cookie/cookie'
 import { VApp } from './container/catalog_compare'
 
 const Lazyload: any = VueLazyload

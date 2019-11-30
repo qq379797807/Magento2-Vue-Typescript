@@ -136,7 +136,6 @@ class Common extends \Magento\Framework\View\Element\Template
         $storeArr = array();
         $refer = $this->urlEncoder->encode($this->urlBuilder->getCurrentUrl());
         $form_key = $this->formKey->getFormKey();
-        $data['form_key'] = $form_key;
 
         $cookieHelper = $this->createObject('Magento\Framework\View\Element\Js\Cookie');
         $data['cookie'] = [
