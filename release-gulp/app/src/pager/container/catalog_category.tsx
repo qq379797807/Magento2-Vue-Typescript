@@ -3,6 +3,7 @@ import Component from 'vue-class-component'
 import { VHeader } from '@components/header/header'
 import { VBreadcrumbs } from '@components/category/breadcrumbs'
 import { VContent } from '@components/category/content'
+import { VCategoryModal } from '@components/common/modal'
 import { VFooter } from '@components/footer/footer'
 
 @Component({
@@ -14,6 +15,7 @@ import { VFooter } from '@components/footer/footer'
         VHeader,
         VBreadcrumbs,
         VContent,
+        VCategoryModal,
         VFooter
     }
 })

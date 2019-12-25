@@ -1,0 +1,13 @@
+<v-product-list inline-template>
+    <div class="in-products">
+        <v-loading color="#666" v-if="loading" :size="{ width: '55px', height: '50px' }"></v-loading>
+        <template v-else>
+            <ol class="product-items" v-if="productList && productList.length > 0">
+                <li class="product-item" v-for="item in productList">
+                    <v-product-item :item="item"></v-product-item>
+                </li>
+            </ol>
+            <infinite-loading :identifier="infiniteId" @infinite="infiniteScroll"></infinite-loading>
+        </template>
+    </div>
+</v-product-list>
