@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
@@ -116,18 +116,28 @@ const baseConfig = new WebpackConfig({
         noEmitOnErrors: true,
         minimize: true,
         minimizer: [
-            new ParallelUglifyPlugin({
-                cacheDir: '.cache/',
-                workerCount: os.cpus().length,
-                sourceMap: true,
-                uglifyJS: {
+            new UglifyJsPlugin({
+                parallel: os.cpus().length - 1,
+                sourceMap: false,
+                uglifyOptions: {
+                    warnings: false,
+                    parse: {},
+                    mangle: true,
+                    toplevel: false,
+                    nameCache: null,
+                    ie8: false,
+                    keep_fnames: false,
                     output: {
                         comments: false,
                         beautify: false
                     },
                     compress: {
                         collapse_vars: true,
-                        reduce_vars: true
+                        reduce_vars: true,
+                        reduce_funcs: true,
+                        expression: true,
+                        drop_debugger: false,
+                        drop_console: false
                     }
                 }
             })

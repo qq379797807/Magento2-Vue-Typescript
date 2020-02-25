@@ -3,7 +3,7 @@ import * as webpack from 'webpack'
 import * as os from 'os'
 import { WebpackConfig, InputConfig } from '../packages'
 import { themeConfig } from '../build'
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const { area, src, mode } = themeConfig.default
 
@@ -53,18 +53,28 @@ const baseConfig = new WebpackConfig({
         noEmitOnErrors: true,
         minimize: true,
         minimizer: [
-            new ParallelUglifyPlugin({
-                cacheDir: '.cache/',
-                workerCount: os.cpus().length,
+            new UglifyJsPlugin({
+                parallel: os.cpus().length - 1,
                 sourceMap: false,
-                uglifyJS: {
+                uglifyOptions: {
+                    warnings: false,
+                    parse: {},
+                    mangle: true,
+                    toplevel: false,
+                    nameCache: null,
+                    ie8: false,
+                    keep_fnames: false,
                     output: {
                         comments: false,
                         beautify: false
                     },
                     compress: {
                         collapse_vars: true,
-                        reduce_vars: true
+                        reduce_vars: true,
+                        reduce_funcs: true,
+                        expression: true,
+                        drop_debugger: false,
+                        drop_console: false
                     }
                 }
             })
